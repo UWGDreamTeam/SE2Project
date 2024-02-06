@@ -5,11 +5,12 @@ Primary Flow
 2 - user enters new employee credentials
 3 - user selects to register employee
 4 - system adds employee data to the server
-5 - system displays the landing page
+5 - system gives confirmation of sucessfully registering the employee
+6 - system displays the landing page
 
 Alternative Flow(s)
 CANCEL
-a2-3 - user selectrs cancel
+a2-3 - user selects cancel
 a3-4 - system displays landing page
 
 INVALID SYSTEM INFORMATION
@@ -20,4 +21,4 @@ return to step 2
 BAD CONNECTION
 a2 - system can't connect to server
 a3 - system informs user of failure and prompts to retry later
-return to step 5
+return to step 6

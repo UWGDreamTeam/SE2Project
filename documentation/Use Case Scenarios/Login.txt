@@ -1,17 +1,17 @@
 Context - User starts the app
 
 Primary Flow
-1- User logs in with correct EmployeeId and password.
-2- System validates user credentials.
-3- User is then directed to landing page.
+1- user logs in with correct EmployeeId and password.
+2- system validates user credentials.
+3- user is then directed to landing page.
 
 Alternative Flows
 BAD LOGIN
-a2 - System fails to validate credentials.
-a3 - System informs user of failure and prompts to re-enter credentials.
+a2 - system fails to validate credentials.
+a3 - system informs user of failure and prompts to re-enter credentials.
 return to step 1
 
 BAD CONNECTION VALIDATING CREDENTIALS
-a2 - System can't connect to server.
-a3 - System informs the user of failure and prompts to retry later.
+a2 - system can't connect to server.
+a3 - system informs the user of failure and prompts to retry later.
 return to step 1

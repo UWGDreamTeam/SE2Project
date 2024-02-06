@@ -1,0 +1,24 @@
+Context - User selects add button on product tab page
+
+Primary Flow
+1 - system communicates with server to create material id
+2 - user enters new product information
+3 - user selects to add new product
+4 - system adds product data to the server
+5 - system gives confirmation of sucessfully adding the product
+6 - system displays the productl tab page
+
+Alternative Flow(s)
+CANCEL
+a1-2 - user selects cancel
+a2-3 - system displays product tab page
+
+INVALID SYSTEM INFORMATION
+a5 - system detects an error with some information
+a6 - system informs user of error and prompts to retry
+return to step 2
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failure and prompts to retry later
+return to step 6
