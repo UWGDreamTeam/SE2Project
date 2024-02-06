@@ -1,0 +1,10 @@
+Context - User is within the Raw Material tabPage of the Inventory page
+
+Primary Flow
+1 - System communicates with the server to retrieve the raw material data
+2 - System shows the raw material information to the user in the ListView
+
+
+Alternative Flow(s)
+BAD CONNECTION
+?? - System will display a red alert above the ListView stating that the connection to the server is not available 
