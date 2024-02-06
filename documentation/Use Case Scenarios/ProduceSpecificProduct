@@ -1,0 +1,25 @@
+Context - User is a manager and has selected a specific product within inventory and clicked produce
+
+Primary Flow -
+1 - System retrieves product information from the server
+2 - System shows the product information to the user
+3 - User inputs the quantity of the product to produce
+4 - User selects produce button
+5 - System validates that there are enough raw material to produce specified product 
+5 - System updates raw material information and product information 
+6 - System notifies the user about sucessful production
+7 - System display the Product tabpage
+
+Alternative flow(s)
+CANCEL
+a1-2 - user selects cancel
+a2-3 - system displays product tab page
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failure and prompts to retry later
+return to step 7
+
+NOT ENOUGH RAW MATERIALS
+?? - System informs user of invalid raw material amount
+return to step 3
