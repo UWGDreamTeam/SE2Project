@@ -1,0 +1,23 @@
+Context - User is Manager and is viewing the register page
+
+Primary Flow
+1 - system communicates with server to create employee id
+2 - user enters new employee credentials
+3 - user selects to register employee
+4 - system adds employee data to the server
+5 - system displays the landing page
+
+Alternative Flow(s)
+CANCEL
+a2-3 - user selectrs cancel
+a3-4 - system displays landing page
+
+INVALID SYSTEM INFORMATION
+a5 - system detects an errors with some information (empty strings for credentials)
+a6 - system informs user of error and prompts to retry
+return to step 2
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failure and prompts to retry later
+return to step 5
