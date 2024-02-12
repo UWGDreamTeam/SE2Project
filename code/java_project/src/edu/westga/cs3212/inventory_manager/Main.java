@@ -1,4 +1,4 @@
-package inventory_manager;
+package edu.westga.cs3212.inventory_manager;
 
 
 import java.io.IOException;
