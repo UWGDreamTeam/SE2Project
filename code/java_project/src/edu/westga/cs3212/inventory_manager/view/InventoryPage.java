@@ -1,4 +1,4 @@
-package inventory_manager.view;
+package edu.westga.cs3212.inventory_manager.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -88,14 +88,14 @@ public class InventoryPage {
 
     @FXML
     void initialize() {
-        assert InvendoryTreeView != null : "fx:id=\"InvendoryTreeView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert employeeFirstLastName != null : "fx:id=\"employeeFirstLastName\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert employeeId != null : "fx:id=\"employeeId\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert employeeRole != null : "fx:id=\"employeeRole\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert productsTabPage != null : "fx:id=\"productsTabPage\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert productsTableView != null : "fx:id=\"productsTableView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert rawMaterialTabPage != null : "fx:id=\"rawMaterialTabPage\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert rawMaterialsTableView != null : "fx:id=\"rawMaterialsTableView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.InvendoryTreeView != null : "fx:id=\"InvendoryTreeView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.employeeFirstLastName != null : "fx:id=\"employeeFirstLastName\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.employeeId != null : "fx:id=\"employeeId\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.employeeRole != null : "fx:id=\"employeeRole\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.productsTabPage != null : "fx:id=\"productsTabPage\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.productsTableView != null : "fx:id=\"productsTableView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.rawMaterialTabPage != null : "fx:id=\"rawMaterialTabPage\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.rawMaterialsTableView != null : "fx:id=\"rawMaterialsTableView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
 
     }
 

@@ -1,12 +1,14 @@
-package inventory_manager.model;
+package edu.westga.cs3212.inventory_manager.model.local_impl;
+
+import edu.westga.cs3212.inventory_manager.model.Item;
 
 /**
- * The Class RawMaterial.
+ * The Class Component.
  * 
  * @author Group 1
  * @version Spring 2024
  */
-public class RawMaterial extends Item {
+public class Component extends Item {
 
 	
 	/**
@@ -15,7 +17,7 @@ public class RawMaterial extends Item {
 	 * @param id the id
 	 * @param name the name
 	 */
-	public RawMaterial(String id, String name) {
+	public Component(String id, String name) {
 		super(id, name);
 	}
 	
