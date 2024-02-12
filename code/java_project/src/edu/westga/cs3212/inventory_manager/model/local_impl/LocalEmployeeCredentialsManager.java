@@ -51,4 +51,17 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public boolean attemptLogin(String employeeID, String password) {
+		if (employeeID == null || employeeID.isEmpty() || password == null || password.isEmpty()) {
+			return false;
+		}
+		if (this.employeeCredentialsMap.containsKey(employeeID)) {
+			LocalEmployeeCredentials employee = this.employeeCredentialsMap.get(employeeID);
+			if (employee.getPassword().equals(password)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
