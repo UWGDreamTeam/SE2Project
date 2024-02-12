@@ -18,11 +18,13 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 
 	public LocalEmployeeCredentialsManager() {
 		this.employeeCredentialsMap = new HashMap<String, LocalEmployeeCredentials>();
+		this.loadEmployeeCredentials();
 	}
 
     public LocalEmployeeCredentials createEmployee(String firstName, String lastName, String password, LocalEmployeeCredentials.EmployeeType employeeType) {
         LocalEmployeeCredentials newCredentials = new LocalEmployeeCredentials(firstName, lastName, password, employeeType);
         this.employeeCredentialsMap.put(newCredentials.getEmployeeID(), newCredentials);
+        this.saveChanges();
         return newCredentials;
     }
 
@@ -90,7 +92,6 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	            this.employeeCredentialsMap = gson.fromJson(json, type);
 	        } catch (IOException e) {
 	            this.employeeCredentialsMap = new HashMap<>();
-	            // Handle the case where the file does not exist or other IO errors
 	        }
 	    }
 }
