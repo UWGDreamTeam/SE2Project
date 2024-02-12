@@ -11,26 +11,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inventory_manager.viewmodel.InventoryPage">
    <children>
-      <Button layoutX="34.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Home" />
-      <Button layoutX="34.0" layoutY="183.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Orders" />
       <Text layoutX="33.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <TabPane layoutX="130.0" layoutY="140.0" prefHeight="383.0" prefWidth="569.0" tabClosingPolicy="UNAVAILABLE">
+      <Button layoutX="34.0" layoutY="140.0" mnemonicParsing="false" onAction="#homePageButton_OnClick" prefHeight="25.0" prefWidth="66.0" text="Home" />
+      <Button layoutX="34.0" layoutY="183.0" mnemonicParsing="false" onAction="#ordersPageButton_OnClick" prefHeight="25.0" prefWidth="66.0" text="Orders" />
+      <TabPane fx:id="InvendoryTreeView" layoutX="130.0" layoutY="140.0" prefHeight="383.0" prefWidth="569.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Raw Materials">
+          <Tab fx:id="rawMaterialTabPage" text="Raw Materials">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="14.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Order" textFill="RED" />
-                        <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Add" textFill="#fa0000" />
-                        <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Edit" textFill="#fa0000" />
-                        <TreeTableView layoutX="92.0" layoutY="44.0" prefHeight="297.0" prefWidth="451.0">
+                        <Button layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#orderRmButtonManager_OnClick" prefHeight="26.0" prefWidth="70.0" text="Order" textFill="RED" />
+                        <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#addRmButtonManager_OnClick" prefHeight="26.0" prefWidth="70.0" text="Add" textFill="#fa0000" />
+                        <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#editRmButtonManager_OnClick" prefHeight="26.0" prefWidth="70.0" text="Edit" textFill="#fa0000" />
+                        <TreeTableView fx:id="rawMaterialsTableView" layoutX="92.0" layoutY="44.0" prefHeight="297.0" prefWidth="451.0">
                           <columns>
                             <TreeTableColumn prefWidth="75.0" text="ID" />
                             <TreeTableColumn prefWidth="75.0" text="Name" />
@@ -40,16 +39,16 @@
                           </columns>
                         </TreeTableView>
                         <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <Button layoutX="14.0" layoutY="142.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Remove" textFill="#fa0000" />
+                        <Button layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#removeRmButtonManager_OnClick" prefHeight="26.0" prefWidth="70.0" text="Remove" textFill="#fa0000" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Products">
+          <Tab fx:id="productsTabPage" text="Products">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TreeTableView layoutX="92.0" layoutY="44.0" prefHeight="297.0" prefWidth="449.0">
+                        <TreeTableView fx:id="productsTableView" layoutX="92.0" layoutY="44.0" prefHeight="297.0" prefWidth="449.0">
                            <columns>
                               <TreeTableColumn prefWidth="31.0" text="ID" />
                               <TreeTableColumn prefWidth="47.0" text="Name" />
@@ -60,19 +59,19 @@
                            </columns>
                         </TreeTableView>
                         <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <Button layoutX="14.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Produce" />
-                        <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Add" textFill="#fa0000" />
-                        <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Edit" textFill="#fa0000" />
-                        <Button layoutX="14.0" layoutY="142.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Remove" textFill="#fa0000" />
+                        <Button layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#produceButton_OnClick" prefHeight="25.0" prefWidth="66.0" text="Produce" />
+                        <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#addProdcutManager_OnClick" prefHeight="25.0" prefWidth="66.0" text="Add" textFill="#fa0000" />
+                        <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#addProdcutManager_OnClick" prefHeight="25.0" prefWidth="66.0" text="Edit" textFill="#fa0000" />
+                        <Button layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#addProdcutManager_OnClick" prefHeight="25.0" prefWidth="66.0" text="Remove" textFill="#fa0000" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="37.0" layoutY="477.0" mnemonicParsing="false" text="Log Out" />
-      <Text layoutX="541.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
-      <Text layoutX="593.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
-      <Text layoutX="592.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
+      <Button layoutX="37.0" layoutY="477.0" mnemonicParsing="false" onAction="#logOutButton_OnClick" text="Log Out" />
+      <Text fx:id="employeeFirstLastName" layoutX="541.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
+      <Text fx:id="employeeId" layoutX="593.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
+      <Text fx:id="employeeRole" layoutX="592.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
    </children>
 </Pane>
