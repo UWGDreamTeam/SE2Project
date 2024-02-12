@@ -32,15 +32,23 @@ public class LoginPage {
 			result = false;
 		}
 		if (result) {
-			Alert successPopup = new Alert(AlertType.CONFIRMATION);
-			successPopup.setContentText("Login successful");
-			successPopup.showAndWait();
-			this.closeWindow(event);
+			this.showSuccessPopup(event);
 		} else {
-			Alert errorPopup = new Alert(AlertType.ERROR);
-			errorPopup.setContentText("Login failed, please check your credentials and try again");
-			errorPopup.showAndWait();
+			this.showErrorPopup();
 		}
+	}
+
+	private void showErrorPopup() {
+		Alert errorPopup = new Alert(AlertType.ERROR);
+		errorPopup.setContentText("Login failed, please check your credentials and try again");
+		errorPopup.showAndWait();
+	}
+
+	private void showSuccessPopup(ActionEvent event) {
+		Alert successPopup = new Alert(AlertType.CONFIRMATION);
+		successPopup.setContentText("Login successful");
+		successPopup.showAndWait();
+		this.closeWindow(event);
 	}
 
 	@FXML

@@ -1,7 +1,15 @@
 package edu.westga.cs3212.inventory_manager.model.local_impl;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 import edu.wetsga.cs3212.inventory_manager.model.SystemCredentialsManager;
 
@@ -64,4 +72,25 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		}
 		return false;
 	}
+	
+	private void saveChanges() {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter("employeeCredentials.json")) {
+            gson.toJson(this.employeeCredentialsMap, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	 private void loadEmployeeCredentials() {
+	        try {
+	            String json = new String(Files.readAllBytes(Paths.get("employeeCredentials.json")));
+	            Gson gson = new Gson();
+	            Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>(){}.getType();
+	            this.employeeCredentialsMap = gson.fromJson(json, type);
+	        } catch (IOException e) {
+	            this.employeeCredentialsMap = new HashMap<>();
+	            // Handle the case where the file does not exist or other IO errors
+	        }
+	    }
 }
