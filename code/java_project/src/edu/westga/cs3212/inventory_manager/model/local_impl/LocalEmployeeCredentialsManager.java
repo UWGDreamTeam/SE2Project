@@ -34,13 +34,25 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 
 	@Override
 	public String getEmployeePassword(String employeeID) {
-		// TODO Auto-generated method stub
+		if (employeeID == null || employeeID.isEmpty()) {
+			return null;
+		}
+		if (this.employeeCredentialsMap.containsKey(employeeID)) {
+			return this.employeeCredentialsMap.get(employeeID).getPassword();
+		}
 		return null;
 	}
 
 	@Override
 	public boolean removeEmployee(String employeeID) {
-		// TODO Auto-generated method stub
+		if (employeeID == null || employeeID.isEmpty()) {
+			return false;
+		}
+		if (this.employeeCredentialsMap.containsKey(employeeID)) {
+			this.employeeCredentialsMap.remove(employeeID);
+			this.saveChanges();
+			return true;
+		}
 		return false;
 	}
 
@@ -52,7 +64,15 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 
 	@Override
 	public boolean updateEmployeePassword(String employeeID, String password) {
-		// TODO Auto-generated method stub
+		if (employeeID == null || employeeID.isEmpty() || password == null || password.isEmpty()) {
+			return false;
+		}
+		if (this.employeeCredentialsMap.containsKey(employeeID)) {
+			LocalEmployeeCredentials employee = this.employeeCredentialsMap.get(employeeID);
+			employee.setPassword(password);
+			this.saveChanges();
+			return true;
+		}
 		return false;
 	}
 
@@ -79,8 +99,8 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter("employeeCredentials.json")) {
             gson.toJson(this.employeeCredentialsMap, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+        	exception.printStackTrace();
         }
 	}
 	
