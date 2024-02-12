@@ -1,5 +1,5 @@
 package edu.westga.cs3212.inventory_manager.model.local_impl;
-
+import java.util.UUID;
 
 public class LocalEmployeeCredentials {
 	public enum EmployeeType {
@@ -13,8 +13,8 @@ public class LocalEmployeeCredentials {
     private String password;
     private EmployeeType employeeType;
 
-    public LocalEmployeeCredentials(String employeeID, String firstName, String lastName, String password, EmployeeType employeeType) {
-        this.employeeID = employeeID;
+    public LocalEmployeeCredentials(String firstName, String lastName, String password, EmployeeType employeeType) {
+        this.employeeID = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -24,10 +24,6 @@ public class LocalEmployeeCredentials {
     // Getters and Setters
     public String getEmployeeID() {
         return employeeID;
-    }
-
-    public void setEmployeeID(String employeeID) {
-        this.employeeID = employeeID;
     }
 
     public String getFirstName() {
