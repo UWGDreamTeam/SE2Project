@@ -22,15 +22,61 @@ public class Order {
 	/**
 	 * Instantiates a new order. Contains a list of items 
 	 * and the date the order was created.
-	 *
-	 * @param product  the product
-	 * @param quantity the quantity
 	 */
-	public Order(Product product, int quantity) {
+	public Order() {
 		this.dateCreated = LocalDateTime.now();
+		// This id implementation is a placeholder until we add a class that handles random generation.
+		this.id = this.dateCreated.getSecond() + "3212" + this.dateCreated.getNano();
 		this.items = new HashMap<Product, Integer>();
-		this.items.put(product, quantity);
 	}
+	
+	/**
+	 * Adds the specified product and its quantity to the order.
+	 * 
+	 * @param product the product to be added
+	 * @param quantity the quantity of the product
+	 */
+	public void addItem(Product product, int quantity) {
+		if (product == null) {
+			throw new IllegalArgumentException("Product cannot be null");
+		}
+		if (quantity <= 0) {
+			throw new IllegalArgumentException("Quantity must be greater than 0");
+		}
+		int currQuantity = this.items.getOrDefault(product, 0);
+	    this.items.put(product, currQuantity + quantity);
+    }
+	
+	/**
+	 * Removes the quantity of the specified product from the order.
+	 * 
+	 * @param product the product to be removed
+	 * @param quantity the amount of the product to be removed
+	 */
+	public void removeItem(Product product, int quantity) {
+	    if (product == null) {
+	        throw new IllegalArgumentException("Product cannot be null");
+	    }
+	    if (quantity <= 0) {
+	        throw new IllegalArgumentException("Quantity must be greater than 0");
+	    }
+	    if (!this.items.containsKey(product)) {
+	        throw new IllegalArgumentException("Product not found in order");
+	    }
+
+	    int currQuantity = this.items.get(product);
+
+	    if (currQuantity < quantity) {
+	        throw new IllegalArgumentException("Quantity to remove is greater than quantity in order");
+	    }
+	    
+	    if (currQuantity == quantity) {
+	        this.items.remove(product);
+	    } else {
+	        this.items.put(product, currQuantity - quantity);
+	    }
+	}
+
 	
 	/**
 	 * Gets the id of the order.
@@ -57,5 +103,22 @@ public class Order {
 	 */
 	public Map<Product, Integer> getItems() {
 		return this.items;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Order other = (Order) obj;
+		return this.id.equals(other.id) && this.dateCreated.equals(other.dateCreated) && this.items.equals(other.items);
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.id.hashCode() + this.dateCreated.hashCode();
 	}
 }
