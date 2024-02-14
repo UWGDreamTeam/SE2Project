@@ -19,6 +19,8 @@ public class Order {
 	
 	private Map<Product, Integer> items;
 	
+	private boolean isCompleted;
+	
 	
 	/**
 	 * Instantiates a new order. Contains a list of items 
@@ -29,6 +31,7 @@ public class Order {
 		// This id implementation is a placeholder until we add a class that handles random generation.
 		this.id = "3212" + this.dateCreated.getNano() + new Random().nextInt();
 		this.items = new HashMap<Product, Integer>();
+		this.isCompleted = false;
 	}
 	
 	/**
@@ -77,7 +80,6 @@ public class Order {
 	        this.items.put(product, currQuantity - quantity);
 	    }
 	}
-
 	
 	/**
 	 * Gets the id of the order.
@@ -106,16 +108,13 @@ public class Order {
 		return this.items;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null || this.getClass() != obj.getClass()) {
-			return false;
-		}
-		Order other = (Order) obj;
-		return this.id.equals(other.id) && this.dateCreated.equals(other.dateCreated) && this.items.equals(other.items);
+	/**
+	 * Gets the completion status of the order.
+	 *
+	 * @return the completion status of the order.
+	 */
+	public boolean isCompleted() {
+		return this.isCompleted;
 	}
 	
 	@Override
