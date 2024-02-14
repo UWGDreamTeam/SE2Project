@@ -62,8 +62,6 @@ class ProductTest {
 		//Act
 		Product product = new Product("ID0000", "Sword");
 		
-		System.out.println(product.getNecessaryComponentsListCopy());
-		
 		//Assert
 		assertAll(
 				() -> assertEquals("ID0000", product.getId()),
@@ -363,6 +361,4 @@ class ProductTest {
 		//Assert
 		assertFalse(product.equals(product1));
 	}
-	
-	
 }
