@@ -1,6 +1,7 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.HashMap;
 import java.time.LocalDateTime;
 
@@ -26,7 +27,7 @@ public class Order {
 	public Order() {
 		this.dateCreated = LocalDateTime.now();
 		// This id implementation is a placeholder until we add a class that handles random generation.
-		this.id = this.dateCreated.getSecond() + "3212" + this.dateCreated.getNano();
+		this.id = "3212" + this.dateCreated.getNano() + new Random().nextInt();
 		this.items = new HashMap<Product, Integer>();
 	}
 	
