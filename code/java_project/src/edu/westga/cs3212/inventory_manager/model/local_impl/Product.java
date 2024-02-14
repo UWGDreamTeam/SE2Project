@@ -13,8 +13,8 @@ import edu.westga.cs3212.inventory_manager.model.Item;
  */
 public class Product extends Item {
 
-	/** The components. */
-	private Map<String, Integer> components;
+	/** The necessaryComponents. */
+	private Map<String, Integer> necessaryComponents;
 	
 	/**
 	 * Instantiates a new product.
@@ -23,10 +23,10 @@ public class Product extends Item {
 	 * @param name the name
 	 * 
 	 */
-	Product(String id, String name) {
+	public Product(String id, String name) {
 		super(id, name);
 		
-		this.components = new HashMap<String, Integer>();
+		this.necessaryComponents = new HashMap<String, Integer>();
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class Product extends Item {
 	 * @param components the recipe for this product
 	 * 
 	 */
-	Product(String id, String name, Map<String, Integer> components) {
+	public Product(String id, String name, Map<String, Integer> components) {
 		super(id, name);
 		
 		if (components == null) {
@@ -48,19 +48,50 @@ public class Product extends Item {
 			throw new IllegalArgumentException("Components cannot be empty");
 		}
 		
-		this.components = new HashMap<String, Integer>(components);
+		this.necessaryComponents = new HashMap<String, Integer>(components);
 	}
 	
 	
 	/**
-	 * Sets the components list to the map passed in.
+	 * Adds the component and quantity to the list of necessaryComponents if it does not contain that compoent. 
+	 *
+	 * @param component the component to be added to the list
+	 * @param quantity the quantity of necessaryComponents needed for this product
 	 * 
+	 * @precondition component != null && quantity > 0
+	 * @postcondition 
+	 * 
+	 * @return true, if successful and false if list already contains the component.
+	 */
+	public boolean addComponent(Component component, int quantity) {
+		if (component == null) {
+			throw new IllegalArgumentException("Component cannot be null");
+		}
+		
+		if (quantity <= 0) {
+			throw new IllegalArgumentException("Quantity has to be greater than 0");
+		}
+		
+		if (!this.necessaryComponents.containsKey(component.getId())) {
+			this.necessaryComponents.put(component.getId(), quantity);
+			
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	
+	/**
+	 * Sets the necessaryComponents list to the map passed in.
+	 * The current list of component is cleared before it is reset.
+	 *
+	 * @param newComponents the new necessaryComponents
 	 * @precondition newComponents != null && newComponents > 0
 	 * @postcondition this.getComponentsList().size() == newComponents.size()
-	 *
-	 * @param newComponents the new components
 	 */
-	public void setComponentsList(Map<String, Integer> newComponents) {
+	public void setNecessaryComponentsList(Map<String, Integer> newComponents) {
 		if (newComponents == null) {
 			throw new IllegalArgumentException("New Components cannot be null");
 		}
@@ -69,26 +100,29 @@ public class Product extends Item {
 			throw new IllegalArgumentException("New Components cannot be empty");
 		}
 		
-		this.components.clear();
-		this.components.putAll(newComponents);
+		if (this.necessaryComponents.size() > 0) {
+			this.necessaryComponents.clear();
+		}
+		
+		this.necessaryComponents.putAll(newComponents);
 	}
 	
 	/**
-	 * Gets the components components.
+	 * Gets the necessaryComponents necessaryComponents.
 	 *
 	 * @precondition none
 	 * @postcondition none
 	 * 
-	 * @return the list of components and quantities
+	 * @return the list of necessaryComponents and quantities
 	 */
-	public Map<String, Integer> getComponentsListCopy() {
-		return new HashMap<String, Integer>(this.components);
+	public Map<String, Integer> getNecessaryComponentsListCopy() {
+		return new HashMap<String, Integer>(this.necessaryComponents);
 	}
 	
 	/**
 	 * Hash code.
 	 *
-	 * @return the int
+	 * @return the int hashcode for this product
 	 */
 	@Override
 	public int hashCode() {
@@ -113,7 +147,7 @@ public class Product extends Item {
             return true;
         }
         
-        if (obj == null || getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
         

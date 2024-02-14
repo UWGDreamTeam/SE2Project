@@ -130,7 +130,7 @@ public abstract class Item {
 	}
 	
 	/**
-	 * Gets the quantity.
+	 * Gets the quantity of this item in the system.
 	 *
 	 * @return the quantity
 	 */
