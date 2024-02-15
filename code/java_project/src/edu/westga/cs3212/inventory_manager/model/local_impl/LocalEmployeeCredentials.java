@@ -4,6 +4,8 @@ import java.util.UUID;
 /**
  * Represents credentials for an employee in the inventory manager system.
  * This includes the employee's first name, last name, password, type, and a uniquely generated ID.
+ * 
+ * @author Jacob Haas
  */
 public class LocalEmployeeCredentials {
 	
@@ -58,7 +60,7 @@ public class LocalEmployeeCredentials {
      * @return the employee ID
      */
     public String getEmployeeID() {
-        return employeeID;
+        return this.employeeID;
     }
 
     /**
@@ -67,7 +69,7 @@ public class LocalEmployeeCredentials {
      * @return the first name of the employee
      */
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     /**
@@ -85,7 +87,7 @@ public class LocalEmployeeCredentials {
      * @return the last name of the employee
      */
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     /**
@@ -103,7 +105,7 @@ public class LocalEmployeeCredentials {
      * @return the password of the employee
      */
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     /**
@@ -121,7 +123,7 @@ public class LocalEmployeeCredentials {
      * @return the employee type
      */
     public EmployeeType getEmployeeType() {
-        return employeeType;
+        return this.employeeType;
     }
 
     /**

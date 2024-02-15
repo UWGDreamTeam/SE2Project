@@ -62,13 +62,4 @@ public abstract class SystemCredentialsManager {
 	 */
 	public abstract boolean updateEmployeePassword(String employeeID, String password);
 	
-	
-	/** Generate a unique employee ID
-	 * 
-	 * @precondition none
-	 * @postcondition none
-	 * 
-	 * @return a unique employee ID that does not exist in the current list of employee IDs
-	 */
-	public abstract String generateEmployeeID();
 }
