@@ -1,6 +1,8 @@
 package edu.westga.cs3212.inventory_manager.model.local_impl;
 import java.util.UUID;
 
+import edu.westga.cs3212.inventory_manager.model.Constants;
+
 /**
  * Represents credentials for an employee in the inventory manager system.
  * This includes the employee's first name, last name, password, type, and a uniquely generated ID.
@@ -18,32 +20,71 @@ public class LocalEmployeeCredentials {
     /**
      * Creates a new set of credentials for an employee.
      * 
+     * @precondition firstName != null && !firstName.isEmpty() &&
+     *              lastName != null && !lastName.isEmpty() &&
+     *              password != null && !password.isEmpty() &&
+     *              employeeType != null
+     * 
+     * @precondition firstName != null && !firstName.isEmpty() &&
+     *             lastName != null && !lastName.isEmpty() &&
+     *             password != null && !password.isEmpty() &&
+     *             employeeType != null
+     *             
+     * @postcondition getEmployeeID() != null && !getEmployeeID().isEmpty() &&
+     *               getFirstName().equals(firstName) &&
+     *               getLastName().equals(lastName) &&
+     *               getPassword().equals(password) &&
+     *               getEmployeeType().equals(employeeType)
+     * 
      * @param firstName    the first name of the employee
      * @param lastName     the last name of the employee
      * @param password     the password for the employee's account
      * @param employeeType the type of employee (MANAGER or WORKER)
-     * @throws IllegalArgumentException if any argument is null or empty (for strings)
      */
-    public LocalEmployeeCredentials(String firstName, String lastName, String password, EmployeeType employeeType) {
-    	if (firstName == null || firstName.trim().isEmpty()) {
-            throw new IllegalArgumentException("First name cannot be null or empty.");
-        }
-        if (lastName == null || lastName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Last name cannot be null or empty.");
-        }
-        if (password == null || password.trim().isEmpty()) {
-            throw new IllegalArgumentException("Password cannot be null or empty.");
-        }
-        if (employeeType == null) {
-            throw new IllegalArgumentException("Employee type cannot be null.");
-        }
+    public LocalEmployeeCredentials(String employeeID, String firstName, String lastName, String password, EmployeeType employeeType) {
+    	this.checkForValidFirstName(firstName);
+    	this.checkForValidLastName(lastName);
+    	this.checkForValidPassword(password);
+    	this.checkForValidEmployeeID(employeeID);
+    	EmployeeType validEmployeeType = this.checkForValidEmployeeType(employeeType);
 		
-        this.employeeID = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+        
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.employeeType = employeeType;
+        this.employeeType = validEmployeeType;
     }
+	
+    private void checkForValidEmployeeID(String employeeID) {
+        if (employeeID == null || employeeID.trim().isEmpty()) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL);
+		}
+    }
+    
+	private void checkForValidFirstName(String firstName) {
+		if (firstName == null || firstName.trim().isEmpty()) {
+			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL);
+		}
+	}
+	
+	private void checkForValidLastName(String lastName) {
+		if (lastName == null || lastName.trim().isEmpty()) {
+			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL);
+		}
+	}
+	
+	private void checkForValidPassword(String password) {
+		if (password == null || password.trim().isEmpty()) {
+			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL);
+		}
+	}
+	
+	private EmployeeType checkForValidEmployeeType(EmployeeType employeeType) {
+		if (employeeType == null) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL);
+		}
+		return employeeType;
+	}
 
     /**
      * Gets the unique ID for the employee.
@@ -69,6 +110,7 @@ public class LocalEmployeeCredentials {
      * @param firstName the new first name of the employee
      */
     public void setFirstName(String firstName) {
+    	this.checkForValidFirstName(firstName);
         this.firstName = firstName;
     }
 
@@ -87,6 +129,7 @@ public class LocalEmployeeCredentials {
      * @param lastName the new last name of the employee
      */
     public void setLastName(String lastName) {
+    	this.checkForValidLastName(lastName);
         this.lastName = lastName;
     }
 
@@ -105,6 +148,7 @@ public class LocalEmployeeCredentials {
      * @param password the new password for the employee
      */
     public void setPassword(String password) {
+    	this.checkForValidPassword(password);
         this.password = password;
     }
 
@@ -123,6 +167,20 @@ public class LocalEmployeeCredentials {
      * @param employeeType the new type of the employee
      */
     public void setEmployeeType(EmployeeType employeeType) {
+    	this.checkForValidEmployeeType(employeeType);
         this.employeeType = employeeType;
-    } 
+    }
+
+    /**
+     * Sets the unique ID for the employee.
+     * 
+     * @precondition employeeID != null && !employeeID.isEmpty()
+     * @postcondition getEmployeeID().equals(employeeID)
+     * 
+     * @param employeeID
+     */
+	public void setEmployeeID(String employeeID) {
+		this.checkForValidEmployeeID(employeeID);
+		this.employeeID = employeeID;
+	} 
 }
