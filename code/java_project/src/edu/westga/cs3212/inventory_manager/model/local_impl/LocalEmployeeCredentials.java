@@ -9,15 +9,6 @@ import java.util.UUID;
  */
 public class LocalEmployeeCredentials {
 	
-	/**
-     * Enum representing the type of employee.
-     * MANAGER for employees with managerial rights, and WORKER for regular employees.
-     */
-	public enum EmployeeType {
-        MANAGER,
-        WORKER
-    }
-
     private String employeeID;
     private String firstName;
     private String lastName;
