@@ -80,6 +80,10 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 
         return true;
     }
+    
+	public Iterable<LocalEmployeeCredentials> getEmployees() {
+		return this.employeeCredentialsMap.values();
+	}
 
     /**
 	 * Removes an employee's credentials from local storage.
@@ -120,6 +124,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		}
 		return false;
 	}
+	
 
 	/**
 	 * Attempts to login with the provided employee ID and password.
@@ -161,7 +166,9 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		try {
 			String json = new String(Files.readAllBytes(Paths.get("employeeCredentials.json")));
 			Gson gson = new Gson();
-			Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>() {	
+
+			Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>() {
+				
 			}.getType();
 			this.employeeCredentialsMap = gson.fromJson(json, type);
 		} catch (IOException e) {
