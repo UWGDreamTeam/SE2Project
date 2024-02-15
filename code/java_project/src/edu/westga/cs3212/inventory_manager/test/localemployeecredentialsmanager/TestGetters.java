@@ -76,5 +76,17 @@ class TestGetters {
 		String employeePassword = employee.getPassword();
 		assertEquals(employeePassword, testManager.getEmployeePassword(employeeID));
 	}
+	
+	@Test
+	void testGetEmployeePasswordWhenEmployeeIDIsNull() {
+		LocalEmployeeCredentialsManager testManager = new LocalEmployeeCredentialsManager();
+		assertThrows(IllegalArgumentException.class, () -> testManager.getEmployeePassword(null));
+	}
+	
+	@Test
+	void testGetEmployeePasswordWhenEmployeeIDIsEmpty() {
+		LocalEmployeeCredentialsManager testManager = new LocalEmployeeCredentialsManager();
+		assertThrows(IllegalArgumentException.class, () -> testManager.getEmployeePassword(""));
+	}
 
 }

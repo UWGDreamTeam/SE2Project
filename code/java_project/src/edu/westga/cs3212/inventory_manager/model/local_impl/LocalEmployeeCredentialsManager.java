@@ -74,14 +74,19 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
         this.checkForValidLastName(lastName);
         this.checkForValidPassword(password);
         this.checkForValidEmployeeType(employeeType);
-        String employeeID = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+        String employeeID = this.generateUniqueEmployeeID();
         EmployeeType type = this.checkForValidEmployeeType(employeeType);
+        
         LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials(employeeID, firstName, lastName, password, type);
 		while (this.employeeCredentialsMap.containsKey(newEmployee.getEmployeeID())) {
-			newEmployee.setEmployeeID(UUID.randomUUID().toString().replace("-", "").substring(0, 8));
+			newEmployee.setEmployeeID(this.generateUniqueEmployeeID());
 		}
         this.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
         this.saveChanges();
+    }
+    
+    public String generateUniqueEmployeeID() {
+    	return UUID.randomUUID().toString().replace("-", "").substring(0, 8);
     }
     
     private EmployeeType checkForValidEmployeeType(String employeeType) {

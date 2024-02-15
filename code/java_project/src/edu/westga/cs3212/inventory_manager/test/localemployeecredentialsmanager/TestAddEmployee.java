@@ -1,20 +1,20 @@
 package edu.westga.cs3212.inventory_manager.test.localemployeecredentialsmanager;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.UUID;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.local_impl.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
 
-public class TestAddEmployee {
-
+class TestAddEmployee {
+	
 	@BeforeEach
 	public void setUp() throws Exception {
 		Files.deleteIfExists(Paths.get(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION));
@@ -86,13 +86,35 @@ public class TestAddEmployee {
 	
 	@Test
 	public void testAddEmployeeWithDuplicateEmployeeID() {
-		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
+		LocalEmployeeCredentialsManagerForTest manager = new LocalEmployeeCredentialsManagerForTest();
+		
 		manager.addEmployee("John", "Doe", "Password", EmployeeType.MANAGER.toString());
-		manager.addEmployee("Jane", "Doe", "Password", EmployeeType.WORKER.toString());
+		manager.addEmployee("Strong", "Type", "Type", EmployeeType.WORKER.toString());
+		
+		assertEquals(2, manager.getEmployees().size());
+		
+	}
+	
+	@Test
+	public void testAddEmployeeWithInvalidEmployeeType() {
+		LocalEmployeeCredentialsManagerForTest manager = new LocalEmployeeCredentialsManagerForTest();
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			manager.addEmployee("John", "Doe", "Password", EmployeeType.MANAGER.toString());
-		});
-		
+			manager.addEmployee("John", "Doe", "Password", "YAYA");
+		});	
+	}
+	
+	private class LocalEmployeeCredentialsManagerForTest extends LocalEmployeeCredentialsManager{
+		private int callCount = 0;
+
+	    @Override
+		public String generateUniqueEmployeeID() {
+	        if (callCount < 2) {
+	            callCount++;
+	            return "duplicateUUID";
+	        } else {
+	            return "uniqueUUID123";
+	        }
+	    } 
 	}
 }
