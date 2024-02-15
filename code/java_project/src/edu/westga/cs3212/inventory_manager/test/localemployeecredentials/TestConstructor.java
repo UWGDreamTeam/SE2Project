@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
-class TestLocalEmployeeCredentials {
+class TestConstructor {
 
 	@Test
     void testConstructorShouldCreateObjectWithValidParameters() {
