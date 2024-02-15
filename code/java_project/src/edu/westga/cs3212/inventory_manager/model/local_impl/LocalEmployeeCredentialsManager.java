@@ -9,9 +9,10 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 
-import edu.wetsga.cs3212.inventory_manager.model.SystemCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.SystemCredentialsManager;
+
+import java.lang.reflect.Type;
 
 /**
  * Manages employee credentials locally by storing, retrieving,
@@ -21,6 +22,8 @@ import edu.wetsga.cs3212.inventory_manager.model.SystemCredentialsManager;
  */
 public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	private Map<String, LocalEmployeeCredentials> employeeCredentialsMap;
+	
+	private static String EMPLOYEE_ID_CANNOT_BE_NULL = "Employee ID cannot be null or empty";
 
 	/**
 	 * Initializes the credentials manager and loads existing credentials from storage.
@@ -50,9 +53,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
      */
     @Override
     public boolean addEmployee(String employeeID, String firstName, String lastName, String password, String employeeType) {
-    	if (employeeID == null || employeeID.trim().isEmpty()) {
-            return false;
-        }
+    	this.checkForValidEmployeeID(employeeID);
         if (firstName == null || firstName.trim().isEmpty()) {
             return false;
         }
@@ -79,6 +80,18 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
         this.saveChanges();
 
         return true;
+    }
+    
+	private void checkForValidEmployeeID(String employeeID) {
+		if (employeeID == null || employeeID.trim().isEmpty()) {
+			throw new IllegalArgumentException(LocalEmployeeCredentialsManager.EMPLOYEE_ID_CANNOT_BE_NULL);
+		}
+	}
+	
+	private void checkForValidFirstName(String firstName) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException(LocalEmployeeCredentialsManager.FIRST_NAME_CANNOT_BE_NULL);
+        }
     }
     
 	public Iterable<LocalEmployeeCredentials> getEmployees() {
