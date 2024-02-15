@@ -1,5 +1,5 @@
 package edu.westga.cs3212.inventory_manager.view;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.viewmodel.LoginPageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,25 +19,25 @@ public class LoginPage {
 
     @FXML
     private TextField passwordTextField;
+    
+    private LoginPageViewModel viewModel;
 
     @FXML
     void attemptLogin(ActionEvent event) {
-    	String employeeID = this.employeeIDTextField.getText();
-    	String password = this.passwordTextField.getText();
-    	LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
-    	boolean result;
-		try {
-			result = manager.attemptLogin(employeeID, password);
-		} catch (Exception exception) {
-			result = false;
-		}
-		if (result) {
+		if (this.viewModel.attemptLogin()) {
 			this.showSuccessPopup(event);
 		} else {
 			this.showErrorPopup();
 		}
 	}
 
+    @FXML
+    void initialize() {
+    	this.viewModel = new LoginPageViewModel();
+    	this.employeeIDTextField.textProperty().bindBidirectional(this.viewModel.employeeIDProperty());
+    	this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
+    }
+    
 	private void showErrorPopup() {
 		Alert errorPopup = new Alert(AlertType.ERROR);
 		errorPopup.setContentText("Login failed, please check your credentials and try again");
@@ -49,16 +49,6 @@ public class LoginPage {
 		successPopup.setContentText("Login successful");
 		successPopup.showAndWait();
 		this.closeWindow(event);
-	}
-
-	@FXML
-	void initialize() {
-		assert this.companyTitleLabel != null
-				: "fx:id=\"companyTitleLabel\" was not injected: check your FXML file 'LoginPage.fxml'.";
-		assert this.employeeIDTextField != null
-				: "fx:id=\"employeeIDTextField\" was not injected: check your FXML file 'LoginPage.fxml'.";
-		assert this.passwordTextField != null
-				: "fx:id=\"passwordTextField\" was not injected: check your FXML file 'LoginPage.fxml'.";
 	}
     
     private void closeWindow(ActionEvent event) {
