@@ -1,13 +1,14 @@
 package edu.westga.cs3212.inventory_manager.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.OrderManager;
 
-class TestOrderManagerAddOrder {
+class TestOrderManagerRemoveOrder {
 
 	private OrderManager orderManager;
 
@@ -17,35 +18,35 @@ class TestOrderManagerAddOrder {
 	}
 
 	@Test
-	void testAddOrderNullOrder() {
+	void testRemoveOrderNullOrder() {
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.addOrder(null);
+			this.orderManager.removeOrder(null);
 		});
 	}
 	
 	@Test
-	void testAddOrderValidInput() {
+	void testRemoveOrderValidInput() {
 		// Arrange
 		Order order = new Order();
-
-		// Act
 		this.orderManager.addOrder(order);
 
+		// Act
+		this.orderManager.removeOrder(order);
+
 		// Assert
-		assertEquals(1, this.orderManager.getOrders().size());
-		assertEquals(order, this.orderManager.findOrderById(order.getId()));
+		assertEquals(0, this.orderManager.getOrders().size());
 	}
 
 	@Test
-	void testAddOrderOrderAlreadyExists() {
+	void testRemoveOrderOrderDoesNotExist() {
 		// Arrange
 		Order order = new Order();
-		this.orderManager.addOrder(order);
 
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.addOrder(order);
+			this.orderManager.removeOrder(order);
 		});
 	}
+
 }
