@@ -25,7 +25,7 @@ class TestOrderManagerAddOrder {
 	}
 	
 	@Test
-	void testAddOrderValidInput() {
+	void testAddOrderValidOrder() {
 		// Arrange
 		Order order = new Order();
 

@@ -26,7 +26,7 @@ class TestOrderManagerRemoveOrder {
 	}
 	
 	@Test
-	void testRemoveOrderValidInput() {
+	void testRemoveOrderValidOrder() {
 		// Arrange
 		Order order = new Order();
 		this.orderManager.addOrder(order);

@@ -125,6 +125,9 @@ public class OrderManager {
 		if (id == null) {
             throw new IllegalArgumentException("Id cannot be null");
         }
+		if (id.isEmpty()) {
+            throw new IllegalArgumentException("Id cannot be empty");
+        }
 		if (!this.orders.containsKey(id)) {
 			throw new IllegalArgumentException("Order not found");
 		} else {
