@@ -76,12 +76,6 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		return false;
 	}
 
-	@Override
-	public String generateEmployeeID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public boolean attemptLogin(String employeeID, String password) {
 		if (employeeID == null || employeeID.isEmpty() || password == null || password.isEmpty()) {
 			return false;
@@ -94,7 +88,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		}
 		return false;
 	}
-
+	
 	private void saveChanges() {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter("employeeCredentials.json")) {
