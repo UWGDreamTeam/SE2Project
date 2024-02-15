@@ -35,4 +35,27 @@ public class TestOrderConstructor {
 		// Act and Assert
 		assertTrue(order.hashCode() == idHashCode + dateCreatedHashCode);
 	}
+	
+	@Test
+	public void testOrderSetComplete() {
+		// Arrange
+        Order order = new Order();
+        
+        // Act and Assert
+        assertFalse(order.isCompleted());
+        order.setCompleted();
+        assertTrue(order.isCompleted());
+	}
+	
+	@Test
+	public void testOrderSetIncomplete() {
+		// Arrange
+        Order order = new Order();
+        order.setCompleted();
+        
+        // Act and Assert
+        assertTrue(order.isCompleted());
+        order.setIncomplete();
+        assertFalse(order.isCompleted());
+	}
 }
