@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_manager.test;
+package edu.westga.cs3212.inventory_manager.test.localemployeecredentials;
 
 import static org.junit.jupiter.api.Assertions.*;
 
