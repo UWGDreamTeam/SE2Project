@@ -1,0 +1,53 @@
+package edu.westga.cs3212.inventory_manager.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import edu.westga.cs3212.inventory_manager.model.Order;
+import edu.westga.cs3212.inventory_manager.model.OrderManager;
+import edu.westga.cs3212.inventory_manager.model.Product;
+
+class TestOrderManagerAddOrder {
+
+	private OrderManager orderManager;
+
+	@BeforeEach
+	public void setUp() {
+		this.orderManager = new OrderManager();
+	}
+
+	@Test
+	void testAddOrderNullOrder() {
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			this.orderManager.addOrder(null);
+		});
+	}
+	
+	@Test
+	void testAddOrderValidOrder() {
+		// Arrange
+		Order order = new Order();
+
+		// Act
+		this.orderManager.addOrder(order);
+
+		// Assert
+		assertEquals(1, this.orderManager.getOrders().size());
+		assertEquals(order, this.orderManager.findOrderById(order.getId()));
+	}
+
+	@Test
+	void testAddOrderOrderAlreadyExists() {
+		// Arrange
+		Order order = new Order();
+		this.orderManager.addOrder(order);
+
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			this.orderManager.addOrder(order);
+		});
+	}
+
+}
