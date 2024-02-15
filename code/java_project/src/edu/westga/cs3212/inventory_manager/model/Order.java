@@ -117,6 +117,20 @@ public class Order {
 		return this.isCompleted;
 	}
 	
+	/**
+	 * Sets the completion status to true for the order.
+	 */
+	public void setCompleted() {
+		this.isCompleted = true;
+	}
+	
+	/**
+	 * Sets the completion status to false for the order.
+	 */
+	public void setIncomplete() {
+		this.isCompleted = false;
+	}
+	
 	@Override
 	public int hashCode() {
 		return this.id.hashCode() + this.dateCreated.hashCode();
