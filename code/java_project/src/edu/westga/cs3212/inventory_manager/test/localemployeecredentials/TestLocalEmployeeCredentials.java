@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.local_impl.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials.EmployeeType;
-
 class TestLocalEmployeeCredentials {
 
 	@Test

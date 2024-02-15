@@ -21,7 +21,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		this.loadEmployeeCredentials();
 	}
 
-    public LocalEmployeeCredentials createEmployee(String firstName, String lastName, String password, LocalEmployeeCredentials.EmployeeType employeeType) {
+    public LocalEmployeeCredentials createEmployee(String firstName, String lastName, String password, EmployeeType employeeType) {
         LocalEmployeeCredentials newCredentials = new LocalEmployeeCredentials(firstName, lastName, password, employeeType);
         this.employeeCredentialsMap.put(newCredentials.getEmployeeID(), newCredentials);
         this.saveChanges();
