@@ -42,9 +42,9 @@ public class OrderManager {
      */
 	public List<Order> getCompleteOrders() {
 		List<Order> completeOrders = new ArrayList<Order>();
-		for (Order order : this.orders.values()) {
-			if (order.isCompleted()) {
-				completeOrders.add(order);
+		for (Order currOrder : this.orders.values()) {
+			if (currOrder.isCompleted()) {
+				completeOrders.add(currOrder);
 			}
 		}
 		return completeOrders;
@@ -57,9 +57,9 @@ public class OrderManager {
      */
 	public List<Order> getIncompleteOrders() {
 		List<Order> incompleteOrders = new ArrayList<Order>();
-		for (Order order : this.orders.values()) {
-			if (!order.isCompleted()) {
-				incompleteOrders.add(order);
+		for (Order currOrder : this.orders.values()) {
+			if (!currOrder.isCompleted()) {
+				incompleteOrders.add(currOrder);
 			}
 		}
 		return incompleteOrders;
@@ -73,9 +73,11 @@ public class OrderManager {
      */
 	public List<Order> getOrdersByDate(LocalDateTime date) {
 		List<Order> orders = new ArrayList<Order>();
-		for (Order order : this.orders.values()) {
-			if (order.getDateCreated().equals(date)) {
-				orders.add(order);
+		for (Order currOrder : this.orders.values()) {
+			int currOrderDate = currOrder.getDateCreated().getDayOfYear();
+			int inputOrderDate = date.getDayOfYear();
+			if (currOrderDate == inputOrderDate) {
+				orders.add(currOrder);
 			}
 		}
 		return orders;
