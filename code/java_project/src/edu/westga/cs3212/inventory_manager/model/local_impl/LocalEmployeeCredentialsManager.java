@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -71,11 +74,11 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
         this.checkForValidLastName(lastName);
         this.checkForValidPassword(password);
         this.checkForValidEmployeeType(employeeType);
+        String employeeID = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
         EmployeeType type = this.checkForValidEmployeeType(employeeType);
-
-        LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials(firstName, lastName, password, type);
+        LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials(employeeID, firstName, lastName, password, type);
 		while (this.employeeCredentialsMap.containsKey(newEmployee.getEmployeeID())) {
-			this.addEmployee(firstName, lastName, password, employeeType);
+			newEmployee.setEmployeeID(UUID.randomUUID().toString().replace("-", "").substring(0, 8));
 		}
         this.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
         this.saveChanges();
@@ -123,10 +126,10 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 * @precondition none
 	 * @postcondition none
 	 *  
-	 * @return An iterable collection of all employees.
+	 * @return An List collection of all employees.
 	 */
-	public Iterable<LocalEmployeeCredentials> getEmployees() {
-		return this.employeeCredentialsMap.values();
+	public List<LocalEmployeeCredentials> getEmployees() {
+		return List.copyOf(this.employeeCredentialsMap.values());
 	}
 
     /**
