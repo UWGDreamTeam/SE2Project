@@ -2,8 +2,6 @@ package edu.westga.cs3212.inventory_manager.model;
 
 import java.util.List;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
-
 /**
  * The Interface InventoryManager.
  * 
@@ -20,47 +18,56 @@ public interface InventoryManager {
 	List<Item> getListOfItems();
 	
 	/**
-	 * Adds the Item to the Inventory
+	 * Adds the newItem to the Inventory
 	 * 
-	 * @precondition item != null
+	 * @precondition newItem != null
 	 * @postcondition this.getListOfItems().size() == this.getListOfItems().size()@prev + 1 
 	 *
-	 * @param item the item to be added
+	 * @param newItem the item to be added
 	 * @return true, if successful
 	 */
-	boolean addNewItemToInventory(Item item);
+	boolean addNewItem(Item newItem);
 	
 	/**
 	 * Removes the item from invenotry
 	 * 
-	 * @precondition id != null && id.isBlank() == false
+	 * @precondition newItem != null && newItem.isBlank() == false
 	 * @postcondition this.getListOfItems().size() == this.getListOfItems().size()@prev - 1 
 	 *
-	 * @param id the id of the item to be removed
+	 * @param newItem the newItem of the item to be removed
 	 * @return true, if successful
 	 */
-	boolean removeItemFromInventory(String id);
+	boolean removeItem(Item newItem);
 	
 	/**
-	 * Gets the item by id.
+	 * Gets the item by an ID.
 	 * 
-	 * @precondition id != null && id.isBlank() == false
+	 * @precondition itemID != null && itemID.isBlank() == false
 	 * @postcondition none
 	 *
-	 * @param id the id
-	 * @return the item by id
+	 * @param itemID the item ID to be searched for in the inventory 
+	 * 
+	 * @return the item if contained in the inventory, null otherwise
 	 */
-	Product getItemById(String id);
+	Item getItemById(String itemID);
 	
 	/**
 	 * Gets the quantity.
 	 *
-	 * @precondition id != null && id.isBlank() == false
+	 * @precondition none
 	 * @postcondition none 
 	 * 
-	 * @param id the id
-	 * @return the quantity
+	 * @return the quantity  of items in the inventory
 	 */
-	int getQuantity(String id);
+	int getQuantity();
+	
+	
+	/**
+	 * Clears the inventory
+	 * 
+	 * @precondition none
+	 * @postcondifiton none
+	 */
+	void clear();
 	
 }

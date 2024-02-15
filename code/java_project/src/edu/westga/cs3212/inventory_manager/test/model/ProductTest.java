@@ -1,6 +1,10 @@
 package edu.westga.cs3212.inventory_manager.test.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 
@@ -8,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
-import edu.westga.cs3212.inventory_manager.model.Item;
 
 class ProductTest {
 
@@ -262,7 +265,7 @@ class ProductTest {
 		
 		components.put(component1.getId(), 3);
 		
-		Product product = new Product("ID008", "metal door", components);
+		Product product = new Product("ID054", "product54", components);
 		
 		//Act
 		
