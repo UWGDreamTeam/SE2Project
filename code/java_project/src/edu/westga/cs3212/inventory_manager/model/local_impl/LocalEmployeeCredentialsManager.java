@@ -49,8 +49,20 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
      * @return true if the employee was successfully added, false otherwise.
      */
     @Override
-    public boolean addEmployee(String employeeID, String password, String employeeType) {
-        if (password == null || password.trim().isEmpty() || employeeType == null) {
+    public boolean addEmployee(String employeeID, String firstName, String lastName, String password, String employeeType) {
+    	if (employeeID == null || employeeID.trim().isEmpty()) {
+            return false;
+        }
+        if (firstName == null || firstName.trim().isEmpty()) {
+            return false;
+        }
+        if (lastName == null || lastName.trim().isEmpty()) {
+            return false;
+        }
+        if (password == null || password.trim().isEmpty()) {
+            return false;
+        }
+        if (employeeType == null || employeeType.trim().isEmpty()) {
             return false;
         }
 
@@ -61,8 +73,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
             return false;
         }
 
-        //TODO Remove hard code values
-        LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials("FirstName", "LastName", password, type);
+        LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials(firstName, lastName, password, type);
         this.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
 
         this.saveChanges();
@@ -150,7 +161,8 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		try {
 			String json = new String(Files.readAllBytes(Paths.get("employeeCredentials.json")));
 			Gson gson = new Gson();
-			Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>(){}.getType();
+			Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>() {	
+			}.getType();
 			this.employeeCredentialsMap = gson.fromJson(json, type);
 		} catch (IOException e) {
 			this.employeeCredentialsMap = new HashMap<>();

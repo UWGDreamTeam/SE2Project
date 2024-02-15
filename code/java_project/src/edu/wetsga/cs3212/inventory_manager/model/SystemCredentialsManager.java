@@ -30,21 +30,30 @@ public abstract class SystemCredentialsManager {
 	 */
 	public abstract boolean removeEmployee(String employeeID);
 	
-	/** Add a new employee with the specified ID and password to the manager
+	/**
+	 * Adds a new employee with the specified details to the manager.
 	 * 
 	 * @precondition employeeID != null && !employeeID.isEmpty() &&
-	 * 				 password != null &&
-	 * 				 !getEmployeeIDs().contains(employeeID)
+	 *               !getEmployeeIDs().contains(employeeID) &&
+	 *               password != null && !password.isEmpty() &&
+	 *               firstName != null && !firstName.isEmpty() &&
+	 *               lastName != null && !lastName.isEmpty() &&
+	 *               employeeType != null && !employeeType.isEmpty()
 	 * @postcondition getEmployeeIDs().contains(employeeID) &&
-	 * 				  getEmployeePassword(employeeID).equals(password)
+	 *                getEmployeePassword(employeeID).equals(password) &&
+	 *                getEmployeeFirstName(employeeID).equals(firstName) &&
+	 *                getEmployeeLastName(employeeID).equals(lastName) &&
+	 *                getEmployeeType(employeeID).equals(employeeType)
 	 * 
-	 * @param employeeID ID of the employee
-	 * @param password password for the employee
+	 * @param employeeID The unique identifier for the new employee.
+	 * @param firstName The first name of the new employee.
+	 * @param lastName The last name of the new employee.
+	 * @param password The password for the new employee.
+	 * @param employeeType The type of the employee (e.g., ADMIN, USER).
 	 * 
-	 * @return true if employee added successfully
-	 * 		   false if employee not added successfully
+	 * @return true if the employee was successfully added, false otherwise.
 	 */
-	public abstract boolean addEmployee(String employeeID, String password, String employeeType);
+	public abstract boolean addEmployee(String employeeID, String firstName, String lastName, String password, String employeeType);
 	
 	/** Update an existing employee's password with the specified new password
 	 * 
