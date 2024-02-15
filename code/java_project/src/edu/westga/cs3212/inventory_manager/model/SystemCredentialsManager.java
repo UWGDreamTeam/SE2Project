@@ -45,15 +45,13 @@ public abstract class SystemCredentialsManager {
 	 *                getEmployeeLastName(employeeID).equals(lastName) &&
 	 *                getEmployeeType(employeeID).equals(employeeType)
 	 * 
-	 * @param employeeID The unique identifier for the new employee.
 	 * @param firstName The first name of the new employee.
 	 * @param lastName The last name of the new employee.
 	 * @param password The password for the new employee.
 	 * @param employeeType The type of the employee (e.g., ADMIN, USER).
 	 * 
-	 * @return true if the employee was successfully added, false otherwise.
 	 */
-	public abstract boolean addEmployee(String employeeID, String firstName, String lastName, String password, String employeeType);
+	public abstract void addEmployee(String firstName, String lastName, String password, String employeeType);
 	
 	/** Update an existing employee's password with the specified new password
 	 * 

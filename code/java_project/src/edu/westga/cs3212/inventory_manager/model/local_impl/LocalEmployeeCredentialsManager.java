@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.SystemCredentialsManager;
 
 import java.lang.reflect.Type;
@@ -22,11 +23,12 @@ import java.lang.reflect.Type;
  */
 public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	private Map<String, LocalEmployeeCredentials> employeeCredentialsMap;
-	
-	private static String EMPLOYEE_ID_CANNOT_BE_NULL = "Employee ID cannot be null or empty";
 
 	/**
 	 * Initializes the credentials manager and loads existing credentials from storage.
+	 * 
+	 * @precondition none
+	 * @postcondition getEmployees().size() == 0
 	 */
 	public LocalEmployeeCredentialsManager() {
 		this.employeeCredentialsMap = new HashMap<String, LocalEmployeeCredentials>();
@@ -37,63 +39,92 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
      * Retrieves the credentials for a given employee ID.
      * 
      * @param employeeID The unique identifier for the employee.
+     * 
+     * @precondition employeeID != null
+     * @postcondition none
+     * 
      * @return The credentials associated with the employee ID or null if not found.
      */
 	public LocalEmployeeCredentials getEmployeeCredentials(String employeeID) {
+		this.checkForValidEmployeeID(employeeID);
 		return this.employeeCredentialsMap.get(employeeID);
 	}
 
 	/**
      * Adds a new employee's credentials to the local storage.
      * 
-     * @param employeeID The unique identifier for the new employee.
      * @param password The password for the new employee.
      * @param employeeType The type of the employee (e.g., ADMIN, USER).
-     * @return true if the employee was successfully added, false otherwise.
+     * @param firstName The first name of the new employee.
+     * @param lastName The last name of the new employee.
+     * 
+     * @precondition password != null && !password.isEmpty() &&
+     *              employeeType != null && !employeeType.isEmpty() &&
+     *              firstName != null && !firstName.isEmpty() &&
+     *              lastName != null && !lastName.isEmpty()
+     *              
+     * @postcondition getEmployees().size() == getEmployees().size()@prev + 1
      */
     @Override
-    public boolean addEmployee(String employeeID, String firstName, String lastName, String password, String employeeType) {
-    	this.checkForValidEmployeeID(employeeID);
-        if (firstName == null || firstName.trim().isEmpty()) {
-            return false;
-        }
-        if (lastName == null || lastName.trim().isEmpty()) {
-            return false;
-        }
-        if (password == null || password.trim().isEmpty()) {
-            return false;
-        }
-        if (employeeType == null || employeeType.trim().isEmpty()) {
-            return false;
-        }
-
-        EmployeeType type;
-        try {
-            type = EmployeeType.valueOf(employeeType.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+    public void addEmployee(String firstName, String lastName, String password, String employeeType) {
+        this.checkForValidFirstName(firstName);
+        this.checkForValidLastName(lastName);
+        this.checkForValidPassword(password);
+        this.checkForValidEmployeeType(employeeType);
+        EmployeeType type = this.checkForValidEmployeeType(employeeType);
 
         LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials(firstName, lastName, password, type);
+		while (this.employeeCredentialsMap.containsKey(newEmployee.getEmployeeID())) {
+			this.addEmployee(firstName, lastName, password, employeeType);
+		}
         this.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
-
         this.saveChanges();
-
-        return true;
     }
+    
+    private EmployeeType checkForValidEmployeeType(String employeeType) {
+		if (employeeType == null || employeeType.trim().isEmpty()) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL);
+		}
+		try {
+			EmployeeType type = EmployeeType.valueOf(employeeType.toUpperCase());
+			return type;
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_MUST_BE_VALID_TYPE);
+		}
+    }
+    
+    private void checkForValidPassword(String password) {
+		if (password == null || password.trim().isEmpty()) {
+			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL);
+		}
+    }
+    
+	private void checkForValidLastName(String lastName) {
+		if (lastName == null || lastName.trim().isEmpty()) {
+			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL);
+		}
+	}
     
 	private void checkForValidEmployeeID(String employeeID) {
 		if (employeeID == null || employeeID.trim().isEmpty()) {
-			throw new IllegalArgumentException(LocalEmployeeCredentialsManager.EMPLOYEE_ID_CANNOT_BE_NULL);
+			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL);
 		}
 	}
 	
 	private void checkForValidFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()) {
-            throw new IllegalArgumentException(LocalEmployeeCredentialsManager.FIRST_NAME_CANNOT_BE_NULL);
+            throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL);
         }
     }
-    
+	
+	/**
+	 * Retrieves all employees from local storage.   
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 *  
+	 * @return An iterable collection of all employees.
+	 */
 	public Iterable<LocalEmployeeCredentials> getEmployees() {
 		return this.employeeCredentialsMap.values();
 	}
@@ -101,14 +132,17 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
     /**
 	 * Removes an employee's credentials from local storage.
 	 * 
+	 * @precondition employeeID != null &&
+	 *                  getEmployeeIDs().contains(employeeID)
+	 *                  
+	 * @postcondition getEmployees().size() == getEmployees().size()@prev - 1
+	 * 
 	 * @param employeeID The unique identifier for the employee to be removed.
 	 * @return true if the employee was successfully removed, false otherwise.
 	 */
 	@Override
 	public boolean removeEmployee(String employeeID) {
-		if (employeeID == null || employeeID.isEmpty()) {
-			return false;
-		}
+		this.checkForValidEmployeeID(employeeID);
 		if (this.employeeCredentialsMap.containsKey(employeeID)) {
 			this.employeeCredentialsMap.remove(employeeID);
 			this.saveChanges();
@@ -120,15 +154,18 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	/**
 	 * Updates the password for a given employee.
 	 * 
+	 * @precondition employeeID != null && !employeeID.isEmpty() && 
+	 *                 password != null && !password.isEmpty()
+	 * @postcondition getEmployeePassword(employeeID).equals(password)
+	 *                 
 	 * @param employeeID The unique identifier for the employee.
 	 * @param password The new password for the employee.
 	 * @return true if the password was successfully updated, false otherwise.
 	 */
 	@Override
 	public boolean updateEmployeePassword(String employeeID, String password) {
-		if (employeeID == null || employeeID.isEmpty() || password == null || password.isEmpty()) {
-			return false;
-		}
+		this.checkForValidEmployeeID(employeeID);
+		this.checkForValidPassword(password);
 		if (this.employeeCredentialsMap.containsKey(employeeID)) {
 			LocalEmployeeCredentials employee = this.employeeCredentialsMap.get(employeeID);
 			employee.setPassword(password);
@@ -142,14 +179,17 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	/**
 	 * Attempts to login with the provided employee ID and password.
 	 * 
+	 * @precondition employeeID != null && !employeeID.isEmpty() &&
+	 *                 password != null && !password.isEmpty()
+	 * @postcondition none
+	 * 
 	 * @param employeeID The employee's unique identifier.
 	 * @param password The password for the employee.
 	 * @return true if login is successful, false otherwise.
 	 */
 	public boolean attemptLogin(String employeeID, String password) {
-		if (employeeID == null || employeeID.isEmpty() || password == null || password.isEmpty()) {
-			return false;
-		}
+		this.checkForValidEmployeeID(employeeID);
+		this.checkForValidPassword(password);
 		if (this.employeeCredentialsMap.containsKey(employeeID)) {
 			LocalEmployeeCredentials employee = this.employeeCredentialsMap.get(employeeID);
 			if (employee.getPassword().equals(password)) {
@@ -159,7 +199,6 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		return false;
 	}
 	
-	//TODO CHANGE JSON LOCATION
 	/**
 	 * Saves the current state of employee credentials to local storage.
 	 */
@@ -192,14 +231,15 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	/**
 	 * Retrieves the password for a given employee ID.
 	 * 
+	 * @precondition employeeID != null && !employeeID.isEmpty()
+	 * @postcondition none
+	 * 
 	 * @param employeeID The unique identifier for the employee.
 	 * @return The password of the employee or null if not found.
 	 */
 	@Override
 	public String getEmployeePassword(String employeeID) {
-		if (employeeID == null || employeeID.isEmpty()) {
-			return null;
-		}
+		this.checkForValidEmployeeID(employeeID);
 		if (this.employeeCredentialsMap.containsKey(employeeID)) {
 			return this.employeeCredentialsMap.get(employeeID).getPassword();
 		}
