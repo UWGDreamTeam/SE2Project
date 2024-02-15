@@ -1,5 +1,7 @@
 package edu.westga.cs3212.inventory_manager.model;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,38 +27,84 @@ public class OrderManager {
 		return this.orders.values().stream().toList();
 	}
 	
+	public List<Order> getCompleteOrders() {
+		List<Order> completeOrders = new ArrayList<Order>();
+		for (Order order : this.orders.values()) {
+			if (order.isCompleted()) {
+				completeOrders.add(order);
+			}
+		}
+		return completeOrders;
+	}
+	
+	public List<Order> getIncompleteOrders() {
+		List<Order> incompleteOrders = new ArrayList<Order>();
+		for (Order order : this.orders.values()) {
+			if (!order.isCompleted()) {
+				incompleteOrders.add(order);
+			}
+		}
+		return incompleteOrders;
+	}
+	
+	public List<Order> getOrdersByDate(LocalDateTime date) {
+		List<Order> orders = new ArrayList<Order>();
+		for (Order order : this.orders.values()) {
+			if (order.getDateCreated().equals(date)) {
+				orders.add(order);
+			}
+		}
+		return orders;
+	}
+	
 	public void addOrder(Order order) {
 		if (order == null) {
 			throw new IllegalArgumentException("Order cannot be null");
 		}
-		this.orders.put(order.getId(), order);
+		if (this.orders.containsKey(order.getId())) {
+			throw new IllegalArgumentException("Order already exists");
+		} else {
+			this.orders.put(order.getId(), order);
+		}
 	}
 	
 	public void removeOrder(Order order) {
         if (order == null) {
             throw new IllegalArgumentException("Order cannot be null");
         }
-        this.orders.remove(order.getId());
+        if (!this.orders.containsKey(order.getId())) {
+			throw new IllegalArgumentException("Order not found");
+		} else {
+			this.orders.remove(order.getId());
+		}
     }
 	
 	public Order findOrderById(String id) {
 		if (id == null) {
             throw new IllegalArgumentException("Id cannot be null");
         }
-        return this.orders.get(id);
+		if (!this.orders.containsKey(id)) {
+			throw new IllegalArgumentException("Order not found");
+		} else {
+			return this.orders.get(id);
+		}
     }
 	
 	public void completeOrder(Order order) {
 		if (order == null) {
             throw new IllegalArgumentException("Order cannot be null");
         }
-        order.setCompleted();
+		if (!order.isCompleted()) {
+	        order.setCompleted();
+	    }
 	}
 	
 	public void undoOrderCompletion(Order order) {
 		if (order == null) {
             throw new IllegalArgumentException("Order cannot be null");
         }
-        order.setIncomplete();
+		if (order.isCompleted()) {
+			order.setIncomplete();
+	    }
 	}
 }
