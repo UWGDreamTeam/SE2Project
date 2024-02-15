@@ -1,5 +1,4 @@
 package edu.westga.cs3212.inventory_manager.model.local_impl;
-import java.util.UUID;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
 
@@ -41,18 +40,12 @@ public class LocalEmployeeCredentials {
      * @param password     the password for the employee's account
      * @param employeeType the type of employee (MANAGER or WORKER)
      */
-    public LocalEmployeeCredentials(String employeeID, String firstName, String lastName, String password, EmployeeType employeeType) {
-    	this.checkForValidFirstName(firstName);
-    	this.checkForValidLastName(lastName);
-    	this.checkForValidPassword(password);
-    	this.checkForValidEmployeeID(employeeID);
-    	EmployeeType validEmployeeType = this.checkForValidEmployeeType(employeeType);
-		
-        
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.employeeType = validEmployeeType;
+    public LocalEmployeeCredentials(String employeeID, String firstName, String lastName, String password, EmployeeType employeeType) {        
+        this.setEmployeeID(employeeID);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setPassword(password);
+        this.setEmployeeType(employeeType);
     }
 	
     private void checkForValidEmployeeID(String employeeID) {
