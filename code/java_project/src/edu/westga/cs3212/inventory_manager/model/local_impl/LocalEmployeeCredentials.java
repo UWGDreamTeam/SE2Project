@@ -38,7 +38,7 @@ public class LocalEmployeeCredentials {
             throw new IllegalArgumentException("Employee type cannot be null.");
         }
 		
-    	this.employeeID = UUID.randomUUID().toString();
+        this.employeeID = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
