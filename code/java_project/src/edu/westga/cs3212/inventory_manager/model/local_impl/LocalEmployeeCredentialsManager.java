@@ -207,7 +207,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 */
 	private void saveChanges() {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		try (FileWriter writer = new FileWriter("employeeCredentials.json")) {
+		try (FileWriter writer = new FileWriter(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION)) {
 			gson.toJson(this.employeeCredentialsMap, writer);
 		} catch (IOException exception) {
 			exception.printStackTrace();
@@ -219,7 +219,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 */
 	private void loadEmployeeCredentials() {
 		try {
-			String json = new String(Files.readAllBytes(Paths.get("employeeCredentials.json")));
+			String json = new String(Files.readAllBytes(Paths.get(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION)));
 			Gson gson = new Gson();
 
 			Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>() {
