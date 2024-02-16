@@ -1,6 +1,5 @@
-package edu.westga.cs3212.inventory_manager.test.model;
+package edu.westga.cs3212.inventory_manager.test.model.Component;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,27 +8,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
 
-class ComponentTest {
-
-/*Hash Code*/
-	
-	@Test
-	void testHashCode() {
-		//Arrange
-		int id = "ID321".hashCode();
-		int name = "bow".hashCode();
-		
-		int hashCode = "component".hashCode() + id + name;
-		
-		Item product = new Component("ID321", "bow");
-		
-		//Act
-		
-		//Assert
-		assertEquals(hashCode, product.hashCode());
-	}
-	
-	/*Equals*/
+class Equals {
 	
 	@Test
 	void testEqualsSelf() {
