@@ -35,10 +35,12 @@ public class LocalEmployeeCredentials {
      *               getPassword().equals(password) &&
      *               getEmployeeType().equals(employeeType)
      * 
+     * @param employeeID   the unique id of the employee
      * @param firstName    the first name of the employee
      * @param lastName     the last name of the employee
      * @param password     the password for the employee's account
      * @param employeeType the type of employee (MANAGER or WORKER)
+     * 
      */
     public LocalEmployeeCredentials(String employeeID, String firstName, String lastName, String password, EmployeeType employeeType) {        
         this.setEmployeeID(employeeID);
