@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
+import edu.westga.cs3212.inventory_manager.model.EmployeeCredentialsStorage;
 import edu.westga.cs3212.inventory_manager.model.SystemCredentialsManager;
 
 import java.lang.reflect.Type;
@@ -35,7 +36,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 */
 	public LocalEmployeeCredentialsManager() {
 		this.employeeCredentialsMap = new HashMap<String, LocalEmployeeCredentials>();
-		this.loadEmployeeCredentials();
+		this.employeeCredentialsMap = EmployeeCredentialsStorage.loadEmployeeCredentials(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 			newEmployee.setEmployeeID(this.generateUniqueEmployeeID());
 		}
         this.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
-        this.saveChanges();
+        EmployeeCredentialsStorage.saveChanges(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
     }
     
     public String generateUniqueEmployeeID() {
@@ -153,7 +154,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		this.checkForValidEmployeeID(employeeID);
 		if (this.employeeCredentialsMap.containsKey(employeeID)) {
 			this.employeeCredentialsMap.remove(employeeID);
-			this.saveChanges();
+			EmployeeCredentialsStorage.saveChanges(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 			return true;
 		}
 		return false;
@@ -177,7 +178,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		if (this.employeeCredentialsMap.containsKey(employeeID)) {
 			LocalEmployeeCredentials employee = this.employeeCredentialsMap.get(employeeID);
 			employee.setPassword(password);
-			this.saveChanges();
+			EmployeeCredentialsStorage.saveChanges(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 			return true;
 		}
 		return false;
@@ -205,35 +206,6 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 			}
 		}
 		return false;
-	}
-	
-	/**
-	 * Saves the current state of employee credentials to local storage.
-	 */
-	private void saveChanges() {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		try (FileWriter writer = new FileWriter(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION)) {
-			gson.toJson(this.employeeCredentialsMap, writer);
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
-	}
-
-	/**
-	 * Loads employee credentials from local storage into memory.
-	 */
-	private void loadEmployeeCredentials() {
-		try {
-			String json = new String(Files.readAllBytes(Paths.get(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION)));
-			Gson gson = new Gson();
-
-			Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>() {
-				
-			}.getType();
-			this.employeeCredentialsMap = gson.fromJson(json, type);
-		} catch (IOException e) {
-			this.employeeCredentialsMap = new HashMap<>();
-		}
 	}
 
 	/**
