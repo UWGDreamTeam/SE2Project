@@ -1,33 +1,48 @@
 package edu.westga.cs3212.inventory_manager.view;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import edu.westga.cs3212.inventory_manager.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class InventoryPage {
 
-    @FXML
+	@FXML
     private ResourceBundle resources;
 
     @FXML
     private URL location;
 
     @FXML
-    private TabPane InvendoryTreeView;
+    private Tab componentsTabPage;
 
     @FXML
-    private Text employeeFirstLastName;
+    private TreeTableView<?> componentsTableView;
 
     @FXML
-    private Text employeeId;
+    private Text employeeFullNameLabel;
 
     @FXML
-    private Text employeeRole;
+    private Text employeeIdLabel;
+
+    @FXML
+    private Text employeeRoleLabel;
+
+    @FXML
+    private TabPane invendoryTreeView;
 
     @FXML
     private Tab productsTabPage;
@@ -35,68 +50,90 @@ public class InventoryPage {
     @FXML
     private TreeTableView<?> productsTableView;
 
+    /* GENERAL */
+    
     @FXML
-    private Tab rawMaterialTabPage;
+    void homePageButtonOnClick(ActionEvent event) {
+    	
+    }
+    
+    @FXML
+    void logOutButtonOnClick(ActionEvent event) {
+    	
+    }
+    
+    /* COMPONENTS TAB*/
+    
+    @FXML
+    void addComponentButtonManagerOnClick(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void editComponentButtonManagerOnClick(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void orderComponentButtonManagerOnClick(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void removeComponentButtonManagerOnClick(ActionEvent event) {
+
+    }
+    
+    /* PRODUCT TABS */
+    
+    @FXML
+    void addProdcutManagerOnClick(ActionEvent event) throws IOException {
+    	/*TESTING*/
+    	Stage modalStage = new Stage();
+    	Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PAGE));
+		Scene scene = new Scene(parent);
+		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.setScene(scene);
+		modalStage.initModality(Modality.WINDOW_MODAL);
+		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+		modalStage.showAndWait();
+		
+        //this.refreshSystemNames();
+    }
+
+    
+    @FXML
+    void ordersPageButtonOnClick(ActionEvent event) {
+    	
+    }
 
     @FXML
-    private TreeTableView<?> rawMaterialsTableView;
-
-    @FXML
-    void addProdcutManager_OnClick(ActionEvent event) {
+    void editProductManagerOnClick(ActionEvent event) {
 
     }
 
     @FXML
-    void addRmButtonManager_OnClick(ActionEvent event) {
+    void produceProductButtonOnClick(ActionEvent event) {
 
     }
 
     @FXML
-    void editRmButtonManager_OnClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void homePageButton_OnClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void logOutButton_OnClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void orderRmButtonManager_OnClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ordersPageButton_OnClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void produceButton_OnClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void removeRmButtonManager_OnClick(ActionEvent event) {
+    void removeProductManagerOnClick(ActionEvent event) {
 
     }
 
     @FXML
     void initialize() {
-        assert this.InvendoryTreeView != null : "fx:id=\"InvendoryTreeView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert this.employeeFirstLastName != null : "fx:id=\"employeeFirstLastName\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert this.employeeId != null : "fx:id=\"employeeId\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert this.employeeRole != null : "fx:id=\"employeeRole\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.componentsTabPage != null : "fx:id=\"componentsTabPage\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.componentsTableView != null : "fx:id=\"componentsTableView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.employeeFullNameLabel != null : "fx:id=\"employeeFullNameLabel\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.employeeIdLabel != null : "fx:id=\"employeeIdLabel\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.employeeRoleLabel != null : "fx:id=\"employeeRoleLabel\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        assert this.invendoryTreeView != null : "fx:id=\"invendoryTreeView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
         assert this.productsTabPage != null : "fx:id=\"productsTabPage\" was not injected: check your FXML file 'InventoryPage.fxml'.";
         assert this.productsTableView != null : "fx:id=\"productsTableView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert this.rawMaterialTabPage != null : "fx:id=\"rawMaterialTabPage\" was not injected: check your FXML file 'InventoryPage.fxml'.";
-        assert this.rawMaterialsTableView != null : "fx:id=\"rawMaterialsTableView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
 
     }
+
 
 }

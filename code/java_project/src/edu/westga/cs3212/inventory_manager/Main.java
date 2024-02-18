@@ -12,12 +12,13 @@ import javafx.scene.Scene;
 /**
  * Entry point for the program
  *
- * @author	CS3212
+ * @author	Group 5
  * @version Spring 2024
  */
 public class Main extends Application {
 	public static final String WINDOW_TITLE = "Inventory Manager";
-	public static final String LANDING_PAGE = "view/LoginPage.fxml";
+	public static final String LANDING_PAGE = "view/InventoryPage.fxml";
+	public static final String ADD_PAGE = "view/LoginPage.fxml";
 
 	/**
 	 * JavaFX entry point.

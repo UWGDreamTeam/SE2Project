@@ -12,6 +12,7 @@ class GetSizeTest {
 	@Test
 	void testGetQuantityEmptyAndNotEmpty() {
 		LocalProductInventory inventory = new LocalProductInventory();
+		inventory.clear();
 		Product product1 = new Product("ID60", "6name");
 		
 		inventory.addNewItem(product1);

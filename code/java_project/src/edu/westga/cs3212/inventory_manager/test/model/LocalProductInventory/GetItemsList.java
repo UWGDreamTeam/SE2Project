@@ -13,6 +13,7 @@ class GetItemsList {
 	@Test
 	void testGetItemsList() {
 		LocalProductInventory inventory = new LocalProductInventory();
+		inventory.clear();
 		Product product1 = new Product("ID999", "name999");
 		
 		assertEquals(0, inventory.getListOfItems().size());

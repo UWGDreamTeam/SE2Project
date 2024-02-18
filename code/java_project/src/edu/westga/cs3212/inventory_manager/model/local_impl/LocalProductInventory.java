@@ -8,14 +8,12 @@ import edu.westga.cs3212.inventory_manager.model.Item;
 
 public class LocalProductInventory implements InventoryManager {
 	
-	private static final String ITEM_ID_CANNOT_BE_NULL = "Item ID cannot be null";
-	private static final String ITEM_ID_CANNOT_BE_BLANK = "Item ID cannot be blank";
-	private static final String NEW_ITEM_CANNOT_BE_NULL = "New Item Cannot be null";
-	private static final String NEW_ITEM_ALREADY_EXISTS = "New Item Already Exists";
-	
+	private static final String ITEM_ID_CANNOT_BE_NULL = "Product ID cannot be null";
+	private static final String ITEM_ID_CANNOT_BE_BLANK = "Product ID cannot be blank";
+	private static final String NEW_ITEM_CANNOT_BE_NULL = "New Product Cannot be null";
+	private static final String NEW_ITEM_ALREADY_EXISTS = "Product Already Exists";
 	
 	private static List<Product> products;
-	
 	
 	/**
 	 * Instantiates a new LocalProductInventory object
@@ -60,7 +58,6 @@ public class LocalProductInventory implements InventoryManager {
 
 	@Override
 	public Product getItemById(String itemID) {
-		
 		if (itemID == null) {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
 		}
