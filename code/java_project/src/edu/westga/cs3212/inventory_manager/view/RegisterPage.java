@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.view;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.EmployeeType;
 import edu.westga.cs3212.inventory_manager.viewmodel.RegisterPageViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -39,7 +40,11 @@ public class RegisterPage {
         this.confirmPasswordTextField.textProperty().bindBidirectional(this.viewModel.confirmPasswordProperty());
         
         this.employeeTypeComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
-            this.viewModel.employeeTypeProperty().set(newVal.toString());
+            if (newVal != null) {
+                this.viewModel.employeeTypeProperty().set(newVal.toString());
+            } else {
+                this.viewModel.employeeTypeProperty().set(null);
+            }
         });
     }
 
@@ -48,7 +53,7 @@ public class RegisterPage {
     }
 
     @FXML
-    void registerEmployee() {
+    void registerEmployee(ActionEvent event) {
 
         String firstName = this.firstNameTextField.getText();
         String lastName = this.lastNameTextField.getText();
@@ -75,7 +80,7 @@ public class RegisterPage {
     }
 
     @FXML
-    void cancelRegistration() {
+    void cancelRegistration(ActionEvent action) {
         this.firstNameTextField.clear();
         this.lastNameTextField.clear();
         this.passwordTextField.clear();
