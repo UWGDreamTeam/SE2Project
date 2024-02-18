@@ -1,23 +1,11 @@
 package edu.westga.cs3212.inventory_manager.model.local_impl;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.EmployeeCredentialsStorage;
 import edu.westga.cs3212.inventory_manager.model.SystemCredentialsManager;
-
-import java.lang.reflect.Type;
 
 /**
  * Manages employee credentials locally by storing, retrieving,
@@ -35,7 +23,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 * @postcondition getEmployees().size() == 0
 	 */
 	public LocalEmployeeCredentialsManager() {
-		this.employeeCredentialsMap = new HashMap<String, LocalEmployeeCredentials>();
+		this.employeeCredentialsMap = new HashMap<>();
 		this.employeeCredentialsMap = EmployeeCredentialsStorage.loadEmployeeCredentials(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 	}
 
@@ -86,6 +74,14 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
         EmployeeCredentialsStorage.saveChanges(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
     }
     
+	/**
+	 * Generates a unique employee ID.
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return A unique employee ID.
+	 */
     public String generateUniqueEmployeeID() {
     	return UUID.randomUUID().toString().replace("-", "").substring(0, 8);
     }
@@ -95,8 +91,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL);
 		}
 		try {
-			EmployeeType type = EmployeeType.valueOf(employeeType.toUpperCase());
-			return type;
+			return EmployeeType.valueOf(employeeType.toUpperCase());
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(Constants.EMPLOYEE_MUST_BE_VALID_TYPE);
 		}

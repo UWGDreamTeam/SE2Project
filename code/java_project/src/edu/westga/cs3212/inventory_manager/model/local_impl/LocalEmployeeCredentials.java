@@ -40,7 +40,6 @@ public class LocalEmployeeCredentials {
      * @param lastName     the last name of the employee
      * @param password     the password for the employee's account
      * @param employeeType the type of employee (MANAGER or WORKER)
-     * 
      */
     public LocalEmployeeCredentials(String employeeID, String firstName, String lastName, String password, EmployeeType employeeType) {        
         this.setEmployeeID(employeeID);

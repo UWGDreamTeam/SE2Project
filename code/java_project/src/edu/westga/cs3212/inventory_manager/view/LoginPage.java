@@ -1,4 +1,5 @@
 package edu.westga.cs3212.inventory_manager.view;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.viewmodel.LoginPageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,13 +41,13 @@ public class LoginPage {
     
 	private void showErrorPopup() {
 		Alert errorPopup = new Alert(AlertType.ERROR);
-		errorPopup.setContentText("Login failed, please check your credentials and try again");
+		errorPopup.setContentText(Constants.LOGIN_ERROR_MESSAGE);
 		errorPopup.showAndWait();
 	}
 
 	private void showSuccessPopup(ActionEvent event) {
 		Alert successPopup = new Alert(AlertType.CONFIRMATION);
-		successPopup.setContentText("Login successful");
+		successPopup.setContentText(Constants.LOGIN_SUCCESS_MESSAGE);
 		successPopup.showAndWait();
 		this.closeWindow(event);
 	}
