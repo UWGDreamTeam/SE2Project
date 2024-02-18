@@ -35,6 +35,7 @@ public class LocalEmployeeCredentials {
      *               getPassword().equals(password) &&
      *               getEmployeeType().equals(employeeType)
      * 
+     * @param employeeID   the unique id of the employee
      * @param firstName    the first name of the employee
      * @param lastName     the last name of the employee
      * @param password     the password for the employee's account
