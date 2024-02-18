@@ -1,6 +1,8 @@
 package edu.westga.cs3212.inventory_manager.test.localemployeecredentialsmanager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,7 +35,6 @@ class TestGetters {
 	void testGetEmployeeCredentialsWhenTheresInvalidEmployeeID() {
 		LocalEmployeeCredentialsManager testManager = new LocalEmployeeCredentialsManager();
 		testManager.addEmployee("password", "ADMIN", "John", EmployeeType.MANAGER.toString());
-		String employeeID = testManager.getEmployees().get(0).getEmployeeID();
 		assertNull(testManager.getEmployeeCredentials("invalidID"));
 	}
 	

@@ -1,6 +1,7 @@
 package edu.westga.cs3212.inventory_manager.test.localemployeecredentialsmanager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

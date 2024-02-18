@@ -1,7 +1,5 @@
 package edu.westga.cs3212.inventory_manager.test.localemployeecredentials;
 
-
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
@@ -10,130 +8,141 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
+
 class TestConstructor {
 
+	private final String employeeID = "123456";
+	private final String firstName = "John";
+	private final String lastName = "Doe";
+	private final String password = "password123";
+	private final EmployeeType employeeType = EmployeeType.WORKER;
+
 	@Test
-    void testConstructorShouldCreateObjectWithValidParameters() {
-	    LocalEmployeeCredentials credentials = new LocalEmployeeCredentials("123", "John", "Doe", "password123", EmployeeType.WORKER);
-	    assertNotNull(credentials);
-	    assertEquals("123", credentials.getEmployeeID());
-	    assertEquals("John", credentials.getFirstName());
-	    assertEquals("Doe", credentials.getLastName());
-	    assertEquals("password123", credentials.getPassword());
-	    assertEquals(EmployeeType.WORKER, credentials.getEmployeeType());
-    }
-	
+	void testConstructorShouldCreateObjectWithValidParameters() {
+		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials(this.employeeID, this.firstName,
+				this.lastName, this.password, this.employeeType);
+		assertNotNull(credentials);
+		assertEquals(this.employeeID, credentials.getEmployeeID());
+		assertEquals(this.firstName, credentials.getFirstName());
+		assertEquals(this.lastName, credentials.getLastName());
+		assertEquals("password123", credentials.getPassword());
+		assertEquals(this.employeeType, credentials.getEmployeeType());
+	}
+
 	@Test
-    void testSetFirstNameShouldUpdateFirstName() {
-		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials("123", "John", "Doe", "password123", EmployeeType.WORKER);
-        credentials.setFirstName("Jane");
-        assertEquals("Jane", credentials.getFirstName());
-    }
-	
+	void testSetFirstNameShouldUpdateFirstName() {
+		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials(this.employeeID, this.firstName,
+				this.lastName, this.password, this.employeeType);
+		credentials.setFirstName("Jane");
+		assertEquals("Jane", credentials.getFirstName());
+	}
+
 	@Test
-    void testSetLastNameShouldUpdateLastName() {
-		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials("123", "John", "Doe", "password123", EmployeeType.WORKER);
-        credentials.setLastName("Smith");
-        assertEquals("Smith", credentials.getLastName());
-    }
-	
+	void testSetLastNameShouldUpdateLastName() {
+		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials(this.employeeID, this.firstName,
+				this.lastName, this.password, this.employeeType);
+		credentials.setLastName("Smith");
+		assertEquals("Smith", credentials.getLastName());
+	}
+
 	@Test
-    void testSetPasswordShouldUpdatePassword() {
-		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials("123", "John", "Doe", "password123", EmployeeType.WORKER);
-        credentials.setPassword("newpassword456");
-        assertEquals("newpassword456", credentials.getPassword());
-    }
-	
+	void testSetPasswordShouldUpdatePassword() {
+		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials(this.employeeID, this.firstName,
+				this.lastName, this.password, this.employeeType);
+		credentials.setPassword("newpassword456");
+		assertEquals("newpassword456", credentials.getPassword());
+	}
+
 	@Test
-    void testSetEmployeeTypeShouldUpdateEmployeeType() {
-		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials("123", "John", "Doe", "password123", EmployeeType.WORKER);
-        credentials.setEmployeeType(EmployeeType.MANAGER);
-        assertEquals(EmployeeType.MANAGER, credentials.getEmployeeType());
-    }
+	void testSetEmployeeTypeShouldUpdateEmployeeType() {
+		LocalEmployeeCredentials credentials = new LocalEmployeeCredentials(this.employeeID, this.firstName,
+				this.lastName, this.password, this.employeeType);
+		credentials.setEmployeeType(EmployeeType.MANAGER);
+		assertEquals(EmployeeType.MANAGER, credentials.getEmployeeType());
+	}
 
 	@Test
 	void testConstructorShouldThrowExceptionIfEmployeeIDIsNull() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials(null, "John", "Doe", "password123", EmployeeType.WORKER);
-        });
-	}
-	
-	@Test
-	void testConstructorShouldThrowExceptionIfEmployeeIDIsEmpty() {
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			new LocalEmployeeCredentials("", "John", "Doe", "password123", EmployeeType.WORKER);
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(null, this.firstName, this.lastName, this.password, this.employeeType);
 		});
 	}
-	
-    @Test
-    void testConstructorShouldThrowExceptionIfFirstNameIsNull() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123", null, "Doe", "password123", EmployeeType.WORKER);
-        });
-    }
 
-    @Test
-    void testConstructorShouldThrowExceptionIfLastNameIsNull() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123", "John", null, "password123", EmployeeType.WORKER);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfEmployeeIDIsEmpty() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials("", this.firstName, this.lastName, this.password, this.employeeType);
+		});
+	}
 
-    @Test
-    void testConstructorShouldThrowExceptionIfPasswordIsNull() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123","John", "Doe", null, EmployeeType.WORKER);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfFirstNameIsNull() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, null, this.lastName, this.password, this.employeeType);
+		});
+	}
 
-    @Test
-    void testConstructorShouldThrowExceptionIfEmployeeTypeIsNull() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123","John", "Doe", "password123", null);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfLastNameIsNull() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, this.firstName, null, this.password, this.employeeType);
+		});
+	}
 
-    @Test
-    void testConstructorShouldThrowExceptionIfFirstNameIsEmpty() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123", "", "Doe", "password123", EmployeeType.WORKER);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfPasswordIsNull() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, this.firstName, this.lastName, null, this.employeeType);
+		});
+	}
 
-    @Test
-    void testConstructorShouldThrowExceptionIfLastNameIsEmpty() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123", "John", "", "password123", EmployeeType.WORKER);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfEmployeeTypeIsNull() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, this.firstName, this.lastName, this.password, null);
+		});
+	}
 
-    @Test
-    void testConstructorShouldThrowExceptionIfPasswordIsEmpty() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123","John", "Doe", "", EmployeeType.WORKER);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfFirstNameIsEmpty() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, "", this.lastName, this.password, this.employeeType);
+		});
+	}
 
-    @Test
-    void testConstructorShouldThrowExceptionIfFirstNameIsWhitespace() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123", "   ", "Doe", "password123", EmployeeType.WORKER);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfLastNameIsEmpty() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, this.firstName, "", this.password, this.employeeType);
+		});
+	}
 
-    @Test
-    void testConstructorShouldThrowExceptionIfLastNameIsWhitespace() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123", "John", "   ", "password123", EmployeeType.WORKER);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfPasswordIsEmpty() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, this.firstName, this.lastName, "", this.employeeType);
+		});
+	}
 
-    @Test
-    void testConstructorShouldThrowExceptionIfPasswordIsWhitespace() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LocalEmployeeCredentials("123","John", "Doe", "   ", EmployeeType.WORKER);
-        });
-    }
+	@Test
+	void testConstructorShouldThrowExceptionIfFirstNameIsWhitespace() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, "   ", this.lastName, this.password, this.employeeType);
+		});
+	}
+
+	@Test
+	void testConstructorShouldThrowExceptionIfLastNameIsWhitespace() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, this.firstName, "   ", this.password, this.employeeType);
+		});
+	}
+
+	@Test
+	void testConstructorShouldThrowExceptionIfPasswordIsWhitespace() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new LocalEmployeeCredentials(this.employeeID, this.firstName, this.lastName, "   ", this.employeeType);
+		});
+	}
 
 }
-

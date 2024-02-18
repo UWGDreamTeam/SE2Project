@@ -50,12 +50,12 @@ public class RegisterPage {
 
 	@FXML
 	void initialize() {
-		assert confirmPasswordTextField != null : "fx:id=\"confirmPasswordTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
-		assert employeeIdTextField != null : "fx:id=\"employeeIdTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
-		assert employeeTypeComboBox != null : "fx:id=\"employeeTypeComboBox\" was not injected: check your FXML file 'RegisterPage.fxml'.";
-		assert firstNameTextField != null : "fx:id=\"firstNameTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
-		assert lastNameTextField != null : "fx:id=\"lastNameTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
-		assert passwordTextField != null : "fx:id=\"passwordTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
+		assert this.confirmPasswordTextField != null : "fx:id=\"confirmPasswordTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
+		assert this.employeeIdTextField != null : "fx:id=\"employeeIdTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
+		assert this.employeeTypeComboBox != null : "fx:id=\"employeeTypeComboBox\" was not injected: check your FXML file 'RegisterPage.fxml'.";
+		assert this.firstNameTextField != null : "fx:id=\"firstNameTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
+		assert this.lastNameTextField != null : "fx:id=\"lastNameTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
+		assert this.passwordTextField != null : "fx:id=\"passwordTextField\" was not injected: check your FXML file 'RegisterPage.fxml'.";
 
 	}
 
