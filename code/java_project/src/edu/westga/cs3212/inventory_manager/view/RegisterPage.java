@@ -27,6 +27,10 @@ public class RegisterPage {
     @FXML
     private ComboBox<EmployeeType> employeeTypeComboBox;
 
+    /**
+     * Initializes the controller class.
+     * This method is automatically called after the FXML file has been loaded. It sets up the initial bindings and configurations needed for the UI components.
+     */
     @FXML
     public void initialize() {
         this.bindToViewModel();
