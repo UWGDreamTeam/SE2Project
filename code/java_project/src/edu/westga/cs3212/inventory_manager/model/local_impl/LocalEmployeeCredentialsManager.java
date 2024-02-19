@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.EmployeeCredentialsStorage;
+import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.SystemCredentialsManager;
 
 /**

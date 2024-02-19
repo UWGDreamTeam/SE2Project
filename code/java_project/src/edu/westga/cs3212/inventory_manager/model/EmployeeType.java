@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_manager.model.local_impl;
+package edu.westga.cs3212.inventory_manager.model;
 
 /**
  * Represents the type of employee (e.g., MANAGER, WORKER).

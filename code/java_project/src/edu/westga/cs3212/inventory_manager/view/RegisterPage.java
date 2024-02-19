@@ -1,6 +1,6 @@
 package edu.westga.cs3212.inventory_manager.view;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.viewmodel.RegisterPageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
