@@ -18,7 +18,8 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	public static final String WINDOW_TITLE = "Inventory Manager";
 	public static final String LANDING_PAGE = "view/InventoryPage.fxml";
-	public static final String ADD_PAGE = "view/LoginPage.fxml";
+	public static final String ADD_PAGE = "view/AddComponentPage.fxml";
+	public static final String HOME_PAGE = "view/HomePage.fxml";
 
 	/**
 	 * JavaFX entry point.

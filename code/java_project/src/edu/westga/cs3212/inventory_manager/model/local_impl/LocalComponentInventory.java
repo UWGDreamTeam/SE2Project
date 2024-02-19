@@ -43,7 +43,6 @@ public class LocalComponentInventory implements InventoryManager {
 		}
 		
 		return LocalComponentInventory.components.add((Component) newItem);
-		
 	}
 
 	@Override
@@ -84,6 +83,18 @@ public class LocalComponentInventory implements InventoryManager {
 	@Override
 	public void clear() {
 		LocalComponentInventory.components = new ArrayList<Component>();
+	}
+
+	@Override
+	public void editItem(String id, Item newItem) {
+		if (!id.equals(newItem.getId())) {
+			throw new IllegalArgumentException("Component ID does not match.");
+		}
+		
+		Item componentBeingEdited = this.getItemById(id);
+		LocalComponentInventory.components.remove(componentBeingEdited);
+		
+		this.addNewItem(newItem);
 	}
 
 }

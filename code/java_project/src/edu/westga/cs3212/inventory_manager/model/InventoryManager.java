@@ -29,7 +29,7 @@ public interface InventoryManager {
 	boolean addNewItem(Item newItem);
 	
 	/**
-	 * Removes the item from invenotry
+	 * Removes the item from inventory
 	 * 
 	 * @precondition newItem != null && newItem.isBlank() == false
 	 * @postcondition this.getListOfItems().size() == this.getListOfItems().size()@prev - 1 
@@ -38,6 +38,21 @@ public interface InventoryManager {
 	 * @return true, if successful
 	 */
 	boolean removeItem(Item newItem);
+	
+	/**
+	 * Edits the specified item.
+	 * 
+	 * @precondition newItem != null
+	 * @postcondition 	this.getItemById.getId().equals(newItem.getId()) &&
+	 * 					this.getItemById.getName().equals(newItem.getName()) &&
+	 * 					this.getItemById..getQuantity == newItem().getQuantity() &&
+	 * 					this.getItemById.getUnitCost == newItem.getUnitCost() &&
+	 * 					this.getItemById.getDateLastModified == newItem.getDateLastModified()
+	 * 
+	 * @param 	id the id of the item to be edited
+	 * @param newItem the item with the new information
+	 */
+	void editItem(String id, Item newItem);
 	
 	/**
 	 * Gets the item by an ID.

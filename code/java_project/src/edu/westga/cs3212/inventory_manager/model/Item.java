@@ -10,31 +10,15 @@ import java.time.LocalDateTime;
  */
 public abstract class Item {
 	
-	/** The Constant ID_CANNOT_BE_NULL. */
 	private static final String ID_CANNOT_BE_NULL = "ID cannot be null";
-	
-	/** The Constant ID_CANNOT_BE_BLANK. */
 	private static final String ID_CANNOT_BE_BLANK = "ID cannot be blank";
-	
-	/** The Constant NAME_CANNOT_BE_NULL. */
 	private static final String NAME_CANNOT_BE_NULL = "Name cannot be null";
-	
-	/** The Constant NAME_CANNOT_BE_BLANK. */
 	private static final String NAME_CANNOT_BE_BLANK = "Name cannot be blank";
 
-	/** The id. */
 	private String id;
-	
-	/** The name. */
 	private String name;
-	
-	/** The unit cost. */
 	private double unitCost;
-	
-	/** The quantity of this item. */
 	private int quantity;
-	
-	/** The date last modified. */
 	private LocalDateTime dateLastModified;
 	
 	/**

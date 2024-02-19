@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
+import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
+import edu.westga.cs3212.inventory_manager.viewmodel.InventoryViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +33,10 @@ public class InventoryPage {
     private Tab componentsTabPage;
 
     @FXML
-    private TreeTableView<?> componentsTableView;
+    private TreeTableView<Component> componentsTableView;
+    
+    @FXML
+    private TreeTableView<Product> productsTableView;
 
     @FXML
     private Text employeeFullNameLabel;
@@ -46,15 +52,18 @@ public class InventoryPage {
 
     @FXML
     private Tab productsTabPage;
-
-    @FXML
-    private TreeTableView<?> productsTableView;
+    
+    private InventoryViewModel inventoryVM;
 
     /* GENERAL */
     
     @FXML
-    void homePageButtonOnClick(ActionEvent event) {
-    	
+    void homePageButtonOnClick(ActionEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
+        Scene currentScene = currentStage.getScene();
+        currentScene.setRoot(parent);
+        currentStage.setTitle("Home Page");
     }
     
     @FXML
@@ -65,8 +74,15 @@ public class InventoryPage {
     /* COMPONENTS TAB*/
     
     @FXML
-    void addComponentButtonManagerOnClick(ActionEvent event) {
-
+    void addComponentButtonManagerOnClick(ActionEvent event) throws IOException {
+    	Stage modalStage = new Stage();
+    	Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PAGE));
+		Scene scene = new Scene(parent);
+		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.setScene(scene);
+		modalStage.initModality(Modality.WINDOW_MODAL);
+		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+		modalStage.showAndWait();
     }
     
     @FXML
@@ -88,17 +104,7 @@ public class InventoryPage {
     
     @FXML
     void addProdcutManagerOnClick(ActionEvent event) throws IOException {
-    	/*TESTING*/
-    	Stage modalStage = new Stage();
-    	Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PAGE));
-		Scene scene = new Scene(parent);
-		modalStage.setTitle(Main.WINDOW_TITLE);
-		modalStage.setScene(scene);
-		modalStage.initModality(Modality.WINDOW_MODAL);
-		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-		modalStage.showAndWait();
-		
-        //this.refreshSystemNames();
+    	
     }
 
     
@@ -132,6 +138,8 @@ public class InventoryPage {
         assert this.invendoryTreeView != null : "fx:id=\"invendoryTreeView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
         assert this.productsTabPage != null : "fx:id=\"productsTabPage\" was not injected: check your FXML file 'InventoryPage.fxml'.";
         assert this.productsTableView != null : "fx:id=\"productsTableView\" was not injected: check your FXML file 'InventoryPage.fxml'.";
+        
+        this.inventoryVM = new InventoryViewModel();
 
     }
 

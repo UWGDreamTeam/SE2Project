@@ -87,4 +87,17 @@ public class LocalProductInventory implements InventoryManager {
 		LocalProductInventory.products = new ArrayList<Product>();
 	}
 
+	@Override
+	public void editItem(String id, Item newItem) {
+		if (!id.equals(newItem.getId())) {
+			throw new IllegalArgumentException("Component ID does not match.");
+		}
+		
+		Item componentBeingEdited = this.getItemById(id);
+		LocalProductInventory.products.remove(componentBeingEdited);
+		
+		this.addNewItem(newItem);
+		
+	}
+
 }
