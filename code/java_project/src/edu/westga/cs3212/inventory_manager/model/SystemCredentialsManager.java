@@ -5,8 +5,7 @@ public abstract class SystemCredentialsManager {
 	
 	/** Return the password associated with a specified employee ID
 	 * 
-	 * @precondition employeeID != null &&
-	 * 				 getEmployeeIDs().contains(employeeID)
+	 * @precondition employeeID != null && !employeeID.isEmpty()
 	 * @postcondition none
 	 * 
 	 * @param employeeID ID of the employee

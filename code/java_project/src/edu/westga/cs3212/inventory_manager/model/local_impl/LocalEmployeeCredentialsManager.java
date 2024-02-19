@@ -50,10 +50,10 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
      * @param firstName The first name of the new employee.
      * @param lastName The last name of the new employee.
      * 
-     * @precondition password != null && !password.isEmpty() &&
-     *              employeeType != null && !employeeType.isEmpty() &&
-     *              firstName != null && !firstName.isEmpty() &&
-     *              lastName != null && !lastName.isEmpty()
+     * @precondition password != null && !password.isBlank &&
+     *              employeeType != null && !employeeType.isBlank() &&
+     *              firstName != null && !firstName.isBlank() &&
+     *              lastName != null && !lastName.isBlank()
      *              
      * @postcondition getEmployees().size() == getEmployees().size()@prev + 1
      */
@@ -137,7 +137,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 * Removes an employee's credentials from local storage.
 	 * 
 	 * @precondition employeeID != null &&
-	 *                  getEmployeeIDs().contains(employeeID)
+	 *                  getEmployeeIDs().contains(employeeID) && !employeeID.isBlank()
 	 *                  
 	 * @postcondition getEmployees().size() == getEmployees().size()@prev - 1
 	 * 
@@ -158,8 +158,8 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	/**
 	 * Updates the password for a given employee.
 	 * 
-	 * @precondition employeeID != null && !employeeID.isEmpty() && 
-	 *                 password != null && !password.isEmpty()
+	 * @precondition employeeID != null && !employeeID.isBlank() && 
+	 *                 password != null && !password.isBlank()
 	 * @postcondition getEmployeePassword(employeeID).equals(password)
 	 *                 
 	 * @param employeeID The unique identifier for the employee.
@@ -183,8 +183,8 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	/**
 	 * Attempts to login with the provided employee ID and password.
 	 * 
-	 * @precondition employeeID != null && !employeeID.isEmpty() &&
-	 *                 password != null && !password.isEmpty()
+	 * @precondition employeeID != null && !employeeID.isBlank() &&
+	 *                 password != null && !password.IsBlank()
 	 * @postcondition none
 	 * 
 	 * @param employeeID The employee's unique identifier.
@@ -206,7 +206,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	/**
 	 * Retrieves the password for a given employee ID.
 	 * 
-	 * @precondition employeeID != null && !employeeID.isEmpty()
+	 * @precondition employeeID != null && !employeeID.isBlank()
 	 * @postcondition none
 	 * 
 	 * @param employeeID The unique identifier for the employee.
