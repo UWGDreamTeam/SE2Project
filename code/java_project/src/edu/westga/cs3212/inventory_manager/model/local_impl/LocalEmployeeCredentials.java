@@ -51,31 +51,31 @@ public class LocalEmployeeCredentials {
 	
     private void checkForValidEmployeeID(String employeeID) {
         if (employeeID == null || employeeID.trim().isEmpty()) {
-			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL);
+			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL_OR_EMPTY);
 		}
     }
     
 	private void checkForValidFirstName(String firstName) {
 		if (firstName == null || firstName.trim().isEmpty()) {
-			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL);
+			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL_OR_EMPTY);
 		}
 	}
 	
 	private void checkForValidLastName(String lastName) {
 		if (lastName == null || lastName.trim().isEmpty()) {
-			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL);
+			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL_OR_EMPTY);
 		}
 	}
 	
 	private void checkForValidPassword(String password) {
 		if (password == null || password.trim().isEmpty()) {
-			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL);
+			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);
 		}
 	}
 	
 	private EmployeeType checkForValidEmployeeType(EmployeeType employeeType) {
 		if (employeeType == null) {
-			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL);
+			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
 		}
 		return employeeType;
 	}
