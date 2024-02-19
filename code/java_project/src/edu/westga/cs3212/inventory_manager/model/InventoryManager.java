@@ -1,6 +1,6 @@
 package edu.westga.cs3212.inventory_manager.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The Interface InventoryManager.
@@ -11,11 +11,14 @@ import java.util.List;
 public interface InventoryManager {
 	
 	/**
-	 * Gets the list of items.
+	 * Gets the list of items in the inventory.
+	 * 
+	 * @preconditon none
+	 * @postcondition none
 	 *
-	 * @return the list of items
+	 * @return the list of items in the inventory
 	 */
-	List<Item> getListOfItems();
+	ArrayList<Item> getListOfItems();
 	
 	/**
 	 * Adds the newItem to the Inventory

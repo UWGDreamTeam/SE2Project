@@ -14,7 +14,11 @@ public abstract class Item {
 	private static final String ID_CANNOT_BE_BLANK = "ID cannot be blank";
 	private static final String NAME_CANNOT_BE_NULL = "Name cannot be null";
 	private static final String NAME_CANNOT_BE_BLANK = "Name cannot be blank";
-
+	private static final String INVALID_QUANTITY = "Quantity cannoy be negative";
+	private static final String QUANTITY_EXCEEDS = "Quantity exceeds what is in inventory";
+	private static final int MINIMUM_QUANTITY = 0;
+	private static final double MINIMUM_UNIT_COST = 0.0;
+	
 	private String id;
 	private String name;
 	private double unitCost;
@@ -29,31 +33,18 @@ public abstract class Item {
 	 *
 	 * @param id the item id
 	 * @param name the name of the item
-	 * @precondition 	id != null && id.isBlank() == false &&
-	 * 					name != null && name.isBlank() == false
-	 * @postcondition 	this.getQuantity() == 0 &&
+	 * 
+	 * @precondition 	none
+	 * 
+	 * @postcondition 	this.getName().equals(name) &&
+	 * 					this.getId().equals(id) &&
+	 * 					this.getQuantity() == 0 &&
 	 * 					this.getDateLastModified() == LocalDateTime.now()
 	 */
 	protected Item(String id, String name) {
-		if (id == null) {
-			throw new IllegalArgumentException(ID_CANNOT_BE_NULL);
-		}
-		
-		if (id.isBlank()) {
-			throw new IllegalArgumentException(ID_CANNOT_BE_BLANK);
-		}
-		
-		if (name == null) {
-			throw new IllegalArgumentException(NAME_CANNOT_BE_NULL);
-		}
-		
-		if (name.isBlank()) {
-			throw new IllegalArgumentException(NAME_CANNOT_BE_BLANK);
-		}
-		
-		this.id = id;
-		this.name = name;
-		this.quantity = 0;
+		this.setId(id);
+		this.setName(name);
+		this.setQuantity(MINIMUM_QUANTITY);
 		this.dateLastModified = LocalDateTime.now();
 	}
 	
@@ -116,6 +107,9 @@ public abstract class Item {
 	/**
 	 * Gets the quantity of this item in the system.
 	 *
+	 * @precondition none
+	 * @postconditio none
+	 * 
 	 * @return the quantity
 	 */
 	public int getQuantity() {
@@ -127,10 +121,13 @@ public abstract class Item {
 	 *
 	 * @param quantity the new quantity of this item
 	 * 
-	 * @precondition quantity >= 0
+	 * @precondition quantity >= MINIMUM_QUANTITY
 	 * @postcondition this.getQuantity() == quantity
 	 */
 	public void setQuantity(int quantity) {
+		if (quantity < MINIMUM_QUANTITY) {
+			throw new IllegalArgumentException(INVALID_QUANTITY);
+		}
 		this.quantity = quantity;
 	}
 	
@@ -138,20 +135,36 @@ public abstract class Item {
 	/**
 	 * Decrease quantity.
 	 * 
-	 * @precondition quantity > 0
+	 * @precondition quantity <= this.getQuantity
 	 * @postcondition this.getQuantity() == this.getQuantity()@prev - quantity  
 	 *
-	 * @param quantity the quantity
+	 * @param quantity the quantity to be decreased from the current value in the system
 	 */
 	public void decreaseQuantity(int quantity) {
-		for (int count = 0; count < quantity; count++) {
-			this.quantity--;
+		if (quantity > this.getQuantity()) {
+			throw new IllegalArgumentException(QUANTITY_EXCEEDS);
 		}
+		this.quantity -= quantity;
+	}
+	
+	/**
+	 * Decrease quantity.
+	 * 
+	 * @precondition none
+	 * @postcondition this.getQuantity() == this.getQuantity()@prev + quantity  
+	 *
+	 * @param quantity the quantity to be added to the current value in the system
+	 */
+	public void increaseQuantity(int quantity) {
+		this.quantity += quantity;
 	}
 
 	/**
 	 * Gets the unit cost.
 	 *
+	 * @precondition none
+	 * @postconditio none
+	 * 
 	 * @return the unit cost
 	 */
 	public double getUnitCost() {
@@ -166,7 +179,7 @@ public abstract class Item {
 	 * @postcondition this.getUnitCost() == unitCost
 	 */
 	public void setUnitCost(double unitCost) {
-		if (unitCost < 0) {
+		if (unitCost < MINIMUM_UNIT_COST) {
 			throw new IllegalArgumentException("Unit cost cannot be less than 0");
 		}
 		
@@ -175,6 +188,9 @@ public abstract class Item {
 	
 	/**
 	 * Gets the date last modified.
+	 * 
+ 	 * @precondition none
+	 * @postconditio none
 	 *
 	 * @return the date last modified
 	 */
@@ -185,9 +201,10 @@ public abstract class Item {
 	/**
 	 * Sets the date this item was last modified.
 	 *
-	 * @param dateLastModified the new date last modified
 	 * @precondition dateLastModified != null
 	 * @postcondition this.getDateLastModified() == dateLastModified
+	 * 
+	 * @param dateLastModified the new date last modified
 	 */
 	public void setDateLastModified(LocalDateTime dateLastModified) {
 		if (dateLastModified == null) {
@@ -199,16 +216,20 @@ public abstract class Item {
 	/**
 	 * Hash code.
 	 *
-	 * @return the int
+	 * @precondition none
+	 * @postconditio none
+	 * 
+	 * @return the int hashcode of this class
 	 */
 	@Override
 	public abstract int hashCode();
 	
 	/**
-	 * Equals.
+	 * Compares the given object to the instance object of this class.
 	 *
-	 * @param obj the obj
-	 * @return true, if successful
+	 * @param obj the object to be compared to the instance object of this class
+	 * 
+	 * @return true, if objects are equal
 	 */
 	@Override
 	public abstract boolean equals(Object obj);

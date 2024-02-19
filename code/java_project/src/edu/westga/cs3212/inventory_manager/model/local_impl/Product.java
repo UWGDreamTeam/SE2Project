@@ -13,7 +13,15 @@ import edu.westga.cs3212.inventory_manager.model.Item;
  */
 public class Product extends Item {
 
-	/** The necessaryComponents. */
+	private static final String COMPONENTS_MAP_CANNOT_BE_EMPTY = "New Components cannot be empty";
+	private static final int MINIMUM_QUANTITY = 1;
+	private static final String INVALID_QUANTITY = "Quantity has to be greater than 0";
+	private static final String COMPONENTS_CANNOT_BE_EMPTY = "Components cannot be empty";
+	private static final String COMPONENT_CANNOT_BE_NULL = "Component cannot be null";
+	/** The necessaryComponents. 
+	 * @key string ID, the ID of the component
+	 * @value int quantity, the quantity of that component
+	 * */
 	private Map<String, Integer> necessaryComponents;
 	
 	/**
@@ -41,11 +49,11 @@ public class Product extends Item {
 		super(id, name);
 		
 		if (components == null) {
-			throw new IllegalArgumentException("Components cannot be null");
+			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
 		}
 		
-		if (components.size() <= 0) {
-			throw new IllegalArgumentException("Components cannot be empty");
+		if (components.isEmpty()) {
+			throw new IllegalArgumentException(COMPONENTS_CANNOT_BE_EMPTY);
 		}
 		
 		this.necessaryComponents = new HashMap<String, Integer>(components);
@@ -58,18 +66,18 @@ public class Product extends Item {
 	 * @param component the component to be added to the list
 	 * @param quantity the quantity of necessaryComponents needed for this product
 	 * 
-	 * @precondition component != null && quantity > 0
+	 * @precondition component != null && quantity >= MINIMUM_QUANTITY
 	 * @postcondition 
 	 * 
 	 * @return true, if successful and false if list already contains the component.
 	 */
 	public boolean addComponent(Component component, int quantity) {
 		if (component == null) {
-			throw new IllegalArgumentException("Component cannot be null");
+			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
 		}
 		
-		if (quantity <= 0) {
-			throw new IllegalArgumentException("Quantity has to be greater than 0");
+		if (quantity < MINIMUM_QUANTITY) {
+			throw new IllegalArgumentException(INVALID_QUANTITY);
 		}
 		
 		if (!this.necessaryComponents.containsKey(component.getId())) {
@@ -93,14 +101,14 @@ public class Product extends Item {
 	 */
 	public void setNecessaryComponentsList(Map<String, Integer> newComponents) {
 		if (newComponents == null) {
-			throw new IllegalArgumentException("New Components cannot be null");
+			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
 		}
 		
-		if (newComponents.size() <= 0) {
-			throw new IllegalArgumentException("New Components cannot be empty");
+		if (newComponents.isEmpty()) {
+			throw new IllegalArgumentException(COMPONENTS_MAP_CANNOT_BE_EMPTY);
 		}
 		
-		if (this.necessaryComponents.size() > 0) {
+		if (!this.necessaryComponents.isEmpty()) {
 			this.necessaryComponents.clear();
 		}
 		
@@ -115,7 +123,7 @@ public class Product extends Item {
 	 * 
 	 * @return the list of necessaryComponents and quantities
 	 */
-	public Map<String, Integer> getNecessaryComponentsListCopy() {
+	public Map<String, Integer> getNecessaryComponentsCopy() {
 		return new HashMap<String, Integer>(this.necessaryComponents);
 	}
 	

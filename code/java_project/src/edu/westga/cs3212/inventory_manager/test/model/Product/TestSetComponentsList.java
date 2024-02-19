@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
 
-class SetComponentsListTest {
+class TestSetComponentsList {
 
 	@Test
 	void testSetComponentsListNullComponents() {
@@ -55,13 +55,13 @@ class SetComponentsListTest {
 		Product product = new Product("ID009", "door");
 		product.setNecessaryComponentsList(components);
 		
-		int listOfComponentsSize = product.getNecessaryComponentsListCopy().size();
+		int listOfComponentsSize = product.getNecessaryComponentsCopy().size();
 		
 		//Assert
 		assertAll(
 				() -> assertEquals(2, listOfComponentsSize),
-				() -> assertTrue(product.getNecessaryComponentsListCopy().containsKey("ID99")),
-				() -> assertTrue(product.getNecessaryComponentsListCopy().containsKey("ID98")));
+				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID99")),
+				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID98")));
 	}
 	
 	
@@ -82,13 +82,13 @@ class SetComponentsListTest {
 		//Act
 		product.setNecessaryComponentsList(components);
 		
-		int listOfComponentsSize = product.getNecessaryComponentsListCopy().size();
+		int listOfComponentsSize = product.getNecessaryComponentsCopy().size();
 		
 		//Assert
 		assertAll(
 				() -> assertEquals(2, listOfComponentsSize),
-				() -> assertTrue(product.getNecessaryComponentsListCopy().containsKey("ID91")),
-				() -> assertTrue(product.getNecessaryComponentsListCopy().containsKey("ID85")));
+				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID91")),
+				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID85")));
 	}
 
 }

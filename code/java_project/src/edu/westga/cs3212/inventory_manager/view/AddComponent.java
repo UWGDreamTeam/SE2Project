@@ -10,6 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddComponent {
+	private static final String UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN = "Unable to add component, please check component information and try again";
+
+	private static final String COMPONENT_ADDED_SUCCESSFULLY = "Component Added Successfully";
+
 	@FXML
     private TextField cost;
 
@@ -29,12 +33,12 @@ public class AddComponent {
  
     	if (result) {
     		Alert successPopup = new Alert(AlertType.CONFIRMATION);
-    		successPopup.setContentText("Component Added Successfully");
+    		successPopup.setContentText(COMPONENT_ADDED_SUCCESSFULLY);
     		successPopup.showAndWait();
         	this.closeWindow(event);
     	} else {
     		Alert errorPopup = new Alert(AlertType.ERROR);
-    		errorPopup.setContentText("Unable to add component, please check component information and try again");
+    		errorPopup.setContentText(UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
     		errorPopup.showAndWait();
     	}
     }

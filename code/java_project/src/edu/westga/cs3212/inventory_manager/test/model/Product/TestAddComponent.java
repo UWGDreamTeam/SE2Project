@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
 
-class AddComponentTest {
+class TestAddComponent {
 
 	@Test
 	void testAddNullComponent() {

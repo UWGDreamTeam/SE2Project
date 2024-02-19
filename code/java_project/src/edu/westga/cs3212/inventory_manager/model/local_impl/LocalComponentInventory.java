@@ -28,7 +28,7 @@ public class LocalComponentInventory implements InventoryManager {
 	}
 
 	@Override
-	public List<Item> getListOfItems() {
+	public ArrayList<Item> getListOfItems() {
 		return new ArrayList<Item>(LocalComponentInventory.components);
 	}
 

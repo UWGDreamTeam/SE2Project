@@ -1,18 +1,19 @@
-package edu.westga.cs3212.inventory_manager.test.model.Product;
+package edu.westga.cs3212.inventory_manager.test.model.Component;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
+import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
+import edu.westga.cs3212.inventory_manager.model.Item;
 
-class EqualsTest {
-
+class TestEquals {
+	
 	@Test
 	void testEqualsSelf() {
 		//Arrange
-		Product product = new Product("ID528", "arrow");
+		Item product = new Component("ID528", "arrow");
 		
 		//Act
 		
@@ -23,7 +24,7 @@ class EqualsTest {
 	@Test
 	void testEqualsWithNull() {
 		//Arrange
-		Product product = new Product("ID527", "feather");
+		Item product = new Component("ID527", "feather");
 		
 		//Act
 		
@@ -34,7 +35,7 @@ class EqualsTest {
 	@Test
 	void testEqualsWithDifferentClass() {
 		//Arrange
-		Product product = new Product("ID523", "furnace");
+		Item product = new Component("ID523", "furnace");
 		Object product1 = new Object();
 		
 		//Act
@@ -49,8 +50,8 @@ class EqualsTest {
 		String id = "ID529";
 		String name = "table";
 		
-		Product product = new Product(id, name);
-		Product product1 = new Product(id, name);
+		Item product = new Component(id, name);
+		Item product1 = new Component(id, name);
 		//Act
 		
 		//Assert
@@ -60,8 +61,8 @@ class EqualsTest {
 	@Test
 	void testEqualsWithSameClassDifferentHashCode() {
 		//Arrange
-		Product product = new Product("ID526", "grass");
-		Product product1 = new Product("ID991", "water");
+		Item product = new Component("ID526", "grass");
+		Item product1 = new Component("ID991", "water");
 		
 		//Act
 		

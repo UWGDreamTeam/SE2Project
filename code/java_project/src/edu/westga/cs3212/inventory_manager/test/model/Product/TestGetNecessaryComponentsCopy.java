@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
 
-class GetNecessaryComponentsListCopyTest {
+class TestGetNecessaryComponentsCopy {
 
 	@Test
 	void testGetComponentsListCopy() {
@@ -26,13 +26,13 @@ class GetNecessaryComponentsListCopyTest {
 		
 		//Act
 		Product product = new Product("ID0005", "bed", components);
-		int listOfComponentsSize = product.getNecessaryComponentsListCopy().size();
+		int listOfComponentsSize = product.getNecessaryComponentsCopy().size();
 		
 		//Assert
 		assertAll(
 				() -> assertEquals(2, listOfComponentsSize),
-				() -> assertTrue(product.getNecessaryComponentsListCopy().containsKey("ID00")),
-				() -> assertTrue(product.getNecessaryComponentsListCopy().containsKey("ID01")));
+				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID00")),
+				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID01")));
 	}
 
 }

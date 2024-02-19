@@ -68,7 +68,7 @@ public class InventoryPage {
     
     @FXML
     void logOutButtonOnClick(ActionEvent event) {
-    	
+    	//TODO
     }
     
     /* COMPONENTS TAB*/
@@ -87,45 +87,45 @@ public class InventoryPage {
     
     @FXML
     void editComponentButtonManagerOnClick(ActionEvent event) {
-
+    	//TODO
     }
     
     @FXML
     void orderComponentButtonManagerOnClick(ActionEvent event) {
-
+    	//TODO
     }
     
     @FXML
     void removeComponentButtonManagerOnClick(ActionEvent event) {
-
+    	//TODO
     }
     
     /* PRODUCT TABS */
     
     @FXML
     void addProdcutManagerOnClick(ActionEvent event) throws IOException {
-    	
+    	//TODO
     }
 
     
     @FXML
     void ordersPageButtonOnClick(ActionEvent event) {
-    	
+    	//TODO
     }
 
     @FXML
     void editProductManagerOnClick(ActionEvent event) {
-
+    	//TODO
     }
 
     @FXML
     void produceProductButtonOnClick(ActionEvent event) {
-
+    	//TODO
     }
 
     @FXML
     void removeProductManagerOnClick(ActionEvent event) {
-
+    	//TODO
     }
 
     @FXML

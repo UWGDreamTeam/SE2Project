@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
 
-class ProductTest {
+class TestProductConstrutor {
 
 	/* SUPER CONSTRUCTOR */
 	@Test
@@ -68,7 +68,7 @@ class ProductTest {
 		assertAll(
 				() -> assertEquals("ID0000", product.getId()),
 				() -> assertEquals("Sword", product.getName()),
-				() -> assertEquals(0, product.getNecessaryComponentsListCopy().size())
+				() -> assertEquals(0, product.getNecessaryComponentsCopy().size())
 		);
 	
 	}
@@ -102,12 +102,12 @@ class ProductTest {
 		
 		//Act
 		Product product = new Product("ID0001", "Pickaxe", components);
-		int listOfComponentsSize = product.getNecessaryComponentsListCopy().size();
+		int listOfComponentsSize = product.getNecessaryComponentsCopy().size();
 		
 		//Assert
 		assertAll(
 				() -> assertEquals(2, listOfComponentsSize),
-				() -> assertTrue(product.getNecessaryComponentsListCopy().containsKey("ID001")),
-				() -> assertTrue(product.getNecessaryComponentsListCopy().containsKey("ID002")));
+				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID001")),
+				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID002")));
 	}
 }

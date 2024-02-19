@@ -14,16 +14,9 @@ import javafx.beans.property.StringProperty;
  */
 public class AddComponentViewModel {
 	
-	/** The name. */
 	private StringProperty name;
-    
-    /** The cost. */
     private StringProperty cost;
-    
-    /** The quantity. */
     private StringProperty quantity;
-    
-    /** The component inventory. */
     private LocalComponentInventory componentInventory;
     
     /**
@@ -39,9 +32,12 @@ public class AddComponentViewModel {
     
     
     /**
-     * Adds the.
+     * Adds a new component to the system
+     * 
+     * @precondition none
+     * @postconditno this.componentInventory.getQuantity() == this.componentInventory.getQuantity()@prev + 1
      *
-     * @return true, if successful
+     * @return true, if successfully added to the system, false otherwise
      */
     public boolean add() {
     	String name = this.name.getValue();
