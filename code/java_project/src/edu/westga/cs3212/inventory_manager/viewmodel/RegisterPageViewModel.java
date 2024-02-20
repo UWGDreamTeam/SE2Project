@@ -1,5 +1,6 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -24,7 +25,7 @@ public class RegisterPageViewModel {
      * Initializes a new instance of the RegisterPageViewModel class.
      * 
      * @precondition none
-     * @postcondition none
+     * @postcondition credentialsManager != null
      */
     public RegisterPageViewModel() {
         this.credentialsManager = new LocalEmployeeCredentialsManager();
@@ -35,13 +36,13 @@ public class RegisterPageViewModel {
      * Validation is performed to ensure passwords match.
      * 
      * @precondition none
-     * @postcondition If registration is successful, a new employee is added to the system.
+     * @postcondition this.credentialsManager.getEmployees().size() == this.credentialsManager.getEmployees().size@prev + 1
      * 
      * @throws IllegalArgumentException If the passwords do not match.
      */
     public void registerEmployee() {
         if (!this.password.get().equals(this.confirmPassword.get())) {
-            throw new IllegalArgumentException("Error: Passwords do not match.");
+            throw new IllegalArgumentException(Constants.PASSWORDS_DO_NOT_MATCH);
         }
         try {
             this.credentialsManager.addEmployee(

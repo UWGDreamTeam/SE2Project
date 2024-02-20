@@ -1,5 +1,6 @@
 package edu.westga.cs3212.inventory_manager.view;
 
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.viewmodel.RegisterPageViewModel;
 import javafx.event.ActionEvent;
@@ -66,20 +67,20 @@ public class RegisterPage {
         EmployeeType selectedType = this.employeeTypeComboBox.getValue();
 
         if (firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || password == null || password.isEmpty() || confirmPassword == null || confirmPassword.isEmpty() || selectedType == null) {
-            this.showAlert(Alert.AlertType.ERROR, "Registration Error", "All fields must be filled out.");
+            this.showAlert(Alert.AlertType.ERROR, Constants.REGISTRATION_ERROR, Constants.MUST_FILL_OUT_ALL_FIELDS);
             return;
         }
 
         if (!password.equals(confirmPassword)) {
-            this.showAlert(Alert.AlertType.ERROR, "Registration Error", "Passwords do not match.");
+            this.showAlert(Alert.AlertType.ERROR, Constants.REGISTRATION_ERROR, Constants.PASSWORDS_DO_NOT_MATCH);
             return;
         }
 
         try {
             this.viewModel.registerEmployee();
-            this.showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "The employee has been successfully registered.");
+            this.showAlert(Alert.AlertType.INFORMATION, Constants.REGISTRATION_SUCCESSFUL, Constants.EMPLOYEE_REGISTRATION_SUCCESSFUL);
         } catch (IllegalArgumentException e) {
-            this.showAlert(Alert.AlertType.ERROR, "Registration Error", e.getMessage());
+            this.showAlert(Alert.AlertType.ERROR, Constants.REGISTRATION_ERROR, e.getMessage());
         }
     }
 

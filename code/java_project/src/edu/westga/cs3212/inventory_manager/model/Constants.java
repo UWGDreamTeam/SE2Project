@@ -12,6 +12,13 @@ public final class Constants {
 	public static final String LOGIN_ERROR_MESSAGE = "Login failed, please check your credentials and try again";
 	public static final String LOGIN_SUCCESS_MESSAGE = "Login successful";
 	
+	public static final String PASSWORDS_DO_NOT_MATCH = "Error: Passwords do not match.";
+	public static final String REGISTRATION_ERROR = "Registration Error";
+	public static final String MUST_FILL_OUT_ALL_FIELDS = "All fields must be filled out.";
+	public static final String REGISTRATION_SUCCESSFUL = "Registration Successful";
+	public static final String EMPLOYEE_REGISTRATION_SUCCESSFUL = "The employee has been successfully registered.";
+	
+	
 	private Constants() {
 		throw new IllegalStateException("Constants class");
 	}
