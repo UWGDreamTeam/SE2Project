@@ -5,15 +5,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.Order;
-import edu.westga.cs3212.inventory_manager.model.OrderManager;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 
 class TestOrderMangerGeneral {
 
-	private OrderManager orderManager;
+	private LocalOrderManager orderManager;
 
 	@BeforeEach
 	public void setUp() {
-		this.orderManager = new OrderManager();
+		this.orderManager = new LocalOrderManager();
 	}
 	
 	@Test
@@ -57,7 +57,7 @@ class TestOrderMangerGeneral {
 	void testCompleteOrderNullOrder() {
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.completeOrder(null);
+			this.orderManager.markOrderAsComplete(null);
 		});
 	}
 	
@@ -68,7 +68,7 @@ class TestOrderMangerGeneral {
 		this.orderManager.addOrder(order);
 
 		// Act
-		this.orderManager.completeOrder(order);
+		this.orderManager.markOrderAsComplete(order);
 
 		// Assert
 		assertTrue(this.orderManager.findOrderById(order.getId()).isCompleted());
@@ -79,10 +79,10 @@ class TestOrderMangerGeneral {
 		// Arrange
 		Order order = new Order();
 		this.orderManager.addOrder(order);
-		this.orderManager.completeOrder(order);
+		this.orderManager.markOrderAsComplete(order);
 
 		// Act
-		this.orderManager.completeOrder(order);
+		this.orderManager.markOrderAsComplete(order);
 
 		// Assert
 		assertTrue(this.orderManager.findOrderById(order.getId()).isCompleted());
@@ -92,7 +92,7 @@ class TestOrderMangerGeneral {
 	void testUndoOrderCompletionNullOrder() {
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.undoOrderCompletion(null);
+			this.orderManager.markOrderAsIncomplete(null);
 		});
 	}
 	
@@ -101,10 +101,10 @@ class TestOrderMangerGeneral {
 		// Arrange
 		Order order = new Order();
 		this.orderManager.addOrder(order);
-		this.orderManager.completeOrder(order);
+		this.orderManager.markOrderAsComplete(order);
 
 		// Act
-		this.orderManager.undoOrderCompletion(order);
+		this.orderManager.markOrderAsIncomplete(order);
 
 		// Assert
 		assertFalse(this.orderManager.findOrderById(order.getId()).isCompleted());
@@ -117,7 +117,7 @@ class TestOrderMangerGeneral {
 		this.orderManager.addOrder(order);
 
 		// Act
-		this.orderManager.undoOrderCompletion(order);
+		this.orderManager.markOrderAsIncomplete(order);
 
 		// Assert
 		assertFalse(this.orderManager.findOrderById(order.getId()).isCompleted());

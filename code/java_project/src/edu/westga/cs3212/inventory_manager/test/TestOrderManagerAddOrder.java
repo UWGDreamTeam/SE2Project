@@ -4,16 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import edu.westga.cs3212.inventory_manager.model.Order;
-import edu.westga.cs3212.inventory_manager.model.OrderManager;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 
 class TestOrderManagerAddOrder {
 
-	private OrderManager orderManager;
+	private LocalOrderManager orderManager;
 
 	@BeforeEach
 	public void setUp() {
-		this.orderManager = new OrderManager();
+		this.orderManager = new LocalOrderManager();
 	}
 
 	@Test

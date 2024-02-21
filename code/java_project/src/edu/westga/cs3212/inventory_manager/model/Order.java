@@ -13,6 +13,11 @@ import java.time.LocalDateTime;
  */
 public class Order {
 	
+	private static final String QUANTITY_TO_REMOVE_IS_GREATER_THAN_QUANTITY_IN_ORDER = "Quantity to remove is greater than quantity in order";
+	private static final String PRODUCT_NOT_FOUND_IN_ORDER = "Product not found in order";
+	private static final String QUANTITY_MUST_BE_GREATER_THAN_0 = "Quantity must be greater than 0";
+	private static final String PRODUCT_CANNOT_BE_NULL = "Product cannot be null";
+
 	private String id;
 	
 	private LocalDateTime dateCreated;
@@ -42,10 +47,10 @@ public class Order {
 	 */
 	public void addItem(Product product, int quantity) {
 		if (product == null) {
-			throw new IllegalArgumentException("Product cannot be null");
+			throw new IllegalArgumentException(PRODUCT_CANNOT_BE_NULL);
 		}
 		if (quantity <= 0) {
-			throw new IllegalArgumentException("Quantity must be greater than 0");
+			throw new IllegalArgumentException(QUANTITY_MUST_BE_GREATER_THAN_0);
 		}
 		int currQuantity = this.items.getOrDefault(product, 0);
 	    this.items.put(product, currQuantity + quantity);
@@ -59,19 +64,19 @@ public class Order {
 	 */
 	public void removeItem(Product product, int quantity) {
 	    if (product == null) {
-	        throw new IllegalArgumentException("Product cannot be null");
+	        throw new IllegalArgumentException(PRODUCT_CANNOT_BE_NULL);
 	    }
 	    if (quantity <= 0) {
-	        throw new IllegalArgumentException("Quantity must be greater than 0");
+	        throw new IllegalArgumentException(QUANTITY_MUST_BE_GREATER_THAN_0);
 	    }
 	    if (!this.items.containsKey(product)) {
-	        throw new IllegalArgumentException("Product not found in order");
+	        throw new IllegalArgumentException(PRODUCT_NOT_FOUND_IN_ORDER);
 	    }
 
 	    int currQuantity = this.items.get(product);
 
 	    if (currQuantity < quantity) {
-	        throw new IllegalArgumentException("Quantity to remove is greater than quantity in order");
+	        throw new IllegalArgumentException(QUANTITY_TO_REMOVE_IS_GREATER_THAN_QUANTITY_IN_ORDER);
 	    }
 	    
 	    if (currQuantity == quantity) {
