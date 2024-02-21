@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.OrdersPage">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.OrderPage">
    <children>
       <Button layoutX="34.0" layoutY="140.0" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Home" />
       <Button layoutX="34.0" layoutY="183.0" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Inventory" />
@@ -27,7 +27,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <TreeTableView layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
+                        <TreeTableView fx:id="openOrdersTable" layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
                           <columns>
                             <TreeTableColumn prefWidth="75.0" text="Order #" />
                             <TreeTableColumn prefWidth="98.0" text="Product Name" />
@@ -45,7 +45,7 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <TreeTableView layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
+                        <TreeTableView fx:id="closedOrdersTable" layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
                            <columns>
                               <TreeTableColumn prefWidth="75.0" text="Order #" />
                               <TreeTableColumn prefWidth="98.0" text="Product Name" />

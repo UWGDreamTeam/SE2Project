@@ -3,6 +3,8 @@ package edu.westga.cs3212.inventory_manager.view;
 import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.Order;
+import edu.westga.cs3212.inventory_manager.viewmodel.OrderPageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -19,13 +22,19 @@ import javafx.stage.Stage;
  * @author Group 1
  * @version Spring 2024
  */
-public class OrdersPage {
+public class OrderPage {
 
-    @FXML
+	@FXML
+    private Tab openOrdersTabPage;
+	
+	@FXML
     private Tab closedOrdersTabPage;
     
     @FXML
-    private Tab openOrdersTabPage;
+    private TreeTableView<Order> openOrdersTable;
+    
+    @FXML
+    private TreeTableView<Order> closedOrdersTable;
 
     @FXML
     private Text employeeFullNameLabel;
@@ -35,6 +44,8 @@ public class OrdersPage {
 
     @FXML
     private Text employeeRoleLabel;
+    
+    private OrderPageViewModel viewModel;
 
     @FXML
     void homePageButtonOnClick(ActionEvent event) throws IOException {
@@ -59,8 +70,9 @@ public class OrdersPage {
     	// TODO
     }
     
-	public void initialize() {
-
+    @FXML
+	void initialize() {
+    	this.viewModel = new OrderPageViewModel();
 	}
 
 }
