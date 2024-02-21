@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_manager.test;
+package edu.westga.cs3212.inventory_manager.test.localordermanager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
