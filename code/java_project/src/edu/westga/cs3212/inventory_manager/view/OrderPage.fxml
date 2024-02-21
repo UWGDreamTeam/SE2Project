@@ -3,9 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -27,15 +27,14 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <TreeTableView fx:id="openOrdersTable" layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
+                        <TableView fx:id="openOrders" layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
                           <columns>
-                            <TreeTableColumn prefWidth="75.0" text="Order #" />
-                            <TreeTableColumn prefWidth="98.0" text="Product Name" />
-                              <TreeTableColumn prefWidth="98.0" text="Product ID" />
-                              <TreeTableColumn prefWidth="116.0" text="Quantity Needed" />
-                              <TreeTableColumn prefWidth="140.0" text="Price" />
+                            <TableColumn fx:id="openOrderNumberColumn" prefWidth="136.0" text="Order Number" />
+                              <TableColumn fx:id="openDateCreatedColumn" prefWidth="143.0" text="Date Created" />
+                              <TableColumn fx:id="openFulfillmentStatusColumn" minWidth="5.0" prefWidth="152.0" text="Fulfillment Status" />
+                              <TableColumn fx:id="openTotalColumn" minWidth="0.0" prefWidth="95.0" text="Total" />
                           </columns>
-                        </TreeTableView>
+                        </TableView>
                      </children>
                   </AnchorPane>
             </content>
@@ -45,15 +44,14 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <TreeTableView fx:id="closedOrdersTable" layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
+                        <TableView fx:id="closedOrders" layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
                            <columns>
-                              <TreeTableColumn prefWidth="75.0" text="Order #" />
-                              <TreeTableColumn prefWidth="98.0" text="Product Name" />
-                              <TreeTableColumn prefWidth="98.0" text="Product ID" />
-                              <TreeTableColumn prefWidth="116.0" text="Quantity Needed" />
-                              <TreeTableColumn prefWidth="140.0" text="Price" />
+                              <TableColumn fx:id="closedOrderNumberColumn" prefWidth="136.0" text="Order Number" />
+                              <TableColumn fx:id="closedDateCreatedColumn" prefWidth="143.0" text="Date Created" />
+                              <TableColumn fx:id="closedFulfillmentStatusColumn" minWidth="5.0" prefWidth="152.0" text="Fulfillment Status" />
+                              <TableColumn fx:id="closedTotalColumn" minWidth="0.0" prefWidth="95.0" text="Total" />
                            </columns>
-                        </TreeTableView>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </content>
