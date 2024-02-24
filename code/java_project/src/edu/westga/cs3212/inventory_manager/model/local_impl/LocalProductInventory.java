@@ -26,6 +26,10 @@ public class LocalProductInventory implements InventoryManager {
 			LocalProductInventory.products = new ArrayList<Product>();
 		}
 	}
+	
+	public Iterable<Product> getProducts() {
+		return LocalProductInventory.products;
+	}
 
 	@Override
 	public ArrayList<Item> getListOfItems() {

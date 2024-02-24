@@ -48,6 +48,7 @@ public class HomePage {
     @FXML
     public void initialize() {
         this.bindToViewModel();
+        
     }
 
 	private void bindToViewModel() {
