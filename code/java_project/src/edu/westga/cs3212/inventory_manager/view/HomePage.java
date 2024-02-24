@@ -10,13 +10,13 @@ public class HomePage {
     private Button adminButton;
 
     @FXML
-    private BarChart<?, ?> commonComponentsBarChart;
+    private BarChart<String, Number> commonComponentsBarChart;
 
     @FXML
-    private BarChart<?, ?> commonProductBarChart;
+    private BarChart<String, Number> commonProductBarChart;
 
     @FXML
-    private ComboBox<?> componentCountComboBox;
+    private ComboBox<String> componentCountComboBox;
 
     @FXML
     private Tab componentTab;
@@ -28,13 +28,13 @@ public class HomePage {
     private Button logOutButton;
 
     @FXML
-    private ComboBox<?> orderFrequencyComboBox;
+    private ComboBox<String> orderFrequencyComboBox;
 
     @FXML
     private Tab orderTab;
 
     @FXML
-    private BarChart<?, ?> ordersBarChart;
+    private BarChart<String, Number> ordersBarChart;
 
     @FXML
     private Button ordersButton;
@@ -43,7 +43,15 @@ public class HomePage {
     private Tab productTab;
 
     @FXML
-    private ComboBox<?> productsCountComboBox;
+    private ComboBox<String> productsCountComboBox;
 
+    @FXML
+    public void initialize() {
+        this.bindToViewModel();
+    }
+
+	private void bindToViewModel() {
+		
+	}
     
 }
