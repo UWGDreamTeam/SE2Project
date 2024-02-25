@@ -23,11 +23,15 @@ public class LocalOrderManager implements OrderManager {
 	private static final String ORDER_NOT_FOUND = "Order not found";
 	private static final String ORDER_ALREADY_EXISTS = "Order already exists";
 	private static final String ORDER_CANNOT_BE_NULL = "Order cannot be null";
+	private static final String DATE_CANNOT_BE_NULL = "Date cannot be null";
 	
 	private Map<String, Order> orders;
 	
 	/**
 	 * Instantiates a new OrderManager with an empty collection of orders.
+	 * 
+	 * @precondition none
+	 * @postcondition this.orders.size() == 0
 	 */
 	public LocalOrderManager() {
 		this.orders = new HashMap<String, Order>();
@@ -62,6 +66,9 @@ public class LocalOrderManager implements OrderManager {
 
 	@Override
 	public List<Order> getOrdersByDate(LocalDateTime date) {
+		if (date == null) {
+			throw new IllegalArgumentException(DATE_CANNOT_BE_NULL);
+		}
 		List<Order> orders = new ArrayList<Order>();
 		for (Order currOrder : this.orders.values()) {
 			

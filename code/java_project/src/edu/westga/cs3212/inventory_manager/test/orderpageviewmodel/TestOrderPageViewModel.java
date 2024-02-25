@@ -20,13 +20,13 @@ class TestOrderPageViewModel {
 
     @Test
     public void testGetOpenOrders() {
-        List<Order> openOrders = this.viewModel.getOpenOrders();
+        List<Order> openOrders = this.viewModel.getIncompleteOrders();
         assertEquals(2, openOrders.size());
     }
 
     @Test
     public void testGetClosedOrders() {
-        List<Order> closedOrders = this.viewModel.getClosedOrders();
+        List<Order> closedOrders = this.viewModel.getCompleteOrders();
         assertEquals(1, closedOrders.size());
     }
 }

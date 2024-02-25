@@ -8,6 +8,9 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 /**
  * The OrderPageViewModel class represents the view model for the OrderPage view.
  * It manages the interaction between the OrderPage view and the underlying data model.
+ * 
+ * @author Group 1
+ * @version Spring 2024
  */
 public class OrderPageViewModel {
 
@@ -15,6 +18,9 @@ public class OrderPageViewModel {
 	
 	/**
      * Constructs a new OrderPageViewModel.
+     * 
+     * @precondition none
+     * @postcondition this.orderManager != null
      */
 	public OrderPageViewModel() {
 		this.orderManager = new LocalOrderManager();
@@ -29,7 +35,7 @@ public class OrderPageViewModel {
      * 
      * @return a list of incomplete orders
      */
-	public List<Order> getOpenOrders() {
+	public List<Order> getIncompleteOrders() {
 		return this.orderManager.getIncompleteOrders();
 	}
 	
@@ -41,7 +47,7 @@ public class OrderPageViewModel {
      * 
      * @return a list of completed orders
      */
-	public List<Order> getClosedOrders() {
+	public List<Order> getCompleteOrders() {
 		return this.orderManager.getCompleteOrders();
 	}
 	

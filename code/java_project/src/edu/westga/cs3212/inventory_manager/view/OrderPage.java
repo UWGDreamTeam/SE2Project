@@ -97,8 +97,8 @@ public class OrderPage {
     	this.viewModel = new OrderPageViewModel();
     	this.bindTableColumns();
     	
-    	this.openOrders.getItems().addAll(this.viewModel.getOpenOrders());
-    	this.closedOrders.getItems().addAll(this.viewModel.getClosedOrders());
+    	this.openOrders.getItems().addAll(this.viewModel.getIncompleteOrders());
+    	this.closedOrders.getItems().addAll(this.viewModel.getCompleteOrders());
 	}
     
     private void bindTableColumns() {
