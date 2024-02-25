@@ -20,7 +20,7 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
  * @author Jason Nunez
  * @version Spring 2024
  */
-public class ProductInventoryStorage {
+public final class ProductInventoryStorage {
 
 	private static final String UTILITY_CLASS_ERROR = "Utility class";
 	

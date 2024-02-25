@@ -17,9 +17,9 @@ import java.util.Map;
 /**
  * The Class EmployeeCredentialsStorage is used to save and load employee credentials from local storage.
  * @version Spring 2024
- * @Author Jason Nunez
+ * @author Jason Nunez
  */
-public class EmployeeCredentialsStorage {
+public final class EmployeeCredentialsStorage {
 
 	private static final String UTILITY_CLASS_ERROR = "Utility class";
 	

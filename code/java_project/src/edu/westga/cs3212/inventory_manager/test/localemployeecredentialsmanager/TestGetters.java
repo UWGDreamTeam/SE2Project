@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -18,7 +19,7 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredent
 class TestGetters {
 
 	@BeforeEach
-	public void setUp() throws Exception {
+	public void setUp() throws IOException {
 		Files.deleteIfExists(Paths.get(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION));
 	}
 	

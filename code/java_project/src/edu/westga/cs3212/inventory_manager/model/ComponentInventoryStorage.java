@@ -21,7 +21,7 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
  * @author Jason Nunez
  * @version Spring 2024
  */
-public class ComponentInventoryStorage {
+public final class ComponentInventoryStorage {
 
 	private static final String UTILITY_CLASS_ERROR = "Utility class";
 	
@@ -30,9 +30,9 @@ public class ComponentInventoryStorage {
 	}	
 	
 	/**
-	 * Saves products to local storage.
+	 * Saves components to local storage.
 	 * 
-	 * @param products  The list of products to save.
+	 * @param components  The list of components to save.
 	 * @param filePath  The file path where products are saved.
 	 */
 	public static void save(List<Component> components, String filePath) {
