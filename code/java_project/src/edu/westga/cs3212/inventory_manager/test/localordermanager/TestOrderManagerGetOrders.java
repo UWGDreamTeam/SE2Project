@@ -164,6 +164,14 @@ class TestOrderManagerGetOrders {
 	}
 
 	@Test
+	public void testGetOrdersByDateInvalidDate() {
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			this.orderManager.getOrdersByDate(null);
+		});
+	}
+
+	@Test
 	public void testGetOrdersByDateNoneMatch() {
 		// Arrange
 		LocalDateTime date = LocalDateTime.MAX;
