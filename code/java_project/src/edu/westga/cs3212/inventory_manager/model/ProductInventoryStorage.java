@@ -31,6 +31,9 @@ public final class ProductInventoryStorage {
 	/**
 	 * Saves products to local storage.
 	 * 
+	 * @precondition none
+	 * @postcondition products are saved to local storage.
+	 * 
 	 * @param products  The list of products to save.
 	 * @param filePath  The file path where products are saved.
 	 */
@@ -45,6 +48,9 @@ public final class ProductInventoryStorage {
 
 	/**
 	 * Loads products from local storage.
+	 * 
+	 * @precondition none
+	 * @postcondition none
 	 * 
 	 * @param filePath The file path from where products are to be loaded.
 	 * @return A list of products.

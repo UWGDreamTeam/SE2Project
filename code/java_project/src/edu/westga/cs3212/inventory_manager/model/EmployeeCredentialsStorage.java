@@ -30,6 +30,9 @@ public final class EmployeeCredentialsStorage {
 	/**
 	 * Saves employee credentials to local storage.
 	 * 
+	 * @preconditions  none
+	 * @postconditions employeeCredentialsMap is saved to filePath
+	 * 
 	 * @param employeeCredentialsMap The map of employee credentials to save.
 	 * @param filePath               The file path where credentials are saved.
 	 */
@@ -44,6 +47,9 @@ public final class EmployeeCredentialsStorage {
 
 	/**
 	 * Loads employee credentials from local storage.
+	 * 
+	 * @preconditions  none
+	 * @postconditions none
 	 * 
 	 * @param filePath The file path from where credentials are to be loaded.
 	 * @return A map of employee credentials.

@@ -32,6 +32,9 @@ public final class ComponentInventoryStorage {
 	/**
 	 * Saves components to local storage.
 	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
 	 * @param components  The list of components to save.
 	 * @param filePath  The file path where products are saved.
 	 */
@@ -46,6 +49,9 @@ public final class ComponentInventoryStorage {
 
 	/**
 	 * Loads components from local storage.
+	 * 
+	 * @precondition none
+	 * @postcondition none
 	 * 
 	 * @param filePath The file path from where products are to be loaded.
 	 * @return A list of products.
