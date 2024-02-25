@@ -26,13 +26,13 @@ class TestGetNecessaryComponentsCopy {
 		
 		//Act
 		Product product = new Product("ID0005", "bed", components);
-		int listOfComponentsSize = product.getNecessaryComponentsCopy().size();
+		int listOfComponentsSize = product.getNecessaryComponents().size();
 		
 		//Assert
 		assertAll(
 				() -> assertEquals(2, listOfComponentsSize),
-				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID00")),
-				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID01")));
+				() -> assertTrue(product.getNecessaryComponents().containsKey("ID00")),
+				() -> assertTrue(product.getNecessaryComponents().containsKey("ID01")));
 	}
 
 }

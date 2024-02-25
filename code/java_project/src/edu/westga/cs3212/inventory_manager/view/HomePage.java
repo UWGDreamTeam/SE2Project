@@ -1,3 +1,4 @@
+package edu.westga.cs3212.inventory_manager.view;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;

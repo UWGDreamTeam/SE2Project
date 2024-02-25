@@ -55,13 +55,13 @@ class TestSetComponentsList {
 		Product product = new Product("ID009", "door");
 		product.setNecessaryComponentsList(components);
 		
-		int listOfComponentsSize = product.getNecessaryComponentsCopy().size();
+		int listOfComponentsSize = product.getNecessaryComponents().size();
 		
 		//Assert
 		assertAll(
 				() -> assertEquals(2, listOfComponentsSize),
-				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID99")),
-				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID98")));
+				() -> assertTrue(product.getNecessaryComponents().containsKey("ID99")),
+				() -> assertTrue(product.getNecessaryComponents().containsKey("ID98")));
 	}
 	
 	
@@ -82,13 +82,13 @@ class TestSetComponentsList {
 		//Act
 		product.setNecessaryComponentsList(components);
 		
-		int listOfComponentsSize = product.getNecessaryComponentsCopy().size();
+		int listOfComponentsSize = product.getNecessaryComponents().size();
 		
 		//Assert
 		assertAll(
 				() -> assertEquals(2, listOfComponentsSize),
-				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID91")),
-				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID85")));
+				() -> assertTrue(product.getNecessaryComponents().containsKey("ID91")),
+				() -> assertTrue(product.getNecessaryComponents().containsKey("ID85")));
 	}
 
 }

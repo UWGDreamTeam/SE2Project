@@ -68,7 +68,7 @@ class TestProductConstrutor {
 		assertAll(
 				() -> assertEquals("ID0000", product.getId()),
 				() -> assertEquals("Sword", product.getName()),
-				() -> assertEquals(0, product.getNecessaryComponentsCopy().size())
+				() -> assertEquals(0, product.getNecessaryComponents().size())
 		);
 	
 	}
@@ -102,12 +102,12 @@ class TestProductConstrutor {
 		
 		//Act
 		Product product = new Product("ID0001", "Pickaxe", components);
-		int listOfComponentsSize = product.getNecessaryComponentsCopy().size();
+		int listOfComponentsSize = product.getNecessaryComponents().size();
 		
 		//Assert
 		assertAll(
 				() -> assertEquals(2, listOfComponentsSize),
-				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID001")),
-				() -> assertTrue(product.getNecessaryComponentsCopy().containsKey("ID002")));
+				() -> assertTrue(product.getNecessaryComponents().containsKey("ID001")),
+				() -> assertTrue(product.getNecessaryComponents().containsKey("ID002")));
 	}
 }

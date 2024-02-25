@@ -116,14 +116,14 @@ public class Product extends Item {
 	}
 	
 	/**
-	 * Gets the necessaryComponents necessaryComponents.
+	 * Returns a copy of the necessaryComponents needed to create the product.
 	 *
 	 * @precondition none
 	 * @postcondition none
 	 * 
 	 * @return the list of necessaryComponents and quantities
 	 */
-	public Map<String, Integer> getNecessaryComponentsCopy() {
+	public Map<String, Integer> getNecessaryComponents() {
 		return new HashMap<String, Integer>(this.necessaryComponents);
 	}
 	
