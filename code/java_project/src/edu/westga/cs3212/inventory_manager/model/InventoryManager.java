@@ -67,7 +67,7 @@ public interface InventoryManager {
 	 * 
 	 * @return the item if contained in the inventory, null otherwise
 	 */
-	Item getItemById(String itemID);
+	Item getItemByID(String itemID);
 	
 	/**
 	 * Gets the quantity.
