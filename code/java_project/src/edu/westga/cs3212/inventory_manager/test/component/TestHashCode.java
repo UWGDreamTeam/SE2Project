@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_manager.test.model.Component;
+package edu.westga.cs3212.inventory_manager.test.component;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -25,7 +25,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 */
 	public LocalEmployeeCredentialsManager() {
 		this.employeeCredentialsMap = new HashMap<>();
-		this.employeeCredentialsMap = EmployeeCredentialsStorage.loadEmployeeCredentials(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+		this.employeeCredentialsMap = EmployeeCredentialsStorage.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 			newEmployee.setEmployeeID(this.generateUniqueEmployeeID());
 		}
         this.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
-        EmployeeCredentialsStorage.saveChanges(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+        EmployeeCredentialsStorage.save(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
     }
     
 	/**
@@ -151,7 +151,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		this.checkForValidEmployeeID(employeeID);
 		if (this.employeeCredentialsMap.containsKey(employeeID)) {
 			this.employeeCredentialsMap.remove(employeeID);
-			EmployeeCredentialsStorage.saveChanges(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+			EmployeeCredentialsStorage.save(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 			return true;
 		}
 		return false;
@@ -175,7 +175,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		if (this.employeeCredentialsMap.containsKey(employeeID)) {
 			LocalEmployeeCredentials employee = this.employeeCredentialsMap.get(employeeID);
 			employee.setPassword(password);
-			EmployeeCredentialsStorage.saveChanges(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+			EmployeeCredentialsStorage.save(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 			return true;
 		}
 		return false;

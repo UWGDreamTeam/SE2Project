@@ -34,7 +34,7 @@ public class Product extends Item {
 	public Product(String id, String name) {
 		super(id, name);
 		
-		this.necessaryComponents = new HashMap<String, Integer>();
+		this.necessaryComponents = new HashMap<>();
 	}
 	
 	/**
@@ -56,7 +56,7 @@ public class Product extends Item {
 			throw new IllegalArgumentException(COMPONENTS_CANNOT_BE_EMPTY);
 		}
 		
-		this.necessaryComponents = new HashMap<String, Integer>(components);
+		this.necessaryComponents = new HashMap<>(components);
 	}
 	
 	
@@ -124,7 +124,7 @@ public class Product extends Item {
 	 * @return the list of necessaryComponents and quantities
 	 */
 	public Map<String, Integer> getNecessaryComponentsCopy() {
-		return new HashMap<String, Integer>(this.necessaryComponents);
+		return new HashMap<>(this.necessaryComponents);
 	}
 	
 	/**

@@ -9,6 +9,8 @@ public final class Constants {
 	public static final String EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY = "Employee type cannot be null or empty";
 	public static final String EMPLOYEE_MUST_BE_VALID_TYPE = "Employee must be a valid type";
 	public static final String EMPLOYEE_CREDENTIAL_FILE_LOCATION = "employeeCredentials.json";
+	public static final String PRODUCT_INVENTORY_FILE_LOCATION = "productInventory.json";
+	public static final String COMPONENT_INVENTORY_FILE_LOCATION = "componentInventory.json";
 	public static final String LOGIN_ERROR_MESSAGE = "Login failed, please check your credentials and try again";
 	public static final String LOGIN_SUCCESS_MESSAGE = "Login successful";
 	
