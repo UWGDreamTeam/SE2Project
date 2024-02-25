@@ -40,7 +40,7 @@ public class Order {
 		// This id implementation is a placeholder until we add a class that handles
 		// random generation.
 		this.id = "3212" + this.dateCreated.getNano() + new Random().nextInt();
-		this.items = new HashMap<Product, Integer>();
+		this.items = new HashMap<>();
 		this.completionStatus = CompletionStatus.INCOMPLETE;
 	}
 
@@ -165,5 +165,17 @@ public class Order {
 	@Override
 	public int hashCode() {
 		return this.id.hashCode() + this.dateCreated.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Order other = (Order) obj;
+		return this.id.equals(other.id) && this.dateCreated.equals(other.dateCreated);
 	}
 }

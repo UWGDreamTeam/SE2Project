@@ -36,7 +36,7 @@ public class LocalOrderManager implements OrderManager {
 	 * @postcondition this.orders.size() == 0
 	 */
 	public LocalOrderManager() {
-		this.orders = new HashMap<String, Order>();
+		this.orders = new HashMap<>();
     }
 	
 	@Override
@@ -49,7 +49,7 @@ public class LocalOrderManager implements OrderManager {
 		if (status == null) {
 			throw new IllegalArgumentException(COMPLETION_STATUS_CANNOT_BE_NULL);
 		}
-		List<Order> completeOrders = new ArrayList<Order>();
+		List<Order> completeOrders = new ArrayList<>();
 		for (Order currOrder : this.orders.values()) {
 			if (currOrder.getCompletionStatus() == status) {
 				completeOrders.add(currOrder);
@@ -63,17 +63,17 @@ public class LocalOrderManager implements OrderManager {
 		if (date == null) {
 			throw new IllegalArgumentException(DATE_CANNOT_BE_NULL);
 		}
-		List<Order> orders = new ArrayList<Order>();
+		List<Order> filteredOrders = new ArrayList<>();
 		for (Order currOrder : this.orders.values()) {
 			
 			int currOrderDate = currOrder.getDateCreated().getDayOfYear();
 			int inputOrderDate = date.getDayOfYear();
 			
 			if (currOrderDate == inputOrderDate) {
-				orders.add(currOrder);
+				filteredOrders.add(currOrder);
 			}
 		}
-		return orders;
+		return filteredOrders;
 	}
 
 	@Override
