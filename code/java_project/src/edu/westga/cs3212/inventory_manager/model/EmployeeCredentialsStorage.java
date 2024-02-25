@@ -14,15 +14,29 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EmployeeCredentialsStorage {
+/**
+ * The Class EmployeeCredentialsStorage is used to save and load employee credentials from local storage.
+ * @version Spring 2024
+ * @author Jason Nunez
+ */
+public final class EmployeeCredentialsStorage {
 
+	private static final String UTILITY_CLASS_ERROR = "Utility class";
+	
+	private EmployeeCredentialsStorage() {
+		throw new IllegalStateException(EmployeeCredentialsStorage.UTILITY_CLASS_ERROR);
+	}
+	
 	/**
 	 * Saves employee credentials to local storage.
+	 * 
+	 * @preconditions  none
+	 * @postconditions employeeCredentialsMap is saved to filePath
 	 * 
 	 * @param employeeCredentialsMap The map of employee credentials to save.
 	 * @param filePath               The file path where credentials are saved.
 	 */
-	public static void saveChanges(Map<String, LocalEmployeeCredentials> employeeCredentialsMap, String filePath) {
+	public static void save(Map<String, LocalEmployeeCredentials> employeeCredentialsMap, String filePath) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(employeeCredentialsMap, writer);
@@ -34,10 +48,13 @@ public class EmployeeCredentialsStorage {
 	/**
 	 * Loads employee credentials from local storage.
 	 * 
+	 * @preconditions  none
+	 * @postconditions none
+	 * 
 	 * @param filePath The file path from where credentials are to be loaded.
 	 * @return A map of employee credentials.
 	 */
-	public static HashMap<String, LocalEmployeeCredentials> loadEmployeeCredentials(String filePath) {
+	public static Map<String, LocalEmployeeCredentials> load(String filePath) {
 		HashMap<String, LocalEmployeeCredentials> employeeCredentialsMap;
 		try {
 			String json = new String(Files.readAllBytes(Paths.get(filePath)));
