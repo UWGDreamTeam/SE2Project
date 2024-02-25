@@ -15,6 +15,7 @@ public class LocalComponentInventory implements InventoryManager {
 	private static final String NEW_ITEM_CANNOT_BE_NULL = "New Component Cannot be null";
 	private static final String NEW_ITEM_ALREADY_EXISTS = "Component Already Exists";
 	private static final String COMPONENT_ID_DOES_NOT_MATCH = "Component ID does not match";
+	private static final String COMPONENT_DOES_NOT_EXIST = "Component does not exist";
 	
 	private List<Component> components;
 	
@@ -94,10 +95,21 @@ public class LocalComponentInventory implements InventoryManager {
 
 	@Override
 	public void editItem(String id, Item newItem) {
+		if (id == null) {
+			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
+		}
+		if (id.isBlank()) {
+			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
+		}
+		if (newItem == null) {
+			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
+		}
 		if (!id.equals(newItem.getId())) {
 			throw new IllegalArgumentException(COMPONENT_ID_DOES_NOT_MATCH);
 		}
-		
+		if (!this.components.contains(this.getItemByID(id))) {
+			throw new IllegalArgumentException(COMPONENT_DOES_NOT_EXIST);
+		}
 		Item componentBeingEdited = this.getItemByID(id);
 		this.components.remove(componentBeingEdited);
 		
