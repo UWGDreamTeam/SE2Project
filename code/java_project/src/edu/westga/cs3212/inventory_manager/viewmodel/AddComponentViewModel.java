@@ -2,6 +2,9 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
+
+import java.util.UUID;
+
 import edu.westga.cs3212.inventory_manager.model.Item;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -40,16 +43,30 @@ public class AddComponentViewModel {
      * @return true, if successfully added to the system, false otherwise
      */
     public boolean add() {
+    	String id = this.generateUniqueEmployeeID();
     	String name = this.name.getValue();
     	Double cost = Double.parseDouble(this.cost.get());
     	int quantity = Integer.parseInt(this.quantity.get());
     	
-    	Item newComponent = new Component("ID001", name);
+    	Item newComponent = new Component(id, name);
     	
     	newComponent.setUnitCost(cost);
     	newComponent.setQuantity(quantity);
     	
     	return this.componentInventory.addNewItem(newComponent);
+    }
+    
+    /**
+	 * Generates a unique employee ID.
+	 * Example: 1244574e
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return A unique employee ID.
+	 */
+    public String generateUniqueEmployeeID() {
+    	return UUID.randomUUID().toString().replace("-", "").substring(0, 8);
     }
 
 

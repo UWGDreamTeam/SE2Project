@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
@@ -26,20 +28,20 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <TextField layoutX="394.0" layoutY="14.0" text="Search" />
                         <Button layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#orderComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Order" textFill="RED" />
                         <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#addComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Add" textFill="#fa0000" />
                         <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#editComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Edit" textFill="#fa0000" />
-                        <TreeTableView fx:id="componentsTableView" layoutX="92.0" layoutY="44.0" prefHeight="297.0" prefWidth="451.0">
-                          <columns>
-                            <TreeTableColumn prefWidth="75.0" text="ID" />
-                            <TreeTableColumn prefWidth="75.0" text="Name" />
-                              <TreeTableColumn prefWidth="75.0" text="Cost" />
-                              <TreeTableColumn prefWidth="75.0" text="Quantity" />
-                              <TreeTableColumn prefWidth="150.0" text="# of Recipes" />
-                          </columns>
-                        </TreeTableView>
-                        <TextField layoutX="394.0" layoutY="14.0" text="Search" />
                         <Button layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#removeComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Remove" textFill="#fa0000" />
+                        <TableView fx:id="componentsTableView" layoutX="118.0" layoutY="45.0" prefHeight="279.0" prefWidth="438.0">
+                          <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="costColumn" prefWidth="75.0" text="Cost" />
+                              <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
+                              <TableColumn fx:id="recipesColumn" prefWidth="75.0" text="# Recipes" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
             </content>
