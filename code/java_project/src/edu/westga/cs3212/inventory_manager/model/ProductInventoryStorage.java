@@ -14,15 +14,27 @@ import com.google.gson.reflect.TypeToken;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
 
+/**
+ * The Class ProductInventoryStorage is used to save and load products from local storage.
+ * 
+ * @author Jason Nunez
+ * @version Spring 2024
+ */
 public class ProductInventoryStorage {
 
+	private static final String UTILITY_CLASS_ERROR = "Utility class";
+	
+	private ProductInventoryStorage() {
+		throw new IllegalStateException(ProductInventoryStorage.UTILITY_CLASS_ERROR);
+	}
+	
 	/**
-	 * Saves employee credentials to local storage.
+	 * Saves products to local storage.
 	 * 
 	 * @param products  The list of products to save.
 	 * @param filePath  The file path where products are saved.
 	 */
-	public static void saveChanges(List<Product> products, String filePath) {
+	public static void save(List<Product> products, String filePath) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(products, writer);
@@ -37,7 +49,7 @@ public class ProductInventoryStorage {
 	 * @param filePath The file path from where products are to be loaded.
 	 * @return A list of products.
 	 */
-	public static List<Product> loadEmployeeCredentials(String filePath) {
+	public static List<Product> load(String filePath) {
 		List<Product> products;
 		try {
 			String json = new String(Files.readAllBytes(Paths.get(filePath)));
