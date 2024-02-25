@@ -20,6 +20,8 @@ public class Main extends Application {
 	public static final String LANDING_PAGE = "view/InventoryPage.fxml";
 	public static final String ADD_PAGE = "view/AddComponentPage.fxml";
 	public static final String HOME_PAGE = "view/HomePage.fxml";
+	public static final String REGISTER_PAGE = "view/RegisterPage.fxml";
+	public static final String LOGIN_PAGE = "view/LoginPage.fxml";
 
 	/**
 	 * JavaFX entry point.
