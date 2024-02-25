@@ -17,7 +17,7 @@ public class LocalComponentInventory implements InventoryManager {
 	private static final String COMPONENT_ID_DOES_NOT_MATCH = "Component ID does not match";
 	private static final String COMPONENT_DOES_NOT_EXIST = "Component does not exist";
 	
-	private List<Component> components;
+	private static List<Component> components;
 	
 	/**
 	 * Instantiates a new LocalComponentInventory object
@@ -26,13 +26,15 @@ public class LocalComponentInventory implements InventoryManager {
 	 * @postcondition LocalComponentsInventory.components != null
 	 */
 	public LocalComponentInventory() {
-		this.components = new ArrayList<>();
-		this.components = ComponentInventoryStorage.load(Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		if (LocalComponentInventory.components == null) {
+			LocalComponentInventory.components = new ArrayList<>();
+			LocalComponentInventory.components = ComponentInventoryStorage.load(Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		}
 	}
 
 	@Override
 	public ArrayList<Item> getListOfItems() {
-		return new ArrayList<>(this.components);
+		return new ArrayList<>(LocalComponentInventory.components);
 	}
 
 	@Override
@@ -41,12 +43,12 @@ public class LocalComponentInventory implements InventoryManager {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
 		
-		if (this.components.contains(newItem)) {
+		if (LocalComponentInventory.components.contains(newItem)) {
 			throw new IllegalArgumentException(NEW_ITEM_ALREADY_EXISTS);
 		}
 		
-		boolean result = this.components.add((Component) newItem);
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		boolean result = LocalComponentInventory.components.add((Component) newItem);
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 		return result;
 	}
 
@@ -56,8 +58,8 @@ public class LocalComponentInventory implements InventoryManager {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
 		
-		boolean result = this.components.remove(item);
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		boolean result = LocalComponentInventory.components.remove(item);
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 		return result;
 	}
 
@@ -73,7 +75,7 @@ public class LocalComponentInventory implements InventoryManager {
 		
 		Item productFound = null;
 		
-		for (Item product : this.components) {
+		for (Item product : LocalComponentInventory.components) {
 			if (product.getId().equals(itemID)) {
 				productFound = product;
 			}
@@ -84,13 +86,13 @@ public class LocalComponentInventory implements InventoryManager {
 
 	@Override
 	public int getQuantity() {
-		return this.components.size();
+		return LocalComponentInventory.components.size();
 	}
 
 	@Override
 	public void clear() {
-		this.components = new ArrayList<>();
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		LocalComponentInventory.components = new ArrayList<>();
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 	}
 
 	@Override
@@ -107,14 +109,14 @@ public class LocalComponentInventory implements InventoryManager {
 		if (!id.equals(newItem.getId())) {
 			throw new IllegalArgumentException(COMPONENT_ID_DOES_NOT_MATCH);
 		}
-		if (!this.components.contains(this.getItemByID(id))) {
+		if (!LocalComponentInventory.components.contains(this.getItemByID(id))) {
 			throw new IllegalArgumentException(COMPONENT_DOES_NOT_EXIST);
 		}
 		Item componentBeingEdited = this.getItemByID(id);
-		this.components.remove(componentBeingEdited);
+		LocalComponentInventory.components.remove(componentBeingEdited);
 		
 		this.addNewItem(newItem);
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 	}
 
 }

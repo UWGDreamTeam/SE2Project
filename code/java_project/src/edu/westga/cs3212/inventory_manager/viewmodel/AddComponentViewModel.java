@@ -148,7 +148,4 @@ public class AddComponentViewModel {
 	public void setComponentInventory(LocalComponentInventory componentInventory) {
 		this.componentInventory = componentInventory;
 	}
-    
-    
-
 }

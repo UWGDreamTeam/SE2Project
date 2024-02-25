@@ -1,26 +1,14 @@
 [
   {
-    "id": "bc4c5668",
-    "name": "product1",
-    "unitCost": 12.0,
-    "quantity": 5
+    "id": "2a176ae7",
+    "name": "pickaxe",
+    "unitCost": 5.0,
+    "quantity": 2
   },
   {
-    "id": "1b9c5f39",
-    "name": "prdocur2",
+    "id": "6b19b443",
+    "name": "Sword",
     "unitCost": 5.0,
     "quantity": 1
-  },
-  {
-    "id": "06d07716",
-    "name": "pickaxe",
-    "unitCost": 12.0,
-    "quantity": 5
-  },
-  {
-    "id": "838ae720",
-    "name": "swrod",
-    "unitCost": 12.0,
-    "quantity": 5
   }
 ]
