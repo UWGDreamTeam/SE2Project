@@ -14,6 +14,8 @@ public class LocalProductInventory implements InventoryManager {
 	private static final String ITEM_ID_CANNOT_BE_BLANK = "Product ID cannot be blank";
 	private static final String NEW_ITEM_CANNOT_BE_NULL = "New Product Cannot be null";
 	private static final String NEW_ITEM_ALREADY_EXISTS = "Product Already Exists";
+    private static final String COMPONENT_DOES_NOT_EXIST = "Component does not exist";
+    private static final String ITEM_ID_DOES_NOT_MATCH = "Product ID does not match";
 	
 	private List<Product> products;
 	
@@ -95,8 +97,20 @@ public class LocalProductInventory implements InventoryManager {
 
 	@Override
 	public void editItem(String id, Item newItem) {
+		if (id == null) {
+			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
+		}
+		if (id.isBlank()) {
+			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
+		}
+		if (newItem == null) {
+			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
+		}
 		if (!id.equals(newItem.getId())) {
-			throw new IllegalArgumentException("Component ID does not match.");
+			throw new IllegalArgumentException(ITEM_ID_DOES_NOT_MATCH);
+		}
+		if (!this.products.contains(this.getItemByID(id))) {
+			throw new IllegalArgumentException(COMPONENT_DOES_NOT_EXIST);
 		}
 		
 		Item componentBeingEdited = this.getItemByID(id);
