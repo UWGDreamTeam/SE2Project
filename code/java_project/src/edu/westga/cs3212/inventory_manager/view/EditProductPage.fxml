@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" />
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="125.0" layoutY="14.0" text="Edit Product">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="94.0" layoutY="105.0" text="Name" />
+      <TextField fx:id="nameTextField" layoutX="226.0" layoutY="101.0" />
+      <Label layoutX="93.0" layoutY="151.0" text="Production Cost" />
+      <TextField fx:id="productionCostTextField" layoutX="227.0" layoutY="147.0" />
+      <Label layoutX="93.0" layoutY="199.0" text="Selling Price" />
+      <TextField fx:id="sellingPriceTextField" layoutX="227.0" layoutY="195.0" />
+      <Label layoutX="94.0" layoutY="247.0" text="Quantity" />
+      <TextField fx:id="quantityTextField" layoutX="226.0" layoutY="243.0" />
+      <Label layoutX="93.0" layoutY="296.0" text="Number of Ingredients" />
+      <TextField fx:id="numberOfIngredientsTextField" layoutX="226.0" layoutY="292.0" />
+      <Button layoutX="226.0" layoutY="349.0" mnemonicParsing="false" onAction="#UpdateEditingProduct" prefHeight="25.0" prefWidth="64.0" text="Update" />
+      <Button layoutX="312.0" layoutY="349.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="25.0" prefWidth="64.0" text="Cancel" />
+   </children>
+</Pane>
