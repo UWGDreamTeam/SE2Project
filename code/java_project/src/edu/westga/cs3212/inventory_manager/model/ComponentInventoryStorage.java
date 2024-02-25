@@ -23,10 +23,10 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
  */
 public class ComponentInventoryStorage {
 
-	private final String UTILITY_CLASS_ERROR = "Utility class";
+	private static final String UTILITY_CLASS_ERROR = "Utility class";
 	
 	private ComponentInventoryStorage() {
-		throw new IllegalStateException(this.UTILITY_CLASS_ERROR);
+		throw new IllegalStateException(UTILITY_CLASS_ERROR);
 	}	
 	
 	/**

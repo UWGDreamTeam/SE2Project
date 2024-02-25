@@ -1,7 +1,5 @@
 package edu.westga.cs3212.inventory_manager.model;
 
-import java.time.LocalDateTime;
-
 /**
  * The Class Item.
  * 
@@ -23,7 +21,6 @@ public abstract class Item {
 	private String name;
 	private double unitCost;
 	private int quantity;
-	private LocalDateTime dateLastModified;
 	
 	/**
 	 * Instantiates a new item.
@@ -45,7 +42,6 @@ public abstract class Item {
 		this.setId(id);
 		this.setName(name);
 		this.setQuantity(MINIMUM_QUANTITY);
-		this.dateLastModified = LocalDateTime.now();
 	}
 	
 	/**
@@ -186,32 +182,6 @@ public abstract class Item {
 		this.unitCost = unitCost;
 	}
 	
-	/**
-	 * Gets the date last modified.
-	 * 
- 	 * @precondition none
-	 * @postconditio none
-	 *
-	 * @return the date last modified
-	 */
-	public LocalDateTime getDateLastModified() {
-		return this.dateLastModified;
-	}
-	
-	/**
-	 * Sets the date this item was last modified.
-	 *
-	 * @precondition dateLastModified != null
-	 * @postcondition this.getDateLastModified() == dateLastModified
-	 * 
-	 * @param dateLastModified the new date last modified
-	 */
-	public void setDateLastModified(LocalDateTime dateLastModified) {
-		if (dateLastModified == null) {
-			throw new IllegalArgumentException("Date Last Modified cannot be null");
-		}
-		this.dateLastModified = dateLastModified;
-	}
 	
 	/**
 	 * Hash code.

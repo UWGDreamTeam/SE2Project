@@ -15,7 +15,7 @@ class TestGetProductById {
 		LocalProductInventory inventory = new LocalProductInventory();
 		
 		assertThrows(IllegalArgumentException.class, () -> 
-				inventory.getItemById(null), 
+				inventory.getItemByID(null), 
 				"Get Item By Id with null param should throw IAE");
 	}
 	
@@ -24,7 +24,7 @@ class TestGetProductById {
 		LocalProductInventory inventory = new LocalProductInventory();
 		
 		assertThrows(IllegalArgumentException.class, () -> 
-				inventory.getItemById(""), 
+				inventory.getItemByID(""), 
 				"Get Item By Id with empty string param should throw IAE");
 	}
 	
@@ -33,7 +33,7 @@ class TestGetProductById {
 		LocalProductInventory inventory = new LocalProductInventory();
 		
 		assertThrows(IllegalArgumentException.class, () -> 
-				inventory.getItemById(" "), 
+				inventory.getItemByID(" "), 
 				"Get Item By Id with blank string param should throw IAE");
 	}
 	
@@ -45,7 +45,7 @@ class TestGetProductById {
 		inventory.addNewItem(product1);
 		
 		Product expected = product1;
-		Product actual = inventory.getItemById("ID03");
+		Product actual = inventory.getItemByID("ID03");
 		
 		assertEquals(expected, actual);
 	}
@@ -57,7 +57,7 @@ class TestGetProductById {
 		
 		inventory.addNewItem(product1);
 		
-		Product actual = inventory.getItemById("ID05");
+		Product actual = inventory.getItemByID("ID05");
 		
 		assertNull(actual);
 	}

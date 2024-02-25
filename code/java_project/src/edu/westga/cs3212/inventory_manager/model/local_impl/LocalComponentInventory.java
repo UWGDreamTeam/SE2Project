@@ -61,7 +61,7 @@ public class LocalComponentInventory implements InventoryManager {
 	}
 
 	@Override
-	public Item getItemById(String itemID) {
+	public Item getItemByID(String itemID) {
 		if (itemID == null) {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
 		}
@@ -98,7 +98,7 @@ public class LocalComponentInventory implements InventoryManager {
 			throw new IllegalArgumentException(COMPONENT_ID_DOES_NOT_MATCH);
 		}
 		
-		Item componentBeingEdited = this.getItemById(id);
+		Item componentBeingEdited = this.getItemByID(id);
 		this.components.remove(componentBeingEdited);
 		
 		this.addNewItem(newItem);
