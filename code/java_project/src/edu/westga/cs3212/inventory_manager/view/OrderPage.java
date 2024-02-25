@@ -105,14 +105,14 @@ public class OrderPage {
     	this.openOrderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     	this.openDateCreatedColumn.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
     	this.openFulfillmentStatusColumn.setCellValueFactory(cellData -> {
-            String status = cellData.getValue().getCompletionStatus() ? "Completed" : "Incomplete";
+            String status = cellData.getValue().getCompletionStatus() != null ? "Completed" : "Incomplete";
             return new SimpleStringProperty(status);
         });
         
     	this.closedOrderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     	this.closedDateCreatedColumn.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
-    	closedFulfillmentStatusColumn.setCellValueFactory(cellData -> {
-            String status = cellData.getValue().getCompletionStatus() ? "Completed" : "Incomplete";
+    	this.closedFulfillmentStatusColumn.setCellValueFactory(cellData -> {
+            String status = cellData.getValue().getCompletionStatus() != null ? "Completed" : "Incomplete";
             return new SimpleStringProperty(status);
         });
     }
