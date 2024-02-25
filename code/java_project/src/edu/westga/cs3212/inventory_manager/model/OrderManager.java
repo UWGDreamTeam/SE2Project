@@ -25,24 +25,16 @@ public interface OrderManager {
 	List<Order> getOrders();
 	
 	/**
-     * Retrieves a list of completed orders in the order manager.
+     * Retrieves a list of orders in the order manager by completion status.
      * 
-     * @precondition none
+     * @precondition status != null
      * @postcondition none
+     * 
+     * @param status the completion status to filter orders by
      * 
      * @return a list of completed orders
      */
-	List<Order> getCompleteOrders();
-	
-	/**
-     * Retrieves a list of incomplete orders in the order manager.
-     * 
-     * @precondition none
-     * @postcondition none
-     * 
-     * @return a list of incomplete orders
-     */
-	List<Order> getIncompleteOrders();
+	List<Order> getOrdersByCompletionStatus(CompletionStatus status);
 	
 	/**
      * Retrieves a list of orders created on a specified date.
@@ -87,22 +79,13 @@ public interface OrderManager {
 	Order findOrderById(String id);
 	
 	/**
-     * Marks an order as completed.
+     * Marks an order's completion status as the specified status.
      * 
-     * @precondition order != null && this.orders.containsKey(order.getId())
+     * @precondition order != null && this.orders.containsKey(order.getId()) && status != null
      * @postcondition order.isCompleted() == true
      * 
      * @param order the order to mark as completed
+     * @param status the completion status to set
      */
-	void markOrderAsComplete(Order order);
-	
-	/**
-     * Marks an order as incomplete.
-     * 
-     * @precondition order != null && this.orders.containsKey(order.getId())
-     * @postcondition order.isCompleted() == false
-     * 
-     * @param order the order to mark as incomplete
-     */
-	void markOrderAsIncomplete(Order order);
+	void setOrderCompletionStatus(Order order, CompletionStatus status);
 }

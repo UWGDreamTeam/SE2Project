@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 
@@ -67,15 +68,15 @@ class TestOrderManagerGetOrders {
 		Order order2 = new Order();
 		Order order3 = new Order();
 
-		order1.setCompleted();
-		order2.setCompleted();
+		order1.setCompletionStatus(CompletionStatus.COMPLETE);
+		order2.setCompletionStatus(CompletionStatus.COMPLETE);
 
 		this.orderManager.addOrder(order1);
 		this.orderManager.addOrder(order2);
 		this.orderManager.addOrder(order3);
 
 		// Act
-		List<Order> orders = this.orderManager.getCompleteOrders();
+		List<Order> orders = this.orderManager.getOrdersByCompletionStatus(CompletionStatus.COMPLETE);
 
 		// Assert
 		assertEquals(2, orders.size());
@@ -95,10 +96,22 @@ class TestOrderManagerGetOrders {
 		this.orderManager.addOrder(order3);
 
 		// Act
-		List<Order> orders = this.orderManager.getCompleteOrders();
+		List<Order> orders = this.orderManager.getOrdersByCompletionStatus(CompletionStatus.COMPLETE);
 
 		// Assert
 		assertEquals(0, orders.size());
+	}
+	
+	@Test
+	void testGetCompleteOrdersInvalidStatus() {
+		// Arrange
+		Order order1 = new Order();
+		this.orderManager.addOrder(order1);
+
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			this.orderManager.getOrdersByCompletionStatus(null);
+		});
 	}
 
 	@Test
@@ -108,15 +121,15 @@ class TestOrderManagerGetOrders {
 		Order order2 = new Order();
 		Order order3 = new Order();
 
-		order1.setCompleted();
-		order2.setCompleted();
+		order1.setCompletionStatus(CompletionStatus.COMPLETE);
+		order2.setCompletionStatus(CompletionStatus.COMPLETE);
 
 		this.orderManager.addOrder(order1);
 		this.orderManager.addOrder(order2);
 		this.orderManager.addOrder(order3);
 
 		// Act
-		List<Order> orders = this.orderManager.getIncompleteOrders();
+		List<Order> orders = this.orderManager.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE);
 
 		// Assert
 		assertEquals(1, orders.size());
@@ -130,16 +143,16 @@ class TestOrderManagerGetOrders {
 		Order order2 = new Order();
 		Order order3 = new Order();
 
-		order1.setCompleted();
-		order2.setCompleted();
-		order3.setCompleted();
+		order1.setCompletionStatus(CompletionStatus.COMPLETE);
+		order2.setCompletionStatus(CompletionStatus.COMPLETE);
+		order3.setCompletionStatus(CompletionStatus.COMPLETE);
 
 		this.orderManager.addOrder(order1);
 		this.orderManager.addOrder(order2);
 		this.orderManager.addOrder(order3);
 
 		// Act
-		List<Order> orders = this.orderManager.getIncompleteOrders();
+		List<Order> orders = this.orderManager.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE);
 
 		// Assert
 		assertEquals(0, orders.size());

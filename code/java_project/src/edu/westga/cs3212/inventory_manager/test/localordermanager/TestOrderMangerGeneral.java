@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 
@@ -15,7 +16,7 @@ class TestOrderMangerGeneral {
 	public void setUp() {
 		this.orderManager = new LocalOrderManager();
 	}
-	
+
 	@Test
 	void testFindOrderByIdNullId() {
 		// Act and Assert
@@ -23,7 +24,7 @@ class TestOrderMangerGeneral {
 			this.orderManager.findOrderById(null);
 		});
 	}
-	
+
 	@Test
 	void testFindOrderByIdEmptyId() {
 		// Act and Assert
@@ -31,7 +32,7 @@ class TestOrderMangerGeneral {
 			this.orderManager.findOrderById("");
 		});
 	}
-	
+
 	@Test
 	void testFindOrderByIdNoIdExists() {
 		// Act and Assert
@@ -39,7 +40,7 @@ class TestOrderMangerGeneral {
 			this.orderManager.findOrderById("9000");
 		});
 	}
-	
+
 	@Test
 	void testFindOrderByIdValidId() {
 		// Arrange
@@ -47,7 +48,7 @@ class TestOrderMangerGeneral {
 		this.orderManager.addOrder(order);
 
 		// Act
-        Order foundOrder = this.orderManager.findOrderById(order.getId());
+		Order foundOrder = this.orderManager.findOrderById(order.getId());
 
 		// Assert
 		assertEquals(order, foundOrder);
@@ -57,10 +58,10 @@ class TestOrderMangerGeneral {
 	void testCompleteOrderNullOrder() {
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.markOrderAsComplete(null);
+			this.orderManager.setOrderCompletionStatus(null, CompletionStatus.COMPLETE);
 		});
 	}
-	
+
 	@Test
 	void testCompleteOrderValidOrder() {
 		// Arrange
@@ -68,48 +69,55 @@ class TestOrderMangerGeneral {
 		this.orderManager.addOrder(order);
 
 		// Act
-		this.orderManager.markOrderAsComplete(order);
+		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.COMPLETE);
 
 		// Assert
-		assertTrue(this.orderManager.findOrderById(order.getId()).isCompleted());
+		CompletionStatus expected = this.orderManager.findOrderById(order.getId()).getCompletionStatus();
+		assertEquals(CompletionStatus.COMPLETE, expected);
 	}
-	
+
+	@Test
+	void testCompleteOrderInvalidStatus() {
+		// Arrange
+		Order order = new Order();
+		this.orderManager.addOrder(order);
+
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			this.orderManager.setOrderCompletionStatus(order, null);
+		});
+	}
+
 	@Test
 	void testCompleteOrderOrderAlreadyComplete() {
 		// Arrange
 		Order order = new Order();
 		this.orderManager.addOrder(order);
-		this.orderManager.markOrderAsComplete(order);
+		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.COMPLETE);
 
 		// Act
-		this.orderManager.markOrderAsComplete(order);
+		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.COMPLETE);
 
 		// Assert
-		assertTrue(this.orderManager.findOrderById(order.getId()).isCompleted());
+		CompletionStatus expected = this.orderManager.findOrderById(order.getId()).getCompletionStatus();
+		assertEquals(CompletionStatus.COMPLETE, expected);
 	}
-	
-	@Test
-	void testUndoOrderCompletionNullOrder() {
-		// Act and Assert
-		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.markOrderAsIncomplete(null);
-		});
-	}
-	
+
 	@Test
 	void testUndoOrderCompletionValidOrder() {
 		// Arrange
 		Order order = new Order();
 		this.orderManager.addOrder(order);
-		this.orderManager.markOrderAsComplete(order);
+		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.COMPLETE);
 
 		// Act
-		this.orderManager.markOrderAsIncomplete(order);
+		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.INCOMPLETE);
 
 		// Assert
-		assertFalse(this.orderManager.findOrderById(order.getId()).isCompleted());
+		CompletionStatus expected = this.orderManager.findOrderById(order.getId()).getCompletionStatus();
+		assertEquals(CompletionStatus.INCOMPLETE, expected);
 	}
-	
+
 	@Test
 	void testUndoOrderCompletionOrderAlreadyIncomplete() {
 		// Arrange
@@ -117,10 +125,11 @@ class TestOrderMangerGeneral {
 		this.orderManager.addOrder(order);
 
 		// Act
-		this.orderManager.markOrderAsIncomplete(order);
+		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.INCOMPLETE);
 
 		// Assert
-		assertFalse(this.orderManager.findOrderById(order.getId()).isCompleted());
+		CompletionStatus expected = this.orderManager.findOrderById(order.getId()).getCompletionStatus();
+		assertEquals(CompletionStatus.INCOMPLETE, expected);
 	}
 
 }

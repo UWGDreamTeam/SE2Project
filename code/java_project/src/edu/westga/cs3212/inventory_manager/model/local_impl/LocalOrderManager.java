@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.OrderManager;
 
@@ -24,6 +25,7 @@ public class LocalOrderManager implements OrderManager {
 	private static final String ORDER_ALREADY_EXISTS = "Order already exists";
 	private static final String ORDER_CANNOT_BE_NULL = "Order cannot be null";
 	private static final String DATE_CANNOT_BE_NULL = "Date cannot be null";
+	private static final String COMPLETION_STATUS_CANNOT_BE_NULL = "Completion status cannot be null";
 	
 	private Map<String, Order> orders;
 	
@@ -43,25 +45,17 @@ public class LocalOrderManager implements OrderManager {
 	}
 
 	@Override
-	public List<Order> getCompleteOrders() {
+	public List<Order> getOrdersByCompletionStatus(CompletionStatus status) {
+		if (status == null) {
+			throw new IllegalArgumentException(COMPLETION_STATUS_CANNOT_BE_NULL);
+		}
 		List<Order> completeOrders = new ArrayList<Order>();
 		for (Order currOrder : this.orders.values()) {
-			if (currOrder.isCompleted()) {
+			if (currOrder.getCompletionStatus() == status) {
 				completeOrders.add(currOrder);
 			}
 		}
 		return completeOrders;
-	}
-
-	@Override
-	public List<Order> getIncompleteOrders() {
-		List<Order> incompleteOrders = new ArrayList<Order>();
-		for (Order currOrder : this.orders.values()) {
-			if (!currOrder.isCompleted()) {
-				incompleteOrders.add(currOrder);
-			}
-		}
-		return incompleteOrders;
 	}
 
 	@Override
@@ -122,22 +116,15 @@ public class LocalOrderManager implements OrderManager {
 	}
 
 	@Override
-	public void markOrderAsComplete(Order order) {
+	public void setOrderCompletionStatus(Order order, CompletionStatus status) {
 		if (order == null) {
             throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);
         }
-		if (!order.isCompleted()) {
-	        order.setCompleted();
-	    }
-	}
-
-	@Override
-	public void markOrderAsIncomplete(Order order) {
-		if (order == null) {
-            throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);
-        }
-		if (order.isCompleted()) {
-			order.setIncomplete();
+		if (status == null) {
+			throw new IllegalArgumentException(COMPLETION_STATUS_CANNOT_BE_NULL);
+		}
+		if (order.getCompletionStatus() != status) {
+	        order.setCompletionStatus(status);
 	    }
 	}
 }

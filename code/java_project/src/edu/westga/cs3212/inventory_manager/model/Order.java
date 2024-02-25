@@ -18,6 +18,7 @@ public class Order {
 	private static final String PRODUCT_NOT_FOUND_IN_ORDER = "Product not found in order";
 	private static final String QUANTITY_MUST_BE_GREATER_THAN_0 = "Quantity must be greater than 0";
 	private static final String PRODUCT_CANNOT_BE_NULL = "Product cannot be null";
+	private static final String COMPLETION_STATUS_CANNOT_BE_NULL = "Completion status cannot be null";
 
 	private String id;
 
@@ -25,7 +26,7 @@ public class Order {
 
 	private Map<Product, Integer> items;
 
-	private boolean isCompleted;
+	private CompletionStatus completionStatus;
 
 	/**
 	 * Instantiates a new order. Contains a list of items and the date the order was
@@ -40,7 +41,7 @@ public class Order {
 		// random generation.
 		this.id = "3212" + this.dateCreated.getNano() + new Random().nextInt();
 		this.items = new HashMap<Product, Integer>();
-		this.isCompleted = false;
+		this.completionStatus = CompletionStatus.INCOMPLETE;
 	}
 
 	/**
@@ -133,28 +134,23 @@ public class Order {
 	 * 
 	 * @return the completion status of the order.
 	 */
-	public boolean isCompleted() {
-		return this.isCompleted;
+	public CompletionStatus getCompletionStatus() {
+		return this.completionStatus;
 	}
 
 	/**
-	 * Sets the completion status to true for the order.
+	 * Sets the completion status to the specified status.
 	 * 
-	 * @precondition none
+	 * @param status the new completion status
+	 * 
+	 * @precondition status != null && typeOf(status) == CompletionStatus
 	 * @postcondition this.isCompleted == true
 	 */
-	public void setCompleted() {
-		this.isCompleted = true;
-	}
-
-	/**
-	 * Sets the completion status to false for the order.
-	 * 
-	 * @precondition none
-	 * @postcondition this.isCompleted == false
-	 */
-	public void setIncomplete() {
-		this.isCompleted = false;
+	public void setCompletionStatus(CompletionStatus status) {
+		if (status == null) {
+			throw new IllegalArgumentException(COMPLETION_STATUS_CANNOT_BE_NULL);
+		}
+		this.completionStatus = status;
 	}
 
 	private void checkProductAndQuantityInput(Product product, int quantity) {

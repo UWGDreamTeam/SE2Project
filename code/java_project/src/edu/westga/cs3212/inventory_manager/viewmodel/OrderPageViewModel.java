@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import java.util.List;
 
+import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 
@@ -36,7 +37,7 @@ public class OrderPageViewModel {
      * @return a list of incomplete orders
      */
 	public List<Order> getIncompleteOrders() {
-		return this.orderManager.getIncompleteOrders();
+		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE);
 	}
 	
 	/**
@@ -48,7 +49,7 @@ public class OrderPageViewModel {
      * @return a list of completed orders
      */
 	public List<Order> getCompleteOrders() {
-		return this.orderManager.getCompleteOrders();
+		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.COMPLETE);
 	}
 	
 	// temporary method to test the UI
@@ -56,7 +57,7 @@ public class OrderPageViewModel {
 		Order order1 = new Order();
 		Order order2 = new Order();
 		Order order3 = new Order();
-		this.orderManager.markOrderAsComplete(order3);
+		this.orderManager.setOrderCompletionStatus(order3, CompletionStatus.COMPLETE);
 		
 		this.orderManager.addOrder(order1);
 		this.orderManager.addOrder(order2);
