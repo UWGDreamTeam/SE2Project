@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.viewmodel.InventoryViewModel;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -85,13 +84,14 @@ public class InventoryPage {
     void initialize() {
     	
         this.inventoryVM = new InventoryViewModel();
+        
         this.inventoryVM.getSelectedComponent().bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
         
         this.setupComponentsTableView();
     }
 
 	private void setupComponentsTableView() {
-        this.componentsTableView.setItems(this.inventoryVM.getObservableComponentList());
+        this.refreshComponentsTableView();
 
         this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         this.nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -119,7 +119,7 @@ public class InventoryPage {
     
     @FXML
     void addComponentButtonManagerOnClick(ActionEvent event) throws IOException {
-    	
+    	System.out.println("Size is " + this.inventoryVM.getObservableComponentList().size());
     	Stage modalStage = new Stage();
     	Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PAGE));
 		Scene scene = new Scene(parent);
@@ -130,7 +130,16 @@ public class InventoryPage {
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
 		modalStage.showAndWait();
 		
-		this.componentsTableView.refresh();
+		System.out.println("Refreshing");
+		System.out.println("Size is " + this.inventoryVM.getObservableComponentList().size());
+		this.refreshComponentsTableView();
+    }
+    
+    @FXML
+    void removeComponentButtonManagerOnClick(ActionEvent event) {
+    	this.inventoryVM.removeComponent();
+    	
+    	this.refreshComponentsTableView();
     }
     
     @FXML
@@ -143,10 +152,10 @@ public class InventoryPage {
     	//TODO
     }
     
-    @FXML
-    void removeComponentButtonManagerOnClick(ActionEvent event) {
-    	this.inventoryVM.removeComponent();
-    }
+
+	private void refreshComponentsTableView() {
+		this.componentsTableView.setItems(this.inventoryVM.getObservableComponentList());
+	}
     
     /* PRODUCT TABS */
     
