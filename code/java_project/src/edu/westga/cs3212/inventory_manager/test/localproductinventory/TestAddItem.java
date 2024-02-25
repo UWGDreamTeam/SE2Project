@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_manager.test.model.LocalProductInventory;
+package edu.westga.cs3212.inventory_manager.test.localproductinventory;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;

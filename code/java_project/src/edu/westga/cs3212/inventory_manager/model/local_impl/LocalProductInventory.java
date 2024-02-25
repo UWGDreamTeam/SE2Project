@@ -3,8 +3,10 @@ package edu.westga.cs3212.inventory_manager.model.local_impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.InventoryManager;
 import edu.westga.cs3212.inventory_manager.model.Item;
+import edu.westga.cs3212.inventory_manager.model.ProductInventoryStorage;
 
 public class LocalProductInventory implements InventoryManager {
 	
@@ -13,7 +15,7 @@ public class LocalProductInventory implements InventoryManager {
 	private static final String NEW_ITEM_CANNOT_BE_NULL = "New Product Cannot be null";
 	private static final String NEW_ITEM_ALREADY_EXISTS = "Product Already Exists";
 	
-	private static List<Product> products;
+	private List<Product> products;
 	
 	/**
 	 * Instantiates a new LocalProductInventory object
@@ -22,14 +24,13 @@ public class LocalProductInventory implements InventoryManager {
 	 * @postcondition LocalProductInventory.products != null
 	 */
 	public LocalProductInventory() {
-		if (LocalProductInventory.products == null) {
-			LocalProductInventory.products = new ArrayList<Product>();
-		}
+		this.products = new ArrayList<>();
+		this.products = ProductInventoryStorage.load(Constants.PRODUCT_INVENTORY_FILE_LOCATION);
 	}
 
 	@Override
 	public ArrayList<Item> getListOfItems() {
-		return new ArrayList<Item>(LocalProductInventory.products);
+		return new ArrayList<>(this.products);
 	}
 
 	@Override
@@ -38,11 +39,13 @@ public class LocalProductInventory implements InventoryManager {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
 		
-		if (LocalProductInventory.products.contains(newItem)) {
+		if (this.products.contains(newItem)) {
 			throw new IllegalArgumentException(NEW_ITEM_ALREADY_EXISTS);
 		}
-		
-		return LocalProductInventory.products.add((Product) newItem);
+
+		boolean result = this.products.add((Product) newItem);
+		ProductInventoryStorage.save(this.products, Constants.PRODUCT_INVENTORY_FILE_LOCATION);
+		return result;
 	}
 
 	@Override
@@ -51,7 +54,9 @@ public class LocalProductInventory implements InventoryManager {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
 		
-		return LocalProductInventory.products.remove(item);
+		boolean result = this.products.remove(item);
+		ProductInventoryStorage.save(this.products, Constants.PRODUCT_INVENTORY_FILE_LOCATION);
+		return result;
 	}
 	
 	
@@ -68,7 +73,7 @@ public class LocalProductInventory implements InventoryManager {
 		
 		Item productFound = null;
 		
-		for (Item product : LocalProductInventory.products) {
+		for (Item product : this.products) {
 			if (product.getId().equals(itemID)) {
 				productFound = product;
 			}
@@ -79,12 +84,13 @@ public class LocalProductInventory implements InventoryManager {
 
 	@Override
 	public int getQuantity() {
-		return LocalProductInventory.products.size();
+		return this.products.size();
 	}
 	
 	@Override
 	public void clear() {
-		LocalProductInventory.products = new ArrayList<Product>();
+		this.products = new ArrayList<>();
+		ProductInventoryStorage.save(this.products, Constants.PRODUCT_INVENTORY_FILE_LOCATION);
 	}
 
 	@Override
@@ -94,10 +100,10 @@ public class LocalProductInventory implements InventoryManager {
 		}
 		
 		Item componentBeingEdited = this.getItemById(id);
-		LocalProductInventory.products.remove(componentBeingEdited);
+		this.products.remove(componentBeingEdited);
 		
 		this.addNewItem(newItem);
-		
+		ProductInventoryStorage.save(this.products, Constants.PRODUCT_INVENTORY_FILE_LOCATION);
 	}
 
 }
