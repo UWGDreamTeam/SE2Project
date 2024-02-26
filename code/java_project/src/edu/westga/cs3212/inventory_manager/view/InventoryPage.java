@@ -16,11 +16,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -63,13 +65,9 @@ public class InventoryPage {
     @FXML
     private Text employeeRoleLabel;
 
-
-
     @FXML
     private TabPane invendoryTreeView;
 
-
-    
     @FXML
     private TreeTableView<?> productsTableView;
 
@@ -102,24 +100,43 @@ public class InventoryPage {
     @FXML
     void homePageButtonOnClick(ActionEvent event) throws IOException {
     	
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
-        Scene currentScene = currentStage.getScene();
-        
-        currentScene.setRoot(parent);
-        currentStage.setTitle("Home Page");
+    	try {
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        Parent parent;
+			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
+			Scene currentScene = currentStage.getScene();
+	        currentScene.setRoot(parent);
+	        currentStage.setTitle("Home Page");
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText(e.getMessage());
+    		errorPopup.showAndWait();
+		}
     }
     
     @FXML
     void logOutButtonOnClick(ActionEvent event) {
-    	//TODO
+    	
+		try {
+			/* TO DO, IMPLEMENT LOGOUT FEATURE */
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        Parent parent;
+			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
+			Scene currentScene = currentStage.getScene();
+	        currentScene.setRoot(parent);
+	        currentStage.setTitle("Home Page");
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText(e.getMessage());
+    		errorPopup.showAndWait();
+		}
+        
     }
     
     /* COMPONENTS TAB*/
     
     @FXML
     void addComponentButtonManagerOnClick(ActionEvent event) throws IOException {
-    	System.out.println("Size is " + this.inventoryVM.getObservableComponentList().size());
     	Stage modalStage = new Stage();
     	Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PAGE));
 		Scene scene = new Scene(parent);
@@ -130,8 +147,6 @@ public class InventoryPage {
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
 		modalStage.showAndWait();
 		
-		System.out.println("Refreshing");
-		System.out.println("Size is " + this.inventoryVM.getObservableComponentList().size());
 		this.refreshComponentsTableView();
     }
     
@@ -144,12 +159,12 @@ public class InventoryPage {
     
     @FXML
     void editComponentButtonManagerOnClick(ActionEvent event) {
-    	//TODO
+    	//TO DO
     }
     
     @FXML
     void orderComponentButtonManagerOnClick(ActionEvent event) {
-    	//TODO
+    	//TO DO
     }
     
 
@@ -161,27 +176,27 @@ public class InventoryPage {
     
     @FXML
     void addProdcutManagerOnClick(ActionEvent event) throws IOException {
-    	//TODO
+    	//TO DO
     }
 
     
     @FXML
     void ordersPageButtonOnClick(ActionEvent event) {
-    	//TODO
+    	//TO DO
     }
 
     @FXML
     void editProductManagerOnClick(ActionEvent event) {
-    	//TODO
+    	//TO DO
     }
 
     @FXML
     void produceProductButtonOnClick(ActionEvent event) {
-    	//TODO
+    	//TO DO
     }
 
     @FXML
     void removeProductManagerOnClick(ActionEvent event) {
-    	//TODO
+    	//TO DO
     }
 }
