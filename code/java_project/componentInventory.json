@@ -1,14 +1,20 @@
 [
   {
-    "id": "2a176ae7",
+    "id": "c05b2a04",
     "name": "pickaxe",
-    "unitCost": 5.0,
-    "quantity": 2
+    "unitCost": 50.0,
+    "quantity": 100
   },
   {
-    "id": "80f900fe",
+    "id": "dda399d3",
+    "name": "sword",
+    "unitCost": 100.0,
+    "quantity": 60000
+  },
+  {
+    "id": "80bcf65f",
     "name": "shovel",
-    "unitCost": 2.0,
-    "quantity": 9
+    "unitCost": 9999.0,
+    "quantity": 451235
   }
 ]

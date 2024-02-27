@@ -17,7 +17,7 @@ import javafx.scene.Scene;
  */
 public class Main extends Application {
 	public static final String WINDOW_TITLE = "Inventory Manager";
-	public static final String LANDING_PAGE = "view/InventoryPage.fxml";
+	public static final String INVENTORY_PAGE = "view/InventoryPage.fxml";
 	public static final String ADD_PAGE = "view/AddComponentPage.fxml";
 	public static final String HOME_PAGE = "view/HomePage.fxml";
 	public static final String REGISTER_PAGE = "view/RegisterPage.fxml";
@@ -34,7 +34,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource(Main.LANDING_PAGE));
+		Parent parent = FXMLLoader.load(getClass().getResource(Main.INVENTORY_PAGE));
 		Scene scene = new Scene(parent);
 		primaryStage.setTitle(WINDOW_TITLE);
 		primaryStage.setScene(scene);
