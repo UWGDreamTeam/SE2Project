@@ -31,7 +31,7 @@ class TestClear {
 	@Test
 	void testWhenInventoryIsNotEmpty() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "test");
+		Item item = new Component("test");
 		inventory.addNewItem(item);
 		inventory.clear();
 		assertEquals(0, inventory.getListOfItems().size());

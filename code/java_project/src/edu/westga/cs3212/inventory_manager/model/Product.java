@@ -11,11 +11,12 @@ import java.util.Map;
  */
 public class Product extends Item {
 
-	private static final String COMPONENTS_MAP_CANNOT_BE_EMPTY = "New Components cannot be empty";
 	private static final int MINIMUM_QUANTITY = 1;
+	private static final String COMPONENTS_MAP_CANNOT_BE_EMPTY = "New Components cannot be empty";
 	private static final String INVALID_QUANTITY = "Quantity has to be greater than 0";
 	private static final String COMPONENTS_CANNOT_BE_EMPTY = "Components cannot be empty";
 	private static final String COMPONENT_CANNOT_BE_NULL = "Component cannot be null";
+	
 	/** The necessaryComponents. 
 	 * @key string ID, the ID of the component
 	 * @value int quantity, the quantity of that component
@@ -25,12 +26,11 @@ public class Product extends Item {
 	/**
 	 * Instantiates a new product.
 	 *
-	 * @param id the id
 	 * @param name the name
 	 * 
 	 */
-	public Product(String id, String name) {
-		super(id, name);
+	public Product(String name) {
+		super(name);
 		
 		this.necessaryComponents = new HashMap<>();
 	}
@@ -38,13 +38,12 @@ public class Product extends Item {
 	/**
 	 * Instantiates a new product.
 	 *
-	 * @param id the id
 	 * @param name the name
 	 * @param components the recipe for this product
 	 * 
 	 */
-	public Product(String id, String name, Map<String, Integer> components) {
-		super(id, name);
+	public Product(String name, Map<String, Integer> components) {
+		super(name);
 		
 		if (components == null) {
 			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);

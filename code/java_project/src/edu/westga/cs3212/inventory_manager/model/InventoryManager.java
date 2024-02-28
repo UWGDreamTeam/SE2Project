@@ -52,10 +52,9 @@ public interface InventoryManager {
 	 * 					this.getItemById.getUnitCost == newItem.getUnitCost() &&
 	 * 					this.getItemById.getDateLastModified == newItem.getDateLastModified()
 	 * 
-	 * @param 	id the id of the item to be edited
 	 * @param newItem the item with the new information
 	 */
-	void editItem(String id, Item newItem);
+	void editItem(Item newItem);
 	
 	/**
 	 * Gets the item by an ID.

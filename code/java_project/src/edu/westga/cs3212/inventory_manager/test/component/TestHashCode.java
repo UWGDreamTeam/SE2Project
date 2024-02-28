@@ -14,12 +14,11 @@ class TestHashCode {
 	@Test
 	void testHashCode() {
 		//Arrange
-		int id = "ID321".hashCode();
 		int name = "bow".hashCode();
 		
-		int hashCode = "component".hashCode() + id + name;
+		int hashCode = "component".hashCode() + name;
 		
-		Item product = new Component("ID321", "bow");
+		Item product = new Component("bow");
 		
 		//Act
 		

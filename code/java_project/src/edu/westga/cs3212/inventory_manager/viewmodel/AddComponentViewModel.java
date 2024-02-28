@@ -43,32 +43,17 @@ public class AddComponentViewModel {
      * @return true, if successfully added to the system, false otherwise
      */
     public boolean add() {
-    	String id = this.generateUniqueEmployeeID();
     	String name = this.name.getValue();
     	Double cost = Double.parseDouble(this.cost.get());
     	int quantity = Integer.parseInt(this.quantity.get());
     	
-    	Item newComponent = new Component(id, name);
+    	Item newComponent = new Component(name);
     	
     	newComponent.setUnitCost(cost);
     	newComponent.setQuantity(quantity);
     	
     	return this.componentInventory.addNewItem(newComponent);
     }
-    
-    /**
-	 * Generates a unique employee ID.
-	 * Example: 1244574e
-	 * 
-	 * @precondition none
-	 * @postcondition none
-	 * 
-	 * @return A unique employee ID.
-	 */
-    public String generateUniqueEmployeeID() {
-    	return UUID.randomUUID().toString().replace("-", "").substring(0, 8);
-    }
-
 
 	/**
 	 * Gets the name.

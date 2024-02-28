@@ -7,23 +7,20 @@ package edu.westga.cs3212.inventory_manager.model;
  * @version Spring 2024
  */
 public class Component extends Item {
-
 	
 	/**
 	 * Instantiates a new raw material.
 	 *
-	 * @param id the id
 	 * @param name the name
 	 */
-	public Component(String id, String name) {
-		super(id, name);
+	public Component(String name) {
+		super(name);
 	}
 	
 	@Override
 	public int hashCode() {
 		int result = "component".hashCode();
 		
-		result += this.getId().hashCode();
 		result += this.getName().hashCode();
 		
 		return result;

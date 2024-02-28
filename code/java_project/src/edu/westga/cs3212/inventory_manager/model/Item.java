@@ -1,5 +1,7 @@
 package edu.westga.cs3212.inventory_manager.model;
 
+import java.util.UUID;
+
 /**
  * The Class Item.
  * 
@@ -38,9 +40,9 @@ public abstract class Item {
 	 * 					this.getQuantity() == 0 &&
 	 * 					this.getDateLastModified() == LocalDateTime.now()
 	 */
-	protected Item(String id, String name) {
-		this.setId(id);
+	protected Item(String name) {
 		this.setName(name);
+		this.setId(this.generateID());
 		this.setQuantity(MINIMUM_QUANTITY);
 	}
 	
@@ -70,6 +72,19 @@ public abstract class Item {
 		}
 		
 		this.id = id;
+	}
+	
+	/**
+	 * Generates a unique employee ID.
+	 * Example: 1244574e
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return A unique employee ID.
+	 */
+	protected String generateID() {
+	    return UUID.randomUUID().toString().replace("-", "").substring(0, 8);
 	}
 	
 	/**
@@ -181,7 +196,6 @@ public abstract class Item {
 		
 		this.unitCost = unitCost;
 	}
-	
 	
 	/**
 	 * Hash code.
