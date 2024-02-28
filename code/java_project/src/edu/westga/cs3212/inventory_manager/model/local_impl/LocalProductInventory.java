@@ -6,6 +6,7 @@ import java.util.List;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.InventoryManager;
 import edu.westga.cs3212.inventory_manager.model.Item;
+import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.ProductInventoryStorage;
 
 public class LocalProductInventory implements InventoryManager {

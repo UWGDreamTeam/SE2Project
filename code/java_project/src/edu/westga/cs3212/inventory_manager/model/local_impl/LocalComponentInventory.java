@@ -3,6 +3,7 @@ package edu.westga.cs3212.inventory_manager.model.local_impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.ComponentInventoryStorage;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.InventoryManager;

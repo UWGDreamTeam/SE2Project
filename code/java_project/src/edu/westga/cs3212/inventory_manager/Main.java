@@ -34,7 +34,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource(Main.INVENTORY_PAGE));
+		Parent parent = FXMLLoader.load(getClass().getResource(Main.REGISTER_PAGE));
 		Scene scene = new Scene(parent);
 		primaryStage.setTitle(WINDOW_TITLE);
 		primaryStage.setScene(scene);
