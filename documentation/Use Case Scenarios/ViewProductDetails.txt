@@ -1,0 +1,9 @@
+Context - User is within the product tab page of the inventory page
+
+Primary Flow -
+1 - system communicates with the server to retrieve the product data
+2 - system displays product information to the user
+
+Alternative Flow(s)
+BAD CONNECTION
+a1 - system will display that the connection to the server is not available 

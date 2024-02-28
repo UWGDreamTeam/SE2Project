@@ -1,17 +1,17 @@
-Context - User is Manager and is viewing the register page
+Context - User is manager and is viewing the register page
 
-Primary Flow
-1 - system communicates with server to create employee id
-2 - user enters new employee credentials
-3 - user selects to register employee
+Primary Flow -
+1 - user enters new employee credentials
+2 - user selects to register employee
+3 - system communicates with server to create employee id
 4 - system adds employee data to the server
 5 - system gives confirmation of sucessfully registering the employee
 6 - system displays the landing page
 
 Alternative Flow(s)
 CANCEL
-a2-3 - user selects cancel
-a3-4 - system displays landing page
+a1 - user selects cancel
+a6 - system displays landing page
 
 INVALID SYSTEM INFORMATION
 a5 - system detects an errors with some information (empty strings for credentials)

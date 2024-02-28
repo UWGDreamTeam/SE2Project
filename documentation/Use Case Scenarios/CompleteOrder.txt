@@ -1,0 +1,18 @@
+Context - User has selected an order within the open orders tab page of the orders page
+
+Primary Flow - 
+1 - user clicks fulfill button
+2 - order fulfillment status is updated to be complete
+3 - system notifies the user about sucessful order completion
+4 - order is moved from Open Orders tab page to Closed Orders tab page
+5 - user then remains on Orders page
+
+Alternative Flow(s)
+NOT ENOUGH PRODUCTS
+a1-2 - system notifies user that there is not enough products to complete the order
+return to step 5
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failure and prompts to retry later
+return to step 5
