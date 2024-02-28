@@ -1,0 +1,18 @@
+Context - User has selected edit product button on product tab page
+
+Primary Flow - 
+1 - user clicks the edit button
+2 - system displays edit product page
+3 - system communicates with server to retrive product data
+4 - user views recipe information
+5 - user exits edit product page and returns to inventory page
+
+Alternative Flow(s)
+CANCEL
+a2-5 - user selects cancel
+a2-3 - system displays inventory page
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failure and prompts to retry later
+return to step 5
