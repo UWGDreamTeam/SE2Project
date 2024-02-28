@@ -1,0 +1,18 @@
+Context - User is a manager and has selected a product within the product tab page of the inventory page
+
+Primary Flow - 
+1 - user clicks remove button
+2 - system communicates with server to remove product
+3 - system notifies the user about sucessful removal
+4 - user then remains on the Inventory page
+
+Alternative Flow(s)
+FAILURE TO REMOVE PRODUCT
+a2 - system cannot remove product
+a3 - system informs user of failure and prompts to retry later
+return to step 4
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failure and prompts to retry later
+return to step 4

@@ -1,6 +1,6 @@
-Context - User selects add button on product tab page
+Context - User is a manager and selects add button on product tab page
 
-Primary Flow
+Primary Flow -
 1 - system communicates with server to create material id
 2 - user enters new product information
 3 - user selects to add new product

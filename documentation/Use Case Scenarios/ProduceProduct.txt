@@ -1,0 +1,24 @@
+Context - User has selected a product within the Product tab page of the inventory page
+
+Primary Flow -
+1 - user clicks produce button
+2 - system shows the product information to the user
+3 - user inputs the desired quantity of the product to produce
+4 - user selects confirm button
+5 - system updates raw material information and product information to reflect the changes
+6 - system notifies the user about sucessful production
+7 - user is then directed to landing page
+
+Alternative Flow(s)
+CANCEL
+a2-3 - user selects cancel
+a7 - user is then directed to landing page
+
+NOT ENOUGH RAW MATERIALS
+a4 - system notifies user that there is not enough raw material to produce product
+return to step 3
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failure and prompts to retry later
+return to step 7

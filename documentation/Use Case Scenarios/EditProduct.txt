@@ -1,0 +1,31 @@
+Context - User is a manager and has selected a product within the product tab page of the inventory page
+
+Primary Flow - 
+1 - user clicks the edit button
+2 - system displays edit product page
+3 - system communicates with server to retrive product data
+4 - user edits product data
+5 - user selects update button
+6 - system communicates with server to update product
+7 - system notifies the user about sucessful edit
+8 - user is redirected to the inventory page
+
+Alternative Flow(s)
+CANCEL
+a2-5 - user selects cancel
+a2-3 - system displays inventory page
+
+INVALID SYSTEM INFORMATION
+a5 - system detects an error with some information
+a6 - system informs user of error and prompts to retry
+return to step 4
+
+FAILURE TO UPDATE RAW MATERIAL DATA
+a2 - system cannot update product data
+a3 - system informs user of failure and prompts to retry later
+return to step 4
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failure and prompts to retry later
+return to step 8
