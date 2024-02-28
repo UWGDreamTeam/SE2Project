@@ -12,8 +12,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
-
 /**
  * The Class ProductInventoryStorage is used to save and load products from local storage.
  * 

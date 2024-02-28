@@ -1,10 +1,10 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 
 import java.util.UUID;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
