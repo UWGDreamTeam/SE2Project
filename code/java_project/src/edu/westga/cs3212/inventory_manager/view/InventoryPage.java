@@ -158,8 +158,24 @@ public class InventoryPage {
     }
     
     @FXML
-    void editComponentButtonManagerOnClick(ActionEvent event) {
-    	//TO DO
+    void editComponentButtonManagerOnClick(ActionEvent event) throws IOException {
+    	Item selectedItem = this.componentsTableView.getSelectionModel().getSelectedItem();
+    	 
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource(Main.EDIT_COMPONENT_PAGE));
+	    Parent parent = loader.load();
+    	
+	    EditComponentPage editComponentPage = loader.getController();
+    	editComponentPage.initializeWithItem(selectedItem);
+    	
+    	Stage modalStage = new Stage();
+		Scene scene = new Scene(parent);
+		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.setScene(scene);
+		modalStage.initModality(Modality.WINDOW_MODAL);
+		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+		modalStage.showAndWait();
+		
+		this.refreshComponentsTableView();
     }
     
     @FXML

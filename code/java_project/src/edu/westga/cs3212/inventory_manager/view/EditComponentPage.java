@@ -2,48 +2,69 @@ package edu.westga.cs3212.inventory_manager.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import edu.westga.cs3212.inventory_manager.model.Item;
+import edu.westga.cs3212.inventory_manager.viewmodel.EditComponentPageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class EditComponentPage {
 
-    @FXML
+	@FXML
     private ResourceBundle resources;
 
     @FXML
     private URL location;
 
     @FXML
+    private TextField nameTextField;
+    
+    @FXML
     private TextField costTextField;
 
     @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private TextField numberOfRecipesTextField;
-
-    @FXML
     private TextField quantityTextField;
-
-    @FXML
-    void Cancel(ActionEvent event) {
-
-    }
-
-    @FXML
-    void UpdateEditingComponent(ActionEvent event) {
-
-    }
-
+    
+    private EditComponentPageViewModel editComponentVM;
+    
     @FXML
     void initialize() {
-        assert costTextField != null : "fx:id=\"costTextField\" was not injected: check your FXML file 'EditComponentPage.fxml'.";
-        assert nameTextField != null : "fx:id=\"nameTextField\" was not injected: check your FXML file 'EditComponentPage.fxml'.";
-        assert numberOfRecipesTextField != null : "fx:id=\"numberOfRecipesTextField\" was not injected: check your FXML file 'EditComponentPage.fxml'.";
-        assert quantityTextField != null : "fx:id=\"quantityTextField\" was not injected: check your FXML file 'EditComponentPage.fxml'.";
+    	this.editComponentVM = new EditComponentPageViewModel();
+    	
+//    	this.nameTextField.textProperty().bindBidirectional(this.editComponentVM.getName());
+//    	this.costTextField.textProperty().bindBidirectional(this.editComponentVM.getCost());
+//    	this.quantityTextField.textProperty().bindBidirectional(this.editComponentVM.getQuantity());
+    }
+    
+    public void initializeWithItem(Item item) {
+		this.editComponentVM.setSelectedComponent(item);
+//	    this.nameTextField.setText(item.getName());
+//	    this.costTextField.setText(String.valueOf(item.getUnitCost()));
+//	    this.quantityTextField.setText(String.valueOf(item.getQuantity()));
+	    
+    	this.nameTextField.textProperty().bindBidirectional(this.editComponentVM.getName());
+    	this.costTextField.textProperty().bindBidirectional(this.editComponentVM.getCost());
+    	this.quantityTextField.textProperty().bindBidirectional(this.editComponentVM.getQuantity());
+	}
 
+    @FXML
+    void cancel(ActionEvent event) {
+    	this.closeWindow(event);
     }
 
+	private void closeWindow(ActionEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	stage.close();
+	}
+
+    @FXML
+    void updateEditingComponent(ActionEvent event) {
+    	if (this.editComponentVM.update()) {
+    		this.closeWindow(event);
+    	}
+    }
 }
 

@@ -97,22 +97,25 @@ public class LocalComponentInventory implements InventoryManager {
 	}
 
 	@Override
-	public void editItem(Item newItem) {
+	public boolean editItem(String id, Item newItem) {
 		if (newItem == null) {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
 		
 		String newItemId = newItem.getId();
 		
-		if (!LocalComponentInventory.components.contains(this.getItemByID(newItemId))) {
+		if (!LocalComponentInventory.components.contains(this.getItemByID(id))) {
 			throw new IllegalArgumentException(COMPONENT_DOES_NOT_EXIST);
 		}
 		
-		Item componentBeingEdited = this.getItemByID(newItemId);
+		Item componentBeingEdited = this.getItemByID(id);
 		LocalComponentInventory.components.remove(componentBeingEdited);
 		
-		this.addNewItem(newItem);
+		boolean wasAdded = this.addNewItem(newItem);
+		
 		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		
+		return wasAdded; 
 	}
 
 }

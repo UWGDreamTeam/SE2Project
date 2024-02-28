@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 public class InventoryViewModel {
 	
 	private ObjectProperty<Item> selectedComponent;
+	
 	private LocalComponentInventory componentsInventory;
 	private LocalProductInventory productInventory;
 	
@@ -32,7 +33,6 @@ public class InventoryViewModel {
 		this.productInventory = new LocalProductInventory();
 		
 		this.selectedComponent = new SimpleObjectProperty<Item>();
-		
 	}
 	
 	/**

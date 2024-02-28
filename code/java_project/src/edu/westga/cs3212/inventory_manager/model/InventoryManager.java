@@ -53,8 +53,10 @@ public interface InventoryManager {
 	 * 					this.getItemById.getDateLastModified == newItem.getDateLastModified()
 	 * 
 	 * @param newItem the item with the new information
+	 * 
+	 * @return true if Item was edited successfully
 	 */
-	void editItem(Item newItem);
+	boolean editItem(String id, Item newItem);
 	
 	/**
 	 * Gets the item by an ID.
