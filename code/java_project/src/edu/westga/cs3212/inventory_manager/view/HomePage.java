@@ -1,52 +1,62 @@
 package edu.westga.cs3212.inventory_manager.view;
+
+import java.io.IOException;
+
+import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.viewmodel.HomePageViewModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class HomePage {
 
 	@FXML
-    private Button adminButton;
+	private Button adminButton;
 
-    @FXML
-    private TextArea componentSummaryTextArea;
+	@FXML
+	private TextArea componentSummaryTextArea;
 
-    @FXML
-    private Tab componentTab;
+	@FXML
+	private Tab componentTab;
 
-    @FXML
-    private Button inventoryButton;
+	@FXML
+	private Button inventoryButton;
 
-    @FXML
-    private Button logOutButton;
+	@FXML
+	private Button logOutButton;
 
-    @FXML
-    private TextArea orderSummaryTextArea;
+	@FXML
+	private TextArea orderSummaryTextArea;
 
-    @FXML
-    private Tab orderTab;
+	@FXML
+	private Tab orderTab;
 
-    @FXML
-    private Button ordersButton;
+	@FXML
+	private Button ordersButton;
 
-    @FXML
-    private TextArea productSummaryTextArea;
+	@FXML
+	private TextArea productSummaryTextArea;
 
-    @FXML
-    private Tab productTab;
-    
-    private HomePageViewModel viewModel;
+	@FXML
+	private Tab productTab;
 
-    @FXML
-    public void initialize() {
-        this.bindToViewModel();
-        this.viewModel.getComponentSummary();
-        this.viewModel.getProductSummary();
-        this.viewModel.getOrderSummary();
-        
-    }
+	private HomePageViewModel viewModel;
+
+	@FXML
+	public void initialize() {
+		this.bindToViewModel();
+		this.viewModel.getComponentSummary();
+		this.viewModel.getProductSummary();
+		this.viewModel.getOrderSummary();
+
+	}
 
 	private void bindToViewModel() {
 		this.viewModel = new HomePageViewModel();
@@ -54,5 +64,30 @@ public class HomePage {
 		this.productSummaryTextArea.textProperty().bind(this.viewModel.getProductSumarryTextArea());
 		this.orderSummaryTextArea.textProperty().bind(this.viewModel.getOrderSumarryTextArea());
 	}
-    
+
+	@FXML
+	void adminPageButtonOnClick(MouseEvent event) {
+		// TODO Add Admin Page
+	}
+
+	@FXML
+	void inventoryPageButtonOnClick(MouseEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
+		Scene scene = new Scene(parent);
+		stage.setScene(scene);
+		stage.setTitle("Home Page");
+		stage.show();
+	}
+
+	@FXML
+	void ordersPageButtonOnClick(MouseEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
+		Scene scene = new Scene(parent);
+		stage.setScene(scene);
+		stage.setTitle("Home Page");
+		stage.show();
+	}
+
 }
