@@ -21,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -102,14 +103,17 @@ public class OrderPage {
 
     @FXML
     void logOutButtonOnClick(ActionEvent event) throws IOException {
-    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
-        Scene scene = new Scene(parent);
-        
-        stage.setScene(scene);
-        stage.setTitle("Login Page");
-        Main.employeeType = null;
-        stage.sizeToScene();
+    	try {
+	        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
+	        Scene currentScene = currentStage.getScene();
+	        currentScene.setRoot(parent);
+	        currentStage.setTitle(Main.WINDOW_TITLE);
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText(e.getMessage());
+    		errorPopup.showAndWait();
+		}
     }
     
     @FXML

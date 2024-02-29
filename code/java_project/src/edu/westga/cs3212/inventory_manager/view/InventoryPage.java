@@ -222,18 +222,33 @@ public class InventoryPage {
     		errorPopup.showAndWait();
 		}
     }
+	
+	@FXML
+    void orderPageButtonOnClick(ActionEvent event) throws IOException {
+    	
+    	try {
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        Parent parent;
+			parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
+			Scene currentScene = currentStage.getScene();
+	        currentScene.setRoot(parent);
+	        currentStage.setTitle("Order Page");
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText(e.getMessage());
+    		errorPopup.showAndWait();
+		}
+    }
     
     @FXML
     void logOutButtonOnClick(ActionEvent event) {
     	
 		try {
-			/* TO DO, IMPLEMENT LOGOUT FEATURE */
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        Parent parent;
-			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
-			Scene currentScene = currentStage.getScene();
+	        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
+	        Scene currentScene = currentStage.getScene();
 	        currentScene.setRoot(parent);
-	        currentStage.setTitle("Home Page");
+	        currentStage.setTitle(Main.WINDOW_TITLE);
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
     		errorPopup.setContentText(e.getMessage());
@@ -346,12 +361,6 @@ public class InventoryPage {
 		this.refreshComponentsTableView();
     }
 
-    
-    @FXML
-    void ordersPageButtonOnClick(ActionEvent event) {
-    	//TO DO
-    }
-
     @FXML
     void editProductManagerOnClick(ActionEvent event) throws IOException {
     	Item selectedItem = this.productsTableView.getSelectionModel().getSelectedItem();
@@ -375,11 +384,19 @@ public class InventoryPage {
 
     @FXML
     void produceProductButtonOnClick(ActionEvent event) {
-    	//TO DO
+    	try {
+    		this.inventoryVM.produceProduct(this.productsTableView.getSelectionModel().getSelectedItem(), 1);
+		} catch (IllegalArgumentException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+			errorPopup.setContentText(e.getMessage());
+			errorPopup.showAndWait();
+		}
+    	this.refreshProductsTableView();
     }
 
     @FXML
     void removeProductManagerOnClick(ActionEvent event) {
-    	//TO DO
+    	this.inventoryVM.removeProduct();
+    	this.refreshProductsTableView();
     }
 }
