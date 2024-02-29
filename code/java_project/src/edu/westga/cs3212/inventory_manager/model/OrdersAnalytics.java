@@ -6,7 +6,7 @@ public class OrdersAnalytics {
 
 	private LocalOrderManager orderManager;
 	
-	public OrdersAnalytics(OrderManager orderManager) {
+	public OrdersAnalytics() {
 		this.orderManager = new LocalOrderManager();
 	}
 	
@@ -28,5 +28,17 @@ public class OrdersAnalytics {
 			total += order.getProductionCost();
 		}
 		return total;
+	}
+	
+	public double getOrdersProfitTotal() {
+		return this.getOrdersSalesTotal() - this.getOrdersProductionCostTotal();
+	}
+	
+	public int getOrdersCompletedCount() {
+		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.COMPLETE).size();
+	}
+	
+	public int getOrdersInProgressCount() {
+		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE).size();
 	}
 }

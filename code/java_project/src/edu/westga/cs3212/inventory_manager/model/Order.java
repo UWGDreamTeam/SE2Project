@@ -142,7 +142,7 @@ public class Order {
 	}
 	
 	/**
-	 * Gets the items of the order.
+	 * Gets the products of the order along with their quantities.
 	 *
 	 * @precondition none
 	 * @postcondition none
@@ -150,8 +150,7 @@ public class Order {
 	 * @return the items in the order
 	 */
 	public Map<Product, Integer> getItems() {
-		var items = new HashMap<Product, Integer>(this.items);
-		return items;
+		return new HashMap<>(this.items);
 	}
 
 	/**
