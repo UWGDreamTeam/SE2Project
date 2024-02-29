@@ -7,6 +7,7 @@ import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Component;
+import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.Product;
 
@@ -16,46 +17,71 @@ public class DemoDataUtility {
 		throw new IllegalStateException("Utility class");
 	}
 	
-	static List<Order> createDemoOrders(int numberOfOrders){
-		ArrayList<Order> orders = new ArrayList<>();
-		// Sample components for products
-	    Component metal = new Component("Metal", 5.0);
-	    Component plastic = new Component("Plastic", 2.0);
-	    Component glass = new Component("Glass", 3.0);
-	    Component electronic = new Component("Electronic", 10.0);
-	    Component wood = new Component("Wood", 4.0);
+	static Map<Component, Integer> createDemoComponents() {
+	    String[] names = {
+	        "Iron", "Wood", "Sticks", "Steel", "Copper", "Aluminum", "Plastic", 
+	        "Glass", "Rubber", "Silicon", "Gold", "Silver", "Bronze", "Lead", 
+	        "Nickel", "Zinc", "Tin", "Magnesium", "Titanium", "Brass", 
+	        "Quartz", "Marble", "Granite", "Ceramic", "Carbon Fiber"
+	    };
 
-	    // Map to store sample components for easy access
-	    Map<String, Component> components = new HashMap<>();
-	    components.put("Metal", metal);
-	    components.put("Plastic", plastic);
-	    components.put("Glass", glass);
-	    components.put("Electronic", electronic);
-	    components.put("Wood", wood);
-
-	    // Product names and recipes
-	    String[] productNames = {"Coffee Maker", "Smartphone", "Table Lamp", "Gaming Chair", "Bluetooth Speaker"};
-	    double baseCost = 20.0; // Base cost for simplicity
-	    double salePrice = 40.0; // Base sale price for simplicity
-
-	    for (int i = 1; i <= numberOfOrders; i++) {
-	        Map<Component, Integer> recipe = new HashMap<>();
-	        recipe.put(components.get("Metal"), (int) (Math.random() * 3 + 1)); // 1-3 pieces of metal
-	        recipe.put(components.get("Plastic"), (int) (Math.random() * 5 + 1)); // 1-5 pieces of plastic
-	        recipe.put(components.get("Glass"), (int) (Math.random() * 2 + 1)); // 1-2 pieces of glass
-	        recipe.put(components.get("Electronic"), (int) (Math.random() * 4 + 1)); // 1-4 pieces of electronic
-	        recipe.put(components.get("Wood"), (int) (Math.random() * 3 + 1)); // 1-3 pieces of wood
-
-	        String productName = productNames[i % productNames.length] + " Model " + i;
-	        Product product = new Product(productName, baseCost * i, salePrice * i, recipe);
-
-	        Order order = new Order();
-	        CompletionStatus status = Math.random() > 0.5 ? CompletionStatus.COMPLETE : CompletionStatus.INCOMPLETE;
-	        order.addItem(product, (int) (Math.random() * 10 + 1)); // Add 1-10 units of the product to the order
-	        order.setCompletionStatus(status);
-	        orders.add(order);
+	    Map<Component, Integer> components = new HashMap<>();
+	    for (int i = 0; i < names.length; i++) {
+	        double price = Math.round(Math.random() * 100.0 * 100.0) / 100.0; // Prices between 0.00 and 100.00
+	        int quantity = (int) (Math.random() * 100 + 1); // Quantities between 1 and 100
+	        components.put(new Component(names[i], price), quantity);
 	    }
-	    return orders;
+	    return components;
+	}
+
+	
+	static Map<Product, Integer> createDemoProducts(Map<Item, Integer> components) {
+	    String[] productNames = {
+	        "Iron Pickaxe", "Stone Shovel", "Wooden Axe", "Diamond Sword", "Gold Hoe",
+	        "Steel Hammer", "Copper Wrench", "Aluminum Ladder", "Plastic Pipe", "Glass Bottle",
+	        "Rubber Belt", "Silicon Chip", "Gold Necklace", "Silver Ring", "Bronze Statue",
+	        "Lead Pipe", "Nickel Screw", "Zinc Plate", "Tin Can", "Magnesium Fire Starter",
+	        "Titanium Frame", "Brass Knuckles", "Quartz Watch", "Marble Sculpture", "Ceramic Vase"
+	    };
+
+	    Map<Product, Integer> products = new HashMap<>();
+	    for (int i = 0; i < productNames.length; i++) {
+	        double productionCost = Math.round(Math.random() * 100.0 * 100.0) / 100.0; // Prices between 0.00 and 100.00
+	        double salePrice = Math.round(Math.random() * 150.0 * 100.0) / 100.0; // Sale prices between 0.00 and 150.00, assuming higher than production cost
+	        Map<Component, Integer> recipe = new HashMap<>();
+	        
+	        // Randomly select 2 to 5 components to make up the recipe for simplicity
+	        for (int j = 0; j < (int) (Math.random() * 4 + 2); j++) {
+	            Component component = (Component) components.keySet().toArray()[(int) (Math.random() * components.size())];
+	            int quantity = (int) (Math.random() * 5 + 1); // Quantities between 1 and 5
+	            recipe.put(component, quantity);
+	        }
+	        
+	        Product product = new Product(productNames[i], productionCost, salePrice, recipe);
+	        products.put(product, (int) (Math.random() * 50 + 1)); // Product stock between 1 and 50
+	    }
+	    return products;
+	}
+
+	
+	static List<Order> createDemoOrders(Map<Product, Integer> products) {
+		List<Order> orders = new ArrayList<>();
+		for (int i = 1; i <= 15; i++) {
+			Map<Product, Integer> orderItems = new HashMap<>();
+			for (int j = 1; j <= 10; j++) {
+				Product product = (Product) products.keySet().toArray()[(int) (Math.random() * products.size())];
+				int quantity = (int) (Math.random() * 10 + 1); // Quantities between 1 and 10
+				orderItems.put(product, quantity);
+			}
+			Order order = new Order();
+			for (Map.Entry<Product, Integer> entry : orderItems.entrySet()) {
+				order.addItem(entry.getKey(), entry.getValue());
+			}
+			CompletionStatus status = Math.random() < 0.5 ? CompletionStatus.COMPLETE : CompletionStatus.INCOMPLETE;
+			order.setCompletionStatus(status);
+			orders.add(order);
+		}
+		return orders;
 	}
 	
 }

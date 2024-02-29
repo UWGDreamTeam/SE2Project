@@ -36,7 +36,8 @@ public class LocalComponentInventory implements ItemInventoryManager {
 		if (this.components == null) {
 			this.components = ComponentInventoryStorage.load(Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 			if (this.components.isEmpty()) {
-				this.createTestData();
+				this.components = DemoDataUtility.createDemoComponents();
+				this.save();
 			}
 		}
 	}

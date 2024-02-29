@@ -33,24 +33,20 @@ public class LocalProductInventory implements ItemInventoryManager {
 		if (this.products == null) {
 			this.products = ProductInventoryStorage.load(Constants.PRODUCT_INVENTORY_FILE_LOCATION);
 			if (this.products.isEmpty()) {
-				this.createTestData();
+				LocalComponentInventory componentInventory = new LocalComponentInventory();
+				this.products = DemoDataUtility.createDemoProducts(componentInventory.getItemsWithQuantities());
+				this.save();
 			}
 		}
-	}
-	
-	private void createTestData() {
-		this.products = new HashMap<>();
-		Map<Component, Integer> recipe = new HashMap<>();
-		recipe.put(new Component("1", 1.0), 1);
-		recipe.put(new Component("2", 2.0), 2);
-		recipe.put(new Component("3", 3.0), 3);
-        this.products.put(new Product("1", 1.0, 2.0, recipe), 10);
-		this.save();
 	}
 
 	public Iterable<Product> getProducts() {
 		return new ArrayList<>(this.products.keySet());
 	}
+	
+	public Map<Product, Integer> getProductsWithQuantities() {
+        return new HashMap<>(this.products);
+    }
 
 	@Override
 	public Iterable<Item> getItems() {
