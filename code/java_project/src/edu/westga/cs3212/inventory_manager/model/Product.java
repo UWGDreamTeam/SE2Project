@@ -152,5 +152,10 @@ public class Product extends Item {
 	public double getSalePrice() {
 		return this.salePrice;
 	}
+	
+	public String toString() {
+		return "Product{" + "id=" + this.getID() + ", name='" + this.getName() + '\'' + ", productionCost="
+				+ this.getProductionCost() + ", salePrice=" + this.getSalePrice() + '}';
+	}
 
 }
