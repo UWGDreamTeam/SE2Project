@@ -61,24 +61,6 @@ public class LocalOrderManager implements OrderManager {
 	}
 
 	@Override
-	public List<Order> getOrdersByDate(LocalDateTime date) {
-		if (date == null) {
-			throw new IllegalArgumentException(DATE_CANNOT_BE_NULL);
-		}
-		List<Order> filteredOrders = new ArrayList<>();
-		for (Order currOrder : this.orders) {
-			
-			int currOrderDate = currOrder.getDateCreated().getDayOfYear();
-			int inputOrderDate = date.getDayOfYear();
-			
-			if (currOrderDate == inputOrderDate) {
-				filteredOrders.add(currOrder);
-			}
-		}
-		return filteredOrders;
-	}
-
-	@Override
 	public void addOrder(Order order) {
 		if (order == null) {
 			throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);

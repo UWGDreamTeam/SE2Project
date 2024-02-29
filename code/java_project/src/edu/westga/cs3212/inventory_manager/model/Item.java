@@ -14,11 +14,8 @@ public abstract class Item {
 	private static final String ID_CANNOT_BE_BLANK = "ID cannot be blank";
 	private static final String NAME_CANNOT_BE_NULL = "Name cannot be null";
 	private static final String NAME_CANNOT_BE_BLANK = "Name cannot be blank";
-	private static final String INVALID_QUANTITY = "Quantity cannoy be negative";
-	private static final String QUANTITY_EXCEEDS = "Quantity exceeds what is in inventory";
 	private static final String INVALID_PRODUCTION_COST = "Production cost cannot be negative";
 	
-	private static final int MINIMUM_QUANTITY = 0;
 	private static final double MINIMUM_PRODUCTION_COST = 0.0;
 	
 	private String id;
