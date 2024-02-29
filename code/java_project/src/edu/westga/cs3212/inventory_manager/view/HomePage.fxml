@@ -11,8 +11,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.HomePage">
    <children>
-      <Button fx:id="inventoryButton" layoutX="34.0" layoutY="140.0" mnemonicParsing="false" text="Inventory" />
-      <Button fx:id="ordersButton" layoutX="34.0" layoutY="183.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Orders" />
+      <Button fx:id="inventoryButton" layoutX="34.0" layoutY="140.0" mnemonicParsing="false" onAction="#openInventory" onMouseClicked="#inventoryPageButtonOnClick" text="Inventory" />
+      <Button fx:id="ordersButton" layoutX="34.0" layoutY="183.0" mnemonicParsing="false" onAction="#openOrders" onMouseClicked="#ordersPageButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Orders" />
       <Text layoutX="33.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home">
          <font>
             <Font size="47.0" />
@@ -53,6 +53,6 @@
       <Text layoutX="541.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
       <Text layoutX="593.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
       <Text layoutX="592.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
-      <Button fx:id="adminButton" layoutX="33.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Admin" />
+      <Button fx:id="adminButton" layoutX="33.0" layoutY="224.0" mnemonicParsing="false" onMouseClicked="#adminPageButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Admin" />
    </children>
 </Pane>
