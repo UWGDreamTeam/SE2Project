@@ -27,7 +27,7 @@ public class Main extends Application {
 	public static final String EDIT_COMPONENT_PAGE = "view/EditComponentPage.fxml";
 	
 	private static Stage primaryStage;
-	private EmployeeType employeeType;
+	public static EmployeeType employeeType;
 
 	/**
 	 * JavaFX entry point.
@@ -40,7 +40,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		primaryStage = stage;
-        Parent parent = FXMLLoader.load(getClass().getResource(Main.LOGIN_PAGE));
+        Parent parent = FXMLLoader.load(getClass().getResource(Main.ORDER_PAGE));
         Scene scene = new Scene(parent);
         primaryStage.setTitle(WINDOW_TITLE);
         primaryStage.setScene(scene);
