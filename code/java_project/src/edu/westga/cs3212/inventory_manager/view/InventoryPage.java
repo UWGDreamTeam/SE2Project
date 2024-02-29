@@ -227,13 +227,11 @@ public class InventoryPage {
     void logOutButtonOnClick(ActionEvent event) {
     	
 		try {
-			/* TO DO, IMPLEMENT LOGOUT FEATURE */
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        Parent parent;
-			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
-			Scene currentScene = currentStage.getScene();
+	        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
+	        Scene currentScene = currentStage.getScene();
 	        currentScene.setRoot(parent);
-	        currentStage.setTitle("Home Page");
+	        currentStage.setTitle(Main.WINDOW_TITLE);
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
     		errorPopup.setContentText(e.getMessage());
