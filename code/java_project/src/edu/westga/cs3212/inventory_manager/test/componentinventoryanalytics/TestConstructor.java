@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_manager.test.model.componentinventoryanalytics;
+package edu.westga.cs3212.inventory_manager.test.componentinventoryanalytics;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,5 +11,4 @@ class TestConstructor {
 		ComponentInventoryAnalytics testComponentInventoryAnalytics = new ComponentInventoryAnalytics();
 		assert(testComponentInventoryAnalytics != null);
 	}
-
 }

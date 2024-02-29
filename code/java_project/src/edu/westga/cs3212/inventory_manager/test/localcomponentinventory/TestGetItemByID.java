@@ -5,14 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 
 class TestGetItemByID {
 
@@ -22,73 +21,54 @@ class TestGetItemByID {
 	}
 	
 	@Test
-	void testWhenItemIDIsNull() {
+	void testGetItemByIdNullId() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-	    assertThrows(IllegalArgumentException.class, () -> inventory.getItemByID(null));
+		
+		assertThrows(IllegalArgumentException.class, () -> 
+				inventory.getItemByID(null), 
+				"Get Item By Id with null param should throw IAE");
 	}
 	
 	@Test
-	void testWhenItemIDIsBlank() {
-		LocalComponentInventory inventory = new LocalComponentInventory();
-		assertThrows(IllegalArgumentException.class, () -> inventory.getItemByID(""));
+	void testGetItemByIdEmptyId() {
+		LocalProductInventory inventory = new LocalProductInventory();
+		
+		assertThrows(IllegalArgumentException.class, () -> 
+				inventory.getItemByID(""), 
+				"Get Item By Id with empty string param should throw IAE");
 	}
 	
 	@Test
-	void testWhenThereIsNoItem() {
-		LocalComponentInventory inventory = new LocalComponentInventory();
-		assertNull(inventory.getItemByID("ID1"));
+	void testGetItemByIdBlankId() {
+		LocalProductInventory inventory = new LocalProductInventory();
+		
+		assertThrows(IllegalArgumentException.class, () -> 
+				inventory.getItemByID(" "), 
+				"Get Item By Id with blank string param should throw IAE");
 	}
 	
 	@Test
-	void testWhenThereIsOneItem() {
+	void testGetItemByIdWithValidIdInSystem() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("item1");
-		inventory.addNewItem(item);
-		assertEquals(item, inventory.getItemByID("ID1"));
+		Component component = new Component("component", 1.0);
+		
+		inventory.addItem(component, 1);
+		
+		Item expected = component;
+		Item actual = inventory.getItemByID(component.getID());
+		
+		assertEquals(expected, actual);
 	}
 	
 	@Test
-	void testWhenItemIDDoesNotMatch() {
+	void testGetItemByIdWithValidIdNotInSystem() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("item1");
-		inventory.addNewItem(item);
-		assertNull(inventory.getItemByID("ID2"));
+		Component component = new Component("component", 1.0);
+		
+		inventory.addItem(component, 1);
+		
+		Item actual = inventory.getItemByID("test");
+		
+		assertNull(actual);
 	}
-	
-	@Test
-	void testWhenItemIsFirstItem() {
-		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item1 = new Component("item1");
-		Item item2 = new Component("item2");
-		Item item3 = new Component("item3");
-		inventory.addNewItem(item1);
-		inventory.addNewItem(item2);
-		inventory.addNewItem(item3);
-		assertEquals(item1, inventory.getItemByID("ID1"));
-	}
-	
-	@Test
-	void testWhenItemIsLastItem() {
-		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item1 = new Component("item1");
-		Item item2 = new Component("item2");
-		Item item3 = new Component("item3");
-		inventory.addNewItem(item1);
-		inventory.addNewItem(item2);
-		inventory.addNewItem(item3);
-		assertEquals(item3, inventory.getItemByID("ID3"));
-	}
-	
-	@Test
-	void testWhenItemIsMiddleItem() {
-		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item1 = new Component("item1");
-		Item item2 = new Component("item2");
-		Item item3 = new Component("item3");
-		inventory.addNewItem(item1);
-		inventory.addNewItem(item2);
-		inventory.addNewItem(item3);
-		assertEquals(item2, inventory.getItemByID("ID2"));
-	}
-
 }

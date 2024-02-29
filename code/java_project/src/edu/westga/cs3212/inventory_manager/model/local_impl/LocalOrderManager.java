@@ -1,18 +1,12 @@
 package edu.westga.cs3212.inventory_manager.model.local_impl;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
-import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.OrderInventoryStorage;
 import edu.westga.cs3212.inventory_manager.model.OrderManager;
-import edu.westga.cs3212.inventory_manager.model.Product;
 
 /**
  * Local implementation of the OrderManager class meant to
