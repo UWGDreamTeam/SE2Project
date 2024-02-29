@@ -197,4 +197,9 @@ public class Order {
 	public double getProductionCost() {
 		return this.productionCost;
 	}
+	
+	public String toString() {
+		return "Order{" + "id=" + this.ID + ", items=" + this.items + ", completionStatus=" + this.completionStatus
+				+ '}';
+	}
 }
