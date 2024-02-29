@@ -5,8 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.viewmodel.InventoryViewModel;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -40,7 +42,7 @@ public class InventoryPage {
     private Tab componentsTabPage;
 
     @FXML
-    private TableView<Item> componentsTableView;
+    private TableView<Component> componentsTableView;
     
     @FXML
     private TableColumn<Item, String> idColumn;
@@ -52,10 +54,10 @@ public class InventoryPage {
     private TableColumn<Item, Number> costColumn;
     
     @FXML
-    private TableColumn<Item, Number> quantityColumn;
+    private TableColumn<Component, Integer> quantityColumn;
 
     @FXML
-    private TableColumn<Item, Number> recipesColumn;
+    private TableColumn<Component, Number> recipesColumn;
     
     @FXML
     private Text employeeFullNameLabel;
@@ -76,15 +78,16 @@ public class InventoryPage {
     private Tab productsTabPage;
 
     private InventoryViewModel inventoryVM;
-    private LocalComponentInventory componentInventory;
+    private LocalComponentInventory localComponentInventory;
+    private LocalProductInventory localProductInventory;
 
     /* GENERAL */
     
     @FXML
     void initialize() {
-    	
-        this.inventoryVM = new InventoryViewModel();
-        this.componentInventory = new LocalComponentInventory();
+        this.localComponentInventory = new LocalComponentInventory();
+        this.localProductInventory = new LocalProductInventory();
+        this.inventoryVM = new InventoryViewModel(localComponentInventory, localProductInventory);
         
         this.inventoryVM.getSelectedComponent().bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
         
@@ -97,10 +100,17 @@ public class InventoryPage {
         this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
         this.nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         this.costColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
-        this.quantityColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(this.componentInventory.getQuantityOfItem(cellData.getValue())));
+        this.quantityColumn.setCellValueFactory(cellData -> {
+            try {
+                int quantity = this.localComponentInventory.getQuantityOfItem(cellData.getValue());
+                return new SimpleIntegerProperty(quantity).asObject();
+            } catch (IllegalArgumentException e) {
+                return new SimpleIntegerProperty(0).asObject();
+            }
+        });
 	}
-    
-    @FXML
+
+	@FXML
     void homePageButtonOnClick(ActionEvent event) throws IOException {
     	
     	try {
@@ -185,7 +195,6 @@ public class InventoryPage {
     void orderComponentButtonManagerOnClick(ActionEvent event) {
     	//TO DO
     }
-    
 
 	private void refreshComponentsTableView() {
 		this.componentsTableView.setItems(this.inventoryVM.getObservableComponentList());

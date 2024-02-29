@@ -1,8 +1,8 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
@@ -31,9 +31,9 @@ public class InventoryViewModel {
 	 * @precondition none
 	 * @postcondition none
 	 */
-	public InventoryViewModel() {
-		this.componentsInventory = new LocalComponentInventory();
-		this.productInventory = new LocalProductInventory();
+	public InventoryViewModel(LocalComponentInventory componentsInventory, LocalProductInventory productInventory) {
+		this.componentsInventory = componentsInventory;
+		this.productInventory = productInventory;
 		
 		this.selectedComponent = new SimpleObjectProperty<Item>();
 	}
@@ -46,12 +46,12 @@ public class InventoryViewModel {
 	 *
 	 * @return the observable component list
 	 */
-	public ObservableList<Item> getObservableComponentList() {
-		List<Item> itemList = new ArrayList<>();
-	    for (Item item : this.componentsInventory.getItems()) {
-	        itemList.add(item);
-	    }
-	    return FXCollections.observableArrayList(itemList);
+	public ObservableList<Component> getObservableComponentList() {
+		ArrayList<Component> items = new ArrayList<Component>();
+		for (Item item : this.componentsInventory.getItems()) {
+			items.add((Component)item);
+		}
+		return FXCollections.observableArrayList(items);
 	}
 	
 	/**
