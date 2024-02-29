@@ -66,17 +66,18 @@ public class HomePageViewModel {
 	}
 	
 	public void getOrderSummary() {
-		OrderAnalytics orderInventoryAnalytics = new OrderAnalytics();
-		StringBuilder summary = new StringBuilder();
-        summary.append("Order Analytics Summary:\n");
-        summary.append("Total Orders: ").append(orderInventoryAnalytics.getOrdersCount()).append("\n");
-        summary.append("Total Sales of Completed Orders: $").append(orderInventoryAnalytics.getOrdersSalesTotal()).append("\n");
-        summary.append("Total Production Cost of Completed Orders: $").append(orderInventoryAnalytics.getOrdersProductionCostTotal()).append("\n");
-        summary.append("Total Profit of Completed Orders: $").append(orderInventoryAnalytics.getOrdersProfitTotal()).append("\n");
-        summary.append("Orders Completed: ").append(orderInventoryAnalytics.getOrdersCompletedCount()).append("\n");
-        summary.append("Orders In Progress: ").append(orderInventoryAnalytics.getOrdersInProgressCount()).append("\n");
-        
-        this.orderSummaryTextArea.set(summary.toString());
+	    OrderAnalytics orderInventoryAnalytics = new OrderAnalytics();
+	    StringBuilder summary = new StringBuilder();
+	    summary.append("Order Analytics Summary:\n");
+	    summary.append("Total Orders: ").append(orderInventoryAnalytics.getOrdersCount()).append("\n");
+	    summary.append("Total Sales of Completed Orders: $").append(String.format("%.2f", orderInventoryAnalytics.getOrdersSalesTotal())).append("\n");
+	    summary.append("Total Production Cost of Completed Orders: $").append(String.format("%.2f", orderInventoryAnalytics.getOrdersProductionCostTotal())).append("\n");
+	    summary.append("Total Profit of Completed Orders: $").append(String.format("%.2f", orderInventoryAnalytics.getOrdersProfitTotal())).append("\n");
+	    summary.append("Orders Completed: ").append(orderInventoryAnalytics.getOrdersCompletedCount()).append("\n");
+	    summary.append("Orders In Progress: ").append(orderInventoryAnalytics.getOrdersInProgressCount()).append("\n");
+	    
+	    this.orderSummaryTextArea.set(summary.toString());
 	}
+
 	
 }

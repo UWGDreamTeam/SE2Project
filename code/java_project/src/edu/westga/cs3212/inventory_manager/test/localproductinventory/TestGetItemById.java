@@ -3,15 +3,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
+import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 
-class TestGetProductById {
+class TestGetItemById {
 
 	@Test
-	void testGetProductByIdWithNull() {
+	void testGetItemByIdNullId() {
 		LocalProductInventory inventory = new LocalProductInventory();
 		
 		assertThrows(IllegalArgumentException.class, () -> 
@@ -20,7 +25,7 @@ class TestGetProductById {
 	}
 	
 	@Test
-	void testGetProductByIdWithEmpty() {
+	void testGetItemByIdEmptyId() {
 		LocalProductInventory inventory = new LocalProductInventory();
 		
 		assertThrows(IllegalArgumentException.class, () -> 
@@ -29,7 +34,7 @@ class TestGetProductById {
 	}
 	
 	@Test
-	void testGetProductByIdWithBlank() {
+	void testGetItemByIdBlankId() {
 		LocalProductInventory inventory = new LocalProductInventory();
 		
 		assertThrows(IllegalArgumentException.class, () -> 
@@ -38,26 +43,30 @@ class TestGetProductById {
 	}
 	
 	@Test
-	void testGetProductByIdWithValidIdInSystem() {
+	void testGetItemByIdWithValidIdInSystem() {
 		LocalProductInventory inventory = new LocalProductInventory();
-		Product product1 = new Product("ID03", "name3");
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		Product product = new Product("product", 5.0, 20.0, recipe);
 		
-		inventory.addNewItem(product1);
+		inventory.addItem(product, 1);
 		
-		Product expected = product1;
-		Product actual = inventory.getItemByID("ID03");
+		Item expected = product;
+		Item actual = inventory.getItemByID(product.getID());
 		
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	void testGetProductByIdWithValidIdNotInSystem() {
+	void testGetItemByIdWithValidIdNotInSystem() {
 		LocalProductInventory inventory = new LocalProductInventory();
-		Product product1 = new Product("ID04", "name4");
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		Product product = new Product("product", 5.0, 20.0, recipe);
 		
-		inventory.addNewItem(product1);
+		inventory.addItem(product, 1);
 		
-		Product actual = inventory.getItemByID("ID05");
+		Item actual = inventory.getItemByID("test");
 		
 		assertNull(actual);
 	}

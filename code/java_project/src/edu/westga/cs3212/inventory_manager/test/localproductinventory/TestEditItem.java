@@ -5,10 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
@@ -18,82 +21,90 @@ class TestEditItem {
 
 	@BeforeEach
 	void setUp() throws IOException {
-		Files.deleteIfExists(Paths.get(Constants.PRODUCT_INVENTORY_FILE_LOCATION
-				));
+		Files.deleteIfExists(Paths.get(Constants.PRODUCT_INVENTORY_FILE_LOCATION));
+	}
+
+	@Test
+	void testEditWhenTheItemIsNull() {
+		LocalProductInventory inventory = new LocalProductInventory();
+		assertThrows(IllegalArgumentException.class, () -> inventory.editItem(null));
+	}
+
+	@Test
+	void testEditWhenItemDoesNotExist() {
+		LocalProductInventory inventory = new LocalProductInventory();
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		Product product = new Product("product", 5.0, 20.0, recipe);
+
+		assertThrows(IllegalArgumentException.class, () -> inventory.editItem(product));
+	}
+
+	@Test
+	void testEditWhenItemExists() {
+		LocalProductInventory inventory = new LocalProductInventory();
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		Product product = new Product("product", 5.0, 20.0, recipe);
+		inventory.addItem(product, 1);
+
+		inventory.editItem(product);
+
+		assertTrue(inventory.getProductsWithQuantities().containsKey(product));
+	}
+
+	@Test
+	void testEditItemFirstOfList() {
+		LocalProductInventory inventory = new LocalProductInventory();
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		
+		Product product1 = new Product("product", 5.0, 20.0, recipe);
+		Product product2 = new Product("product", 5.0, 20.0, recipe);
+		Product product3 = new Product("product", 5.0, 20.0, recipe);
+		inventory.addItem(product1, 1);
+		inventory.addItem(product2, 1);
+		inventory.addItem(product3, 1);
+
+		inventory.editItem(product1);
+
+		assertTrue(inventory.getProductsWithQuantities().containsKey(product1));
 	}
 	
 	@Test
-	void testWhenTheIDIsNull() {
+	void testEditItemMiddleOfList() {
 		LocalProductInventory inventory = new LocalProductInventory();
-        assertThrows(IllegalArgumentException.class, () -> inventory.editItem(null, null));
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		
+		Product product1 = new Product("product", 5.0, 20.0, recipe);
+		Product product2 = new Product("product", 5.0, 20.0, recipe);
+		Product product3 = new Product("product", 5.0, 20.0, recipe);
+		inventory.addItem(product1, 1);
+		inventory.addItem(product2, 1);
+		inventory.addItem(product3, 1);
+
+		inventory.editItem(product2);
+
+		assertTrue(inventory.getProductsWithQuantities().containsKey(product2));
 	}
-	
+
 	@Test
-	void testWhenTheIDIsBlank() {
+	void testEditItemLastOfList() {
 		LocalProductInventory inventory = new LocalProductInventory();
-		assertThrows(IllegalArgumentException.class, () -> inventory.editItem("", null));
-	}
-	
-	@Test
-	void testWhenTheItemIsNull() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		assertThrows(IllegalArgumentException.class, () -> inventory.editItem("1", null));
-	}
-	
-	@Test
-	void testWhenItemIDAndProductIDDoNotMatch() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		Item item = new Product("test", "test");
-		assertThrows(IllegalArgumentException.class, () -> inventory.editItem("1", item));
-	} 
-	
-	@Test
-	void testWhenItemDoesNotExist() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		Item item = new Product("1", "test");
-		assertThrows(IllegalArgumentException.class, () -> inventory.editItem("1", item));
-	}
-	
-	@Test
-	void testWhenItemExists() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		Item item = new Product("1", "test");
-		inventory.addNewItem(item);
-		inventory.editItem("1", new Product("1", "test"));
-		assertEquals("test", inventory.getListOfItems().get(0).getName());
-	}
-	
-	@Test
-	void testWhenThereAreMultipleItems() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		Item item = new Product("1", "test");
-		Item item2 = new Product("2", "test2");
-		inventory.addNewItem(item);
-		inventory.addNewItem(item2);
-		inventory.editItem("1", new Product("1", "test"));
-		assertEquals("test", inventory.getItemByID("1").getName());
-	}
-	
-	@Test
-	void testWhenItemIsFirstItem() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		Item item = new Product("1", "test");
-		Item item2 = new Product("2", "test2");
-		inventory.addNewItem(item);
-		inventory.addNewItem(item2);
-		inventory.editItem("1", new Product("1", "test"));
-		assertEquals("test", inventory.getItemByID("1").getName());
-	}
-	
-	@Test
-	void testWhenItemIsLastItem() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		Item item = new Product("1", "test");
-		Item item2 = new Product("2", "test2");
-		inventory.addNewItem(item);
-		inventory.addNewItem(item2);
-		inventory.editItem("2", new Product("2", "test"));
-		assertEquals("test", inventory.getItemByID("2").getName());
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		
+		Product product1 = new Product("product", 5.0, 20.0, recipe);
+		Product product2 = new Product("product", 5.0, 20.0, recipe);
+		Product product3 = new Product("product", 5.0, 20.0, recipe);
+		inventory.addItem(product1, 1);
+		inventory.addItem(product2, 1);
+		inventory.addItem(product3, 1);
+
+		inventory.editItem(product3);
+
+		assertTrue(inventory.getProductsWithQuantities().containsKey(product3));
 	}
 
 }

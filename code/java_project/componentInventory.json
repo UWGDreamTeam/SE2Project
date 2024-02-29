@@ -1,1 +1,27 @@
-{}
+{
+  "Component{id\u003d27e8be0e, name\u003d\u0027Gold\u0027, productionCost\u003d5.87}": 85,
+  "Component{id\u003d36083111, name\u003d\u0027Brass\u0027, productionCost\u003d64.23}": 34,
+  "Component{id\u003d0c64af02, name\u003d\u0027Titanium\u0027, productionCost\u003d63.2}": 51,
+  "Component{id\u003debfe6ed5, name\u003d\u0027Ceramic\u0027, productionCost\u003d17.75}": 58,
+  "Component{id\u003d2867f948, name\u003d\u0027Iron\u0027, productionCost\u003d22.65}": 79,
+  "Component{id\u003d873e0e27, name\u003d\u0027Bronze\u0027, productionCost\u003d11.02}": 44,
+  "Component{id\u003ddc2f2844, name\u003d\u0027Quartz\u0027, productionCost\u003d61.47}": 93,
+  "Component{id\u003dbf3f6945, name\u003d\u0027Rubber\u0027, productionCost\u003d41.77}": 65,
+  "Component{id\u003d18c8944a, name\u003d\u0027Zinc\u0027, productionCost\u003d31.53}": 27,
+  "Component{id\u003d2bd8aaeb, name\u003d\u0027Marble\u0027, productionCost\u003d92.83}": 53,
+  "Component{id\u003d4dfb5683, name\u003d\u0027Aluminum\u0027, productionCost\u003d70.34}": 39,
+  "Component{id\u003de11abc41, name\u003d\u0027Magnesium\u0027, productionCost\u003d19.5}": 77,
+  "Component{id\u003d212324fb, name\u003d\u0027Granite\u0027, productionCost\u003d74.34}": 90,
+  "Component{id\u003d5bf5792a, name\u003d\u0027Plastic\u0027, productionCost\u003d73.25}": 78,
+  "Component{id\u003d7bd5c5c8, name\u003d\u0027Tin\u0027, productionCost\u003d26.55}": 61,
+  "Component{id\u003deab137f4, name\u003d\u0027Nickel\u0027, productionCost\u003d99.35}": 40,
+  "Component{id\u003df608c818, name\u003d\u0027Steel\u0027, productionCost\u003d16.42}": 12,
+  "Component{id\u003d843628e9, name\u003d\u0027Silicon\u0027, productionCost\u003d58.71}": 19,
+  "Component{id\u003d5fa5b952, name\u003d\u0027Sticks\u0027, productionCost\u003d42.79}": 31,
+  "Component{id\u003d2f11cbc9, name\u003d\u0027Lead\u0027, productionCost\u003d85.46}": 59,
+  "Component{id\u003ddacfe6e3, name\u003d\u0027Glass\u0027, productionCost\u003d83.56}": 16,
+  "Component{id\u003d36e08828, name\u003d\u0027Copper\u0027, productionCost\u003d66.35}": 13,
+  "Component{id\u003dd52e805e, name\u003d\u0027Silver\u0027, productionCost\u003d5.94}": 13,
+  "Component{id\u003d3b86599b, name\u003d\u0027Wood\u0027, productionCost\u003d2.58}": 91,
+  "Component{id\u003d18b9d27f, name\u003d\u0027Carbon Fiber\u0027, productionCost\u003d99.21}": 62
+}

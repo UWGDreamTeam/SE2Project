@@ -5,15 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 
-class TestGetSize {
+class TestGetQuantity {
 
 	@BeforeEach
 	void setUp() throws IOException {
@@ -21,20 +24,14 @@ class TestGetSize {
 	}
 	
 	@Test
-	void testGetQuantityEmptyAndNotEmpty() {
+	void testGetQuantityValidProduct() {
 		LocalProductInventory inventory = new LocalProductInventory();
-		inventory.clear();
-		Product product1 = new Product("ID60", "6name");
-		
-		inventory.addNewItem(product1);
-		
-		assertEquals(1, inventory.getQuantity());
-		
-		inventory.clear();
-		
-		assertEquals(0, inventory.getQuantity());
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		Product product = new Product("product", 5.0, 20.0, recipe);
+		inventory.addItem(product, 1);
 		
 		
+		assertEquals(1, inventory.getQuantityOfItem(product));
 	} 
-
 }

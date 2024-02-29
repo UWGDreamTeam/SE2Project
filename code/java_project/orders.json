@@ -1,452 +1,245 @@
 [
   {
-    "ID": "05d5a612-2a85-41f4-b1d1-bf5d0f29afeb",
+    "ID": "4d9a88fe-69d1-4a52-bd67-5b345957fbb6",
     "items": {
-      "Product{id\u003dc6a0a30f, name\u003d\u0027Smartphone Model 1\u0027, productionCost\u003d20.0, salePrice\u003d40.0}": 4
+      "Product{id\u003d023cbaec, name\u003d\u0027Stone Shovel\u0027, productionCost\u003d88.58, salePrice\u003d21.72}": 8,
+      "Product{id\u003d98aa62d9, name\u003d\u0027Brass Knuckles\u0027, productionCost\u003d1.08, salePrice\u003d129.29}": 10,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 4,
+      "Product{id\u003dffb31c7c, name\u003d\u0027Diamond Sword\u0027, productionCost\u003d78.59, salePrice\u003d15.54}": 7,
+      "Product{id\u003dc0a09374, name\u003d\u0027Gold Necklace\u0027, productionCost\u003d12.27, salePrice\u003d98.59}": 4,
+      "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 9,
+      "Product{id\u003db4dc5899, name\u003d\u0027Silver Ring\u0027, productionCost\u003d91.48, salePrice\u003d40.01}": 2,
+      "Product{id\u003d8f2c3acf, name\u003d\u0027Silicon Chip\u0027, productionCost\u003d88.9, salePrice\u003d119.36}": 4
     },
     "completionStatus": "INCOMPLETE",
-    "salePrice": 160.0,
-    "productionCost": 80.0
+    "salePrice": 3351.36,
+    "productionCost": 2792.9199999999996
   },
   {
-    "ID": "9793e2a4-37fa-4ec3-8989-b08b6f8e089b",
+    "ID": "540b17aa-e961-4707-b62c-9e78ef58bcf5",
     "items": {
-      "Product{id\u003dd5eda128, name\u003d\u0027Table Lamp Model 2\u0027, productionCost\u003d40.0, salePrice\u003d80.0}": 5
+      "Product{id\u003d45b31ad1, name\u003d\u0027Rubber Belt\u0027, productionCost\u003d7.81, salePrice\u003d48.03}": 1,
+      "Product{id\u003dcc96e5a2, name\u003d\u0027Magnesium Fire Starter\u0027, productionCost\u003d2.4, salePrice\u003d143.25}": 8,
+      "Product{id\u003dffb31c7c, name\u003d\u0027Diamond Sword\u0027, productionCost\u003d78.59, salePrice\u003d15.54}": 1,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 3,
+      "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 1,
+      "Product{id\u003d0c58a91a, name\u003d\u0027Gold Hoe\u0027, productionCost\u003d53.18, salePrice\u003d82.44}": 7,
+      "Product{id\u003df4d511a5, name\u003d\u0027Glass Bottle\u0027, productionCost\u003d80.14, salePrice\u003d83.3}": 10,
+      "Product{id\u003d21006b6b, name\u003d\u0027Quartz Watch\u0027, productionCost\u003d45.27, salePrice\u003d44.45}": 5,
+      "Product{id\u003d871864ce, name\u003d\u0027Nickel Screw\u0027, productionCost\u003d15.53, salePrice\u003d8.64}": 1
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 400.0,
-    "productionCost": 200.0
+    "salePrice": 3294.5099999999998,
+    "productionCost": 1613.28
   },
   {
-    "ID": "f13b683a-526d-442b-9c00-2275c401b022",
+    "ID": "deeb04b5-1e71-4db6-b8a9-084203ad5958",
     "items": {
-      "Product{id\u003d538ae85c, name\u003d\u0027Gaming Chair Model 3\u0027, productionCost\u003d60.0, salePrice\u003d120.0}": 7
+      "Product{id\u003d84f9e42a, name\u003d\u0027Zinc Plate\u0027, productionCost\u003d64.71, salePrice\u003d110.28}": 2,
+      "Product{id\u003db494109b, name\u003d\u0027Titanium Frame\u0027, productionCost\u003d56.57, salePrice\u003d21.21}": 4,
+      "Product{id\u003d222e67f4, name\u003d\u0027Wooden Axe\u0027, productionCost\u003d89.6, salePrice\u003d110.68}": 2,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 8,
+      "Product{id\u003d85783684, name\u003d\u0027Tin Can\u0027, productionCost\u003d65.82, salePrice\u003d135.47}": 1,
+      "Product{id\u003dfaf4a991, name\u003d\u0027Iron Pickaxe\u0027, productionCost\u003d47.15, salePrice\u003d56.5}": 10,
+      "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 3,
+      "Product{id\u003d3fbd20fa, name\u003d\u0027Ceramic Vase\u0027, productionCost\u003d8.22, salePrice\u003d116.83}": 4,
+      "Product{id\u003d5ac27530, name\u003d\u0027Lead Pipe\u0027, productionCost\u003d2.57, salePrice\u003d28.08}": 2
     },
     "completionStatus": "INCOMPLETE",
-    "salePrice": 840.0,
-    "productionCost": 420.0
+    "salePrice": 2707.41,
+    "productionCost": 1522.6100000000001
   },
   {
-    "ID": "a81e50ce-6c73-422b-b7bc-0e217c0283d4",
+    "ID": "1681c0d1-7c76-4d2c-8066-453e1b231db8",
     "items": {
-      "Product{id\u003df359d7e7, name\u003d\u0027Bluetooth Speaker Model 4\u0027, productionCost\u003d80.0, salePrice\u003d160.0}": 1
+      "Product{id\u003db494109b, name\u003d\u0027Titanium Frame\u0027, productionCost\u003d56.57, salePrice\u003d21.21}": 4,
+      "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 8,
+      "Product{id\u003d0c58a91a, name\u003d\u0027Gold Hoe\u0027, productionCost\u003d53.18, salePrice\u003d82.44}": 10,
+      "Product{id\u003df4d511a5, name\u003d\u0027Glass Bottle\u0027, productionCost\u003d80.14, salePrice\u003d83.3}": 6,
+      "Product{id\u003db4dc5899, name\u003d\u0027Silver Ring\u0027, productionCost\u003d91.48, salePrice\u003d40.01}": 4,
+      "Product{id\u003dcb515719, name\u003d\u0027Copper Wrench\u0027, productionCost\u003d40.37, salePrice\u003d147.31}": 5,
+      "Product{id\u003d8f2c3acf, name\u003d\u0027Silicon Chip\u0027, productionCost\u003d88.9, salePrice\u003d119.36}": 1,
+      "Product{id\u003d871864ce, name\u003d\u0027Nickel Screw\u0027, productionCost\u003d15.53, salePrice\u003d8.64}": 3,
+      "Product{id\u003d21006b6b, name\u003d\u0027Quartz Watch\u0027, productionCost\u003d45.27, salePrice\u003d44.45}": 3
     },
     "completionStatus": "INCOMPLETE",
-    "salePrice": 160.0,
-    "productionCost": 80.0
+    "salePrice": 3680.8199999999997,
+    "productionCost": 2453.4300000000003
   },
   {
-    "ID": "a52b4497-047c-4ea7-8b12-22c4d4487bf4",
+    "ID": "5cb74754-b9cc-4e63-9e56-cd01a14f869c",
     "items": {
-      "Product{id\u003d0699b183, name\u003d\u0027Coffee Maker Model 5\u0027, productionCost\u003d100.0, salePrice\u003d200.0}": 8
+      "Product{id\u003d222e67f4, name\u003d\u0027Wooden Axe\u0027, productionCost\u003d89.6, salePrice\u003d110.68}": 10,
+      "Product{id\u003d98aa62d9, name\u003d\u0027Brass Knuckles\u0027, productionCost\u003d1.08, salePrice\u003d129.29}": 1,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 8,
+      "Product{id\u003dffb31c7c, name\u003d\u0027Diamond Sword\u0027, productionCost\u003d78.59, salePrice\u003d15.54}": 8,
+      "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 2,
+      "Product{id\u003dc0a09374, name\u003d\u0027Gold Necklace\u0027, productionCost\u003d12.27, salePrice\u003d98.59}": 4,
+      "Product{id\u003d8d96080b, name\u003d\u0027Steel Hammer\u0027, productionCost\u003d75.64, salePrice\u003d92.36}": 10,
+      "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 6,
+      "Product{id\u003d8f2c3acf, name\u003d\u0027Silicon Chip\u0027, productionCost\u003d88.9, salePrice\u003d119.36}": 6
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 4763.67,
+    "productionCost": 3662.72
+  },
+  {
+    "ID": "29bb4383-f9ee-4d34-a727-d361c55314cc",
+    "items": {
+      "Product{id\u003dcc96e5a2, name\u003d\u0027Magnesium Fire Starter\u0027, productionCost\u003d2.4, salePrice\u003d143.25}": 7,
+      "Product{id\u003da15490fa, name\u003d\u0027Marble Sculpture\u0027, productionCost\u003d92.51, salePrice\u003d122.86}": 8,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 1,
+      "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 9,
+      "Product{id\u003dc0a09374, name\u003d\u0027Gold Necklace\u0027, productionCost\u003d12.27, salePrice\u003d98.59}": 3,
+      "Product{id\u003db4dc5899, name\u003d\u0027Silver Ring\u0027, productionCost\u003d91.48, salePrice\u003d40.01}": 5,
+      "Product{id\u003dcb515719, name\u003d\u0027Copper Wrench\u0027, productionCost\u003d40.37, salePrice\u003d147.31}": 7,
+      "Product{id\u003d871864ce, name\u003d\u0027Nickel Screw\u0027, productionCost\u003d15.53, salePrice\u003d8.64}": 7
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 4909.030000000001,
+    "productionCost": 2079.83
+  },
+  {
+    "ID": "d4ba53e7-2b19-49e3-a4a9-906e72ee436e",
+    "items": {
+      "Product{id\u003d023cbaec, name\u003d\u0027Stone Shovel\u0027, productionCost\u003d88.58, salePrice\u003d21.72}": 4,
+      "Product{id\u003dcc96e5a2, name\u003d\u0027Magnesium Fire Starter\u0027, productionCost\u003d2.4, salePrice\u003d143.25}": 6,
+      "Product{id\u003d98aa62d9, name\u003d\u0027Brass Knuckles\u0027, productionCost\u003d1.08, salePrice\u003d129.29}": 5,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 3,
+      "Product{id\u003d8d96080b, name\u003d\u0027Steel Hammer\u0027, productionCost\u003d75.64, salePrice\u003d92.36}": 2,
+      "Product{id\u003df4d511a5, name\u003d\u0027Glass Bottle\u0027, productionCost\u003d80.14, salePrice\u003d83.3}": 10,
+      "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 3,
+      "Product{id\u003d3fbd20fa, name\u003d\u0027Ceramic Vase\u0027, productionCost\u003d8.22, salePrice\u003d116.83}": 7,
+      "Product{id\u003d5ac27530, name\u003d\u0027Lead Pipe\u0027, productionCost\u003d2.57, salePrice\u003d28.08}": 4
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 1600.0,
-    "productionCost": 800.0
+    "salePrice": 3985.88,
+    "productionCost": 1731.6399999999996
   },
   {
-    "ID": "b1f50984-5769-4e09-b333-ce318136d573",
+    "ID": "f0542934-5049-4c8f-a029-ac95eba75fd0",
     "items": {
-      "Product{id\u003d068af3a2, name\u003d\u0027Smartphone Model 6\u0027, productionCost\u003d120.0, salePrice\u003d240.0}": 5
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 1200.0,
-    "productionCost": 600.0
-  },
-  {
-    "ID": "3b56c24e-5c32-40b6-820f-6079c6d66c0a",
-    "items": {
-      "Product{id\u003df3d560f5, name\u003d\u0027Table Lamp Model 7\u0027, productionCost\u003d140.0, salePrice\u003d280.0}": 1
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 280.0,
-    "productionCost": 140.0
-  },
-  {
-    "ID": "8a409fd3-d023-4f48-9a27-d95309a03cf8",
-    "items": {
-      "Product{id\u003d43c07c86, name\u003d\u0027Gaming Chair Model 8\u0027, productionCost\u003d160.0, salePrice\u003d320.0}": 3
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 960.0,
-    "productionCost": 480.0
-  },
-  {
-    "ID": "b76b75f2-7435-4c7c-befc-105e2a9409ef",
-    "items": {
-      "Product{id\u003da8685016, name\u003d\u0027Bluetooth Speaker Model 9\u0027, productionCost\u003d180.0, salePrice\u003d360.0}": 2
+      "Product{id\u003d023cbaec, name\u003d\u0027Stone Shovel\u0027, productionCost\u003d88.58, salePrice\u003d21.72}": 1,
+      "Product{id\u003d45b31ad1, name\u003d\u0027Rubber Belt\u0027, productionCost\u003d7.81, salePrice\u003d48.03}": 3,
+      "Product{id\u003d98aa62d9, name\u003d\u0027Brass Knuckles\u0027, productionCost\u003d1.08, salePrice\u003d129.29}": 3,
+      "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 10,
+      "Product{id\u003d85783684, name\u003d\u0027Tin Can\u0027, productionCost\u003d65.82, salePrice\u003d135.47}": 7,
+      "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 4,
+      "Product{id\u003df4d511a5, name\u003d\u0027Glass Bottle\u0027, productionCost\u003d80.14, salePrice\u003d83.3}": 7,
+      "Product{id\u003dfaf4a991, name\u003d\u0027Iron Pickaxe\u0027, productionCost\u003d47.15, salePrice\u003d56.5}": 9,
+      "Product{id\u003db4dc5899, name\u003d\u0027Silver Ring\u0027, productionCost\u003d91.48, salePrice\u003d40.01}": 3
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 720.0,
-    "productionCost": 360.0
+    "salePrice": 4268.7,
+    "productionCost": 2694.14
   },
   {
-    "ID": "1d0d43b8-208f-4a96-8839-3979d26d961c",
+    "ID": "38f80622-4c5c-46d9-bbf0-cddf59c5f9c1",
     "items": {
-      "Product{id\u003de981f2a7, name\u003d\u0027Coffee Maker Model 10\u0027, productionCost\u003d200.0, salePrice\u003d400.0}": 10
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 4000.0,
-    "productionCost": 2000.0
-  },
-  {
-    "ID": "ba4ceca7-b65d-4e74-b154-cba9890123d5",
-    "items": {
-      "Product{id\u003d81ed1395, name\u003d\u0027Smartphone Model 11\u0027, productionCost\u003d220.0, salePrice\u003d440.0}": 2
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 880.0,
-    "productionCost": 440.0
-  },
-  {
-    "ID": "eb563632-e7c0-4648-a7d3-58a7df4d19ed",
-    "items": {
-      "Product{id\u003d6629d0c0, name\u003d\u0027Table Lamp Model 12\u0027, productionCost\u003d240.0, salePrice\u003d480.0}": 1
+      "Product{id\u003d023cbaec, name\u003d\u0027Stone Shovel\u0027, productionCost\u003d88.58, salePrice\u003d21.72}": 9,
+      "Product{id\u003da15490fa, name\u003d\u0027Marble Sculpture\u0027, productionCost\u003d92.51, salePrice\u003d122.86}": 10,
+      "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 9,
+      "Product{id\u003d8d96080b, name\u003d\u0027Steel Hammer\u0027, productionCost\u003d75.64, salePrice\u003d92.36}": 7,
+      "Product{id\u003dc0a09374, name\u003d\u0027Gold Necklace\u0027, productionCost\u003d12.27, salePrice\u003d98.59}": 2,
+      "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 5,
+      "Product{id\u003d5ac27530, name\u003d\u0027Lead Pipe\u0027, productionCost\u003d2.57, salePrice\u003d28.08}": 8
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 480.0,
-    "productionCost": 240.0
+    "salePrice": 3956.5499999999997,
+    "productionCost": 3205.62
   },
   {
-    "ID": "0519f13a-a254-4d76-b102-e1795051f257",
+    "ID": "8ab39a10-aca9-4398-8ba0-9b36d33e49f2",
     "items": {
-      "Product{id\u003d399758f4, name\u003d\u0027Gaming Chair Model 13\u0027, productionCost\u003d260.0, salePrice\u003d520.0}": 8
+      "Product{id\u003db494109b, name\u003d\u0027Titanium Frame\u0027, productionCost\u003d56.57, salePrice\u003d21.21}": 8,
+      "Product{id\u003d222e67f4, name\u003d\u0027Wooden Axe\u0027, productionCost\u003d89.6, salePrice\u003d110.68}": 5,
+      "Product{id\u003dcc96e5a2, name\u003d\u0027Magnesium Fire Starter\u0027, productionCost\u003d2.4, salePrice\u003d143.25}": 10,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 7,
+      "Product{id\u003d85783684, name\u003d\u0027Tin Can\u0027, productionCost\u003d65.82, salePrice\u003d135.47}": 7,
+      "Product{id\u003d8d96080b, name\u003d\u0027Steel Hammer\u0027, productionCost\u003d75.64, salePrice\u003d92.36}": 9,
+      "Product{id\u003df4d511a5, name\u003d\u0027Glass Bottle\u0027, productionCost\u003d80.14, salePrice\u003d83.3}": 7,
+      "Product{id\u003d3fbd20fa, name\u003d\u0027Ceramic Vase\u0027, productionCost\u003d8.22, salePrice\u003d116.83}": 7,
+      "Product{id\u003d871864ce, name\u003d\u0027Nickel Screw\u0027, productionCost\u003d15.53, salePrice\u003d8.64}": 5
     },
     "completionStatus": "INCOMPLETE",
-    "salePrice": 4160.0,
-    "productionCost": 2080.0
+    "salePrice": 6095.320000000001,
+    "productionCost": 2867.7200000000003
   },
   {
-    "ID": "c63a92f9-6241-428d-bdbe-fe3b400b2a7c",
+    "ID": "cf16d57b-ca3f-4ae0-869d-e2310a291b0a",
     "items": {
-      "Product{id\u003d8a9e639b, name\u003d\u0027Bluetooth Speaker Model 14\u0027, productionCost\u003d280.0, salePrice\u003d560.0}": 7
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 3920.0,
-    "productionCost": 1960.0
-  },
-  {
-    "ID": "5be2494c-7744-4b66-add2-01a0f663c16a",
-    "items": {
-      "Product{id\u003de8bf345b, name\u003d\u0027Coffee Maker Model 15\u0027, productionCost\u003d300.0, salePrice\u003d600.0}": 7
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 4200.0,
-    "productionCost": 2100.0
-  },
-  {
-    "ID": "28dfe88d-ca6c-4898-b186-e30e27f48977",
-    "items": {
-      "Product{id\u003db1a1b3d2, name\u003d\u0027Smartphone Model 16\u0027, productionCost\u003d320.0, salePrice\u003d640.0}": 2
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 1280.0,
-    "productionCost": 640.0
-  },
-  {
-    "ID": "0b5d4847-ea7f-40a7-8731-0ac6b05b8a10",
-    "items": {
-      "Product{id\u003db61bf0dc, name\u003d\u0027Table Lamp Model 17\u0027, productionCost\u003d340.0, salePrice\u003d680.0}": 5
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 3400.0,
-    "productionCost": 1700.0
-  },
-  {
-    "ID": "40005bff-010e-434d-ab42-839a3d1493af",
-    "items": {
-      "Product{id\u003d5cd7e51c, name\u003d\u0027Gaming Chair Model 18\u0027, productionCost\u003d360.0, salePrice\u003d720.0}": 6
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 4320.0,
-    "productionCost": 2160.0
-  },
-  {
-    "ID": "b2d84ab3-3bfd-4767-9131-50bf600efb5a",
-    "items": {
-      "Product{id\u003df5f3b794, name\u003d\u0027Bluetooth Speaker Model 19\u0027, productionCost\u003d380.0, salePrice\u003d760.0}": 1
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 760.0,
-    "productionCost": 380.0
-  },
-  {
-    "ID": "06e2729a-e729-46d6-9310-dad1b2bad1c7",
-    "items": {
-      "Product{id\u003dce0787e2, name\u003d\u0027Coffee Maker Model 20\u0027, productionCost\u003d400.0, salePrice\u003d800.0}": 2
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 1600.0,
-    "productionCost": 800.0
-  },
-  {
-    "ID": "b39ddf12-a0f7-4dfe-b687-ff69cf234dab",
-    "items": {
-      "Product{id\u003dbc98c991, name\u003d\u0027Smartphone Model 21\u0027, productionCost\u003d420.0, salePrice\u003d840.0}": 7
+      "Product{id\u003d023cbaec, name\u003d\u0027Stone Shovel\u0027, productionCost\u003d88.58, salePrice\u003d21.72}": 5,
+      "Product{id\u003d84f9e42a, name\u003d\u0027Zinc Plate\u0027, productionCost\u003d64.71, salePrice\u003d110.28}": 6,
+      "Product{id\u003db494109b, name\u003d\u0027Titanium Frame\u0027, productionCost\u003d56.57, salePrice\u003d21.21}": 9,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 1,
+      "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 6,
+      "Product{id\u003d8d96080b, name\u003d\u0027Steel Hammer\u0027, productionCost\u003d75.64, salePrice\u003d92.36}": 6,
+      "Product{id\u003df4d511a5, name\u003d\u0027Glass Bottle\u0027, productionCost\u003d80.14, salePrice\u003d83.3}": 8,
+      "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 3,
+      "Product{id\u003d3fbd20fa, name\u003d\u0027Ceramic Vase\u0027, productionCost\u003d8.22, salePrice\u003d116.83}": 2
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 5880.0,
-    "productionCost": 2940.0
+    "salePrice": 3478.41,
+    "productionCost": 3040.1499999999996
   },
   {
-    "ID": "becb8e72-8dc9-47ec-b890-f45c7c3a5fa4",
+    "ID": "288d8891-24ec-42db-b5df-caef567dfd73",
     "items": {
-      "Product{id\u003dc2e6e64b, name\u003d\u0027Table Lamp Model 22\u0027, productionCost\u003d440.0, salePrice\u003d880.0}": 3
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 2640.0,
-    "productionCost": 1320.0
-  },
-  {
-    "ID": "9bfa4090-807b-42d8-9a07-58376d44cee0",
-    "items": {
-      "Product{id\u003d8798aa89, name\u003d\u0027Gaming Chair Model 23\u0027, productionCost\u003d460.0, salePrice\u003d920.0}": 2
+      "Product{id\u003d023cbaec, name\u003d\u0027Stone Shovel\u0027, productionCost\u003d88.58, salePrice\u003d21.72}": 1,
+      "Product{id\u003db494109b, name\u003d\u0027Titanium Frame\u0027, productionCost\u003d56.57, salePrice\u003d21.21}": 2,
+      "Product{id\u003d222e67f4, name\u003d\u0027Wooden Axe\u0027, productionCost\u003d89.6, salePrice\u003d110.68}": 2,
+      "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 6,
+      "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 6,
+      "Product{id\u003dc0a09374, name\u003d\u0027Gold Necklace\u0027, productionCost\u003d12.27, salePrice\u003d98.59}": 5,
+      "Product{id\u003db4dc5899, name\u003d\u0027Silver Ring\u0027, productionCost\u003d91.48, salePrice\u003d40.01}": 9
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 1840.0,
-    "productionCost": 920.0
+    "salePrice": 2574.76,
+    "productionCost": 1637.5900000000001
   },
   {
-    "ID": "a8160bd7-0131-490f-886c-8fbc212ebad4",
+    "ID": "73166159-5d7a-4e7b-94cb-092645f4e3d9",
     "items": {
-      "Product{id\u003da164dac1, name\u003d\u0027Bluetooth Speaker Model 24\u0027, productionCost\u003d480.0, salePrice\u003d960.0}": 3
+      "Product{id\u003dffb31c7c, name\u003d\u0027Diamond Sword\u0027, productionCost\u003d78.59, salePrice\u003d15.54}": 4,
+      "Product{id\u003d85783684, name\u003d\u0027Tin Can\u0027, productionCost\u003d65.82, salePrice\u003d135.47}": 5,
+      "Product{id\u003d8d96080b, name\u003d\u0027Steel Hammer\u0027, productionCost\u003d75.64, salePrice\u003d92.36}": 3,
+      "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 2,
+      "Product{id\u003d5ac27530, name\u003d\u0027Lead Pipe\u0027, productionCost\u003d2.57, salePrice\u003d28.08}": 6,
+      "Product{id\u003d21006b6b, name\u003d\u0027Quartz Watch\u0027, productionCost\u003d45.27, salePrice\u003d44.45}": 6
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 1543.97,
+    "productionCost": 1351.96
+  },
+  {
+    "ID": "2bb94187-5838-4d97-aaa5-36f2673d2812",
+    "items": {
+      "Product{id\u003d84f9e42a, name\u003d\u0027Zinc Plate\u0027, productionCost\u003d64.71, salePrice\u003d110.28}": 9,
+      "Product{id\u003d45b31ad1, name\u003d\u0027Rubber Belt\u0027, productionCost\u003d7.81, salePrice\u003d48.03}": 5,
+      "Product{id\u003d98aa62d9, name\u003d\u0027Brass Knuckles\u0027, productionCost\u003d1.08, salePrice\u003d129.29}": 8,
+      "Product{id\u003d8d96080b, name\u003d\u0027Steel Hammer\u0027, productionCost\u003d75.64, salePrice\u003d92.36}": 4,
+      "Product{id\u003dfaf4a991, name\u003d\u0027Iron Pickaxe\u0027, productionCost\u003d47.15, salePrice\u003d56.5}": 6,
+      "Product{id\u003db4dc5899, name\u003d\u0027Silver Ring\u0027, productionCost\u003d91.48, salePrice\u003d40.01}": 10,
+      "Product{id\u003d5ac27530, name\u003d\u0027Lead Pipe\u0027, productionCost\u003d2.57, salePrice\u003d28.08}": 1
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 3403.6099999999997,
+    "productionCost": 2132.9100000000003
+  },
+  {
+    "ID": "86701e22-3e89-4224-acad-243e1813b32a",
+    "items": {
+      "Product{id\u003d84f9e42a, name\u003d\u0027Zinc Plate\u0027, productionCost\u003d64.71, salePrice\u003d110.28}": 5,
+      "Product{id\u003dcc96e5a2, name\u003d\u0027Magnesium Fire Starter\u0027, productionCost\u003d2.4, salePrice\u003d143.25}": 1,
+      "Product{id\u003d98aa62d9, name\u003d\u0027Brass Knuckles\u0027, productionCost\u003d1.08, salePrice\u003d129.29}": 9,
+      "Product{id\u003d85783684, name\u003d\u0027Tin Can\u0027, productionCost\u003d65.82, salePrice\u003d135.47}": 4,
+      "Product{id\u003dfaf4a991, name\u003d\u0027Iron Pickaxe\u0027, productionCost\u003d47.15, salePrice\u003d56.5}": 2,
+      "Product{id\u003d3fbd20fa, name\u003d\u0027Ceramic Vase\u0027, productionCost\u003d8.22, salePrice\u003d116.83}": 6,
+      "Product{id\u003d8f2c3acf, name\u003d\u0027Silicon Chip\u0027, productionCost\u003d88.9, salePrice\u003d119.36}": 6,
+      "Product{id\u003d5ac27530, name\u003d\u0027Lead Pipe\u0027, productionCost\u003d2.57, salePrice\u003d28.08}": 6
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 2880.0,
-    "productionCost": 1440.0
-  },
-  {
-    "ID": "10200f09-bf91-4422-a7cf-b1c708d372c1",
-    "items": {
-      "Product{id\u003d61c9e187, name\u003d\u0027Coffee Maker Model 25\u0027, productionCost\u003d500.0, salePrice\u003d1000.0}": 9
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 9000.0,
-    "productionCost": 4500.0
-  },
-  {
-    "ID": "bf9cfc2b-b269-478f-bce7-ed2374af41e2",
-    "items": {
-      "Product{id\u003d129b4b48, name\u003d\u0027Smartphone Model 26\u0027, productionCost\u003d520.0, salePrice\u003d1040.0}": 4
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 4160.0,
-    "productionCost": 2080.0
-  },
-  {
-    "ID": "280f808c-9c25-4932-a1f2-4a9e153e95b9",
-    "items": {
-      "Product{id\u003dafb0356a, name\u003d\u0027Table Lamp Model 27\u0027, productionCost\u003d540.0, salePrice\u003d1080.0}": 9
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 9720.0,
-    "productionCost": 4860.0
-  },
-  {
-    "ID": "4192a9fd-6b74-4589-a7d3-d689c7789e6a",
-    "items": {
-      "Product{id\u003d35e3780e, name\u003d\u0027Gaming Chair Model 28\u0027, productionCost\u003d560.0, salePrice\u003d1120.0}": 4
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 4480.0,
-    "productionCost": 2240.0
-  },
-  {
-    "ID": "d2397eef-69bb-42f5-bc46-9a4e8e45e0ad",
-    "items": {
-      "Product{id\u003db20e222e, name\u003d\u0027Bluetooth Speaker Model 29\u0027, productionCost\u003d580.0, salePrice\u003d1160.0}": 10
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 11600.0,
-    "productionCost": 5800.0
-  },
-  {
-    "ID": "1471ddcf-9f0b-43d3-a438-00b8171e82ff",
-    "items": {
-      "Product{id\u003d15909c58, name\u003d\u0027Coffee Maker Model 30\u0027, productionCost\u003d600.0, salePrice\u003d1200.0}": 8
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 9600.0,
-    "productionCost": 4800.0
-  },
-  {
-    "ID": "5cdbcf5f-46bd-44b3-8793-bc98a9f9ad32",
-    "items": {
-      "Product{id\u003d6ea149bf, name\u003d\u0027Smartphone Model 31\u0027, productionCost\u003d620.0, salePrice\u003d1240.0}": 3
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 3720.0,
-    "productionCost": 1860.0
-  },
-  {
-    "ID": "e9b10e00-cd3f-401b-8c3c-782d1789a46f",
-    "items": {
-      "Product{id\u003d8c827f21, name\u003d\u0027Table Lamp Model 32\u0027, productionCost\u003d640.0, salePrice\u003d1280.0}": 8
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 10240.0,
-    "productionCost": 5120.0
-  },
-  {
-    "ID": "2440a5a5-41b5-49a1-a8ad-e4d6c4d9d69c",
-    "items": {
-      "Product{id\u003df93ae094, name\u003d\u0027Gaming Chair Model 33\u0027, productionCost\u003d660.0, salePrice\u003d1320.0}": 9
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 11880.0,
-    "productionCost": 5940.0
-  },
-  {
-    "ID": "fb966b97-1c7a-4ac4-808c-dd539e78acbf",
-    "items": {
-      "Product{id\u003d24bbed18, name\u003d\u0027Bluetooth Speaker Model 34\u0027, productionCost\u003d680.0, salePrice\u003d1360.0}": 9
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 12240.0,
-    "productionCost": 6120.0
-  },
-  {
-    "ID": "48b8203a-8e70-4ba4-ad62-65406d0b8ea6",
-    "items": {
-      "Product{id\u003d108402a0, name\u003d\u0027Coffee Maker Model 35\u0027, productionCost\u003d700.0, salePrice\u003d1400.0}": 6
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 8400.0,
-    "productionCost": 4200.0
-  },
-  {
-    "ID": "4e589a24-ec8c-4ea5-bdfb-d04d4884200a",
-    "items": {
-      "Product{id\u003d2a840c46, name\u003d\u0027Smartphone Model 36\u0027, productionCost\u003d720.0, salePrice\u003d1440.0}": 4
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 5760.0,
-    "productionCost": 2880.0
-  },
-  {
-    "ID": "bf085e6c-3af5-4fc7-8c96-493f57dcaafd",
-    "items": {
-      "Product{id\u003d3ddcaf85, name\u003d\u0027Table Lamp Model 37\u0027, productionCost\u003d740.0, salePrice\u003d1480.0}": 3
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 4440.0,
-    "productionCost": 2220.0
-  },
-  {
-    "ID": "6a0d9818-f74b-4012-8877-e2cb94c9a4cf",
-    "items": {
-      "Product{id\u003dfb51781b, name\u003d\u0027Gaming Chair Model 38\u0027, productionCost\u003d760.0, salePrice\u003d1520.0}": 1
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 1520.0,
-    "productionCost": 760.0
-  },
-  {
-    "ID": "9e823bcb-0bfa-42f5-8703-c11c22c14642",
-    "items": {
-      "Product{id\u003dbc68504b, name\u003d\u0027Bluetooth Speaker Model 39\u0027, productionCost\u003d780.0, salePrice\u003d1560.0}": 1
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 1560.0,
-    "productionCost": 780.0
-  },
-  {
-    "ID": "a1287245-62f0-4008-a039-53c769545b57",
-    "items": {
-      "Product{id\u003db7d11872, name\u003d\u0027Coffee Maker Model 40\u0027, productionCost\u003d800.0, salePrice\u003d1600.0}": 8
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 12800.0,
-    "productionCost": 6400.0
-  },
-  {
-    "ID": "a6e027c9-f7e2-44eb-879d-b58264b94e50",
-    "items": {
-      "Product{id\u003dac0f1f43, name\u003d\u0027Smartphone Model 41\u0027, productionCost\u003d820.0, salePrice\u003d1640.0}": 9
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 14760.0,
-    "productionCost": 7380.0
-  },
-  {
-    "ID": "4e0f5f3b-235b-4f6f-bb8e-fb5f071e41ef",
-    "items": {
-      "Product{id\u003d8ff88783, name\u003d\u0027Table Lamp Model 42\u0027, productionCost\u003d840.0, salePrice\u003d1680.0}": 7
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 11760.0,
-    "productionCost": 5880.0
-  },
-  {
-    "ID": "3dd345cd-f2ea-4bea-9a50-1e309bfaf632",
-    "items": {
-      "Product{id\u003d7f498b7d, name\u003d\u0027Gaming Chair Model 43\u0027, productionCost\u003d860.0, salePrice\u003d1720.0}": 2
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 3440.0,
-    "productionCost": 1720.0
-  },
-  {
-    "ID": "4c65eb45-5860-4e73-a6cf-7ae9f08229c7",
-    "items": {
-      "Product{id\u003d3510d55b, name\u003d\u0027Bluetooth Speaker Model 44\u0027, productionCost\u003d880.0, salePrice\u003d1760.0}": 10
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 17600.0,
-    "productionCost": 8800.0
-  },
-  {
-    "ID": "efdd8754-dff3-4adb-9e60-39406779d6e7",
-    "items": {
-      "Product{id\u003d270c9372, name\u003d\u0027Coffee Maker Model 45\u0027, productionCost\u003d900.0, salePrice\u003d1800.0}": 4
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 7200.0,
-    "productionCost": 3600.0
-  },
-  {
-    "ID": "988a5d8d-f6aa-4d25-adb4-3e76b102b113",
-    "items": {
-      "Product{id\u003dc7a13ad6, name\u003d\u0027Smartphone Model 46\u0027, productionCost\u003d920.0, salePrice\u003d1840.0}": 4
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 7360.0,
-    "productionCost": 3680.0
-  },
-  {
-    "ID": "466ca184-63dd-4319-8d48-0283a49623d9",
-    "items": {
-      "Product{id\u003d0653c276, name\u003d\u0027Table Lamp Model 47\u0027, productionCost\u003d940.0, salePrice\u003d1880.0}": 4
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 7520.0,
-    "productionCost": 3760.0
-  },
-  {
-    "ID": "471d74aa-1319-4732-9a46-838310aa72b0",
-    "items": {
-      "Product{id\u003d58928b2c, name\u003d\u0027Gaming Chair Model 48\u0027, productionCost\u003d960.0, salePrice\u003d1920.0}": 7
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 13440.0,
-    "productionCost": 6720.0
-  },
-  {
-    "ID": "0b32c817-8c31-4b56-a21b-f8c2fe55dbcb",
-    "items": {
-      "Product{id\u003d63791507, name\u003d\u0027Bluetooth Speaker Model 49\u0027, productionCost\u003d980.0, salePrice\u003d1960.0}": 6
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 11760.0,
-    "productionCost": 5880.0
-  },
-  {
-    "ID": "112b33ea-9fad-4910-8432-87a6a9b29e50",
-    "items": {
-      "Product{id\u003d578da97d, name\u003d\u0027Coffee Maker Model 50\u0027, productionCost\u003d1000.0, salePrice\u003d2000.0}": 8
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 16000.0,
-    "productionCost": 8000.0
+    "salePrice": 4098.759999999999,
+    "productionCost": 1291.39
   }
 ]
