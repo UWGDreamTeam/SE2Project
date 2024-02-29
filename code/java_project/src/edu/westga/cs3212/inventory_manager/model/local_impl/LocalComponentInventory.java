@@ -3,6 +3,7 @@ package edu.westga.cs3212.inventory_manager.model.local_impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.ComponentInventoryStorage;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.InventoryManager;
@@ -17,7 +18,7 @@ public class LocalComponentInventory implements InventoryManager {
 	private static final String COMPONENT_ID_DOES_NOT_MATCH = "Component ID does not match";
 	private static final String COMPONENT_DOES_NOT_EXIST = "Component does not exist";
 	
-	private List<Component> components;
+	private static List<Component> components;
 	
 	/**
 	 * Instantiates a new LocalComponentInventory object
@@ -26,13 +27,15 @@ public class LocalComponentInventory implements InventoryManager {
 	 * @postcondition LocalComponentsInventory.components != null
 	 */
 	public LocalComponentInventory() {
-		this.components = new ArrayList<>();
-		this.components = ComponentInventoryStorage.load(Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		if (LocalComponentInventory.components == null) {
+			LocalComponentInventory.components = new ArrayList<>();
+			LocalComponentInventory.components = ComponentInventoryStorage.load(Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		}
 	}
 
 	@Override
 	public ArrayList<Item> getListOfItems() {
-		return new ArrayList<>(this.components);
+		return new ArrayList<>(LocalComponentInventory.components);
 	}
 
 	@Override
@@ -41,12 +44,12 @@ public class LocalComponentInventory implements InventoryManager {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
 		
-		if (this.components.contains(newItem)) {
+		if (LocalComponentInventory.components.contains(newItem)) {
 			throw new IllegalArgumentException(NEW_ITEM_ALREADY_EXISTS);
 		}
 		
-		boolean result = this.components.add((Component) newItem);
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		boolean result = LocalComponentInventory.components.add((Component) newItem);
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 		return result;
 	}
 
@@ -56,8 +59,8 @@ public class LocalComponentInventory implements InventoryManager {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
 		
-		boolean result = this.components.remove(item);
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		boolean result = LocalComponentInventory.components.remove(item);
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 		return result;
 	}
 
@@ -73,7 +76,7 @@ public class LocalComponentInventory implements InventoryManager {
 		
 		Item productFound = null;
 		
-		for (Item product : this.components) {
+		for (Item product : LocalComponentInventory.components) {
 			if (product.getId().equals(itemID)) {
 				productFound = product;
 			}
@@ -84,37 +87,35 @@ public class LocalComponentInventory implements InventoryManager {
 
 	@Override
 	public int getQuantity() {
-		return this.components.size();
+		return LocalComponentInventory.components.size();
 	}
 
 	@Override
 	public void clear() {
-		this.components = new ArrayList<>();
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		LocalComponentInventory.components = new ArrayList<>();
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 	}
 
 	@Override
-	public void editItem(String id, Item newItem) {
-		if (id == null) {
-			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
-		}
-		if (id.isBlank()) {
-			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
-		}
+	public boolean editItem(String id, Item newItem) {
 		if (newItem == null) {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
-		if (!id.equals(newItem.getId())) {
-			throw new IllegalArgumentException(COMPONENT_ID_DOES_NOT_MATCH);
-		}
-		if (!this.components.contains(this.getItemByID(id))) {
+		
+		String newItemId = newItem.getId();
+		
+		if (!LocalComponentInventory.components.contains(this.getItemByID(id))) {
 			throw new IllegalArgumentException(COMPONENT_DOES_NOT_EXIST);
 		}
-		Item componentBeingEdited = this.getItemByID(id);
-		this.components.remove(componentBeingEdited);
 		
-		this.addNewItem(newItem);
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		Item componentBeingEdited = this.getItemByID(id);
+		LocalComponentInventory.components.remove(componentBeingEdited);
+		
+		boolean wasAdded = this.addNewItem(newItem);
+		
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		
+		return wasAdded; 
 	}
 
 }

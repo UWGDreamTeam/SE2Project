@@ -10,8 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddComponent {
-	private static final String UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN = "Unable to add component, please check component information and try again";
-
+	
+	private static final String UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN = 
+			"Unable to add component, please check component information and try again";
 	private static final String COMPONENT_ADDED_SUCCESSFULLY = "Component Added Successfully";
 
 	@FXML
@@ -24,6 +25,15 @@ public class AddComponent {
     private TextField quantity;
     
     private AddComponentViewModel addComponentVM;
+    
+    @FXML
+    void initialize() {
+        this.addComponentVM = new AddComponentViewModel();
+
+        this.cost.textProperty().bindBidirectional(this.addComponentVM.getCost());
+        this.name.textProperty().bindBidirectional(this.addComponentVM.getName());
+        this.quantity.textProperty().bindBidirectional(this.addComponentVM.getQuantity());
+    }
    
     @FXML
     void add(ActionEvent event) {
@@ -52,17 +62,4 @@ public class AddComponent {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     	stage.close();
 	}
-    
-    @FXML
-    void initialize() {
-        assert this.cost != null : "fx:id=\"cost\" was not injected: check your FXML file 'AddComponentPage.fxml'.";
-        assert this.name != null : "fx:id=\"name\" was not injected: check your FXML file 'AddComponentPage.fxml'.";
-        assert this.quantity != null : "fx:id=\"quantity\" was not injected: check your FXML file 'AddComponentPage.fxml'.";
-        
-        this.addComponentVM = new AddComponentViewModel();
-
-        this.cost.textProperty().bindBidirectional(this.addComponentVM.getCost());
-        this.name.textProperty().bindBidirectional(this.addComponentVM.getName());
-        this.quantity.textProperty().bindBidirectional(this.addComponentVM.getQuantity());
-    }
 }

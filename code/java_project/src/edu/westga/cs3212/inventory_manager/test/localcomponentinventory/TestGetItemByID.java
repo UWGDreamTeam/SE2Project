@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 
 class TestGetItemByID {
@@ -42,7 +42,7 @@ class TestGetItemByID {
 	@Test
 	void testWhenThereIsOneItem() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID1", "item1");
+		Item item = new Component("item1");
 		inventory.addNewItem(item);
 		assertEquals(item, inventory.getItemByID("ID1"));
 	}
@@ -50,7 +50,7 @@ class TestGetItemByID {
 	@Test
 	void testWhenItemIDDoesNotMatch() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID1", "item1");
+		Item item = new Component("item1");
 		inventory.addNewItem(item);
 		assertNull(inventory.getItemByID("ID2"));
 	}
@@ -58,9 +58,9 @@ class TestGetItemByID {
 	@Test
 	void testWhenItemIsFirstItem() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item1 = new Component("ID1", "item1");
-		Item item2 = new Component("ID2", "item2");
-		Item item3 = new Component("ID3", "item3");
+		Item item1 = new Component("item1");
+		Item item2 = new Component("item2");
+		Item item3 = new Component("item3");
 		inventory.addNewItem(item1);
 		inventory.addNewItem(item2);
 		inventory.addNewItem(item3);
@@ -70,9 +70,9 @@ class TestGetItemByID {
 	@Test
 	void testWhenItemIsLastItem() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item1 = new Component("ID1", "item1");
-		Item item2 = new Component("ID2", "item2");
-		Item item3 = new Component("ID3", "item3");
+		Item item1 = new Component("item1");
+		Item item2 = new Component("item2");
+		Item item3 = new Component("item3");
 		inventory.addNewItem(item1);
 		inventory.addNewItem(item2);
 		inventory.addNewItem(item3);
@@ -82,9 +82,9 @@ class TestGetItemByID {
 	@Test
 	void testWhenItemIsMiddleItem() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item1 = new Component("ID1", "item1");
-		Item item2 = new Component("ID2", "item2");
-		Item item3 = new Component("ID3", "item3");
+		Item item1 = new Component("item1");
+		Item item2 = new Component("item2");
+		Item item3 = new Component("item3");
 		inventory.addNewItem(item1);
 		inventory.addNewItem(item2);
 		inventory.addNewItem(item3);

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
+import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 
 class TestAddItem {

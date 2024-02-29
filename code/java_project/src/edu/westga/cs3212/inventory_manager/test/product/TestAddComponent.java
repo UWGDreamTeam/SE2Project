@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
+import edu.westga.cs3212.inventory_manager.model.Component;
+import edu.westga.cs3212.inventory_manager.model.Product;
 
 class TestAddComponent {
 

@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 
 class TestAddComponent {
@@ -32,7 +32,7 @@ class TestAddComponent {
 	@Test
 	void testAddItemWhenItemAlreadyExists() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "Arrow");
+		Item item = new Component("sand");
 		inventory.addNewItem(item);
 		assertThrows(IllegalArgumentException.class, () -> {
 			inventory.addNewItem(item);
@@ -42,8 +42,8 @@ class TestAddComponent {
 	@Test
 	void testAddItemWhenThereAreMultipleItems() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item1 = new Component("ID123", "Arrow");
-		Item item2 = new Component("ID124", "Bow");
+		Item item1 = new Component("Arrow");
+		Item item2 = new Component("Bow");
 		inventory.addNewItem(item1);
 		inventory.addNewItem(item2);
 		assertEquals(2, inventory.getListOfItems().size());

@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 
 class TestRemoveComponent {
@@ -32,7 +32,7 @@ class TestRemoveComponent {
 	@Test
 	void testRemoveItemWhenItemIsNotInInventory() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "test");
+		Item item = new Component("test");
 		boolean result = inventory.removeItem(item);
 		assertFalse(result);
 		
@@ -41,7 +41,7 @@ class TestRemoveComponent {
 	@Test
 	void testRemoveItemWhenItemIsInInventory() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "test");
+		Item item = new Component("test");
 		inventory.addNewItem(item);
 		boolean result = inventory.removeItem(item);
 		assertTrue(result);
@@ -50,9 +50,9 @@ class TestRemoveComponent {
 	@Test
 	void testRemoveItemWhenItemIsFirstItemInInventory() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "test");
+		Item item = new Component("test");
 		inventory.addNewItem(item);
-		Item item2 = new Component("ID124", "test2");
+		Item item2 = new Component("test2");
 		inventory.addNewItem(item2);
 		boolean result = inventory.removeItem(item);
 		assertTrue(result);
@@ -61,9 +61,9 @@ class TestRemoveComponent {
 	@Test
 	void testRemoveItemWhenItemIsLastItemInInventory() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "test");
+		Item item = new Component("test");
 		inventory.addNewItem(item);
-		Item item2 = new Component("ID124", "test2");
+		Item item2 = new Component("test2");
 		inventory.addNewItem(item2);
 		boolean result = inventory.removeItem(item2);
 		assertTrue(result);
@@ -72,11 +72,11 @@ class TestRemoveComponent {
 	@Test
 	void testRemoveItemWhenItemIsMiddleItemInInventory() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "test");
+		Item item = new Component("test");
 		inventory.addNewItem(item);
-		Item item2 = new Component("ID124", "test2");
+		Item item2 = new Component("test2");
 		inventory.addNewItem(item2);
-		Item item3 = new Component("ID125", "test3");
+		Item item3 = new Component("test3");
 		inventory.addNewItem(item3);
 		boolean result = inventory.removeItem(item2);
 		assertTrue(result);

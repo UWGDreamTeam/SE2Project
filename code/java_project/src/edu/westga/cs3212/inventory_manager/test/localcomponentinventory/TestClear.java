@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 
 class TestClear {
@@ -31,7 +31,7 @@ class TestClear {
 	@Test
 	void testWhenInventoryIsNotEmpty() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "test");
+		Item item = new Component("test");
 		inventory.addNewItem(item);
 		inventory.clear();
 		assertEquals(0, inventory.getListOfItems().size());
