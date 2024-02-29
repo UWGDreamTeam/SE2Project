@@ -333,7 +333,17 @@ public class InventoryPage {
     
     @FXML
     void addProdcutManagerOnClick(ActionEvent event) throws IOException {
-    	//TO DO
+    	Stage modalStage = new Stage();
+    	Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PRODUCT_PAGE));
+		Scene scene = new Scene(parent);
+		
+		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.setScene(scene);
+		modalStage.initModality(Modality.WINDOW_MODAL);
+		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+		modalStage.showAndWait();
+		
+		this.refreshComponentsTableView();
     }
 
     
