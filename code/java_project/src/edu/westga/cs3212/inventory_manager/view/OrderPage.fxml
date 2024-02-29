@@ -5,13 +5,12 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.OrderPage">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.OrderPage">
    <children>
       <Button layoutX="34.0" layoutY="140.0" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Home" />
       <Button layoutX="34.0" layoutY="183.0" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Inventory" />
@@ -20,19 +19,18 @@
             <Font size="47.0" />
          </font>
       </Text>
-      <TabPane layoutX="130.0" layoutY="140.0" prefHeight="383.0" prefWidth="569.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="ordersTabPane" layoutX="130.0" layoutY="140.0" prefHeight="383.0" prefWidth="569.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="openOrdersTabPage" text="Open Orders">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <TableView fx:id="openOrders" layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
+                        <TableView fx:id="openOrders" layoutX="16.0" layoutY="19.0" prefHeight="328.0" prefWidth="528.0">
                           <columns>
                             <TableColumn fx:id="openOrderNumberColumn" prefWidth="136.0" text="Order Number" />
-                              <TableColumn fx:id="openDateCreatedColumn" prefWidth="143.0" text="Date Created" />
+                              <TableColumn fx:id="openProductionCostColumn" prefWidth="143.0" text="Production Cost" />
                               <TableColumn fx:id="openFulfillmentStatusColumn" minWidth="5.0" prefWidth="152.0" text="Fulfillment Status" />
-                              <TableColumn fx:id="openTotalColumn" minWidth="0.0" prefWidth="95.0" text="Total" />
+                              <TableColumn fx:id="openSalesPriceColumn" minWidth="0.0" prefWidth="95.0" text="Sales Price" />
                           </columns>
                         </TableView>
                      </children>
@@ -43,13 +41,12 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <TableView fx:id="closedOrders" layoutX="16.0" layoutY="47.0" prefHeight="300.0" prefWidth="528.0">
+                        <TableView fx:id="closedOrders" layoutX="16.0" layoutY="17.0" prefHeight="330.0" prefWidth="528.0">
                            <columns>
                               <TableColumn fx:id="closedOrderNumberColumn" prefWidth="136.0" text="Order Number" />
-                              <TableColumn fx:id="closedDateCreatedColumn" prefWidth="143.0" text="Date Created" />
+                              <TableColumn fx:id="closedProductionCostColumn" prefWidth="143.0" text="Production Cost" />
                               <TableColumn fx:id="closedFulfillmentStatusColumn" minWidth="5.0" prefWidth="152.0" text="Fulfillment Status" />
-                              <TableColumn fx:id="closedTotalColumn" minWidth="0.0" prefWidth="95.0" text="Total" />
+                              <TableColumn fx:id="closedSalesPriceColumn" minWidth="0.0" prefWidth="95.0" text="Sales Price" />
                            </columns>
                         </TableView>
                      </children>
@@ -62,5 +59,7 @@
       <Text fx:id="employeeFullNameLabel" layoutX="541.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
       <Text fx:id="employeeIdLabel" layoutX="593.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
       <Text fx:id="employeeRoleLabel" layoutX="592.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
+      <Button layoutX="34.0" layoutY="226.0" mnemonicParsing="false" onAction="#adminButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Admin" />
+      <Button fx:id="fulfillButton" layoutX="34.0" layoutY="268.0" mnemonicParsing="false" onAction="#fullfillButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Fullfill" />
    </children>
 </Pane>

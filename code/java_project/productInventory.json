@@ -1,1 +1,27 @@
-{}
+{
+  "Product{id\u003d4da17964, name\u003d\u0027Plastic Pipe\u0027, productionCost\u003d97.27, salePrice\u003d46.1}": 26,
+  "Product{id\u003db4dc5899, name\u003d\u0027Silver Ring\u0027, productionCost\u003d91.48, salePrice\u003d40.01}": 45,
+  "Product{id\u003d84f9e42a, name\u003d\u0027Zinc Plate\u0027, productionCost\u003d64.71, salePrice\u003d110.28}": 1,
+  "Product{id\u003db494109b, name\u003d\u0027Titanium Frame\u0027, productionCost\u003d56.57, salePrice\u003d21.21}": 15,
+  "Product{id\u003d0c58a91a, name\u003d\u0027Gold Hoe\u0027, productionCost\u003d53.18, salePrice\u003d82.44}": 26,
+  "Product{id\u003d8d96080b, name\u003d\u0027Steel Hammer\u0027, productionCost\u003d75.64, salePrice\u003d92.36}": 8,
+  "Product{id\u003d871864ce, name\u003d\u0027Nickel Screw\u0027, productionCost\u003d15.53, salePrice\u003d8.64}": 30,
+  "Product{id\u003d21006b6b, name\u003d\u0027Quartz Watch\u0027, productionCost\u003d45.27, salePrice\u003d44.45}": 19,
+  "Product{id\u003d023cbaec, name\u003d\u0027Stone Shovel\u0027, productionCost\u003d88.58, salePrice\u003d21.72}": 37,
+  "Product{id\u003d222e67f4, name\u003d\u0027Wooden Axe\u0027, productionCost\u003d89.6, salePrice\u003d110.68}": 12,
+  "Product{id\u003dcc96e5a2, name\u003d\u0027Magnesium Fire Starter\u0027, productionCost\u003d2.4, salePrice\u003d143.25}": 9,
+  "Product{id\u003da15490fa, name\u003d\u0027Marble Sculpture\u0027, productionCost\u003d92.51, salePrice\u003d122.86}": 14,
+  "Product{id\u003d98aa62d9, name\u003d\u0027Brass Knuckles\u0027, productionCost\u003d1.08, salePrice\u003d129.29}": 22,
+  "Product{id\u003dffb31c7c, name\u003d\u0027Diamond Sword\u0027, productionCost\u003d78.59, salePrice\u003d15.54}": 50,
+  "Product{id\u003d3934452b, name\u003d\u0027Aluminum Ladder\u0027, productionCost\u003d46.93, salePrice\u003d137.07}": 48,
+  "Product{id\u003dc0a09374, name\u003d\u0027Gold Necklace\u0027, productionCost\u003d12.27, salePrice\u003d98.59}": 23,
+  "Product{id\u003df4d511a5, name\u003d\u0027Glass Bottle\u0027, productionCost\u003d80.14, salePrice\u003d83.3}": 24,
+  "Product{id\u003d3fbd20fa, name\u003d\u0027Ceramic Vase\u0027, productionCost\u003d8.22, salePrice\u003d116.83}": 29,
+  "Product{id\u003dcb515719, name\u003d\u0027Copper Wrench\u0027, productionCost\u003d40.37, salePrice\u003d147.31}": 27,
+  "Product{id\u003d5ac27530, name\u003d\u0027Lead Pipe\u0027, productionCost\u003d2.57, salePrice\u003d28.08}": 8,
+  "Product{id\u003d45b31ad1, name\u003d\u0027Rubber Belt\u0027, productionCost\u003d7.81, salePrice\u003d48.03}": 6,
+  "Product{id\u003d09d523c5, name\u003d\u0027Bronze Statue\u0027, productionCost\u003d15.07, salePrice\u003d102.3}": 41,
+  "Product{id\u003d85783684, name\u003d\u0027Tin Can\u0027, productionCost\u003d65.82, salePrice\u003d135.47}": 5,
+  "Product{id\u003dfaf4a991, name\u003d\u0027Iron Pickaxe\u0027, productionCost\u003d47.15, salePrice\u003d56.5}": 37,
+  "Product{id\u003d8f2c3acf, name\u003d\u0027Silicon Chip\u0027, productionCost\u003d88.9, salePrice\u003d119.36}": 33
+}

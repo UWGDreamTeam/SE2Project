@@ -5,6 +5,8 @@ import java.util.List;
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 /**
  * The OrderPageViewModel class represents the view model for the OrderPage view.
@@ -16,6 +18,7 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 public class OrderPageViewModel {
 
 	private LocalOrderManager orderManager;
+	private ObjectProperty<Order> selectedOrder;
 	
 	/**
      * Constructs a new OrderPageViewModel.
@@ -25,7 +28,7 @@ public class OrderPageViewModel {
      */
 	public OrderPageViewModel() {
 		this.orderManager = new LocalOrderManager();
-		this.loadOrders();
+		this.selectedOrder = new SimpleObjectProperty<Order>();
 	}
 	
 	/**
@@ -40,6 +43,10 @@ public class OrderPageViewModel {
 		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE);
 	}
 	
+	public ObjectProperty<Order> getSelectedOrderProperty() {
+		return this.selectedOrder;
+	}
+	
 	/**
      * Retrieves a list of completed orders from the order manager.
      * 
@@ -51,16 +58,9 @@ public class OrderPageViewModel {
 	public List<Order> getCompleteOrders() {
 		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.COMPLETE);
 	}
-	
-	// temporary method to test the UI
-	private void loadOrders() {
-		Order order1 = new Order();
-		Order order2 = new Order();
-		Order order3 = new Order();
-		this.orderManager.setOrderCompletionStatus(order3, CompletionStatus.COMPLETE);
-		
-		this.orderManager.addOrder(order1);
-		this.orderManager.addOrder(order2);
-		this.orderManager.addOrder(order3);
+
+	public void fulfillSelectedOrder(Order selectedOrder2) {
+		this.orderManager.setOrderCompletionStatus(selectedOrder2, CompletionStatus.COMPLETE);
 	}
+	
 }
