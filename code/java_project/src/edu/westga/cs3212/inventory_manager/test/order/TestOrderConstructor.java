@@ -18,10 +18,8 @@ public class TestOrderConstructor {
 		
 		// Act and Assert 
 		assertNotNull(order.getID());
-        assertNotNull(order.getDateCreated());
         assertNotNull(order.getItems());
         assertEquals(CompletionStatus.INCOMPLETE, order.getCompletionStatus());
-        assertEquals(LocalDateTime.now().getDayOfYear(), order.getDateCreated().getDayOfYear());
         assertEquals(0, order.getItems().size());
 	}
 	
@@ -30,10 +28,9 @@ public class TestOrderConstructor {
 		// Arrange
 		Order order = new Order();
 		int idHashCode = order.getID().hashCode();
-		int dateCreatedHashCode = order.getDateCreated().hashCode();
 
 		// Act and Assert
-		assertTrue(order.hashCode() == idHashCode + dateCreatedHashCode);
+		assertTrue(order.hashCode() == "Order".hashCode() + idHashCode);
 	}
 	
 	@Test
@@ -66,17 +63,6 @@ public class TestOrderConstructor {
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
 			order.setID("");
-		});
-	}
-	
-	@Test
-	void testOrderSetDateCreatedNull() {
-		// Arrange
-		Order order = new Order();
-
-		// Act and Assert
-		assertThrows(IllegalArgumentException.class, () -> {
-			order.setDateCreated(null);
 		});
 	}
 	

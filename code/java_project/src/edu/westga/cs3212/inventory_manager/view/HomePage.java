@@ -4,6 +4,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
 
 public class HomePage {
 
@@ -11,16 +12,10 @@ public class HomePage {
     private Button adminButton;
 
     @FXML
-    private BarChart<String, Number> commonComponentsBarChart;
-
-    @FXML
-    private BarChart<String, Number> commonProductBarChart;
-
-    @FXML
-    private ComboBox<String> componentCountComboBox;
-
-    @FXML
     private Tab componentTab;
+
+    @FXML
+    private TextArea componentSumarryTextArea;
 
     @FXML
     private Button inventoryButton;
@@ -29,13 +24,10 @@ public class HomePage {
     private Button logOutButton;
 
     @FXML
-    private ComboBox<String> orderFrequencyComboBox;
-
-    @FXML
     private Tab orderTab;
 
     @FXML
-    private BarChart<String, Number> ordersBarChart;
+    private TextArea orderSumarryTextArea;
 
     @FXML
     private Button ordersButton;
@@ -44,7 +36,7 @@ public class HomePage {
     private Tab productTab;
 
     @FXML
-    private ComboBox<String> productsCountComboBox;
+    private TextArea productSumarryTextArea;
 
     @FXML
     public void initialize() {

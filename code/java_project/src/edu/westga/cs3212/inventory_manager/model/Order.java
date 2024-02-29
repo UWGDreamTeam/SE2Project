@@ -26,8 +26,6 @@ public class Order {
 	
 	private String ID;
 
-	private LocalDateTime dateCreated;
-
 	private Map<Product, Integer> items;
 
 	private CompletionStatus completionStatus;
@@ -43,7 +41,6 @@ public class Order {
 	 * @postcondition none
 	 */
 	public Order() {
-		this.dateCreated = LocalDateTime.now();
 		this.ID = this.generateID();
 		this.items = new HashMap<>();
 		this.salePrice = MINIMUM_PURCHASE_PRICE;
@@ -113,36 +110,9 @@ public class Order {
 	public String getID() {
 		return this.ID;
 	}
-
-	/**
-	 * Gets the date the order was created.
-	 *
-	 * @precondition none
-	 * @postcondition none
-	 * 
-	 * @return the date created
-	 */
-	public LocalDateTime getDateCreated() {
-		return this.dateCreated;
-	}
 	
 	/**
-	 * Sets the date the order was created.
-	 *
-	 * @param dateCreated the new date created
-	 * 
-	 * @precondition dateCreated != null
-	 * @postcondition this.getDateCreated() == dateCreated
-	 */
-	public void setDateCreated(LocalDateTime dateCreated) {
-		if (dateCreated == null) {
-			throw new IllegalArgumentException("Date created cannot be null");
-		}
-		this.dateCreated = dateCreated;
-	}
-	
-	/**
-	 * Gets the items of the order.
+	 * Gets the products of the order along with their quantities.
 	 *
 	 * @precondition none
 	 * @postcondition none
@@ -150,8 +120,7 @@ public class Order {
 	 * @return the items in the order
 	 */
 	public Map<Product, Integer> getItems() {
-		var items = new HashMap<Product, Integer>(this.items);
-		return items;
+		return new HashMap<>(this.items);
 	}
 
 	/**
@@ -206,7 +175,7 @@ public class Order {
 
 	@Override
 	public int hashCode() {
-		return this.ID.hashCode() + this.dateCreated.hashCode();
+		return "Order".hashCode() + this.ID.hashCode();
 	}
 	
 	@Override

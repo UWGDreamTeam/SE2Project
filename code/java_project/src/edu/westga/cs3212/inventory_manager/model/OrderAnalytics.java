@@ -2,11 +2,11 @@ package edu.westga.cs3212.inventory_manager.model;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 
-public class OrdersAnalytics {
+public class OrderAnalytics {
 
 	private LocalOrderManager orderManager;
 	
-	public OrdersAnalytics(OrderManager orderManager) {
+	public OrderAnalytics() {
 		this.orderManager = new LocalOrderManager();
 	}
 	
@@ -28,5 +28,17 @@ public class OrdersAnalytics {
 			total += order.getProductionCost();
 		}
 		return total;
+	}
+	
+	public double getOrdersProfitTotal() {
+		return this.getOrdersSalesTotal() - this.getOrdersProductionCostTotal();
+	}
+	
+	public int getOrdersCompletedCount() {
+		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.COMPLETE).size();
+	}
+	
+	public int getOrdersInProgressCount() {
+		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE).size();
 	}
 }

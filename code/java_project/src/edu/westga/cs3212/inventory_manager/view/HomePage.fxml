@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -27,15 +24,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BarChart fx:id="commonComponentsBarChart" layoutX="6.0" layoutY="14.0" prefHeight="277.0" prefWidth="475.0" title="Top # Commonly Used Component">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                        <ComboBox fx:id="componentCountComboBox" layoutX="435.0" layoutY="14.0" prefHeight="25.0" prefWidth="46.0" promptText="#" />
+                        <TextArea fx:id="componentSumarryTextArea" layoutX="14.0" layoutY="8.0" prefHeight="282.0" prefWidth="473.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -44,15 +33,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BarChart fx:id="commonProductBarChart" layoutX="9.0" layoutY="12.0" prefHeight="278.0" prefWidth="466.0" title="Top # Commonly Purchased Products">
-                           <xAxis>
-                              <CategoryAxis side="BOTTOM" />
-                           </xAxis>
-                           <yAxis>
-                              <NumberAxis side="LEFT" />
-                           </yAxis>
-                        </BarChart>
-                        <ComboBox fx:id="productsCountComboBox" layoutX="439.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" promptText="#" />
+                        <TextArea fx:id="productTextArea" layoutX="14.0" layoutY="8.0" prefHeight="282.0" prefWidth="473.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -61,31 +42,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="31.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Outstanding Orders">
-                           <font>
-                              <Font size="11.0" />
-                           </font></Text>
-                        <Text layoutX="72.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="###" />
-                        <Text layoutX="160.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Needed Components">
-                           <font>
-                              <Font size="11.0" />
-                           </font></Text>
-                        <Text layoutX="239.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="###" />
-                        <BarChart fx:id="ordersBarChart" layoutX="-3.0" layoutY="58.0" prefHeight="247.0" prefWidth="506.0" title="Number of Orders">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                        <Text layoutX="405.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="###" />
-                        <ComboBox fx:id="orderFrequencyComboBox" layoutX="401.0" layoutY="70.0" prefHeight="25.0" prefWidth="90.0" promptText="Month" />
-                        <Text layoutX="346.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Needed Products">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Text>
+                        <TextArea fx:id="orderTextArea" layoutX="14.0" layoutY="14.0" prefHeight="275.0" prefWidth="472.0" />
                      </children>
                   </AnchorPane>
                </content>

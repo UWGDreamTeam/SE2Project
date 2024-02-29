@@ -54,30 +54,4 @@ class TestOrderEquals {
 		// Assert
 		assertFalse(order1.equals(order2));
 	}
-
-	@Test
-	public void testEqualsDifferentIdsDifferentDateCreated() throws NoSuchFieldException, IllegalAccessException {
-		// Arrange
-		Order order1 = new Order();
-		Order order2 = new Order();
-
-		// Act
-		order1.setDateCreated(LocalDateTime.now().minusDays(1));
-		// Assert
-		assertFalse(order1.equals(order2));
-	}
-
-	@Test
-	public void testEqualsSameIdDifferentDateCreated() throws NoSuchFieldException, IllegalAccessException {
-		// Arrange
-		Order order1 = new Order();
-		Order order2 = new Order();
-
-		// Act
-		order1.setID(order2.getID());
-		order1.setDateCreated(LocalDateTime.now().minusDays(1));
-
-		// Assert
-		assertFalse(order1.equals(order2));
-	}
 }

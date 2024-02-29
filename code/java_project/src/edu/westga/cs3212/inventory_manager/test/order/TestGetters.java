@@ -18,15 +18,6 @@ public class TestGetters {
 	}
 	
 	@Test
-	void testGetDateCreated() {
-		// Arrange
-		Order order = new Order();
-
-		// Act and Assert
-		assertNotNull(order.getDateCreated());
-	}
-	
-	@Test
 	void testGetItems() {
 		// Arrange
 		Order order = new Order();
