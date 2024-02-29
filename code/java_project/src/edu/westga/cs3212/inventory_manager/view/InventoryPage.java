@@ -222,6 +222,23 @@ public class InventoryPage {
     		errorPopup.showAndWait();
 		}
     }
+	
+	@FXML
+    void orderPageButtonOnClick(ActionEvent event) throws IOException {
+    	
+    	try {
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        Parent parent;
+			parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
+			Scene currentScene = currentStage.getScene();
+	        currentScene.setRoot(parent);
+	        currentStage.setTitle("Order Page");
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText(e.getMessage());
+    		errorPopup.showAndWait();
+		}
+    }
     
     @FXML
     void logOutButtonOnClick(ActionEvent event) {
@@ -344,12 +361,6 @@ public class InventoryPage {
 		this.refreshComponentsTableView();
     }
 
-    
-    @FXML
-    void ordersPageButtonOnClick(ActionEvent event) {
-    	//TO DO
-    }
-
     @FXML
     void editProductManagerOnClick(ActionEvent event) {
     	//TO DO
@@ -357,11 +368,19 @@ public class InventoryPage {
 
     @FXML
     void produceProductButtonOnClick(ActionEvent event) {
-    	//TO DO
+    	try {
+    		this.inventoryVM.produceProduct(this.productsTableView.getSelectionModel().getSelectedItem(), 1);
+		} catch (IllegalArgumentException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+			errorPopup.setContentText(e.getMessage());
+			errorPopup.showAndWait();
+		}
+    	this.refreshProductsTableView();
     }
 
     @FXML
     void removeProductManagerOnClick(ActionEvent event) {
-    	//TO DO
+    	this.inventoryVM.removeProduct();
+    	this.refreshProductsTableView();
     }
 }

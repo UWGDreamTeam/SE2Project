@@ -120,5 +120,18 @@ public class InventoryViewModel {
 	public void orderComponent(Component selectedComponent2, int quantity) {
 		this.componentsInventory.setQuantityOfItem(selectedComponent2, quantity + this.componentsInventory.getQuantityOfItem(selectedComponent2));
 	}
-
+	
+	public void removeProduct() {
+		this.productInventory.removeItem(this.selectedProduct.getValue());
+	}
+	
+	public void produceProduct(Product selectedProduct, int quantity) {
+		this.productInventory.setQuantityOfItem(selectedProduct,
+				quantity + this.productInventory.getQuantityOfItem(selectedProduct));
+		
+		for (Component component : selectedProduct.getRecipe().keySet()) {
+			this.componentsInventory.setQuantityOfItem(component, this.componentsInventory.getQuantityOfItem(component)
+					- selectedProduct.getRecipe().get(component) * quantity);
+		}
+	}
 }
