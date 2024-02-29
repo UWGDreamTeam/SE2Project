@@ -66,7 +66,7 @@ public class LocalProductInventory implements ItemInventoryManager {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
 		}
 		for (Product product : this.products.keySet()) {
-			if (product.getId().equals(itemID)) {
+			if (product.getID().equals(itemID)) {
 				return product;
 			}
 		}

@@ -43,7 +43,7 @@ public abstract class Item {
 	 */
 	protected Item(String name, double productionCost) {
 		this.setName(name);
-		this.setId(this.generateID());
+		this.setID(this.generateID());
 		this.setProductionCost(productionCost);
 	}
 	
@@ -52,7 +52,7 @@ public abstract class Item {
 	 *
 	 * @return the id
 	 */
-	public String getId() {
+	public String getID() {
 		return this.id;
 	}
 	
@@ -63,7 +63,7 @@ public abstract class Item {
 	 * @precondition id != null && id.isEmpty() == false
 	 * @postcondition this.getId().equals(id)
 	 */
-	public void setId(String id) {
+	public void setID(String id) {
 		if (id == null) {
 			throw new IllegalArgumentException(ID_CANNOT_BE_NULL);
 		}

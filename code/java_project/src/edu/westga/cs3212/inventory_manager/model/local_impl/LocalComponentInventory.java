@@ -87,7 +87,7 @@ public class LocalComponentInventory implements ItemInventoryManager {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
 		}
 		for (Component component : this.components.keySet()) {
-			if (component.getId().equals(itemID)) {
+			if (component.getID().equals(itemID)) {
 				return component;
 			}
 		}

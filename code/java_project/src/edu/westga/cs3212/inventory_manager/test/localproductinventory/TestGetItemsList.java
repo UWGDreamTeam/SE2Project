@@ -31,7 +31,7 @@ class TestGetItemsList {
 		
 		inventory.addNewItem(product1);
 		
-		String id = inventory.getListOfItems().get(0).getId();
+		String id = inventory.getListOfItems().get(0).getID();
 		String name = inventory.getListOfItems().get(0).getName();
 		
 		

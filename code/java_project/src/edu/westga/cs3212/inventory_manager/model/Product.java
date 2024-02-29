@@ -124,7 +124,7 @@ public class Product extends Item {
 	 */
 	@Override
 	public int hashCode() {
-		return "Product".hashCode() + this.getId().hashCode();
+		return "Product".hashCode() + this.getID().hashCode();
 	}
 	
 	/**
@@ -146,7 +146,7 @@ public class Product extends Item {
         
         Item other = (Item) obj;
         
-        return Objects.equals(this.getId(), other.getId());
+        return Objects.equals(this.getID(), other.getID());
 	}
 
 	public double getSalePrice() {

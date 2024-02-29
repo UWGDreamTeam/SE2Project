@@ -19,7 +19,7 @@ public class Component extends Item {
 	
 	@Override
 	public int hashCode() {
-		return "Component".hashCode() + this.getId().hashCode();
+		return "Component".hashCode() + this.getID().hashCode();
 	}
 	
 	@Override

@@ -34,5 +34,15 @@ public class TestConstructor {
 		assert (product.getName().equals("Name"));
 	}
 	
+	@Test
+	void testNegativeSalePrice() {
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Product("Name", 2, -3, recipe);
+		});
+	}
+	
 	
 }

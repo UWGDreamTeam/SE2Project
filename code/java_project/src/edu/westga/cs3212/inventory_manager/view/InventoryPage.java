@@ -94,7 +94,7 @@ public class InventoryPage {
 	private void setupComponentsTableView() {
         this.refreshComponentsTableView();
 
-        this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
         this.nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         this.costColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
         this.quantityColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(this.componentInventory.getQuantityOfItem(cellData.getValue())));
