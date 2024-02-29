@@ -1,11 +1,13 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
+import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
+import javafx.beans.property.DoublePropertyBase;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -20,6 +22,7 @@ import javafx.collections.ObservableList;
 public class InventoryViewModel {
 	
 	private ObjectProperty<Item> selectedComponent;
+	private ObjectProperty<Item> selectedProduct;
 	
 	private LocalComponentInventory componentsInventory;
 	private LocalProductInventory productInventory;
@@ -31,11 +34,12 @@ public class InventoryViewModel {
 	 * @precondition none
 	 * @postcondition none
 	 */
-	public InventoryViewModel() {
-		this.componentsInventory = new LocalComponentInventory();
-		this.productInventory = new LocalProductInventory();
+	public InventoryViewModel(LocalComponentInventory componentsInventory, LocalProductInventory productInventory) {
+		this.componentsInventory = componentsInventory;
+		this.productInventory = productInventory;
 		
 		this.selectedComponent = new SimpleObjectProperty<Item>();
+		this.selectedProduct = new SimpleObjectProperty<Item>();
 	}
 	
 	/**
@@ -46,12 +50,12 @@ public class InventoryViewModel {
 	 *
 	 * @return the observable component list
 	 */
-	public ObservableList<Item> getObservableComponentList() {
-		List<Item> itemList = new ArrayList<>();
-	    for (Item item : this.componentsInventory.getItems()) {
-	        itemList.add(item);
-	    }
-	    return FXCollections.observableArrayList(itemList);
+	public ObservableList<Component> getObservableComponentList() {
+		ArrayList<Component> items = new ArrayList<Component>();
+		for (Item item : this.componentsInventory.getItems()) {
+			items.add((Component)item);
+		}
+		return FXCollections.observableArrayList(items);
 	}
 	
 	/**
@@ -100,6 +104,21 @@ public class InventoryViewModel {
 	public LocalProductInventory getProductInventory() {
 		return this.productInventory;
 	}
-	
-	
+
+	public ObservableList<Product> getObservableProductList() {
+		ArrayList<Product> items = new ArrayList<Product>();
+        for (Item item : this.productInventory.getItems()) {
+            items.add((Product)item);
+        }
+        return FXCollections.observableArrayList(items);
+	}
+
+	public ObjectProperty<Item> getSelectedProduct() {
+		return this.selectedProduct;
+	}
+
+	public void orderComponent(Component selectedComponent2, int quantity) {
+		this.componentsInventory.setQuantityOfItem(selectedComponent2, quantity + this.componentsInventory.getQuantityOfItem(selectedComponent2));
+	}
+
 }

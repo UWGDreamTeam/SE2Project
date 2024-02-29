@@ -24,7 +24,7 @@ public class LocalOrderManager implements OrderManager {
 	private static final String ORDER_CANNOT_BE_NULL = "Order cannot be null";
 	private static final String COMPLETION_STATUS_CANNOT_BE_NULL = "Completion status cannot be null";
 	
-	private List<Order> orders;
+	private static List<Order> orders;
 	
 	/**
 	 * Instantiates a new OrderManager with an empty collection of orders.

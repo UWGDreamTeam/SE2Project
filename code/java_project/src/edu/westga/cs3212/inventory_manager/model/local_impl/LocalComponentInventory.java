@@ -24,7 +24,7 @@ public class LocalComponentInventory implements ItemInventoryManager {
 	 * @key string ID, the ID of the component
 	 * @value int quantity, the quantity of that component  
 	 */
-	private Map<Component, Integer> components; 
+	private static Map<Component, Integer> components; 
 	
 	/**
 	 * Instantiates a new LocalComponentInventory object
