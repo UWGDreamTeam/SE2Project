@@ -1,10 +1,8 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 import java.util.HashMap;
-import java.time.LocalDateTime;
 
 /**
  * The Order Class.
@@ -196,5 +194,10 @@ public class Order {
 
 	public double getProductionCost() {
 		return this.productionCost;
+	}
+	
+	public String toString() {
+		return "Order{" + "id=" + this.ID + ", items=" + this.items + ", completionStatus=" + this.completionStatus
+				+ '}';
 	}
 }

@@ -17,7 +17,9 @@ public class OrderAnalytics {
 	public double getOrdersSalesTotal() {
 		double total = 0;
 		for (Order order : this.orderManager.getOrders()) {
-			total += order.getSalePrice();
+			if (order.getCompletionStatus() == CompletionStatus.COMPLETE) {
+				total += order.getSalePrice();
+			}
 		}
 		return total;
 	}
@@ -25,7 +27,9 @@ public class OrderAnalytics {
 	public double getOrdersProductionCostTotal() {
 		double total = 0;
 		for (Order order : this.orderManager.getOrders()) {
-			total += order.getProductionCost();
+			if  (order.getCompletionStatus() == CompletionStatus.COMPLETE) {
+				total += order.getProductionCost();
+			}
 		}
 		return total;
 	}
