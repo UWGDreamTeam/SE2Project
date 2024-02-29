@@ -100,7 +100,7 @@ public class LocalProductInventory implements ItemInventoryManager {
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(QUANTITY_CANNOT_BE_NEGATIVE);
 		}
-		if (this.products.put((Product) newItem, quantity) != null) {
+		if (this.products.put((Product) newItem, quantity) == null) {
 			this.save();
 			return true;
 		}
