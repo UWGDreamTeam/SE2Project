@@ -62,7 +62,7 @@ public class LocalComponentInventory implements ItemInventoryManager {
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(QUANTITY_CANNOT_BE_NEGATIVE);
 		}
-		if (this.components.put((Component) newItem, quantity) != null) {
+		if (this.components.put((Component) newItem, quantity) == null) {
 			this.save();
 			return true;
 		}

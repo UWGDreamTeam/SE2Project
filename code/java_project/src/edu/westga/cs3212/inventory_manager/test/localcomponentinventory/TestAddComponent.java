@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,9 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
+import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 
 class TestAddComponent {
 
@@ -20,33 +24,39 @@ class TestAddComponent {
 	void setUp() throws IOException {
 		Files.deleteIfExists(Paths.get(Constants.COMPONENT_INVENTORY_FILE_LOCATION));
 	}
-	
+
 	@Test
-	void testAddItemWhenItemIsNull() {
+	void testAddComponentWithNull() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		assertThrows(IllegalArgumentException.class, () -> {
-			inventory.addNewItem(null);
-		});
+
+		assertThrows(IllegalArgumentException.class, () -> inventory.addItem(null, 0),
+				"Adding new item with null param should throw IAE");
 	}
-	
+
 	@Test
-	void testAddItemWhenItemAlreadyExists() {
+	void testAddComponentWithDuplicated() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("sand");
-		inventory.addNewItem(item);
-		assertThrows(IllegalArgumentException.class, () -> {
-			inventory.addNewItem(item);
-		});
+		Component component = new Component("component", 1.0);
+
+		inventory.addItem(component, 1);
+
+		assertThrows(IllegalArgumentException.class, () -> inventory.addItem(component, 1));
 	}
-	
+
 	@Test
-	void testAddItemWhenThereAreMultipleItems() {
+	void testAddComponentLessThanMinimumQuantityNegative() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item1 = new Component("Arrow");
-		Item item2 = new Component("Bow");
-		inventory.addNewItem(item1);
-		inventory.addNewItem(item2);
-		assertEquals(2, inventory.getListOfItems().size());
+		Component component = new Component("component", 1.0);
+
+		assertThrows(IllegalArgumentException.class, () -> inventory.addItem(component, -1));
 	}
-	
+
+	@Test
+	void testAddComponentValid() {
+		LocalComponentInventory inventory = new LocalComponentInventory();
+		inventory.clear();
+		Component component = new Component("component", 1.0);
+
+		assertTrue(inventory.addItem(component, 1));
+	}
 }
