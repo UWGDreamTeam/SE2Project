@@ -6,8 +6,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -29,17 +27,16 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="394.0" layoutY="14.0" text="Search" />
-                        <Button layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#orderComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Order" textFill="RED" />
-                        <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#addComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Add" textFill="#fa0000" />
-                        <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#editComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Edit" textFill="#fa0000" />
-                        <Button layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#removeComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Remove" textFill="#fa0000" />
+                        <Button fx:id="componentOrderButton" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#orderComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Order" textFill="RED" />
+                        <Button fx:id="componentAddButton" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#addComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Add" textFill="#fa0000" />
+                        <Button fx:id="componentEditButton" layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#editComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Edit" textFill="#fa0000" />
+                        <Button fx:id="componentRemoveButton" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#removeComponentButtonManagerOnClick" prefHeight="26.0" prefWidth="70.0" text="Remove" textFill="#fa0000" />
                         <TableView fx:id="componentsTableView" layoutX="118.0" layoutY="45.0" prefHeight="279.0" prefWidth="438.0">
                           <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
-                            <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="costColumn" prefWidth="75.0" text="Cost" />
-                              <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
-                              <TableColumn fx:id="recipesColumn" prefWidth="75.0" text="# Recipes" />
+                            <TableColumn fx:id="idColumn" prefWidth="87.0" text="ID" />
+                            <TableColumn fx:id="nameColumn" prefWidth="96.0" text="Name" />
+                              <TableColumn fx:id="costColumn" prefWidth="104.0" text="Production Cost" />
+                              <TableColumn fx:id="quantityColumn" prefWidth="148.0" text="Quantity" />
                           </columns>
                         </TableView>
                      </children>
@@ -50,21 +47,20 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TreeTableView fx:id="productsTableView" layoutX="92.0" layoutY="44.0" prefHeight="297.0" prefWidth="449.0">
+                        <TableView fx:id="productsTableView" layoutX="91.0" layoutY="38.0" prefHeight="279.0" prefWidth="438.0">
                            <columns>
-                              <TreeTableColumn prefWidth="31.0" text="ID" />
-                              <TreeTableColumn prefWidth="47.0" text="Name" />
-                              <TreeTableColumn prefWidth="106.0" text="Production Cost" />
-                              <TreeTableColumn prefWidth="83.0" text="Selling Price" />
-                              <TreeTableColumn prefWidth="65.0" text="Quantity" />
-                              <TreeTableColumn prefWidth="115.0" text="# of Ingredients" />
+                              <TableColumn fx:id="productIDColumn" prefWidth="49.0" text="ID" />
+                              <TableColumn fx:id="productNameColumn" prefWidth="81.0" text="Name" />
+                              <TableColumn fx:id="productProductionCostColumn" prefWidth="110.0" text="Production Cost" />
+                              <TableColumn fx:id="productQuantityColumn" prefWidth="71.0" text="Quantity" />
+                              <TableColumn fx:id="productSellingPrice" prefWidth="126.0" text="Selling Price" />
                            </columns>
-                        </TreeTableView>
+                        </TableView>
                         <TextField layoutX="380.0" layoutY="8.0" text="Search" />
-                        <Button layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#produceProductButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Produce" />
-                        <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#addProdcutManagerOnClick" prefHeight="25.0" prefWidth="66.0" text="Add" textFill="#fa0000" />
-                        <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#editProductManagerOnClick" prefHeight="25.0" prefWidth="66.0" text="Edit" textFill="#fa0000" />
-                        <Button layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#removeProductManagerOnClick" prefHeight="25.0" prefWidth="66.0" text="Remove" textFill="#fa0000" />
+                        <Button fx:id="productProduceButton" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#produceProductButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Produce" />
+                        <Button fx:id="productAddButton" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#addProdcutManagerOnClick" prefHeight="25.0" prefWidth="66.0" text="Add" textFill="#fa0000" />
+                        <Button fx:id="editProductButton" layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#editProductManagerOnClick" prefHeight="25.0" prefWidth="66.0" text="Edit" textFill="#fa0000" />
+                        <Button fx:id="removeProductButton" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#removeProductManagerOnClick" prefHeight="25.0" prefWidth="66.0" text="Remove" textFill="#fa0000" />
                      </children>
                   </AnchorPane>
             </content>
