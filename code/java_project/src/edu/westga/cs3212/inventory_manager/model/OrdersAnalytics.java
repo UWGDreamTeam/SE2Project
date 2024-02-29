@@ -14,10 +14,18 @@ public class OrdersAnalytics {
 		return this.orderManager.getOrders().size();
 	}
 	
-	public double getOrdersTotal() {
+	public double getOrdersSalesTotal() {
 		double total = 0;
 		for (Order order : this.orderManager.getOrders()) {
-			total += order.get
+			total += order.getSalePrice();
+		}
+		return total;
+	}
+	
+	public double getOrdersProductionCostTotal() {
+		double total = 0;
+		for (Order order : this.orderManager.getOrders()) {
+			total += order.getProductionCost();
 		}
 		return total;
 	}

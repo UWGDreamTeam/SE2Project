@@ -16,12 +16,14 @@ public abstract class Item {
 	private static final String NAME_CANNOT_BE_BLANK = "Name cannot be blank";
 	private static final String INVALID_QUANTITY = "Quantity cannoy be negative";
 	private static final String QUANTITY_EXCEEDS = "Quantity exceeds what is in inventory";
+	private static final String INVALID_PRODUCTION_COST = "Production cost cannot be negative";
+	
 	private static final int MINIMUM_QUANTITY = 0;
-	private static final double MINIMUM_UNIT_COST = 0.0;
+	private static final double MINIMUM_PRODUCTION_COST = 0.0;
 	
 	private String id;
 	private String name;
-	private double unitCost;
+	private double productionCost;
 	private int quantity;
 	
 	/**
@@ -171,30 +173,30 @@ public abstract class Item {
 	}
 
 	/**
-	 * Gets the unit cost.
+	 * Gets the production cost of this item.
 	 *
 	 * @precondition none
 	 * @postconditio none
 	 * 
-	 * @return the unit cost
+	 * @return the production cost
 	 */
-	public double getUnitCost() {
-		return this.unitCost;
+	public double getProductionCost() {
+		return this.productionCost;
 	}
 	
 	/**
-	 * Sets the unit cost.
+	 * Sets the production cost of this item.
 	 *
-	 * @param unitCost the new unit cost
-	 * @precondition unitCost >= 0
-	 * @postcondition this.getUnitCost() == unitCost
+	 * @param productionCost the new production cost
+	 * 
+	 * @precondition productionCost >= MINIMUM_UNIT_COST
+	 * @postcondition this.getProductionCost() == productionCost
 	 */
-	public void setUnitCost(double unitCost) {
-		if (unitCost < MINIMUM_UNIT_COST) {
-			throw new IllegalArgumentException("Unit cost cannot be less than 0");
+	public void setProductionCost(double productionCost) {
+		if (productionCost < MINIMUM_PRODUCTION_COST) {
+			throw new IllegalArgumentException(INVALID_PRODUCTION_COST);
 		}
-		
-		this.unitCost = unitCost;
+		this.productionCost = productionCost;
 	}
 	
 	/**

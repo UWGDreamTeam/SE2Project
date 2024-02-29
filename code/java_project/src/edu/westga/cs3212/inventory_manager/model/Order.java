@@ -29,7 +29,8 @@ public class Order {
 
 	private CompletionStatus completionStatus;
 	
-	private double purchasePrice;
+	private double salePrice;
+	private double productionCost;
 
 	/**
 	 * Instantiates a new order. Contains a list of items and the date the order was
@@ -44,7 +45,8 @@ public class Order {
 		// random generation.
 		this.id = "3212" + this.dateCreated.getNano() + new Random().nextInt();
 		this.items = new HashMap<>();
-		this.purchasePrice = MINIMUM_PURCHASE_PRICE;
+		this.salePrice = MINIMUM_PURCHASE_PRICE;
+		this.productionCost = MINIMUM_PURCHASE_PRICE;
 		this.completionStatus = CompletionStatus.INCOMPLETE;
 	}
 
@@ -61,8 +63,13 @@ public class Order {
 		this.checkProductAndQuantityInput(product, quantity);
 
 		int currQuantity = this.items.getOrDefault(product, 0);
-		this.purchasePrice += product.getPurchasePrice() * quantity;
+		this.updatePricing(product, quantity);
 		this.items.put(product, currQuantity + quantity);
+	}
+
+	private void updatePricing(Product product, int quantity) {
+		this.salePrice += product.getSalePrice() * quantity;
+		this.productionCost += product.getProductionCost() * quantity;
 	}
 
 	/**
@@ -182,5 +189,13 @@ public class Order {
 		}
 		Order other = (Order) obj;
 		return this.id.equals(other.id) && this.dateCreated.equals(other.dateCreated);
+	}
+
+	public double getSalePrice() {
+		return this.salePrice;
+	}
+
+	public double getProductionCost() {
+		return this.productionCost;
 	}
 }

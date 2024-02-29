@@ -20,7 +20,7 @@ public class Product extends Item {
 	private static final String COMPONENTS_CANNOT_BE_EMPTY = "Components cannot be empty";
 	private static final String COMPONENT_CANNOT_BE_NULL = "Component cannot be null";
 	
-	private double purchasePrice;
+	private double salePrice;
 	
 	/** The necessaryComponents. 
 	 * @key string ID, the ID of the component
@@ -38,7 +38,7 @@ public class Product extends Item {
 		super(name);
 		
 		this.necessaryComponents = new HashMap<>();
-		this.purchasePrice = MINIMUM_PURCHASE_PRICE;
+		this.salePrice = MINIMUM_PURCHASE_PRICE;
 	}
 	
 	/**
@@ -59,7 +59,9 @@ public class Product extends Item {
 			throw new IllegalArgumentException(COMPONENTS_CANNOT_BE_EMPTY);
 		}
 		
-		this.necessaryComponents = new HashMap<>(components);
+		for (Map.Entry<String, Integer> entry : components.entrySet()) {
+			this.addComponent(new Component(entry.getKey()), entry.getValue());
+		}
 	}
 	
 	
@@ -86,18 +88,18 @@ public class Product extends Item {
 			return false;
 		}
 		this.necessaryComponents.put(component.getId(), quantity);	
-		this.setUnitCost(component.getUnitCost() * quantity);
-		this.setPurchasePrice(this.purchasePrice + (this.purchasePrice * PROFIT_MARGIN));
+		this.setProductionCost(component.getProductionCost() * quantity);
+		this.setSalePrice(this.salePrice + (this.salePrice * PROFIT_MARGIN));
 		return true;
 		
 	}
 	
 	
-	public void setPurchasePrice(double newPurchasePrice) {
+	public void setSalePrice(double newPurchasePrice) {
 		if (newPurchasePrice < MINIMUM_PURCHASE_PRICE) {
 			throw new IllegalArgumentException(PURCHASE_PRICE_CANNOT_BE_NEGATIVE);
 		}
-		this.purchasePrice = newPurchasePrice;
+		this.salePrice = newPurchasePrice;
 	}
 
 	/**
@@ -174,7 +176,11 @@ public class Product extends Item {
 	}
 
 	public double getPurchasePrice() {
-		return this.purchasePrice;
+		return this.salePrice;
+	}
+
+	public double getSalePrice() {
+		return this.salePrice;
 	}
 
 }
