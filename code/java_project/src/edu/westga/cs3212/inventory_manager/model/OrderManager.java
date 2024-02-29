@@ -88,4 +88,7 @@ public interface OrderManager {
      * @param status the completion status to set
      */
 	void setOrderCompletionStatus(Order order, CompletionStatus status);
+	
+	
+	void clearOrders();
 }

@@ -27,7 +27,7 @@ public class LocalOrderManager implements OrderManager {
 	private static final String DATE_CANNOT_BE_NULL = "Date cannot be null";
 	private static final String COMPLETION_STATUS_CANNOT_BE_NULL = "Completion status cannot be null";
 	
-	private Map<String, Order> orders;
+	private List<Order> orders;
 	
 	/**
 	 * Instantiates a new OrderManager with an empty collection of orders.
@@ -36,12 +36,12 @@ public class LocalOrderManager implements OrderManager {
 	 * @postcondition this.orders.size() == 0
 	 */
 	public LocalOrderManager() {
-		this.orders = new HashMap<>();
+		this.orders = new ArrayList<>();
     }
 	
 	@Override
 	public List<Order> getOrders() {
-		return this.orders.values().stream().toList();
+		return this.orders;
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class LocalOrderManager implements OrderManager {
 			throw new IllegalArgumentException(COMPLETION_STATUS_CANNOT_BE_NULL);
 		}
 		List<Order> completeOrders = new ArrayList<>();
-		for (Order currOrder : this.orders.values()) {
+		for (Order currOrder : this.orders) {
 			if (currOrder.getCompletionStatus() == status) {
 				completeOrders.add(currOrder);
 			}
@@ -64,7 +64,7 @@ public class LocalOrderManager implements OrderManager {
 			throw new IllegalArgumentException(DATE_CANNOT_BE_NULL);
 		}
 		List<Order> filteredOrders = new ArrayList<>();
-		for (Order currOrder : this.orders.values()) {
+		for (Order currOrder : this.orders) {
 			
 			int currOrderDate = currOrder.getDateCreated().getDayOfYear();
 			int inputOrderDate = date.getDayOfYear();
@@ -81,10 +81,10 @@ public class LocalOrderManager implements OrderManager {
 		if (order == null) {
 			throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);
 		}
-		if (this.orders.containsKey(order.getID())) {
+		if (this.orders.contains(order)) {
 			throw new IllegalArgumentException(ORDER_ALREADY_EXISTS);
 		} else {
-			this.orders.put(order.getID(), order);
+			this.orders.add(order);
 		}
 	}
 
@@ -93,11 +93,10 @@ public class LocalOrderManager implements OrderManager {
 		if (order == null) {
             throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);
         }
-        if (!this.orders.containsKey(order.getID())) {
-			throw new IllegalArgumentException(ORDER_NOT_FOUND);
-		} else {
-			this.orders.remove(order.getID());
-		}
+        if (!this.orders.contains(order)) {
+            throw new IllegalArgumentException(ORDER_NOT_FOUND);
+        }
+        this.orders.remove(order);
 	}
 
 	@Override
@@ -108,11 +107,13 @@ public class LocalOrderManager implements OrderManager {
 		if (id.isEmpty()) {
             throw new IllegalArgumentException(ORDER_ID_CANNOT_BE_EMPTY);
         }
-		if (!this.orders.containsKey(id)) {
-			throw new IllegalArgumentException(ORDER_NOT_FOUND);
-		} else {
-			return this.orders.get(id);
+		Order foundOrder = null;
+		for (Order currOrder : this.orders) {
+			if (currOrder.getID().equals(id)) {
+				foundOrder = currOrder;
+			}
 		}
+		return foundOrder;
 	}
 
 	@Override
@@ -126,5 +127,10 @@ public class LocalOrderManager implements OrderManager {
 		if (order.getCompletionStatus() != status) {
 	        order.setCompletionStatus(status);
 	    }
+	}
+
+	@Override
+	public void clearOrders() {
+		this.orders.clear();
 	}
 }

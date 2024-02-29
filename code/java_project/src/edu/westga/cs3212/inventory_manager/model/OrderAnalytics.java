@@ -2,11 +2,11 @@ package edu.westga.cs3212.inventory_manager.model;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 
-public class OrdersAnalytics {
+public class OrderAnalytics {
 
 	private LocalOrderManager orderManager;
 	
-	public OrdersAnalytics() {
+	public OrderAnalytics() {
 		this.orderManager = new LocalOrderManager();
 	}
 	
