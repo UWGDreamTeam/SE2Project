@@ -32,9 +32,9 @@ public class LocalProductInventory implements ItemInventoryManager {
 	public LocalProductInventory() {
 		if (this.products == null) {
 			this.products = ProductInventoryStorage.load(Constants.PRODUCT_INVENTORY_FILE_LOCATION);
-//			if (this.products.isEmpty()) {
-//				this.createTestData();
-//			}
+			if (this.products.isEmpty()) {
+				this.createTestData();
+			}
 		}
 	}
 	
