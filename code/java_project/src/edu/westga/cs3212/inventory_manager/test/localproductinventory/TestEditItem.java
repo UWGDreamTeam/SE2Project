@@ -54,10 +54,29 @@ class TestEditItem {
 	}
 
 	@Test
-	void testEditWhenThereAreMultipleItems() {
+	void testEditItemFirstOfList() {
 		LocalProductInventory inventory = new LocalProductInventory();
 		Map<Component, Integer> recipe = new HashMap<>();
 		recipe.put(new Component("component", 1.0), 1);
+		
+		Product product1 = new Product("product", 5.0, 20.0, recipe);
+		Product product2 = new Product("product", 5.0, 20.0, recipe);
+		Product product3 = new Product("product", 5.0, 20.0, recipe);
+		inventory.addItem(product1, 1);
+		inventory.addItem(product2, 1);
+		inventory.addItem(product3, 1);
+
+		inventory.editItem(product1);
+
+		assertTrue(inventory.getProductsWithQuantities().containsKey(product1));
+	}
+	
+	@Test
+	void testEditItemMiddleOfList() {
+		LocalProductInventory inventory = new LocalProductInventory();
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		
 		Product product1 = new Product("product", 5.0, 20.0, recipe);
 		Product product2 = new Product("product", 5.0, 20.0, recipe);
 		Product product3 = new Product("product", 5.0, 20.0, recipe);
@@ -71,27 +90,11 @@ class TestEditItem {
 	}
 
 	@Test
-	void testEditWhenItemIsFirstItem() {
+	void testEditItemLastOfList() {
 		LocalProductInventory inventory = new LocalProductInventory();
 		Map<Component, Integer> recipe = new HashMap<>();
 		recipe.put(new Component("component", 1.0), 1);
-		Product product1 = new Product("product", 5.0, 20.0, recipe);
-		Product product2 = new Product("product", 5.0, 20.0, recipe);
-		Product product3 = new Product("product", 5.0, 20.0, recipe);
-		inventory.addItem(product1, 1);
-		inventory.addItem(product2, 1);
-		inventory.addItem(product3, 1);
-
-		inventory.editItem(product1);
-
-		assertTrue(inventory.getProductsWithQuantities().containsKey(product1));
-	}
-
-	@Test
-	void testEditWhenItemIsLastItem() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		Map<Component, Integer> recipe = new HashMap<>();
-		recipe.put(new Component("component", 1.0), 1);
+		
 		Product product1 = new Product("product", 5.0, 20.0, recipe);
 		Product product2 = new Product("product", 5.0, 20.0, recipe);
 		Product product3 = new Product("product", 5.0, 20.0, recipe);
