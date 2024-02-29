@@ -28,19 +28,19 @@ public class Product extends Item {
 	 * */
 	private Map<Component, Integer> recipe;
 	
-	public Product(String name, double productionCost, double salePrice, Map<Component, Integer> components) {
+	public Product(String name, double productionCost, double salePrice, Map<Component, Integer> recipe) {
 		super(name, productionCost);
 		this.setSalePrice(salePrice);
-		if (components == null) {
+		if (recipe == null) {
 			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
 		}
 
-		if (components.isEmpty()) {
+		if (recipe.isEmpty()) {
 			throw new IllegalArgumentException(COMPONENTS_CANNOT_BE_EMPTY);
 		}
 		
         this.recipe = new HashMap<>();
-		for (Map.Entry<Component, Integer> component : components.entrySet()) {
+		for (Map.Entry<Component, Integer> component : recipe.entrySet()) {
 			this.recipe.put(component.getKey(), component.getValue());
 		}
 
