@@ -44,7 +44,7 @@ public class InventoryViewModel {
 	 * @return the observable component list
 	 */
 	public ObservableList<Item> getObservableComponentList() {
-		return FXCollections.observableArrayList(this.componentsInventory.getListOfItems());
+		return FXCollections.observableArrayList(this.componentsInventory.getItems());
 	}
 	
 	/**

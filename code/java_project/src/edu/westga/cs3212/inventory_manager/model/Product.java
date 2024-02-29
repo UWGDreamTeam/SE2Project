@@ -26,7 +26,7 @@ public class Product extends Item {
 	 * @key string ID, the ID of the component
 	 * @value int quantity, the quantity of that component
 	 * */
-	private Map<String, Integer> necessaryComponents;
+	private Map<String, Integer> recipe;
 	
 	/**
 	 * Instantiates a new product.
@@ -37,7 +37,7 @@ public class Product extends Item {
 	public Product(String name) {
 		super(name);
 		
-		this.necessaryComponents = new HashMap<>();
+		this.recipe = new HashMap<>();
 		this.salePrice = MINIMUM_PURCHASE_PRICE;
 	}
 	
@@ -84,10 +84,10 @@ public class Product extends Item {
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(INVALID_QUANTITY);
 		}
-		if (this.necessaryComponents.containsKey(component.getId())) {
+		if (this.recipe.containsKey(component.getId())) {
 			return false;
 		}
-		this.necessaryComponents.put(component.getId(), quantity);	
+		this.recipe.put(component.getId(), quantity);	
 		this.setProductionCost(component.getProductionCost() * quantity);
 		this.setSalePrice(this.salePrice + (this.salePrice * PROFIT_MARGIN));
 		return true;
@@ -119,11 +119,11 @@ public class Product extends Item {
 			throw new IllegalArgumentException(COMPONENTS_MAP_CANNOT_BE_EMPTY);
 		}
 		
-		if (!this.necessaryComponents.isEmpty()) {
-			this.necessaryComponents.clear();
+		if (!this.recipe.isEmpty()) {
+			this.recipe.clear();
 		}
 		
-		this.necessaryComponents.putAll(newComponents);
+		this.recipe.putAll(newComponents);
 	}
 	
 	/**
@@ -134,8 +134,8 @@ public class Product extends Item {
 	 * 
 	 * @return the list of necessaryComponents and quantities
 	 */
-	public Map<String, Integer> getNecessaryComponentsCopy() {
-		return new HashMap<>(this.necessaryComponents);
+	public Map<String, Integer> getRecipe() {
+		return new HashMap<>(this.recipe);
 	}
 	
 	/**

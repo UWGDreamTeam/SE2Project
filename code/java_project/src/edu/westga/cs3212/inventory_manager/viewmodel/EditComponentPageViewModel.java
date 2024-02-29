@@ -32,20 +32,21 @@ public class EditComponentPageViewModel {
         this.selectedComponent.set(item);
         
         this.name.set(item.getName());
-        this.cost.set(String.valueOf(item.getUnitCost()));
-        this.quantity.set(String.valueOf(item.getQuantity()));
+        this.cost.set(String.valueOf(item.getProductionCost()));
+        this.quantity.set(String.valueOf(componentInventory.getQuantityOfItem(item)));
     }
     
     public boolean update() {
     	String newName = this.name.getValue();
     	Double newCost = Double.parseDouble(this.cost.getValue());
     	int newQuantity = Integer.parseInt(this.quantity.getValue());
+    	Item item = this.selectedComponent.getValue();
     	
-    	this.selectedComponent.getValue().setName(newName);
-    	this.selectedComponent.getValue().setQuantity(newQuantity);
-    	this.selectedComponent.getValue().setUnitCost(newCost);
+    	item.setName(newName);
+    	item.setProductionCost(newCost);
+    	componentInventory.setQuantityOfItem(item, newQuantity);
     	
-    	return this.componentInventory.editItem(this.selectedComponent.getValue().getId(), this.selectedComponent.getValue());
+    	return this.componentInventory.editItem(item);
     }
 
 	public StringProperty getName() {

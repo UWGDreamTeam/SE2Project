@@ -32,11 +32,11 @@ public class LocalProductInventory implements InventoryManager {
 	}
 	
 	public Iterable<Product> getProducts() {
-		return LocalProductInventory.products;
+		return this.products;
 	}
 
 	@Override
-	public ArrayList<Item> getListOfItems() {
+	public ArrayList<Item> getItems() {
 		return new ArrayList<>(this.products);
 	}
 

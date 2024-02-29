@@ -43,16 +43,14 @@ public class AddComponentViewModel {
      * @return true, if successfully added to the system, false otherwise
      */
     public boolean add() {
-    	String name = this.name.getValue();
-    	Double cost = Double.parseDouble(this.cost.get());
-    	int quantity = Integer.parseInt(this.quantity.get());
+    	String itemName = this.name.getValue();
+    	Double itemCost = Double.parseDouble(this.cost.get());
+    	int quantityOfItem = Integer.parseInt(this.quantity.get());
     	
-    	Item newComponent = new Component(name);
+    	Item newComponent = new Component(itemName);
     	
-    	newComponent.setUnitCost(cost);
-    	newComponent.setQuantity(quantity);
-    	
-    	return this.componentInventory.addNewItem(newComponent);
+    	newComponent.setProductionCost(itemCost);    	
+    	return this.componentInventory.addItem(newComponent, quantityOfItem);
     }
 
 	/**

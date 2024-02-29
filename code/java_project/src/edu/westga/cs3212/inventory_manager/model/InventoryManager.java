@@ -1,7 +1,5 @@
 package edu.westga.cs3212.inventory_manager.model;
 
-import java.util.ArrayList;
-
 /**
  * The Interface InventoryManager.
  * 
@@ -18,7 +16,7 @@ public interface InventoryManager {
 	 *
 	 * @return the list of items in the inventory
 	 */
-	ArrayList<Item> getListOfItems();
+	Iterable<Item> getItems();
 	
 	/**
 	 * Adds the newItem to the Inventory
@@ -29,7 +27,7 @@ public interface InventoryManager {
 	 * @param newItem the item to be added
 	 * @return true, if successful
 	 */
-	boolean addNewItem(Item newItem);
+	boolean addItem(Item newItem, int quantity);
 	
 	/**
 	 * Removes the item from inventory
@@ -56,7 +54,7 @@ public interface InventoryManager {
 	 * 
 	 * @return true if Item was edited successfully
 	 */
-	boolean editItem(String id, Item newItem);
+	boolean editItem(Item newItem);
 	
 	/**
 	 * Gets the item by an ID.
@@ -78,7 +76,9 @@ public interface InventoryManager {
 	 * 
 	 * @return the quantity  of items in the inventory
 	 */
-	int getQuantity();
+	int getQuantityOfItem(Item item);
+	
+	int setQuantityOfItem(Item item, int quantity);
 	
 	
 	/**

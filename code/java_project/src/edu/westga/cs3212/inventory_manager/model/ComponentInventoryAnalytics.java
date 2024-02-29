@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
 
 public class ComponentInventoryAnalytics {
 
@@ -44,7 +43,7 @@ public class ComponentInventoryAnalytics {
 	}
 
 	private void updateComponentCount(Product product, Map<Item, Integer> componentCount) {
-	    Map<String, Integer> necessaryComponents = product.getNecessaryComponents();
+	    Map<String, Integer> necessaryComponents = product.getRecipe();
 	    for (Map.Entry<String, Integer> entry : necessaryComponents.entrySet()) {
 	        Item component = this.componentManager.getItemByID(entry.getKey());
 	        int quantity = entry.getValue();

@@ -3,9 +3,9 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 import java.util.ArrayList;
 
 import edu.westga.cs3212.inventory_manager.model.Item;
+import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
 import javafx.beans.property.SimpleListProperty;
 import javafx.scene.chart.XYChart;
 
@@ -41,7 +41,6 @@ public class HomePageViewModel {
 	
 	private void test() {
 		Iterable<Product> products = this.productManager.getProducts();
-		
 	}
 	
 	

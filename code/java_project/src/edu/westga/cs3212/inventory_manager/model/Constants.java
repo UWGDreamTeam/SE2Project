@@ -19,7 +19,7 @@ public final class Constants {
 	public static final String MUST_FILL_OUT_ALL_FIELDS = "All fields must be filled out.";
 	public static final String REGISTRATION_SUCCESSFUL = "Registration Successful";
 	public static final String EMPLOYEE_REGISTRATION_SUCCESSFUL = "The employee has been successfully registered.";
-	
+	public static final String COMPONENT_QUANTITIES_FILE_LOCATION = "componentQuantities.json";
 	
 	private Constants() {
 		throw new IllegalStateException("Constants class");

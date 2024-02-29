@@ -24,7 +24,6 @@ public abstract class Item {
 	private String id;
 	private String name;
 	private double productionCost;
-	private int quantity;
 	
 	/**
 	 * Instantiates a new item.
@@ -45,7 +44,6 @@ public abstract class Item {
 	protected Item(String name) {
 		this.setName(name);
 		this.setId(this.generateID());
-		this.setQuantity(MINIMUM_QUANTITY);
 	}
 	
 	/**
@@ -115,61 +113,6 @@ public abstract class Item {
 		}
 		
 		this.name = name;
-	}
-	
-	/**
-	 * Gets the quantity of this item in the system.
-	 *
-	 * @precondition none
-	 * @postconditio none
-	 * 
-	 * @return the quantity
-	 */
-	public int getQuantity() {
-		return this.quantity;
-	}
-
-	/**
-	 * Sets the quantity of this item.
-	 *
-	 * @param quantity the new quantity of this item
-	 * 
-	 * @precondition quantity >= MINIMUM_QUANTITY
-	 * @postcondition this.getQuantity() == quantity
-	 */
-	public void setQuantity(int quantity) {
-		if (quantity < MINIMUM_QUANTITY) {
-			throw new IllegalArgumentException(INVALID_QUANTITY);
-		}
-		this.quantity = quantity;
-	}
-	
-	
-	/**
-	 * Decrease quantity.
-	 * 
-	 * @precondition quantity <= this.getQuantity
-	 * @postcondition this.getQuantity() == this.getQuantity()@prev - quantity  
-	 *
-	 * @param quantity the quantity to be decreased from the current value in the system
-	 */
-	public void decreaseQuantity(int quantity) {
-		if (quantity > this.getQuantity()) {
-			throw new IllegalArgumentException(QUANTITY_EXCEEDS);
-		}
-		this.quantity -= quantity;
-	}
-	
-	/**
-	 * Decrease quantity.
-	 * 
-	 * @precondition none
-	 * @postcondition this.getQuantity() == this.getQuantity()@prev + quantity  
-	 *
-	 * @param quantity the quantity to be added to the current value in the system
-	 */
-	public void increaseQuantity(int quantity) {
-		this.quantity += quantity;
 	}
 
 	/**
