@@ -19,7 +19,7 @@ public class LocalProductInventory implements ItemInventoryManager {
 	private static final String NEW_ITEM_ALREADY_EXISTS = "Product Already Exists";
     private static final String PRODUCT_DOES_NOT_EXIST = "Product does not exist";
 	
-	private Map<Product, Integer> products;
+	private static Map<Product, Integer> products;
 	
 	/**
 	 * Instantiates a new LocalProductInventory object

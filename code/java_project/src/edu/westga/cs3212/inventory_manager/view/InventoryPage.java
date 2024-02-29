@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.Main;
@@ -26,6 +27,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -144,9 +146,7 @@ public class InventoryPage {
 		this.editProductButton.disableProperty().bind(
 	            Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty())
 	        );
-	        this.productAddButton.disableProperty().bind(
-	            Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty())
-	        );
+
 	        this.productProduceButton.disableProperty().bind(
 	            Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty())
 	        );
@@ -156,9 +156,6 @@ public class InventoryPage {
 	}
 
 	private void setupComponentButtons() {
-		this.componentAddButton.disableProperty().bind(
-	            Bindings.isNull(this.componentsTableView.getSelectionModel().selectedItemProperty())
-	        );
 	        this.componentEditButton.disableProperty().bind(
 	            Bindings.isNull(this.componentsTableView.getSelectionModel().selectedItemProperty())
 	        );
@@ -190,7 +187,7 @@ public class InventoryPage {
 
 	private void refreshProductsTableView() {
 		this.productsTableView.setItems(this.inventoryVM.getObservableProductList());
-		
+		this.productsTableView.refresh();
 	}
 
 	private void setupComponentsTableView() {
@@ -292,11 +289,44 @@ public class InventoryPage {
     
     @FXML
     void orderComponentButtonManagerOnClick(ActionEvent event) {
-    	//TO DO
+    	TextInputDialog dialog = new TextInputDialog("1"); // Default value is 1
+        dialog.setTitle("Order Component");
+        dialog.setHeaderText("Order More Components");
+        dialog.setContentText("Please enter the quantity:");
+
+        // Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            try {
+                int quantity = Integer.parseInt(result.get());
+                if (quantity > 0) {
+                    Component selectedComponent = componentsTableView.getSelectionModel().getSelectedItem();
+                    if (selectedComponent != null) {
+                        this.inventoryVM.orderComponent(selectedComponent, quantity);
+                        this.refreshComponentsTableView();
+                    } else {
+                        showAlert("Order Error", "No component selected.", AlertType.ERROR);
+                    }
+                } else {
+                    showAlert("Invalid Quantity", "Please enter a positive number.", AlertType.ERROR);
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Invalid Input", "Please enter a valid number.", AlertType.ERROR);
+            }
+        }
+        this.refreshComponentsTableView();
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 	private void refreshComponentsTableView() {
 		this.componentsTableView.setItems(this.inventoryVM.getObservableComponentList());
+		this.componentsTableView.refresh();
 	}
     
     /* PRODUCT TABS */

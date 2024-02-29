@@ -15,7 +15,7 @@ import edu.westga.cs3212.inventory_manager.model.SystemCredentialsManager;
  * @author Jacob Haas
  */
 public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
-	private Map<String, LocalEmployeeCredentials> employeeCredentialsMap;
+	private static Map<String, LocalEmployeeCredentials> employeeCredentialsMap;
 
 	/**
 	 * Initializes the credentials manager and loads existing credentials from storage.

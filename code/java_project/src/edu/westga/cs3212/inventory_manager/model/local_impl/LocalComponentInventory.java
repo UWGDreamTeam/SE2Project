@@ -24,7 +24,7 @@ public class LocalComponentInventory implements ItemInventoryManager {
 	 * @key string ID, the ID of the component
 	 * @value int quantity, the quantity of that component  
 	 */
-	private Map<Component, Integer> components; 
+	private static Map<Component, Integer> components; 
 	
 	/**
 	 * Instantiates a new LocalComponentInventory object
@@ -62,7 +62,7 @@ public class LocalComponentInventory implements ItemInventoryManager {
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(QUANTITY_CANNOT_BE_NEGATIVE);
 		}
-		if (this.components.put((Component) newItem, quantity) != null) {
+		if (this.components.put((Component) newItem, quantity) == null) {
 			this.save();
 			return true;
 		}

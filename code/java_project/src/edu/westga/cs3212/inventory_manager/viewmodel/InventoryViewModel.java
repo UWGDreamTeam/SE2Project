@@ -117,4 +117,8 @@ public class InventoryViewModel {
 		return this.selectedProduct;
 	}
 
+	public void orderComponent(Component selectedComponent2, int quantity) {
+		this.componentsInventory.setQuantityOfItem(selectedComponent2, quantity + this.componentsInventory.getQuantityOfItem(selectedComponent2));
+	}
+
 }
