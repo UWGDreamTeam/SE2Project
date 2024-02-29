@@ -25,20 +25,20 @@ public final class OrderInventoryStorage {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(orders, writer);
-		} catch (IOException exception) {
+		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
 	}
 	
 	public static List<Order> load(String filePath) {
-		List<Order> orders;
+		ArrayList<Order> orders;
 		try {
 			String json = new String(Files.readAllBytes(Paths.get(filePath)));
 			Gson gson = new Gson();
-			Type type = new TypeToken<List<Order>>() {
+			Type type = new TypeToken<ArrayList<Order>>() {
 			}.getType();
 			orders = gson.fromJson(json, type);
-		} catch (IOException exception) {
+		} catch (Exception exception) {
 			orders = new ArrayList<>();
 		}
 		return orders;

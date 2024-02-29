@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.OrderInventoryStorage;
 import edu.westga.cs3212.inventory_manager.model.OrderManager;
+import edu.westga.cs3212.inventory_manager.model.Product;
 
 /**
  * Local implementation of the OrderManager class meant to
@@ -26,7 +28,6 @@ public class LocalOrderManager implements OrderManager {
 	private static final String ORDER_NOT_FOUND = "Order not found";
 	private static final String ORDER_ALREADY_EXISTS = "Order already exists";
 	private static final String ORDER_CANNOT_BE_NULL = "Order cannot be null";
-	private static final String DATE_CANNOT_BE_NULL = "Date cannot be null";
 	private static final String COMPLETION_STATUS_CANNOT_BE_NULL = "Completion status cannot be null";
 	
 	private List<Order> orders;
@@ -39,8 +40,12 @@ public class LocalOrderManager implements OrderManager {
 	 */
 	public LocalOrderManager() {
 		this.orders = OrderInventoryStorage.load(Constants.ORDER_FILE_PATH);
+		if (this.orders.isEmpty()) {
+			this.orders = DemoDataUtility.createDemoOrders(50);
+			OrderInventoryStorage.save(this.orders, Constants.ORDER_FILE_PATH);
+		}
     }
-	
+
 	@Override
 	public List<Order> getOrders() {
 		return this.orders;

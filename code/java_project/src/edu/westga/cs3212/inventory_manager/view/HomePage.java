@@ -1,21 +1,20 @@
 package edu.westga.cs3212.inventory_manager.view;
+import edu.westga.cs3212.inventory_manager.viewmodel.HomePageViewModel;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 
 public class HomePage {
 
-    @FXML
+	@FXML
     private Button adminButton;
 
     @FXML
-    private Tab componentTab;
+    private TextArea componentSummaryTextArea;
 
     @FXML
-    private TextArea componentSumarryTextArea;
+    private Tab componentTab;
 
     @FXML
     private Button inventoryButton;
@@ -24,28 +23,36 @@ public class HomePage {
     private Button logOutButton;
 
     @FXML
-    private Tab orderTab;
+    private TextArea orderSummaryTextArea;
 
     @FXML
-    private TextArea orderSumarryTextArea;
+    private Tab orderTab;
 
     @FXML
     private Button ordersButton;
 
     @FXML
-    private Tab productTab;
+    private TextArea productSummaryTextArea;
 
     @FXML
-    private TextArea productSumarryTextArea;
+    private Tab productTab;
+    
+    private HomePageViewModel viewModel;
 
     @FXML
     public void initialize() {
         this.bindToViewModel();
+        this.viewModel.getComponentSummary();
+        this.viewModel.getProductSummary();
+        this.viewModel.getOrderSummary();
         
     }
 
 	private void bindToViewModel() {
-		
+		this.viewModel = new HomePageViewModel();
+		this.componentSummaryTextArea.textProperty().bind(this.viewModel.getComponentSumarryTextArea());
+		this.productSummaryTextArea.textProperty().bind(this.viewModel.getProductSumarryTextArea());
+		this.orderSummaryTextArea.textProperty().bind(this.viewModel.getOrderSumarryTextArea());
 	}
     
 }

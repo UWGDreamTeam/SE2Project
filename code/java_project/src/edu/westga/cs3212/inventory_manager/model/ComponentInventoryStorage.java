@@ -1,13 +1,10 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -42,7 +39,7 @@ public final class ComponentInventoryStorage {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(components, writer);
-		} catch (IOException exception) {
+		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
 	}
@@ -64,7 +61,7 @@ public final class ComponentInventoryStorage {
 			Type type = new TypeToken<Map<Component, Integer>>() {
 			}.getType();
 			components = gson.fromJson(json, type);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			components = new HashMap<>();
 		}
 		return components;

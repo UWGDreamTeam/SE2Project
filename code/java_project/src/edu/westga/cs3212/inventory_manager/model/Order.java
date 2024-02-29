@@ -1,10 +1,8 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 import java.util.HashMap;
-import java.time.LocalDateTime;
 
 /**
  * The Order Class.

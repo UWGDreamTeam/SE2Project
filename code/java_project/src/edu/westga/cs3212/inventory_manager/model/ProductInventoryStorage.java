@@ -41,7 +41,7 @@ public final class ProductInventoryStorage {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(products, writer);
-		} catch (IOException exception) {
+		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
 	}
@@ -63,7 +63,7 @@ public final class ProductInventoryStorage {
 			Type type = new TypeToken<Map<Product, Integer>>() {
 			}.getType();
 			products = gson.fromJson(json, type);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			products = new HashMap<>();
 		}
 		return products;
