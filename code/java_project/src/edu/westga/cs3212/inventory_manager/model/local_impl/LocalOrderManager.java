@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Order;
+import edu.westga.cs3212.inventory_manager.model.OrderInventoryStorage;
 import edu.westga.cs3212.inventory_manager.model.OrderManager;
 
 /**
@@ -36,7 +38,7 @@ public class LocalOrderManager implements OrderManager {
 	 * @postcondition this.orders.size() == 0
 	 */
 	public LocalOrderManager() {
-		this.orders = new ArrayList<>();
+		this.orders = OrderInventoryStorage.load(Constants.ORDER_FILE_PATH);
     }
 	
 	@Override
@@ -85,6 +87,7 @@ public class LocalOrderManager implements OrderManager {
 			throw new IllegalArgumentException(ORDER_ALREADY_EXISTS);
 		} else {
 			this.orders.add(order);
+			OrderInventoryStorage.save(this.orders, Constants.ORDER_FILE_PATH);
 		}
 	}
 
@@ -126,6 +129,7 @@ public class LocalOrderManager implements OrderManager {
 		}
 		if (order.getCompletionStatus() != status) {
 	        order.setCompletionStatus(status);
+	        OrderInventoryStorage.save(this.orders, Constants.ORDER_FILE_PATH);
 	    }
 	}
 

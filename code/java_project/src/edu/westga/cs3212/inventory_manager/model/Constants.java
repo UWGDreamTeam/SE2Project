@@ -20,6 +20,7 @@ public final class Constants {
 	public static final String REGISTRATION_SUCCESSFUL = "Registration Successful";
 	public static final String EMPLOYEE_REGISTRATION_SUCCESSFUL = "The employee has been successfully registered.";
 	public static final String COMPONENT_QUANTITIES_FILE_LOCATION = "componentQuantities.json";
+	public static final String ORDER_FILE_PATH = "orders.json";
 	
 	private Constants() {
 		throw new IllegalStateException("Constants class");
