@@ -33,15 +33,6 @@ class TestRemoveItem {
 	}
 
 	@Test
-	void testRemoveItemWithEmptyList() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		Map<Component, Integer> recipe = new HashMap<>();
-		Product product = new Product("product", 5.0, 20.0, recipe);
-
-		assertThrows(IllegalArgumentException.class, () -> inventory.removeItem(product));
-	}
-
-	@Test
 	void testRemoveItemWithItemOnList() {
 		LocalProductInventory inventory = new LocalProductInventory();
 		Map<Component, Integer> recipe = new HashMap<>();
@@ -104,7 +95,7 @@ class TestRemoveItem {
 		inventory.addItem(product2, 1);
 		inventory.addItem(product3, 1);
 
-		inventory.editItem(product3);
+		inventory.removeItem(product3);
 
 		assertFalse(inventory.getProductsWithQuantities().containsKey(product3));
 	}

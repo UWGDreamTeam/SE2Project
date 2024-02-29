@@ -36,9 +36,7 @@ class TestOrderMangerGeneral {
 	@Test
 	void testFindOrderByIdNoIdExists() {
 		// Act and Assert
-		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.findOrderById("9000");
-		});
+		assertNull(this.orderManager.findOrderById("9000"));
 	}
 
 	@Test

@@ -59,8 +59,20 @@ public class OrderPageViewModel {
 		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.COMPLETE);
 	}
 
+	/**
+     * Retrieves a list of fulfilled orders from the order manager.
+     * 
+     * @precondition none
+     * @postcondition none
+     * 
+     * @return a list of fulfilled orders
+     */
 	public void fulfillSelectedOrder(Order selectedOrder2) {
 		this.orderManager.setOrderCompletionStatus(selectedOrder2, CompletionStatus.COMPLETE);
+	}
+	
+	public void clearOrders() {
+		this.orderManager.clearOrders();
 	}
 	
 }
