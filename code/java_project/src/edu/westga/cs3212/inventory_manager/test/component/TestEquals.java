@@ -51,6 +51,7 @@ class TestEquals {
 		
 		Item product = new Component(name, 20);
 		Item product1 = new Component(name, 20);
+		product1.setId(product.getId());
 		
 		//Act & Assert
 		assertTrue(product.equals(product1));
