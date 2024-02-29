@@ -353,8 +353,24 @@ public class InventoryPage {
     }
 
     @FXML
-    void editProductManagerOnClick(ActionEvent event) {
-    	//TO DO
+    void editProductManagerOnClick(ActionEvent event) throws IOException {
+    	Item selectedItem = this.productsTableView.getSelectionModel().getSelectedItem();
+   	 
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource(Main.EDIT_PRODUCT_PAGE));
+	    Parent parent = loader.load();
+    	
+	    EditProduct editProduct = loader.getController();
+    	editProduct.initalizeWithItem(selectedItem);
+    	
+    	Stage modalStage = new Stage();
+		Scene scene = new Scene(parent);
+		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.setScene(scene);
+		modalStage.initModality(Modality.WINDOW_MODAL);
+		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+		modalStage.showAndWait();
+		
+		this.refreshComponentsTableView();
     }
 
     @FXML
