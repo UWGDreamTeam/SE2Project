@@ -1,1 +1,27 @@
-{}
+{
+  "Component{id\u003d01dc3a7f, name\u003d\u0027Aluminum\u0027, productionCost\u003d66.73}": 13,
+  "Component{id\u003d2d67a964, name\u003d\u0027Gold\u0027, productionCost\u003d96.64}": 67,
+  "Component{id\u003ddba8e0e3, name\u003d\u0027Steel\u0027, productionCost\u003d37.53}": 30,
+  "Component{id\u003db18451fb, name\u003d\u0027Titanium\u0027, productionCost\u003d22.97}": 69,
+  "Component{id\u003d45ff229b, name\u003d\u0027Sticks\u0027, productionCost\u003d23.5}": 62,
+  "Component{id\u003d6f59cdaa, name\u003d\u0027Silver\u0027, productionCost\u003d47.28}": 49,
+  "Component{id\u003d506e6e67, name\u003d\u0027Lead\u0027, productionCost\u003d29.54}": 40,
+  "Component{id\u003d85c62cff, name\u003d\u0027Copper\u0027, productionCost\u003d99.0}": 20,
+  "Component{id\u003d807fbb78, name\u003d\u0027Carbon Fiber\u0027, productionCost\u003d46.56}": 44,
+  "Component{id\u003d625f9a89, name\u003d\u0027Rubber\u0027, productionCost\u003d47.04}": 19,
+  "Component{id\u003ddfe0dfdc, name\u003d\u0027Zinc\u0027, productionCost\u003d69.41}": 40,
+  "Component{id\u003d98373a5d, name\u003d\u0027Marble\u0027, productionCost\u003d11.73}": 17,
+  "Component{id\u003d59fbb2d3, name\u003d\u0027Glass\u0027, productionCost\u003d30.77}": 85,
+  "Component{id\u003d5aeb5d68, name\u003d\u0027Plastic\u0027, productionCost\u003d37.83}": 22,
+  "Component{id\u003dc3251cdd, name\u003d\u0027Quartz\u0027, productionCost\u003d46.95}": 49,
+  "Component{id\u003dbcf226ee, name\u003d\u0027Iron\u0027, productionCost\u003d4.54}": 7,
+  "Component{id\u003da3bf2b09, name\u003d\u0027Brass\u0027, productionCost\u003d9.39}": 32,
+  "Component{id\u003d96f68a05, name\u003d\u0027Granite\u0027, productionCost\u003d97.21}": 2,
+  "Component{id\u003d4dd2a246, name\u003d\u0027Magnesium\u0027, productionCost\u003d61.9}": 58,
+  "Component{id\u003d2cf8afcb, name\u003d\u0027Bronze\u0027, productionCost\u003d46.58}": 36,
+  "Component{id\u003d52da9824, name\u003d\u0027Wood\u0027, productionCost\u003d19.67}": 76,
+  "Component{id\u003dc75d249d, name\u003d\u0027Tin\u0027, productionCost\u003d78.71}": 25,
+  "Component{id\u003d2a640a8f, name\u003d\u0027Silicon\u0027, productionCost\u003d43.25}": 14,
+  "Component{id\u003df2c6216f, name\u003d\u0027Nickel\u0027, productionCost\u003d82.07}": 96,
+  "Component{id\u003d29995731, name\u003d\u0027Ceramic\u0027, productionCost\u003d96.81}": 15
+}
