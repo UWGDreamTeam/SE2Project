@@ -222,6 +222,23 @@ public class InventoryPage {
     		errorPopup.showAndWait();
 		}
     }
+	
+	@FXML
+    void orderPageButtonOnClick(ActionEvent event) throws IOException {
+    	
+    	try {
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        Parent parent;
+			parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
+			Scene currentScene = currentStage.getScene();
+	        currentScene.setRoot(parent);
+	        currentStage.setTitle("Order Page");
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText(e.getMessage());
+    		errorPopup.showAndWait();
+		}
+    }
     
     @FXML
     void logOutButtonOnClick(ActionEvent event) {
