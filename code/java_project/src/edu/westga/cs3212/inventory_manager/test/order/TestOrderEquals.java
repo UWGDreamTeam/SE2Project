@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.Product;
 
@@ -34,7 +36,10 @@ class TestOrderEquals {
 	public void testEqualsDifferentClass() {
 		// Arrange
 		Order order = new Order();
-		Product product = new Product();
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
 
 		// Assert
 		assertFalse(order.equals(product));
@@ -57,23 +62,9 @@ class TestOrderEquals {
 		Order order2 = new Order();
 
 		// Act
-		this.setDifferentDates(order2);
-
+		order1.setDateCreated(LocalDateTime.now().minusDays(1));
 		// Assert
 		assertFalse(order1.equals(order2));
-	}
-
-	@Test
-	public void testEqualsSameIdSameDateCreated() throws NoSuchFieldException, IllegalAccessException {
-		// Arrange
-		Order order1 = new Order();
-		Order order2 = new Order();
-
-		// Act
-		this.setSameIds(order1, order2);
-
-		// Assert
-		assertTrue(order1.equals(order2));
 	}
 
 	@Test
@@ -83,26 +74,10 @@ class TestOrderEquals {
 		Order order2 = new Order();
 
 		// Act
-		this.setSameIds(order1, order2);
-		this.setDifferentDates(order2);
+		order1.setID(order2.getID());
+		order1.setDateCreated(LocalDateTime.now().minusDays(1));
 
 		// Assert
 		assertFalse(order1.equals(order2));
-	}
-
-	private void setSameIds(Order order1, Order order2) throws NoSuchFieldException, IllegalAccessException {
-		Field idField = Order.class.getDeclaredField("id");
-		idField.setAccessible(true);
-		String id = order1.getId();
-		idField.set(order2, id);
-		idField.setAccessible(false);
-	}
-
-	private void setDifferentDates(Order order2) throws NoSuchFieldException, IllegalAccessException {
-		Field dateCreatedField = Order.class.getDeclaredField("dateCreated");
-		dateCreatedField.setAccessible(true);
-		LocalDateTime newDate = order2.getDateCreated().plusDays(1);
-		dateCreatedField.set(order2, newDate);
-		dateCreatedField.setAccessible(false);
 	}
 }

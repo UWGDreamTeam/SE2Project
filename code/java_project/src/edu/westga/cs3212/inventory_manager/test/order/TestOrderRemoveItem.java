@@ -3,7 +3,12 @@ package edu.westga.cs3212.inventory_manager.test.order;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.HashMap;
+
 import org.junit.jupiter.api.Test;
+
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.Product;
 
@@ -13,7 +18,10 @@ class TestOrderRemoveItem {
     void testRemoveItemValidInput() {
         // Arrange 
         Order order = new Order();
-        Product product = new Product();
+        Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
         int quantity = 2;
         order.addItem(product, quantity);
 
@@ -42,7 +50,10 @@ class TestOrderRemoveItem {
     void testRemoveItemQuantityIsZero() {
         // Arrange
         Order order = new Order();
-        Product product = new Product();
+        Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
         int quantity = 0;
 
         // Act and Assert
@@ -55,7 +66,10 @@ class TestOrderRemoveItem {
     void testRemoveItemQuantityIsLessThanZero() {
         // Arrange
         Order order = new Order();
-        Product product = new Product();
+        Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
         int quantity = -1;
 
         // Act and Assert
@@ -68,7 +82,10 @@ class TestOrderRemoveItem {
     void testRemoveItemProductNotFound() {
         // Arrange
         Order order = new Order();
-        Product product = new Product();
+        Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
         int quantity = 1;
 
         // Act and Assert
@@ -81,7 +98,10 @@ class TestOrderRemoveItem {
     void testRemoveItemQuantityGreaterThanOrderQuantity() {
         // Arrange
         Order order = new Order();
-        Product product = new Product();
+        Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
         int quantity = 2;
         order.addItem(product, 1);
 
@@ -95,7 +115,10 @@ class TestOrderRemoveItem {
     void testRemoveItemQuantityEqualsCurrentQuantity() {
         // Arrange 
         Order order = new Order();
-        Product product = new Product();
+        Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
         int quantity = 2;
         order.addItem(product, quantity);
 

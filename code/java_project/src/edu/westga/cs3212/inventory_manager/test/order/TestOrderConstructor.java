@@ -17,7 +17,7 @@ public class TestOrderConstructor {
 		Order order = new Order();
 		
 		// Act and Assert 
-		assertNotNull(order.getId());
+		assertNotNull(order.getID());
         assertNotNull(order.getDateCreated());
         assertNotNull(order.getItems());
         assertEquals(CompletionStatus.INCOMPLETE, order.getCompletionStatus());
@@ -29,7 +29,7 @@ public class TestOrderConstructor {
 	public void testOrderHashCode() {
 		// Arrange
 		Order order = new Order();
-		int idHashCode = order.getId().hashCode();
+		int idHashCode = order.getID().hashCode();
 		int dateCreatedHashCode = order.getDateCreated().hashCode();
 
 		// Act and Assert
@@ -44,6 +44,39 @@ public class TestOrderConstructor {
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
 			order.setCompletionStatus(null);
+		});
+	}
+	
+	@Test
+	void testOrderSetNullID() {
+		// Arrange
+		Order order = new Order();
+
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			order.setID(null);
+		});
+	}
+	
+	@Test
+	void testOrderSetEmptyID() {
+		// Arrange
+		Order order = new Order();
+
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			order.setID("");
+		});
+	}
+	
+	@Test
+	void testOrderSetDateCreatedNull() {
+		// Arrange
+		Order order = new Order();
+
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			order.setDateCreated(null);
 		});
 	}
 	
@@ -69,4 +102,5 @@ public class TestOrderConstructor {
         order.setCompletionStatus(CompletionStatus.INCOMPLETE);
         assertEquals(CompletionStatus.INCOMPLETE, order.getCompletionStatus());
 	}
+	
 }

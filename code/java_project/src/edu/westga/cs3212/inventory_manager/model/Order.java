@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.model;
 
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 import java.util.HashMap;
 import java.time.LocalDateTime;
 
@@ -20,8 +21,10 @@ public class Order {
 	private static final String QUANTITY_MUST_BE_GREATER_THAN_0 = "Quantity must be greater than 0";
 	private static final String PRODUCT_CANNOT_BE_NULL = "Product cannot be null";
 	private static final String COMPLETION_STATUS_CANNOT_BE_NULL = "Completion status cannot be null";
-
-	private String id;
+	private static final String ID_CANNOT_BE_NULL = "ID cannot be null";
+	private static final String ID_CANNOT_BE_BLANK = "ID cannot be blank";
+	
+	private String ID;
 
 	private LocalDateTime dateCreated;
 
@@ -41,9 +44,7 @@ public class Order {
 	 */
 	public Order() {
 		this.dateCreated = LocalDateTime.now();
-		// This id implementation is a placeholder until we add a class that handles
-		// random generation.
-		this.id = "3212" + this.dateCreated.getNano() + new Random().nextInt();
+		this.ID = this.generateID();
 		this.items = new HashMap<>();
 		this.salePrice = MINIMUM_PURCHASE_PRICE;
 		this.productionCost = MINIMUM_PURCHASE_PRICE;
@@ -109,8 +110,8 @@ public class Order {
 	 *
 	 * @return the id
 	 */
-	public String getId() {
-		return this.id;
+	public String getID() {
+		return this.ID;
 	}
 
 	/**
@@ -123,6 +124,21 @@ public class Order {
 	 */
 	public LocalDateTime getDateCreated() {
 		return this.dateCreated;
+	}
+	
+	/**
+	 * Sets the date the order was created.
+	 *
+	 * @param dateCreated the new date created
+	 * 
+	 * @precondition dateCreated != null
+	 * @postcondition this.getDateCreated() == dateCreated
+	 */
+	public void setDateCreated(LocalDateTime dateCreated) {
+		if (dateCreated == null) {
+			throw new IllegalArgumentException("Date created cannot be null");
+		}
+		this.dateCreated = dateCreated;
 	}
 	
 	/**
@@ -173,10 +189,24 @@ public class Order {
 			throw new IllegalArgumentException(QUANTITY_MUST_BE_GREATER_THAN_0);
 		}
 	}
+	
+	private String generateID() {
+		return UUID.randomUUID().toString();
+	}
+	
+	public String setID(String id) {
+		if (id == null) {
+			throw new IllegalArgumentException(ID_CANNOT_BE_NULL);
+		}
+		if (id.isBlank()) {
+			throw new IllegalArgumentException(ID_CANNOT_BE_BLANK);
+		}
+		return id;
+	}
 
 	@Override
 	public int hashCode() {
-		return this.id.hashCode() + this.dateCreated.hashCode();
+		return this.ID.hashCode() + this.dateCreated.hashCode();
 	}
 	
 	@Override
@@ -188,7 +218,7 @@ public class Order {
 			return false;
 		}
 		Order other = (Order) obj;
-		return this.id.equals(other.id) && this.dateCreated.equals(other.dateCreated);
+		return this.ID.equals(other.ID);
 	}
 
 	public double getSalePrice() {

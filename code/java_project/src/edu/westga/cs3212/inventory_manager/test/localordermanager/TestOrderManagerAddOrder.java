@@ -35,7 +35,7 @@ class TestOrderManagerAddOrder {
 
 		// Assert
 		assertEquals(1, this.orderManager.getOrders().size());
-		assertEquals(order, this.orderManager.findOrderById(order.getId()));
+		assertEquals(order, this.orderManager.findOrderById(order.getID()));
 	}
 
 	@Test

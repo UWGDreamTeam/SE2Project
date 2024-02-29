@@ -81,10 +81,10 @@ public class LocalOrderManager implements OrderManager {
 		if (order == null) {
 			throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);
 		}
-		if (this.orders.containsKey(order.getId())) {
+		if (this.orders.containsKey(order.getID())) {
 			throw new IllegalArgumentException(ORDER_ALREADY_EXISTS);
 		} else {
-			this.orders.put(order.getId(), order);
+			this.orders.put(order.getID(), order);
 		}
 	}
 
@@ -93,10 +93,10 @@ public class LocalOrderManager implements OrderManager {
 		if (order == null) {
             throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);
         }
-        if (!this.orders.containsKey(order.getId())) {
+        if (!this.orders.containsKey(order.getID())) {
 			throw new IllegalArgumentException(ORDER_NOT_FOUND);
 		} else {
-			this.orders.remove(order.getId());
+			this.orders.remove(order.getID());
 		}
 	}
 
