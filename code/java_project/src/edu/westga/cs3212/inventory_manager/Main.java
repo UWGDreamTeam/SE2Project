@@ -3,6 +3,7 @@ package edu.westga.cs3212.inventory_manager;
 
 import java.io.IOException;
 
+import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -24,6 +25,9 @@ public class Main extends Application {
 	public static final String LOGIN_PAGE = "view/LoginPage.fxml";
 	public static final String ORDER_PAGE = "view/OrderPage.fxml";
 	public static final String EDIT_COMPONENT_PAGE = "view/EditComponentPage.fxml";
+	
+	private static Stage primaryStage;
+	private EmployeeType employeeType;
 
 	/**
 	 * JavaFX entry point.
@@ -34,13 +38,18 @@ public class Main extends Application {
 	 * @throws IOException
 	 */
 	@Override
-	public void start(Stage primaryStage) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource(Main.HOME_PAGE));
-		Scene scene = new Scene(parent);
-		primaryStage.setTitle(WINDOW_TITLE);
-		primaryStage.setScene(scene);
-		primaryStage.show();
+	public void start(Stage stage) throws IOException {
+		primaryStage = stage;
+        Parent parent = FXMLLoader.load(getClass().getResource(Main.LOGIN_PAGE));
+        Scene scene = new Scene(parent);
+        primaryStage.setTitle(WINDOW_TITLE);
+        primaryStage.setScene(scene);
+        primaryStage.show();
 	}
+	
+	public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
 
 	/**
 	 * Primary Java entry point.
