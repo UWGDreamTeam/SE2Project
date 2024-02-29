@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class Order {
 
 	private static final int MINIMUM_QUANTITY = 0;
+	private static final int MINIMUM_PURCHASE_PRICE = 0;
 	private static final String QUANTITY_TO_REMOVE_IS_GREATER_THAN_QUANTITY_IN_ORDER = "Quantity to remove is greater than quantity in order";
 	private static final String PRODUCT_NOT_FOUND_IN_ORDER = "Product not found in order";
 	private static final String QUANTITY_MUST_BE_GREATER_THAN_0 = "Quantity must be greater than 0";
@@ -27,6 +28,8 @@ public class Order {
 	private Map<Product, Integer> items;
 
 	private CompletionStatus completionStatus;
+	
+	private double purchasePrice;
 
 	/**
 	 * Instantiates a new order. Contains a list of items and the date the order was
@@ -41,6 +44,7 @@ public class Order {
 		// random generation.
 		this.id = "3212" + this.dateCreated.getNano() + new Random().nextInt();
 		this.items = new HashMap<>();
+		this.purchasePrice = MINIMUM_PURCHASE_PRICE;
 		this.completionStatus = CompletionStatus.INCOMPLETE;
 	}
 
@@ -57,6 +61,7 @@ public class Order {
 		this.checkProductAndQuantityInput(product, quantity);
 
 		int currQuantity = this.items.getOrDefault(product, 0);
+		this.purchasePrice += product.getPurchasePrice() * quantity;
 		this.items.put(product, currQuantity + quantity);
 	}
 

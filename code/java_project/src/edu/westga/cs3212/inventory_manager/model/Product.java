@@ -12,10 +12,15 @@ import java.util.Map;
 public class Product extends Item {
 
 	private static final int MINIMUM_QUANTITY = 1;
+	private static final double MINIMUM_PURCHASE_PRICE = 0;
+	private static final double PROFIT_MARGIN = 0.2;
 	private static final String COMPONENTS_MAP_CANNOT_BE_EMPTY = "New Components cannot be empty";
+	private static final String PURCHASE_PRICE_CANNOT_BE_NEGATIVE = "Purchase price cannot be negative";
 	private static final String INVALID_QUANTITY = "Quantity has to be greater than 0";
 	private static final String COMPONENTS_CANNOT_BE_EMPTY = "Components cannot be empty";
 	private static final String COMPONENT_CANNOT_BE_NULL = "Component cannot be null";
+	
+	private double purchasePrice;
 	
 	/** The necessaryComponents. 
 	 * @key string ID, the ID of the component
@@ -33,6 +38,7 @@ public class Product extends Item {
 		super(name);
 		
 		this.necessaryComponents = new HashMap<>();
+		this.purchasePrice = MINIMUM_PURCHASE_PRICE;
 	}
 	
 	/**
@@ -76,18 +82,24 @@ public class Product extends Item {
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(INVALID_QUANTITY);
 		}
-		
-		if (!this.necessaryComponents.containsKey(component.getId())) {
-			this.necessaryComponents.put(component.getId(), quantity);
-			
-			return true;
-		} else {
+		if (this.necessaryComponents.containsKey(component.getId())) {
 			return false;
 		}
+		this.necessaryComponents.put(component.getId(), quantity);	
+		this.setUnitCost(component.getUnitCost() * quantity);
+		this.setPurchasePrice(this.purchasePrice + (this.purchasePrice * PROFIT_MARGIN));
+		return true;
 		
 	}
 	
 	
+	public void setPurchasePrice(double newPurchasePrice) {
+		if (newPurchasePrice < MINIMUM_PURCHASE_PRICE) {
+			throw new IllegalArgumentException(PURCHASE_PRICE_CANNOT_BE_NEGATIVE);
+		}
+		this.purchasePrice = newPurchasePrice;
+	}
+
 	/**
 	 * Sets the necessaryComponents list to the map passed in.
 	 * The current list of component is cleared before it is reset.
@@ -159,6 +171,10 @@ public class Product extends Item {
         Item other = (Item) obj;
         
         return this.hashCode() == other.hashCode();
+	}
+
+	public double getPurchasePrice() {
+		return this.purchasePrice;
 	}
 
 }
