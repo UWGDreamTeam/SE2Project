@@ -47,9 +47,7 @@ public class AddComponentViewModel {
     	Double itemCost = Double.parseDouble(this.cost.get());
     	int quantityOfItem = Integer.parseInt(this.quantity.get());
     	
-    	Item newComponent = new Component(itemName);
-    	
-    	newComponent.setProductionCost(itemCost);    	
+    	Item newComponent = new Component(itemName, itemCost);  	
     	return this.componentInventory.addItem(newComponent, quantityOfItem);
     }
 

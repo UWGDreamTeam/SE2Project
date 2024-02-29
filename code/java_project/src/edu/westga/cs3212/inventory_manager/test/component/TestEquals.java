@@ -13,7 +13,7 @@ class TestEquals {
 	@Test
 	void testEqualsSelf() {
 		//Arrange
-		Item product = new Component("arrow");
+		Item product = new Component("arrow", 50);
 		
 		//Act
 		
@@ -24,7 +24,7 @@ class TestEquals {
 	@Test
 	void testEqualsWithNull() {
 		//Arrange
-		Item product = new Component("feather");
+		Item product = new Component("feather", 50);
 		
 		//Act
 		
@@ -35,7 +35,7 @@ class TestEquals {
 	@Test
 	void testEqualsWithDifferentClass() {
 		//Arrange
-		Item product = new Component("furnace");
+		Item product = new Component("furnace", 20);
 		Object product1 = new Object();
 		
 		//Act
@@ -49,8 +49,8 @@ class TestEquals {
 		//Arrange
 		String name = "table";
 		
-		Item product = new Component(name);
-		Item product1 = new Component(name);
+		Item product = new Component(name, 20);
+		Item product1 = new Component(name, 20);
 		
 		//Act & Assert
 		assertTrue(product.equals(product1));
@@ -59,8 +59,8 @@ class TestEquals {
 	@Test
 	void testEqualsWithSameClassDifferentHashCode() {
 		//Arrange
-		Item product = new Component("grass");
-		Item product1 = new Component("water");
+		Item product = new Component("grass", 90);
+		Item product1 = new Component("water", 90);
 		
 		//Act
 		

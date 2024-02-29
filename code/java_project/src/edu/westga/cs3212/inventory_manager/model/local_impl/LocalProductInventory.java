@@ -1,24 +1,26 @@
 package edu.westga.cs3212.inventory_manager.model.local_impl;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.InventoryManager;
+import edu.westga.cs3212.inventory_manager.model.ItemInventoryManager;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.ProductInventoryStorage;
 
-public class LocalProductInventory implements InventoryManager {
+public class LocalProductInventory implements ItemInventoryManager {
 	
 	private static final String ITEM_ID_CANNOT_BE_NULL = "Product ID cannot be null";
 	private static final String ITEM_ID_CANNOT_BE_BLANK = "Product ID cannot be blank";
+	private static final int MINIMUM_QUANTITY = 0;
+	private static final String QUANTITY_CANNOT_BE_NEGATIVE = "Quantity cannot be negative";
 	private static final String NEW_ITEM_CANNOT_BE_NULL = "New Product Cannot be null";
 	private static final String NEW_ITEM_ALREADY_EXISTS = "Product Already Exists";
-    private static final String COMPONENT_DOES_NOT_EXIST = "Component does not exist";
-    private static final String ITEM_ID_DOES_NOT_MATCH = "Product ID does not match";
+    private static final String PRODUCT_DOES_NOT_EXIST = "Product does not exist";
 	
-	private List<Product> products;
+	private Map<Product, Integer> products;
 	
 	/**
 	 * Instantiates a new LocalProductInventory object
@@ -27,102 +29,114 @@ public class LocalProductInventory implements InventoryManager {
 	 * @postcondition LocalProductInventory.products != null
 	 */
 	public LocalProductInventory() {
-		this.products = new ArrayList<>();
-		this.products = ProductInventoryStorage.load(Constants.PRODUCT_INVENTORY_FILE_LOCATION);
+		if (this.products == null) {
+			this.products = ProductInventoryStorage.load(Constants.PRODUCT_INVENTORY_FILE_LOCATION);
+		}
 	}
 	
 	public Iterable<Product> getProducts() {
-		return this.products;
+		return new ArrayList<>(this.products.keySet());
 	}
 
 	@Override
-	public ArrayList<Item> getItems() {
-		return new ArrayList<>(this.products);
-	}
-
-	@Override
-	public boolean addNewItem(Item newItem) {
-		if (newItem == null) {
-			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
-		}
-		
-		if (this.products.contains(newItem)) {
-			throw new IllegalArgumentException(NEW_ITEM_ALREADY_EXISTS);
-		}
-
-		boolean result = this.products.add((Product) newItem);
-		ProductInventoryStorage.save(this.products, Constants.PRODUCT_INVENTORY_FILE_LOCATION);
-		return result;
+	public Iterable<Item> getItems() {
+		return new ArrayList<>(this.products.keySet());
 	}
 
 	@Override
 	public boolean removeItem(Item item) {
 		if (item == null) {
-			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
+			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
 		}
-		
-		boolean result = this.products.remove(item);
-		ProductInventoryStorage.save(this.products, Constants.PRODUCT_INVENTORY_FILE_LOCATION);
-		return result;
+		if (this.products.remove(item) != null) {
+			this.save();
+			return true;
+		}
+		return false;
 	}
 	
 	
 
 	@Override
-	public Product getItemByID(String itemID) {
+	public Item getItemByID(String itemID) {
 		if (itemID == null) {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
 		}
-		
 		if (itemID.isBlank()) {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
 		}
-		
-		Item productFound = null;
-		
-		for (Item product : this.products) {
+		for (Product product : this.products.keySet()) {
 			if (product.getId().equals(itemID)) {
-				productFound = product;
+				return product;
 			}
 		}
-		
-		return (Product) productFound;
-	}
-
-	@Override
-	public int getQuantity() {
-		return this.products.size();
+		return null;
 	}
 	
 	@Override
 	public void clear() {
-		this.products = new ArrayList<>();
+		this.products.clear();
 		ProductInventoryStorage.save(this.products, Constants.PRODUCT_INVENTORY_FILE_LOCATION);
 	}
 
 	@Override
-	public void editItem(String id, Item newItem) {
-		if (id == null) {
-			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
-		}
-		if (id.isBlank()) {
-			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
-		}
+	public boolean addItem(Item newItem, int quantity) {
 		if (newItem == null) {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
-		if (!id.equals(newItem.getId())) {
-			throw new IllegalArgumentException(ITEM_ID_DOES_NOT_MATCH);
+		if (this.products.containsKey(newItem)) {
+			throw new IllegalArgumentException(NEW_ITEM_ALREADY_EXISTS);
 		}
-		if (!this.products.contains(this.getItemByID(id))) {
-			throw new IllegalArgumentException(COMPONENT_DOES_NOT_EXIST);
+		if (quantity < MINIMUM_QUANTITY) {
+			throw new IllegalArgumentException(QUANTITY_CANNOT_BE_NEGATIVE);
 		}
-		
-		Item componentBeingEdited = this.getItemByID(id);
-		this.products.remove(componentBeingEdited);
-		
-		this.addNewItem(newItem);
+		if (this.products.put((Product) newItem, quantity) != null) {
+			this.save();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean editItem(Item newItem) {
+		this.validItemAndWithinInventory(newItem);
+		if (this.products.put((Product) newItem, this.products.get(newItem)) != null) {
+			this.save();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int getQuantityOfItem(Item item) {
+		return this.products.get(item);
+	}
+
+	@Override
+	public void setQuantityOfItem(Item item, int quantity) {
+		this.validItemAndWithinInventory(item);
+		if (quantity < MINIMUM_QUANTITY) {
+			throw new IllegalArgumentException(QUANTITY_CANNOT_BE_NEGATIVE);
+		}
+		this.products.put((Product) item, quantity);
+	}
+	
+	void save() {
 		ProductInventoryStorage.save(this.products, Constants.PRODUCT_INVENTORY_FILE_LOCATION);
+	}
+	
+	private void validItemAndWithinInventory(Item item) {
+		if (item == null) {
+			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
+		}
+		if (this.products.get(item) == null) {
+			throw new IllegalArgumentException(PRODUCT_DOES_NOT_EXIST);
+		}
+	}
+
+	@Override
+	public Map<Item, Integer> getItemsWithQuantities() {
+		return new HashMap<>(this.products);
 	}
 
 }

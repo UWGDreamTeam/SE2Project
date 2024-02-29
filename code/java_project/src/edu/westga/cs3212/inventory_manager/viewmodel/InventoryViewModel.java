@@ -1,5 +1,8 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
@@ -44,7 +47,11 @@ public class InventoryViewModel {
 	 * @return the observable component list
 	 */
 	public ObservableList<Item> getObservableComponentList() {
-		return FXCollections.observableArrayList(this.componentsInventory.getItems());
+		List<Item> itemList = new ArrayList<>();
+	    for (Item item : this.componentsInventory.getItems()) {
+	        itemList.add(item);
+	    }
+	    return FXCollections.observableArrayList(itemList);
 	}
 	
 	/**

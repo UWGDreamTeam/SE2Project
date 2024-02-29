@@ -6,7 +6,9 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,7 +38,7 @@ public final class ComponentInventoryStorage {
 	 * @param components  The list of components to save.
 	 * @param filePath  The file path where products are saved.
 	 */
-	public static void save(List<Component> components, String filePath) {
+	public static void save(Map<Component, Integer> components, String filePath) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(components, writer);
@@ -54,16 +56,16 @@ public final class ComponentInventoryStorage {
 	 * @param filePath The file path from where products are to be loaded.
 	 * @return A list of products.
 	 */
-	public static List<Component> load(String filePath) {
-		List<Component> components;
+	public static Map<Component, Integer> load(String filePath) {
+		Map<Component, Integer> components;
 		try {
 			String json = new String(Files.readAllBytes(Paths.get(filePath)));
 			Gson gson = new Gson();
-			Type type = new TypeToken<List<Component>>() {
+			Type type = new TypeToken<Map<Component, Integer>>() {
 			}.getType();
 			components = gson.fromJson(json, type);
 		} catch (IOException e) {
-			components = new ArrayList<>();
+			components = new HashMap<>();
 		}
 		return components;
 	}

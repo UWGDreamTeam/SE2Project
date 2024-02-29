@@ -1,12 +1,14 @@
 package edu.westga.cs3212.inventory_manager.model;
 
+import java.util.Map;
+
 /**
  * The Interface InventoryManager.
  * 
  * @author Group 1
  * @version Spring 2024
  */
-public interface InventoryManager {
+public interface ItemInventoryManager {
 	
 	/**
 	 * Gets the list of items in the inventory.
@@ -17,6 +19,9 @@ public interface InventoryManager {
 	 * @return the list of items in the inventory
 	 */
 	Iterable<Item> getItems();
+	
+	Map<Item, Integer> getItemsWithQuantities();
+	
 	
 	/**
 	 * Adds the newItem to the Inventory
@@ -78,7 +83,7 @@ public interface InventoryManager {
 	 */
 	int getQuantityOfItem(Item item);
 	
-	int setQuantityOfItem(Item item, int quantity);
+	void setQuantityOfItem(Item item, int quantity);
 	
 	
 	/**

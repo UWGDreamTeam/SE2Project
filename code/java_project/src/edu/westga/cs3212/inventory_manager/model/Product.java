@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * The Class Product.
@@ -19,6 +20,7 @@ public class Product extends Item {
 	private static final String INVALID_QUANTITY = "Quantity has to be greater than 0";
 	private static final String COMPONENTS_CANNOT_BE_EMPTY = "Components cannot be empty";
 	private static final String COMPONENT_CANNOT_BE_NULL = "Component cannot be null";
+	private static final String COMPONENT_ALREADY_EXISTS = "Component already exists";
 	
 	private double salePrice;
 	
@@ -26,7 +28,7 @@ public class Product extends Item {
 	 * @key string ID, the ID of the component
 	 * @value int quantity, the quantity of that component
 	 * */
-	private Map<String, Integer> recipe;
+	private Map<Component, Integer> recipe;
 	
 	/**
 	 * Instantiates a new product.
@@ -34,11 +36,16 @@ public class Product extends Item {
 	 * @param name the name
 	 * 
 	 */
-	public Product(String name) {
-		super(name);
-		
+	public Product(String name, double productionCost) {
+		super(name, productionCost);
+		this.setSalePrice(productionCost * (1 + PROFIT_MARGIN));
 		this.recipe = new HashMap<>();
-		this.salePrice = MINIMUM_PURCHASE_PRICE;
+	}
+	
+	public Product(String name, double productionCost, double salePrice) {
+		super(name, productionCost);
+		this.setSalePrice(salePrice);
+		this.recipe = new HashMap<>();
 	}
 	
 	/**
@@ -48,8 +55,9 @@ public class Product extends Item {
 	 * @param components the recipe for this product
 	 * 
 	 */
-	public Product(String name, Map<String, Integer> components) {
-		super(name);
+	public Product(String name, double productionCost, Map<Component, Integer> components) {
+		super(name, productionCost);
+		this.setSalePrice(productionCost * (1 + PROFIT_MARGIN));
 		
 		if (components == null) {
 			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
@@ -59,9 +67,27 @@ public class Product extends Item {
 			throw new IllegalArgumentException(COMPONENTS_CANNOT_BE_EMPTY);
 		}
 		
-		for (Map.Entry<String, Integer> entry : components.entrySet()) {
-			this.addComponent(new Component(entry.getKey()), entry.getValue());
+		for (Map.Entry<Component, Integer> component : components.entrySet()) {
+			this.recipe.put(component.getKey(), component.getValue());
 		}
+		
+	}
+	
+	public Product(String name, double productionCost, double salePrice, Map<Component, Integer> components) {
+		super(name, productionCost);
+		this.setSalePrice(salePrice);
+		if (components == null) {
+			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
+		}
+
+		if (components.isEmpty()) {
+			throw new IllegalArgumentException(COMPONENTS_CANNOT_BE_EMPTY);
+		}
+
+		for (Map.Entry<Component, Integer> component : components.entrySet()) {
+			this.recipe.put(component.getKey(), component.getValue());
+		}
+
 	}
 	
 	
@@ -84,14 +110,13 @@ public class Product extends Item {
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(INVALID_QUANTITY);
 		}
-		if (this.recipe.containsKey(component.getId())) {
-			return false;
+		if (this.recipe.containsKey(component)) {
+			throw new IllegalArgumentException(COMPONENT_ALREADY_EXISTS);
 		}
-		this.recipe.put(component.getId(), quantity);	
-		this.setProductionCost(component.getProductionCost() * quantity);
-		this.setSalePrice(this.salePrice + (this.salePrice * PROFIT_MARGIN));
-		return true;
-		
+		if (this.recipe.put(component, quantity) != null) {
+			return true;
+		} 
+		return false;
 	}
 	
 	
@@ -110,7 +135,7 @@ public class Product extends Item {
 	 * @precondition newComponents != null && newComponents > 0
 	 * @postcondition this.getComponentsList().size() == newComponents.size()
 	 */
-	public void setNecessaryComponentsList(Map<String, Integer> newComponents) {
+	public void setRecipe(Map<Component, Integer> newComponents) {
 		if (newComponents == null) {
 			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
 		}
@@ -134,7 +159,7 @@ public class Product extends Item {
 	 * 
 	 * @return the list of necessaryComponents and quantities
 	 */
-	public Map<String, Integer> getRecipe() {
+	public Map<Component, Integer> getRecipe() {
 		return new HashMap<>(this.recipe);
 	}
 	
@@ -145,12 +170,7 @@ public class Product extends Item {
 	 */
 	@Override
 	public int hashCode() {
-		int result = "product".hashCode();
-		
-		result += this.getId().hashCode();
-		result += this.getName().hashCode();
-		
-		return result;
+		return "Product".hashCode() + this.getId().hashCode();
 	}
 	
 	/**
@@ -172,7 +192,7 @@ public class Product extends Item {
         
         Item other = (Item) obj;
         
-        return this.hashCode() == other.hashCode();
+        return Objects.equals(this.getId(), other.getId());
 	}
 
 	public double getPurchasePrice() {

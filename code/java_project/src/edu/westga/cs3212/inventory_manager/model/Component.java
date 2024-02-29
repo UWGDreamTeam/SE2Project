@@ -13,17 +13,13 @@ public class Component extends Item {
 	 *
 	 * @param name the name
 	 */
-	public Component(String name) {
-		super(name);
+	public Component(String name, double productionCost) {
+		super(name, productionCost);
 	}
 	
 	@Override
 	public int hashCode() {
-		int result = "component".hashCode();
-		
-		result += this.getName().hashCode();
-		
-		return result;
+		return "Component".hashCode() + this.getId().hashCode();
 	}
 	
 	@Override

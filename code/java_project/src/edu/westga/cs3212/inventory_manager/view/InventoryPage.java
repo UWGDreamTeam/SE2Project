@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Item;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.viewmodel.InventoryViewModel;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -75,6 +76,7 @@ public class InventoryPage {
     private Tab productsTabPage;
 
     private InventoryViewModel inventoryVM;
+    private LocalComponentInventory componentInventory;
 
     /* GENERAL */
     
@@ -82,6 +84,7 @@ public class InventoryPage {
     void initialize() {
     	
         this.inventoryVM = new InventoryViewModel();
+        this.componentInventory = new LocalComponentInventory();
         
         this.inventoryVM.getSelectedComponent().bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
         
@@ -93,8 +96,8 @@ public class InventoryPage {
 
         this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         this.nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        this.costColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getUnitCost()));
-        this.quantityColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()));
+        this.costColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
+        this.quantityColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(this.componentInventory.getQuantityOfItem(cellData.getValue())));
 	}
     
     @FXML

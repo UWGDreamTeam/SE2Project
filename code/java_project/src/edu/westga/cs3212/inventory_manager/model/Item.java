@@ -41,9 +41,10 @@ public abstract class Item {
 	 * 					this.getQuantity() == 0 &&
 	 * 					this.getDateLastModified() == LocalDateTime.now()
 	 */
-	protected Item(String name) {
+	protected Item(String name, double productionCost) {
 		this.setName(name);
 		this.setId(this.generateID());
+		this.setProductionCost(productionCost);
 	}
 	
 	/**
