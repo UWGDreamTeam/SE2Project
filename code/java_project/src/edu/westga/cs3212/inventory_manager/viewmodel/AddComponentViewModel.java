@@ -60,17 +60,6 @@ public class AddComponentViewModel {
 		return this.name;
 	}
 
-
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(StringProperty name) {
-		this.name = name;
-	}
-
-
 	/**
 	 * Gets the cost.
 	 *
@@ -80,17 +69,6 @@ public class AddComponentViewModel {
 		return this.cost;
 	}
 
-
-	/**
-	 * Sets the cost.
-	 *
-	 * @param cost the new cost
-	 */
-	public void setCost(StringProperty cost) {
-		this.cost = cost;
-	}
-
-
 	/**
 	 * Gets the quantity.
 	 *
@@ -98,35 +76,5 @@ public class AddComponentViewModel {
 	 */
 	public StringProperty getQuantity() {
 		return this.quantity;
-	}
-
-
-	/**
-	 * Sets the quantity.
-	 *
-	 * @param quantity the new quantity
-	 */
-	public void setQuantity(StringProperty quantity) {
-		this.quantity = quantity;
-	}
-
-
-	/**
-	 * Gets the component inventory.
-	 *
-	 * @return the component inventory
-	 */
-	public LocalComponentInventory getComponentInventory() {
-		return this.componentInventory;
-	}
-
-
-	/**
-	 * Sets the component inventory.
-	 *
-	 * @param componentInventory the new component inventory
-	 */
-	public void setComponentInventory(LocalComponentInventory componentInventory) {
-		this.componentInventory = componentInventory;
 	}
 }
