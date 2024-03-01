@@ -1,10 +1,8 @@
 package edu.westga.cs3212.inventory_manager.view;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
@@ -15,17 +13,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class EditProduct {
@@ -68,7 +62,7 @@ public class EditProduct {
 	void editProductOnClick(ActionEvent event) {
 		boolean result = true;
 		try {
-			this.editProductVM.updateProduct(componentList);
+			this.editProductVM.updateProduct(this.componentList);
 		} catch (Exception e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Error");
@@ -83,14 +77,17 @@ public class EditProduct {
 	}
 
 	/**
-	 * Initializes the UI with data from the specified product for editing.
-	 * Sets the currently selected product in the ViewModel and populates a local map with the product's components,
-	 * allowing for modifications to the product's recipe. This method casts the given Item to a Product
-	 * and retrieves its recipe for further manipulation.
+	 * Initializes the UI with data from the specified product for editing. Sets the
+	 * currently selected product in the ViewModel and populates a local map with
+	 * the product's components, allowing for modifications to the product's recipe.
+	 * This method casts the given Item to a Product and retrieves its recipe for
+	 * further manipulation.
 	 *
-	 * @param item The product item whose data is to be loaded into the UI for editing. It is expected to be an instance of Product.
+	 * @param item The product item whose data is to be loaded into the UI for
+	 *             editing. It is expected to be an instance of Product.
 	 * @precondition item != null && item instanceof Product
-	 * @postcondition The UI is prepared for editing the product, with the component list populated from the product's recipe.
+	 * @postcondition The UI is prepared for editing the product, with the component
+	 *                list populated from the product's recipe.
 	 * @throws ClassCastException if the item cannot be cast to a Product.
 	 */
 	public void initalizeWithItem(Item item) {

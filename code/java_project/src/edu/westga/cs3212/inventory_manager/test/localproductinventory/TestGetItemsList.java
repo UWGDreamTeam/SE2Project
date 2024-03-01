@@ -1,6 +1,5 @@
 package edu.westga.cs3212.inventory_manager.test.localproductinventory;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;

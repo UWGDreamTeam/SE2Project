@@ -64,7 +64,7 @@ public final class EmployeeCredentialsStorage {
 		} catch (Exception e) {
 			employeeCredentialsMap = new HashMap<>();
 		}
-		LocalEmployeeCredentials admin = new LocalEmployeeCredentials("admin", "admin", "admin", "password", EmployeeType.MANAGER);
+		LocalEmployeeCredentials admin = new LocalEmployeeCredentials("admin", "admin1", "admin2", "password", EmployeeType.MANAGER);
 		employeeCredentialsMap.put(admin.getEmployeeID(), admin);
 		return employeeCredentialsMap;
 	}
