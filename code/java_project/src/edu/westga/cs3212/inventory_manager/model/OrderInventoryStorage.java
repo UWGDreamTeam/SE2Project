@@ -1,7 +1,6 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,7 +18,6 @@ public final class OrderInventoryStorage {
 	private OrderInventoryStorage() {
 		throw new IllegalStateException(OrderInventoryStorage.UTILITY_CLASS_ERROR);
 	}
-	
 	
 	public static void save(List<Order> orders, String filePath) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
