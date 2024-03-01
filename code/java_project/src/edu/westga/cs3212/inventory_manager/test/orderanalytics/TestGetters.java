@@ -10,19 +10,21 @@ public class TestGetters {
 	
 	@Test
 	void testWhenThereAreNoOrders() {
-		LocalOrderManager testOrderManager = new LocalOrderManager();
-		testOrderManager.clearOrders();
 		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
+		testOrderAnalytics.clearOrders();
+		
 		assertTrue(testOrderAnalytics.getOrdersCount() == 0);
 	}
 	
 	@Test
 	void testWhenThereIsOneOrder() {
 		LocalOrderManager testOrderManager = new LocalOrderManager();
+		testOrderManager.clearOrders();
+		
 		Order testOrder = new Order();
+		
 		testOrderManager.addOrder(testOrder);
 		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
 		assertTrue(testOrderAnalytics.getOrdersCount() == 1);
 	}
-	
 }

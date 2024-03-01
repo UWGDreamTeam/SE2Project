@@ -1,4 +1,5 @@
 package edu.westga.cs3212.inventory_manager.view;
+
 import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.Main;
@@ -20,18 +21,18 @@ import javafx.stage.Stage;
 public class LoginPage {
 
 	@FXML
-    private Text companyTitleLabel;
+	private Text companyTitleLabel;
 
-    @FXML
-    private TextField employeeIDTextField;
+	@FXML
+	private TextField employeeIDTextField;
 
-    @FXML
-    private PasswordField passwordTextField;
-    
-    private LoginPageViewModel viewModel;
+	@FXML
+	private PasswordField passwordTextField;
 
-    @FXML
-    void attemptLogin(ActionEvent event) throws IOException {
+	private LoginPageViewModel viewModel;
+
+	@FXML
+	void attemptLogin(ActionEvent event) throws IOException {
 		if (this.viewModel.attemptLogin()) {
 			this.showSuccessPopup(event);
 		} else {
@@ -39,13 +40,13 @@ public class LoginPage {
 		}
 	}
 
-    @FXML
-    void initialize() {
-    	this.viewModel = new LoginPageViewModel();
-    	this.employeeIDTextField.textProperty().bindBidirectional(this.viewModel.employeeIDProperty());
-    	this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
-    }
-    
+	@FXML
+	void initialize() {
+		this.viewModel = new LoginPageViewModel();
+		this.employeeIDTextField.textProperty().bindBidirectional(this.viewModel.employeeIDProperty());
+		this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
+	}
+
 	private void showErrorPopup() {
 		Alert errorPopup = new Alert(AlertType.ERROR);
 		errorPopup.setContentText(Constants.LOGIN_ERROR_MESSAGE);
@@ -59,18 +60,18 @@ public class LoginPage {
 		this.closeWindow(event);
 		this.showHomePage(event);
 	}
-    
-    private void closeWindow(ActionEvent event) {
+
+	private void closeWindow(ActionEvent event) {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	stage.close();
+		stage.close();
 	}
-    
-    void showHomePage(ActionEvent event) throws IOException{
-    	 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	 Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
-	     Scene scene = new Scene(parent);
-	     stage.setScene(scene);
-    	 stage.setTitle("Home Page");
-    	 stage.show();
-    }
+
+	void showHomePage(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
+		Scene scene = new Scene(parent);
+		stage.setScene(scene);
+		stage.setTitle("Home Page");
+		stage.show();
+	}
 }

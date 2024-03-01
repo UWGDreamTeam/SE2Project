@@ -1,6 +1,5 @@
 package edu.westga.cs3212.inventory_manager.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -80,5 +79,8 @@ public interface OrderManager {
 	void setOrderCompletionStatus(Order order, CompletionStatus status);
 	
 	
+	/**
+	 * Clear the orders.
+	 */
 	void clearOrders();
 }

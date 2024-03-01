@@ -1,13 +1,10 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;

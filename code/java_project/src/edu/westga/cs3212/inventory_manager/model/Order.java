@@ -22,7 +22,7 @@ public class Order {
 	private static final String ID_CANNOT_BE_NULL = "ID cannot be null";
 	private static final String ID_CANNOT_BE_BLANK = "ID cannot be blank";
 	
-	private String ID;
+	private String id;
 
 	private Map<Product, Integer> items;
 
@@ -39,7 +39,7 @@ public class Order {
 	 * @postcondition none
 	 */
 	public Order() {
-		this.ID = this.generateID();
+		this.id = this.generateID();
 		this.items = new HashMap<>();
 		this.salePrice = MINIMUM_PURCHASE_PRICE;
 		this.productionCost = MINIMUM_PURCHASE_PRICE;
@@ -106,7 +106,7 @@ public class Order {
 	 * @return the id
 	 */
 	public String getID() {
-		return this.ID;
+		return this.id;
 	}
 	
 	/**
@@ -161,19 +161,27 @@ public class Order {
 		return UUID.randomUUID().toString();
 	}
 	
-	public String setID(String id) {
+	/**
+	 * Sets the ID for this order.
+	 * 
+	 * @param id The new ID to be assigned to the order.
+	 * @precondition id != null && !id.isBlank()
+	 * @postcondition this.getID() == id
+	 * @throws IllegalArgumentException if id is null or blank
+	 */
+	public void setID(String id) {
 		if (id == null) {
 			throw new IllegalArgumentException(ID_CANNOT_BE_NULL);
 		}
 		if (id.isBlank()) {
 			throw new IllegalArgumentException(ID_CANNOT_BE_BLANK);
 		}
-		return id;
+		this.id = id;
 	}
 
 	@Override
 	public int hashCode() {
-		return "Order".hashCode() + this.ID.hashCode();
+		return "Order".hashCode() + this.id.hashCode();
 	}
 	
 	@Override
@@ -185,19 +193,28 @@ public class Order {
 			return false;
 		}
 		Order other = (Order) obj;
-		return this.ID.equals(other.ID);
+		return this.id.equals(other.id);
 	}
 
+	/**
+	 * Gets the sale price of this order.
+	 * 
+	 * @return The sale price of the order.
+	 * @precondition none
+	 * @postcondition none
+	 */
 	public double getSalePrice() {
 		return this.salePrice;
 	}
 
+	/**
+	 * Gets the production cost of this order.
+	 * 
+	 * @return The production cost of the order.
+	 * @precondition none
+	 * @postcondition none
+	 */
 	public double getProductionCost() {
 		return this.productionCost;
-	}
-	
-	public String toString() {
-		return "Order{" + "id=" + this.ID + ", items=" + this.items + ", completionStatus=" + this.completionStatus
-				+ '}';
 	}
 }

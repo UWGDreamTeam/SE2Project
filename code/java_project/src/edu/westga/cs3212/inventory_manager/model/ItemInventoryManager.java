@@ -20,6 +20,12 @@ public interface ItemInventoryManager {
 	 */
 	Iterable<Item> getItems();
 	
+	
+	/**
+	 * Gets the items with their quantities.
+	 *
+	 * @return the map of items with their quantities
+	 */
 	Map<Item, Integer> getItemsWithQuantities();
 	
 	
@@ -30,6 +36,7 @@ public interface ItemInventoryManager {
 	 * @postcondition this.getListOfItems().size() == this.getListOfItems().size()@prev + 1 
 	 *
 	 * @param newItem the item to be added
+	 * @param quantity quantity of items to add
 	 * @return true, if successful
 	 */
 	boolean addItem(Item newItem, int quantity);
@@ -75,14 +82,23 @@ public interface ItemInventoryManager {
 	
 	/**
 	 * Gets the quantity.
+	 * 
+	 * @param item gets the quantity of the specified item
 	 *
 	 * @precondition none
-	 * @postcondition none 
+	 * @postcondition none
 	 * 
 	 * @return the quantity  of items in the inventory
 	 */
 	int getQuantityOfItem(Item item);
 	
+	
+	/**
+	 * Sets the quantity of item.
+	 *
+	 * @param item the item to set the quantity
+	 * @param quantity the quantity of the item
+	 */
 	void setQuantityOfItem(Item item, int quantity);
 	
 	
