@@ -1,15 +1,8 @@
 [
   {
-    "ID": "ef369e22-7c60-4299-9523-2f39cd66eb30",
+    "ID": "92f72ffa-70bc-4942-acad-2899bdca22f7",
     "items": {},
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 0.0,
-    "productionCost": 0.0
-  },
-  {
-    "ID": "d3de882d-20d9-48f5-9903-2994931aa5e0",
-    "items": {},
-    "completionStatus": "INCOMPLETE",
+    "completionStatus": "COMPLETE",
     "salePrice": 0.0,
     "productionCost": 0.0
   }

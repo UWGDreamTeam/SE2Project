@@ -45,4 +45,8 @@ public class OrderAnalytics {
 	public int getOrdersInProgressCount() {
 		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE).size();
 	}
+	
+	public void clearOrders() {
+		this.orderManager.clearOrders();
+	}
 }

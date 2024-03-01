@@ -30,20 +30,20 @@ public class LocalOrderManager implements OrderManager {
 	 * Instantiates a new OrderManager with an empty collection of orders.
 	 * 
 	 * @precondition none
-	 * @postcondition this.orders.size() == 0
+	 * @postcondition LocalOrderManager.orders.size() == 0
 	 */
 	public LocalOrderManager() {
-		this.orders = OrderInventoryStorage.load(Constants.ORDER_FILE_PATH);
-		if (this.orders.isEmpty()) {
+		LocalOrderManager.orders = OrderInventoryStorage.load(Constants.ORDER_FILE_PATH);
+		if (LocalOrderManager.orders.isEmpty()) {
 			LocalProductInventory productInventory = new LocalProductInventory();
-			this.orders = DemoDataUtility.createDemoOrders(productInventory.getProductsWithQuantities());
-			OrderInventoryStorage.save(this.orders, Constants.ORDER_FILE_PATH);
+			LocalOrderManager.orders = DemoDataUtility.createDemoOrders(productInventory.getProductsWithQuantities());
+			OrderInventoryStorage.save(LocalOrderManager.orders, Constants.ORDER_FILE_PATH);
 		}
     }
 
 	@Override
 	public List<Order> getOrders() {
-		return this.orders;
+		return LocalOrderManager.orders;
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class LocalOrderManager implements OrderManager {
 			throw new IllegalArgumentException(COMPLETION_STATUS_CANNOT_BE_NULL);
 		}
 		List<Order> completeOrders = new ArrayList<>();
-		for (Order currOrder : this.orders) {
+		for (Order currOrder : LocalOrderManager.orders) {
 			if (currOrder.getCompletionStatus() == status) {
 				completeOrders.add(currOrder);
 			}
@@ -65,11 +65,11 @@ public class LocalOrderManager implements OrderManager {
 		if (order == null) {
 			throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);
 		}
-		if (this.orders.contains(order)) {
+		if (LocalOrderManager.orders.contains(order)) {
 			throw new IllegalArgumentException(ORDER_ALREADY_EXISTS);
 		} else {
-			this.orders.add(order);
-			OrderInventoryStorage.save(this.orders, Constants.ORDER_FILE_PATH);
+			LocalOrderManager.orders.add(order);
+			OrderInventoryStorage.save(LocalOrderManager.orders, Constants.ORDER_FILE_PATH);
 		}
 	}
 
@@ -78,10 +78,10 @@ public class LocalOrderManager implements OrderManager {
 		if (order == null) {
             throw new IllegalArgumentException(ORDER_CANNOT_BE_NULL);
         }
-        if (!this.orders.contains(order)) {
+        if (!LocalOrderManager.orders.contains(order)) {
             throw new IllegalArgumentException(ORDER_NOT_FOUND);
         }
-        this.orders.remove(order);
+        LocalOrderManager.orders.remove(order);
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class LocalOrderManager implements OrderManager {
             throw new IllegalArgumentException(ORDER_ID_CANNOT_BE_EMPTY);
         }
 		Order foundOrder = null;
-		for (Order currOrder : this.orders) {
+		for (Order currOrder : LocalOrderManager.orders) {
 			if (currOrder.getID().equals(id)) {
 				foundOrder = currOrder;
 			}
@@ -111,12 +111,12 @@ public class LocalOrderManager implements OrderManager {
 		}
 		if (order.getCompletionStatus() != status) {
 	        order.setCompletionStatus(status);
-	        OrderInventoryStorage.save(this.orders, Constants.ORDER_FILE_PATH);
+	        OrderInventoryStorage.save(LocalOrderManager.orders, Constants.ORDER_FILE_PATH);
 	    }
 	}
 
 	@Override
 	public void clearOrders() {
-		this.orders.clear();
+		LocalOrderManager.orders.clear();
 	}
 }
