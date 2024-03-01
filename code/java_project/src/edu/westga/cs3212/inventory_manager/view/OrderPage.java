@@ -168,7 +168,7 @@ public class OrderPage {
             Optional<ButtonType> result = confirmationDialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 this.viewModel.fulfillSelectedOrder(selectedOrder);
-                refreshTablesAndClearSelection();
+                this.refreshTablesAndClearSelection();
             }
         }
     }
@@ -182,7 +182,7 @@ public class OrderPage {
 
 	@FXML
     void adminButtonOnClick(ActionEvent event) {
-    	// TODO Add Admin Page
+    	// TO DO Add Admin Page
     }
 
 

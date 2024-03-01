@@ -14,57 +14,57 @@ import javafx.stage.Stage;
 public class EditComponentPage {
 
 	@FXML
-    private ResourceBundle resources;
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private TextField nameTextField;
-    
-    @FXML
-    private TextField costTextField;
+	@FXML
+	private TextField nameTextField;
 
-    @FXML
-    private TextField quantityTextField;
-    
-    private EditComponentViewModel editComponentVM;
-    
-    @FXML
-    void initialize() {
-    	this.editComponentVM = new EditComponentViewModel();
-    	
-//    	this.nameTextField.textProperty().bindBidirectional(this.editComponentVM.getName());
-//    	this.costTextField.textProperty().bindBidirectional(this.editComponentVM.getCost());
-//    	this.quantityTextField.textProperty().bindBidirectional(this.editComponentVM.getQuantity());
-    }
-    
-    public void initializeWithItem(Item item) {
-		this.editComponentVM.setSelectedComponent(item);
-//	    this.nameTextField.setText(item.getName());
-//	    this.costTextField.setText(String.valueOf(item.getUnitCost()));
-//	    this.quantityTextField.setText(String.valueOf(item.getQuantity()));
-	    
-    	this.nameTextField.textProperty().bindBidirectional(this.editComponentVM.getName());
-    	this.costTextField.textProperty().bindBidirectional(this.editComponentVM.getCost());
-    	this.quantityTextField.textProperty().bindBidirectional(this.editComponentVM.getQuantity());
+	@FXML
+	private TextField costTextField;
+
+	@FXML
+	private TextField quantityTextField;
+
+	private EditComponentViewModel editComponentVM;
+
+	@FXML
+	void initialize() {
+		this.editComponentVM = new EditComponentViewModel();
 	}
 
-    @FXML
-    void cancel(ActionEvent event) {
-    	this.closeWindow(event);
-    }
+	/**
+	 * Initializes the UI with the data from the specified item for editing.
+	 * Binds the item's properties (name, cost, and quantity) to the corresponding input fields in the UI,
+	 * allowing for the editing of the item's attributes.
+	 *
+	 * @param item The item whose data is to be loaded into the UI for editing.
+	 * @precondition item != null
+	 * @postcondition The UI input fields are bound to the properties of the specified item, enabling their edit.
+	 */
+	public void initializeWithItem(Item item) {
+		this.editComponentVM.setSelectedComponent(item);
+		this.nameTextField.textProperty().bindBidirectional(this.editComponentVM.getName());
+		this.costTextField.textProperty().bindBidirectional(this.editComponentVM.getCost());
+		this.quantityTextField.textProperty().bindBidirectional(this.editComponentVM.getQuantity());
+	}
+
+	@FXML
+	void cancel(ActionEvent event) {
+		this.closeWindow(event);
+	}
 
 	private void closeWindow(ActionEvent event) {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	stage.close();
+		stage.close();
 	}
 
-    @FXML
-    void updateEditingComponent(ActionEvent event) {
-    	if (this.editComponentVM.update()) {
-    		this.closeWindow(event);
-    	}
-    }
+	@FXML
+	void updateEditingComponent(ActionEvent event) {
+		if (this.editComponentVM.update()) {
+			this.closeWindow(event);
+		}
+	}
 }
-

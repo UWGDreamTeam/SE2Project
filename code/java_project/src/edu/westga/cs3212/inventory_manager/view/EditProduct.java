@@ -10,7 +10,6 @@ import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
-import edu.westga.cs3212.inventory_manager.viewmodel.AddProductViewModel;
 import edu.westga.cs3212.inventory_manager.viewmodel.EditProductViewModel;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,7 +25,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class EditProduct {
@@ -81,6 +79,17 @@ public class EditProduct {
 		}
 	}
 
+	/**
+	 * Initializes the UI with data from the specified product for editing.
+	 * Sets the currently selected product in the ViewModel and populates a local map with the product's components,
+	 * allowing for modifications to the product's recipe. This method casts the given Item to a Product
+	 * and retrieves its recipe for further manipulation.
+	 *
+	 * @param item The product item whose data is to be loaded into the UI for editing. It is expected to be an instance of Product.
+	 * @precondition item != null && item instanceof Product
+	 * @postcondition The UI is prepared for editing the product, with the component list populated from the product's recipe.
+	 * @throws ClassCastException if the item cannot be cast to a Product.
+	 */
 	public void initalizeWithItem(Item item) {
 		this.editProductVM.setProduct(item);
 		Product itemProduct = (Product) item;
@@ -93,20 +102,16 @@ public class EditProduct {
 			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
 
-			// Create a new scene with the parent and get its preferred size
 			Scene scene = new Scene(parent);
 			double preferredWidth = parent.prefWidth(-1);
 			double preferredHeight = parent.prefHeight(preferredWidth);
 
-			// Set the stage's width and height to fit the content
 			currentStage.setWidth(preferredWidth);
 			currentStage.setHeight(preferredHeight);
 
-			// Set the scene and title of the stage
 			currentStage.setScene(scene);
 			currentStage.setTitle("Inventory Page");
 		} catch (IOException e) {
-			// Handle IOException
 			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
 			errorPopup.showAndWait();
@@ -151,23 +156,16 @@ public class EditProduct {
 		this.componentRecipeTableView.getSelectionModel().selectedItemProperty()
 				.addListener((obs, oldSelection, newSelection) -> {
 					if (newSelection != null) {
-						Integer quantity = this.componentList.getOrDefault(newSelection, 0); // Default to 1 if not
-																								// found
-						// This line assumes your Spinner is configured with a SpinnerValueFactory that
-						// allows setting its value
+						Integer quantity = this.componentList.getOrDefault(newSelection, 0);
 						this.currentComponentQuantity.getValueFactory().setValue(quantity);
 					}
 				});
 
-		// Update map when spinner value changes
 		this.currentComponentQuantity.valueProperty().addListener((obs, oldValue, newValue) -> {
-			// Get the selected component
 			Component selectedComponent = this.componentRecipeTableView.getSelectionModel().getSelectedItem();
 			if (selectedComponent != null && newValue != null) {
-				// Update the quantity in the componentList map
 				this.componentList.put(selectedComponent, newValue);
 
-				// Refresh the table view to reflect the updated quantity
 				this.componentRecipeTableView.refresh();
 			}
 		});

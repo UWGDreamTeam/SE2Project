@@ -23,7 +23,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class AddProduct {
@@ -79,20 +78,16 @@ public class AddProduct {
 			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
 
-			// Create a new scene with the parent and get its preferred size
 			Scene scene = new Scene(parent);
 			double preferredWidth = parent.prefWidth(-1);
 			double preferredHeight = parent.prefHeight(preferredWidth);
 
-			// Set the stage's width and height to fit the content
 			currentStage.setWidth(preferredWidth);
 			currentStage.setHeight(preferredHeight);
 
-			// Set the scene and title of the stage
 			currentStage.setScene(scene);
 			currentStage.setTitle("Inventory Page");
 		} catch (IOException e) {
-			// Handle IOException
 			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
 			errorPopup.showAndWait();
@@ -137,23 +132,16 @@ public class AddProduct {
 		this.componentRecipeTableView.getSelectionModel().selectedItemProperty()
 				.addListener((obs, oldSelection, newSelection) -> {
 					if (newSelection != null) {
-						Integer quantity = this.componentList.getOrDefault(newSelection, 0); // Default to 1 if not
-																								// found
-						// This line assumes your Spinner is configured with a SpinnerValueFactory that
-						// allows setting its value
+						Integer quantity = this.componentList.getOrDefault(newSelection, 0);
 						this.currentComponentQuantity.getValueFactory().setValue(quantity);
 					}
 				});
 
-		// Update map when spinner value changes
 		this.currentComponentQuantity.valueProperty().addListener((obs, oldValue, newValue) -> {
-			// Get the selected component
 			Component selectedComponent = this.componentRecipeTableView.getSelectionModel().getSelectedItem();
 			if (selectedComponent != null && newValue != null) {
-				// Update the quantity in the componentList map
 				this.componentList.put(selectedComponent, newValue);
 
-				// Refresh the table view to reflect the updated quantity
 				this.componentRecipeTableView.refresh();
 			}
 		});

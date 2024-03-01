@@ -28,7 +28,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.TreeTableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -131,7 +130,7 @@ public class InventoryPage {
 	void initialize() {
 		this.localComponentInventory = new LocalComponentInventory();
 		this.localProductInventory = new LocalProductInventory();
-		this.inventoryVM = new InventoryViewModel(localComponentInventory, localProductInventory);
+		this.inventoryVM = new InventoryViewModel(this.localComponentInventory, this.localProductInventory);
 
 		this.inventoryVM.getSelectedComponent()
 				.bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
@@ -302,32 +301,35 @@ public class InventoryPage {
 
 	@FXML
 	void orderComponentButtonManagerOnClick(ActionEvent event) {
-		TextInputDialog dialog = new TextInputDialog("1"); // Default value is 1
+		TextInputDialog dialog = new TextInputDialog("1");
 		dialog.setTitle("Order Component");
 		dialog.setHeaderText("Order More Components");
 		dialog.setContentText("Please enter the quantity:");
 
-		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
 			try {
 				int quantity = Integer.parseInt(result.get());
 				if (quantity > 0) {
-					Component selectedComponent = componentsTableView.getSelectionModel().getSelectedItem();
-					if (selectedComponent != null) {
-						this.inventoryVM.orderComponent(selectedComponent, quantity);
-						this.refreshComponentsTableView();
-					} else {
-						showAlert("Order Error", "No component selected.", AlertType.ERROR);
-					}
+					this.tryToOrderComponent(quantity);
 				} else {
-					showAlert("Invalid Quantity", "Please enter a positive number.", AlertType.ERROR);
+					this.showAlert("Invalid Quantity", "Please enter a positive number.", AlertType.ERROR);
 				}
 			} catch (NumberFormatException e) {
-				showAlert("Invalid Input", "Please enter a valid number.", AlertType.ERROR);
+				this.showAlert("Invalid Input", "Please enter a valid number.", AlertType.ERROR);
 			}
 		}
 		this.refreshComponentsTableView();
+	}
+
+	private void tryToOrderComponent(int quantity) {
+		Component selectedComponent = this.componentsTableView.getSelectionModel().getSelectedItem();
+		if (selectedComponent != null) {
+			this.inventoryVM.orderComponent(selectedComponent, quantity);
+			this.refreshComponentsTableView();
+		} else {
+			this.showAlert("Order Error", "No component selected.", AlertType.ERROR);
+		}
 	}
 
 	private void showAlert(String title, String content, Alert.AlertType alertType) {

@@ -53,7 +53,7 @@ public class HomePage {
 	private HomePageViewModel viewModel;
 
 	@FXML
-	public void initialize() {
+	void initialize() {
 		this.bindToViewModel();
 		this.viewModel.getComponentSummary();
 		this.viewModel.getProductSummary();
@@ -70,7 +70,7 @@ public class HomePage {
 
 	@FXML
 	void adminPageButtonOnClick(MouseEvent event) {
-		// TODO Add Admin Page
+		// TO DO Add Admin Page
 	}
 
 	@FXML
@@ -92,19 +92,19 @@ public class HomePage {
 		stage.setTitle("Home Page");
 		stage.show();
 	}
-	
+
 	@FXML
-    void logOutButton(ActionEvent event) {
+	void logOutButton(ActionEvent event) {
 		try {
-	        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
-	        Scene currentScene = currentStage.getScene();
-	        currentScene.setRoot(parent);
-	        currentStage.setTitle(Main.WINDOW_TITLE);
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
+			Scene currentScene = currentStage.getScene();
+			currentScene.setRoot(parent);
+			currentStage.setTitle(Main.WINDOW_TITLE);
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
-    		errorPopup.setContentText(e.getMessage());
-    		errorPopup.showAndWait();
+			errorPopup.setContentText(e.getMessage());
+			errorPopup.showAndWait();
 		}
-    }
+	}
 }

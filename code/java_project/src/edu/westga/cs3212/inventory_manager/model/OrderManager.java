@@ -79,5 +79,8 @@ public interface OrderManager {
 	void setOrderCompletionStatus(Order order, CompletionStatus status);
 	
 	
+	/**
+	 * Clear the orders.
+	 */
 	void clearOrders();
 }
