@@ -36,9 +36,7 @@ class TestOrderMangerGeneral {
 	@Test
 	void testFindOrderByIdNoIdExists() {
 		// Act and Assert
-		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.findOrderById("9000");
-		});
+		assertNull(this.orderManager.findOrderById("9000"));
 	}
 
 	@Test
@@ -48,7 +46,7 @@ class TestOrderMangerGeneral {
 		this.orderManager.addOrder(order);
 
 		// Act
-		Order foundOrder = this.orderManager.findOrderById(order.getId());
+		Order foundOrder = this.orderManager.findOrderById(order.getID());
 
 		// Assert
 		assertEquals(order, foundOrder);
@@ -72,7 +70,7 @@ class TestOrderMangerGeneral {
 		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.COMPLETE);
 
 		// Assert
-		CompletionStatus expected = this.orderManager.findOrderById(order.getId()).getCompletionStatus();
+		CompletionStatus expected = this.orderManager.findOrderById(order.getID()).getCompletionStatus();
 		assertEquals(CompletionStatus.COMPLETE, expected);
 	}
 
@@ -99,7 +97,7 @@ class TestOrderMangerGeneral {
 		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.COMPLETE);
 
 		// Assert
-		CompletionStatus expected = this.orderManager.findOrderById(order.getId()).getCompletionStatus();
+		CompletionStatus expected = this.orderManager.findOrderById(order.getID()).getCompletionStatus();
 		assertEquals(CompletionStatus.COMPLETE, expected);
 	}
 
@@ -114,7 +112,7 @@ class TestOrderMangerGeneral {
 		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.INCOMPLETE);
 
 		// Assert
-		CompletionStatus expected = this.orderManager.findOrderById(order.getId()).getCompletionStatus();
+		CompletionStatus expected = this.orderManager.findOrderById(order.getID()).getCompletionStatus();
 		assertEquals(CompletionStatus.INCOMPLETE, expected);
 	}
 
@@ -128,7 +126,7 @@ class TestOrderMangerGeneral {
 		this.orderManager.setOrderCompletionStatus(order, CompletionStatus.INCOMPLETE);
 
 		// Assert
-		CompletionStatus expected = this.orderManager.findOrderById(order.getId()).getCompletionStatus();
+		CompletionStatus expected = this.orderManager.findOrderById(order.getID()).getCompletionStatus();
 		assertEquals(CompletionStatus.INCOMPLETE, expected);
 	}
 

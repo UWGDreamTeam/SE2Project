@@ -1,5 +1,7 @@
 package edu.westga.cs3212.inventory_manager.model;
 
+import java.util.UUID;
+
 /**
  * The Class Item.
  * 
@@ -12,15 +14,13 @@ public abstract class Item {
 	private static final String ID_CANNOT_BE_BLANK = "ID cannot be blank";
 	private static final String NAME_CANNOT_BE_NULL = "Name cannot be null";
 	private static final String NAME_CANNOT_BE_BLANK = "Name cannot be blank";
-	private static final String INVALID_QUANTITY = "Quantity cannoy be negative";
-	private static final String QUANTITY_EXCEEDS = "Quantity exceeds what is in inventory";
-	private static final int MINIMUM_QUANTITY = 0;
-	private static final double MINIMUM_UNIT_COST = 0.0;
+	private static final String INVALID_PRODUCTION_COST = "Production cost cannot be negative";
+	
+	private static final double MINIMUM_PRODUCTION_COST = 0.0;
 	
 	private String id;
 	private String name;
-	private double unitCost;
-	private int quantity;
+	private double productionCost;
 	
 	/**
 	 * Instantiates a new item.
@@ -38,10 +38,10 @@ public abstract class Item {
 	 * 					this.getQuantity() == 0 &&
 	 * 					this.getDateLastModified() == LocalDateTime.now()
 	 */
-	protected Item(String id, String name) {
-		this.setId(id);
+	protected Item(String name, double productionCost) {
 		this.setName(name);
-		this.setQuantity(MINIMUM_QUANTITY);
+		this.setID(this.generateID());
+		this.setProductionCost(productionCost);
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public abstract class Item {
 	 *
 	 * @return the id
 	 */
-	public String getId() {
+	public String getID() {
 		return this.id;
 	}
 	
@@ -60,7 +60,7 @@ public abstract class Item {
 	 * @precondition id != null && id.isEmpty() == false
 	 * @postcondition this.getId().equals(id)
 	 */
-	public void setId(String id) {
+	public void setID(String id) {
 		if (id == null) {
 			throw new IllegalArgumentException(ID_CANNOT_BE_NULL);
 		}
@@ -70,6 +70,19 @@ public abstract class Item {
 		}
 		
 		this.id = id;
+	}
+	
+	/**
+	 * Generates a unique employee ID.
+	 * Example: 1244574e
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return A unique employee ID.
+	 */
+	protected String generateID() {
+	    return UUID.randomUUID().toString().replace("-", "").substring(0, 8);
 	}
 	
 	/**
@@ -99,89 +112,33 @@ public abstract class Item {
 		
 		this.name = name;
 	}
-	
+
 	/**
-	 * Gets the quantity of this item in the system.
+	 * Gets the production cost of this item.
 	 *
 	 * @precondition none
 	 * @postconditio none
 	 * 
-	 * @return the quantity
+	 * @return the production cost
 	 */
-	public int getQuantity() {
-		return this.quantity;
+	public double getProductionCost() {
+		return this.productionCost;
 	}
-
+	
 	/**
-	 * Sets the quantity of this item.
+	 * Sets the production cost of this item.
 	 *
-	 * @param quantity the new quantity of this item
+	 * @param productionCost the new production cost
 	 * 
-	 * @precondition quantity >= MINIMUM_QUANTITY
-	 * @postcondition this.getQuantity() == quantity
+	 * @precondition productionCost >= MINIMUM_UNIT_COST
+	 * @postcondition this.getProductionCost() == productionCost
 	 */
-	public void setQuantity(int quantity) {
-		if (quantity < MINIMUM_QUANTITY) {
-			throw new IllegalArgumentException(INVALID_QUANTITY);
+	public void setProductionCost(double productionCost) {
+		if (productionCost < MINIMUM_PRODUCTION_COST) {
+			throw new IllegalArgumentException(INVALID_PRODUCTION_COST);
 		}
-		this.quantity = quantity;
+		this.productionCost = productionCost;
 	}
-	
-	
-	/**
-	 * Decrease quantity.
-	 * 
-	 * @precondition quantity <= this.getQuantity
-	 * @postcondition this.getQuantity() == this.getQuantity()@prev - quantity  
-	 *
-	 * @param quantity the quantity to be decreased from the current value in the system
-	 */
-	public void decreaseQuantity(int quantity) {
-		if (quantity > this.getQuantity()) {
-			throw new IllegalArgumentException(QUANTITY_EXCEEDS);
-		}
-		this.quantity -= quantity;
-	}
-	
-	/**
-	 * Decrease quantity.
-	 * 
-	 * @precondition none
-	 * @postcondition this.getQuantity() == this.getQuantity()@prev + quantity  
-	 *
-	 * @param quantity the quantity to be added to the current value in the system
-	 */
-	public void increaseQuantity(int quantity) {
-		this.quantity += quantity;
-	}
-
-	/**
-	 * Gets the unit cost.
-	 *
-	 * @precondition none
-	 * @postconditio none
-	 * 
-	 * @return the unit cost
-	 */
-	public double getUnitCost() {
-		return this.unitCost;
-	}
-	
-	/**
-	 * Sets the unit cost.
-	 *
-	 * @param unitCost the new unit cost
-	 * @precondition unitCost >= 0
-	 * @postcondition this.getUnitCost() == unitCost
-	 */
-	public void setUnitCost(double unitCost) {
-		if (unitCost < MINIMUM_UNIT_COST) {
-			throw new IllegalArgumentException("Unit cost cannot be less than 0");
-		}
-		
-		this.unitCost = unitCost;
-	}
-	
 	
 	/**
 	 * Hash code.

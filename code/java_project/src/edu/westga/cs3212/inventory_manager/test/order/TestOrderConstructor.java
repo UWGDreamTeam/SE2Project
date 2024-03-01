@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
@@ -17,11 +16,9 @@ public class TestOrderConstructor {
 		Order order = new Order();
 		
 		// Act and Assert 
-		assertNotNull(order.getId());
-        assertNotNull(order.getDateCreated());
+		assertNotNull(order.getID());
         assertNotNull(order.getItems());
         assertEquals(CompletionStatus.INCOMPLETE, order.getCompletionStatus());
-        assertEquals(LocalDateTime.now().getDayOfYear(), order.getDateCreated().getDayOfYear());
         assertEquals(0, order.getItems().size());
 	}
 	
@@ -29,11 +26,10 @@ public class TestOrderConstructor {
 	public void testOrderHashCode() {
 		// Arrange
 		Order order = new Order();
-		int idHashCode = order.getId().hashCode();
-		int dateCreatedHashCode = order.getDateCreated().hashCode();
+		int idHashCode = order.getID().hashCode();
 
 		// Act and Assert
-		assertTrue(order.hashCode() == idHashCode + dateCreatedHashCode);
+		assertTrue(order.hashCode() == "Order".hashCode() + idHashCode);
 	}
 	
 	@Test
@@ -44,6 +40,28 @@ public class TestOrderConstructor {
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
 			order.setCompletionStatus(null);
+		});
+	}
+	
+	@Test
+	void testOrderSetNullID() {
+		// Arrange
+		Order order = new Order();
+
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			order.setID(null);
+		});
+	}
+	
+	@Test
+	void testOrderSetEmptyID() {
+		// Arrange
+		Order order = new Order();
+
+		// Act and Assert
+		assertThrows(IllegalArgumentException.class, () -> {
+			order.setID("");
 		});
 	}
 	
@@ -69,4 +87,5 @@ public class TestOrderConstructor {
         order.setCompletionStatus(CompletionStatus.INCOMPLETE);
         assertEquals(CompletionStatus.INCOMPLETE, order.getCompletionStatus());
 	}
+	
 }

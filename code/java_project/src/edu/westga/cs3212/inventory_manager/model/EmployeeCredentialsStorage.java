@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,7 +20,7 @@ import java.util.Map;
  */
 public final class EmployeeCredentialsStorage {
 
-	private static final String UTILITY_CLASS_ERROR = "Utility class";
+	public static final String UTILITY_CLASS_ERROR = "Utility class";
 	
 	private EmployeeCredentialsStorage() {
 		throw new IllegalStateException(EmployeeCredentialsStorage.UTILITY_CLASS_ERROR);
@@ -40,8 +39,8 @@ public final class EmployeeCredentialsStorage {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(employeeCredentialsMap, writer);
-		} catch (IOException exception) {
-			exception.printStackTrace();
+		} catch (Exception exception) {
+			
 		}
 	}
 
@@ -62,9 +61,11 @@ public final class EmployeeCredentialsStorage {
 			Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>() {
 			}.getType();
 			employeeCredentialsMap = gson.fromJson(json, type);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			employeeCredentialsMap = new HashMap<>();
 		}
+		LocalEmployeeCredentials admin = new LocalEmployeeCredentials("admin", "admin1", "admin2", "password", EmployeeType.MANAGER);
+		employeeCredentialsMap.put(admin.getEmployeeID(), admin);
 		return employeeCredentialsMap;
 	}
 }

@@ -15,6 +15,7 @@ class TestOrderManagerAddOrder {
 	@BeforeEach
 	public void setUp() {
 		this.orderManager = new LocalOrderManager();
+		this.orderManager.clearOrders();
 	}
 
 	@Test
@@ -35,7 +36,7 @@ class TestOrderManagerAddOrder {
 
 		// Assert
 		assertEquals(1, this.orderManager.getOrders().size());
-		assertEquals(order, this.orderManager.findOrderById(order.getId()));
+		assertEquals(order, this.orderManager.findOrderById(order.getID()));
 	}
 
 	@Test

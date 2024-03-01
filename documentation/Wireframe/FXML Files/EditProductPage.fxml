@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.EditProduct">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="125.0" layoutY="14.0" text="Edit Product">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="94.0" layoutY="105.0" text="Name" />
+      <TextField fx:id="nameTextField" layoutX="226.0" layoutY="101.0" />
+      <Label layoutX="93.0" layoutY="151.0" text="Production Cost" />
+      <TextField fx:id="productionCostTextField" layoutX="227.0" layoutY="147.0" />
+      <Label layoutX="93.0" layoutY="199.0" text="Selling Price" />
+      <TextField fx:id="sellingPriceTextField" layoutX="227.0" layoutY="195.0" />
+      <Label layoutX="94.0" layoutY="247.0" text="Quantity" />
+      <TextField fx:id="quantityTextField" layoutX="226.0" layoutY="243.0" />
+      <Button layoutX="117.0" layoutY="613.0" mnemonicParsing="false" onAction="#editProductOnClick" prefHeight="25.0" prefWidth="64.0" text="Add" />
+      <Button layoutX="268.0" layoutY="613.0" mnemonicParsing="false" onAction="#cancelAddOnButtonClick" prefHeight="25.0" prefWidth="64.0" text="Cancel" />
+      <TableView fx:id="componentRecipeTableView" layoutX="38.0" layoutY="304.0" prefHeight="200.0" prefWidth="388.0">
+        <columns>
+          <TableColumn fx:id="componentIDColumn" prefWidth="117.0" text="Component ID" />
+          <TableColumn fx:id="componentName" prefWidth="141.0" text="Component Name" />
+            <TableColumn fx:id="quantityColumn" prefWidth="127.0" text="Quantity" />
+        </columns>
+      </TableView>
+      <Spinner fx:id="currentComponentQuantity" layoutX="277.0" layoutY="533.0" />
+      <Label layoutX="37.0" layoutY="537.0" text="Quantity for Selected Component" />
+   </children>
+</Pane>

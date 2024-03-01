@@ -2,7 +2,12 @@ package edu.westga.cs3212.inventory_manager.test.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.HashMap;
+
 import org.junit.jupiter.api.Test;
+
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.Product;
 
@@ -12,7 +17,10 @@ class TestOrderAddItem {
 	void testAddItemValidInput() {
 		// Arrange 
 		Order order = new Order();
-		Product product = new Product();
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
 		int quantity = 2;
 		
 		// Act
@@ -27,12 +35,11 @@ class TestOrderAddItem {
 	void testAddItemNullProduct() {
 		// Arrange
 		Order order = new Order();
-		Product product = null;
 		int quantity = 2;
 
 		// Act and Assert
 		assertThrows(IllegalArgumentException.class, () -> {
-			order.addItem(product, quantity);
+			order.addItem(null, quantity);
 		});
 	}
 	
@@ -40,7 +47,10 @@ class TestOrderAddItem {
 	void testAddItemQuantityIsZero() {
 		// Arrange
 		Order order = new Order();
-		Product product = new Product();
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
 		int quantity = 0;
 
 		// Act and Assert
@@ -53,7 +63,10 @@ class TestOrderAddItem {
 	void testAddItemQuantityIsLessThanZero() {
 		// Arrange
 		Order order = new Order();
-		Product product = new Product();
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
 		int quantity = -1;
 
 		// Act and Assert
@@ -66,7 +79,10 @@ class TestOrderAddItem {
 	void testAddItemItemAlreadyExists() {
 		// Arrange
 		Order order = new Order();
-		Product product = new Product();
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
 		int quantity = 1;
 		order.addItem(product, quantity);
 
