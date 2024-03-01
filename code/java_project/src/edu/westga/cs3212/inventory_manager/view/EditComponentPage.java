@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.model.Item;
-import edu.westga.cs3212.inventory_manager.viewmodel.EditComponentPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.EditComponentViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -28,11 +28,11 @@ public class EditComponentPage {
     @FXML
     private TextField quantityTextField;
     
-    private EditComponentPageViewModel editComponentVM;
+    private EditComponentViewModel editComponentVM;
     
     @FXML
     void initialize() {
-    	this.editComponentVM = new EditComponentPageViewModel();
+    	this.editComponentVM = new EditComponentViewModel();
     	
 //    	this.nameTextField.textProperty().bindBidirectional(this.editComponentVM.getName());
 //    	this.costTextField.textProperty().bindBidirectional(this.editComponentVM.getCost());

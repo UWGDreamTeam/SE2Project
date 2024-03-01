@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class EditComponentPageViewModel {
+public class EditComponentViewModel {
 	
 	private StringProperty name;
     private StringProperty cost;
@@ -17,11 +17,10 @@ public class EditComponentPageViewModel {
     
     private LocalComponentInventory componentInventory;
     
-    public EditComponentPageViewModel() {
+    public EditComponentViewModel() {
     	
     	this.componentInventory = new LocalComponentInventory();
-    	this.selectedComponent = new SimpleObjectProperty<Item>();
-    	
+    	this.selectedComponent = new SimpleObjectProperty<Item>(); 
     	this.name = new SimpleStringProperty();
     	this.cost = new SimpleStringProperty();
     	this.quantity = new SimpleStringProperty();
