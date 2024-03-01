@@ -71,8 +71,7 @@ public class AddProductViewModel {
 			Double sellingPrice = Double.parseDouble(this.sellingPrice.getValue().trim());
 			int quantity = Integer.parseInt(this.quantity.getValue().trim());
 			Product newProduct = new Product(productName, productionCost, sellingPrice, recipe);
-			this.productInventory.addItem(newProduct, quantity);
-			
+			this.productInventory.addItem(newProduct, quantity);		
 		}
 	    
 	    
