@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.viewmodel.LoginPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.LoginViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +29,7 @@ public class LoginPage {
 	@FXML
 	private PasswordField passwordTextField;
 
-	private LoginPageViewModel viewModel;
+	private LoginViewModel viewModel;
 
 	@FXML
 	void attemptLogin(ActionEvent event) throws IOException {
@@ -42,7 +42,7 @@ public class LoginPage {
 
 	@FXML
 	void initialize() {
-		this.viewModel = new LoginPageViewModel();
+		this.viewModel = new LoginViewModel();
 		this.employeeIDTextField.textProperty().bindBidirectional(this.viewModel.employeeIDProperty());
 		this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
 	}

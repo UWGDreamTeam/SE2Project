@@ -4,7 +4,7 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredent
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class LoginPageViewModel {
+public class LoginViewModel {
 
 	private final LocalEmployeeCredentialsManager manager;
 	private final StringProperty employeeID;
@@ -17,7 +17,7 @@ public class LoginPageViewModel {
 	 * 
 	 * @author Jason Nunez
 	 */
-	public LoginPageViewModel() {
+	public LoginViewModel() {
 		this.manager = new LocalEmployeeCredentialsManager();
 		this.employeeID = new SimpleStringProperty();
 		this.password = new SimpleStringProperty();
