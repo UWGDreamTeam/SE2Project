@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public final class EmployeeCredentialsStorage {
 
-	private static final String UTILITY_CLASS_ERROR = "Utility class";
+	public static final String UTILITY_CLASS_ERROR = "Utility class";
 	
 	private EmployeeCredentialsStorage() {
 		throw new IllegalStateException(EmployeeCredentialsStorage.UTILITY_CLASS_ERROR);
@@ -40,7 +40,7 @@ public final class EmployeeCredentialsStorage {
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(employeeCredentialsMap, writer);
 		} catch (Exception exception) {
-			exception.printStackTrace();
+			
 		}
 	}
 

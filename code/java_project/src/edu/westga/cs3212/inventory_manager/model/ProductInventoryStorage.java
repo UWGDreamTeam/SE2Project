@@ -19,7 +19,7 @@ import com.google.gson.reflect.TypeToken;
  */
 public final class ProductInventoryStorage {
 
-	private static final String UTILITY_CLASS_ERROR = "Utility class";
+	public static final String UTILITY_CLASS_ERROR = "Utility class";
 	
 	private ProductInventoryStorage() {
 		throw new IllegalStateException(ProductInventoryStorage.UTILITY_CLASS_ERROR);
@@ -39,7 +39,7 @@ public final class ProductInventoryStorage {
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(products, writer);
 		} catch (Exception exception) {
-			exception.printStackTrace();
+			
 		}
 	}
 
