@@ -2,8 +2,6 @@ package edu.westga.cs3212.inventory_manager.test.order;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Field;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;

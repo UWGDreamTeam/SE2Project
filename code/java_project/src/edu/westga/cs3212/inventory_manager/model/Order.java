@@ -161,14 +161,14 @@ public class Order {
 		return UUID.randomUUID().toString();
 	}
 	
-	public String setID(String id) {
+	public void setID(String id) {
 		if (id == null) {
 			throw new IllegalArgumentException(ID_CANNOT_BE_NULL);
 		}
 		if (id.isBlank()) {
 			throw new IllegalArgumentException(ID_CANNOT_BE_BLANK);
 		}
-		return id;
+		this.ID = id;
 	}
 
 	@Override
@@ -194,10 +194,5 @@ public class Order {
 
 	public double getProductionCost() {
 		return this.productionCost;
-	}
-	
-	public String toString() {
-		return "Order{" + "id=" + this.ID + ", items=" + this.items + ", completionStatus=" + this.completionStatus
-				+ '}';
 	}
 }
