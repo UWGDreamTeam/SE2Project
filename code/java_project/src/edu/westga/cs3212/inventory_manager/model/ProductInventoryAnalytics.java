@@ -47,7 +47,5 @@ public class ProductInventoryAnalytics {
 				productCount.put(product, quantity);
 			}
 		}
-		
-		
 	}
 }
