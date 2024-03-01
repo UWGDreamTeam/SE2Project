@@ -24,7 +24,7 @@
       <TextField fx:id="sellingPriceTextField" layoutX="227.0" layoutY="195.0" />
       <Label layoutX="94.0" layoutY="247.0" text="Quantity" />
       <TextField fx:id="quantityTextField" layoutX="226.0" layoutY="243.0" />
-      <Button layoutX="117.0" layoutY="613.0" mnemonicParsing="false" onAction="#editProductOnClick" prefHeight="25.0" prefWidth="64.0" text="Add" />
+      <Button layoutX="117.0" layoutY="613.0" mnemonicParsing="false" onAction="#editProductOnClick" prefHeight="25.0" prefWidth="64.0" text="Edit" />
       <Button layoutX="268.0" layoutY="613.0" mnemonicParsing="false" onAction="#cancelAddOnButtonClick" prefHeight="25.0" prefWidth="64.0" text="Cancel" />
       <TableView fx:id="componentRecipeTableView" layoutX="38.0" layoutY="304.0" prefHeight="200.0" prefWidth="388.0">
         <columns>

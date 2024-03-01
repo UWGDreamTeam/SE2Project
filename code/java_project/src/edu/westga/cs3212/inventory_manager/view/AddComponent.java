@@ -36,16 +36,20 @@ public class AddComponent {
 
 	@FXML
 	void add(ActionEvent event) {
-		boolean result;
 
-		result = this.addComponentVM.add();
-
-		if (result) {
-			Alert successPopup = new Alert(AlertType.CONFIRMATION);
-			successPopup.setContentText(COMPONENT_ADDED_SUCCESSFULLY);
-			successPopup.showAndWait();
-			this.closeWindow(event);
-		} else {
+		try {
+			boolean result = this.addComponentVM.add();
+			if (result) {
+				Alert successPopup = new Alert(AlertType.INFORMATION);
+				successPopup.setContentText(COMPONENT_ADDED_SUCCESSFULLY);
+				successPopup.showAndWait();
+				this.closeWindow(event);
+			} else {
+				Alert errorPopup = new Alert(AlertType.ERROR);
+				errorPopup.setContentText(UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
+				errorPopup.showAndWait();
+			}
+		} catch (IllegalArgumentException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
 			errorPopup.showAndWait();

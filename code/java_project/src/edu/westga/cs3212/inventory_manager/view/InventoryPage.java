@@ -246,6 +246,7 @@ public class InventoryPage {
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
+			currentStage.sizeToScene();
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());

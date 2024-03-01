@@ -8,10 +8,16 @@ import edu.westga.cs3212.inventory_manager.viewmodel.EditComponentViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class EditComponentPage {
+
+	private static final String UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN = "Unable to update component, please check component information and try again";
+
+	private static final String COMPONENT_UPDATED_SUCCESSFULLY = "Component Updated Successfully";
 
 	@FXML
 	private ResourceBundle resources;
@@ -63,8 +69,22 @@ public class EditComponentPage {
 
 	@FXML
 	void updateEditingComponent(ActionEvent event) {
-		if (this.editComponentVM.update()) {
-			this.closeWindow(event);
-		}
+		try {
+            boolean result = this.editComponentVM.update();
+            if (result) {
+				Alert successPopup = new Alert(AlertType.INFORMATION);
+				successPopup.setContentText(COMPONENT_UPDATED_SUCCESSFULLY);
+				successPopup.showAndWait();
+				this.closeWindow(event);
+			} else {
+				Alert errorPopup = new Alert(AlertType.ERROR);
+				errorPopup.setContentText(UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
+				errorPopup.showAndWait();
+			}
+        } catch (IllegalArgumentException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+			errorPopup.setContentText(UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
+			errorPopup.showAndWait();
+        }
 	}
 }

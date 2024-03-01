@@ -23,9 +23,12 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class AddProduct {
+
+	private static final String UNABLE_TO_ADD_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN = "Unable to add product, please check product information and try again";
 
 	@FXML
 	private TableColumn<Component, String> componentIDColumn;
@@ -61,37 +64,25 @@ public class AddProduct {
 
 	@FXML
 	void addProductOnClick(ActionEvent event) {
+		boolean result = true;
 		try {
 			this.addProductVM.addProduct(this.componentList);
 		} catch (Exception e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Error");
 			alert.setHeaderText("Error Adding Product");
-			alert.setContentText(e.getMessage());
+			alert.setContentText(UNABLE_TO_ADD_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN);
 			alert.showAndWait();
+			result = false;
 		}
-		this.returnToInventoryPage(event);
+		if (result) {
+			this.returnToInventoryPage(event);
+		}
 	}
 
 	private void returnToInventoryPage(ActionEvent event) {
-		try {
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
-
-			Scene scene = new Scene(parent);
-			double preferredWidth = parent.prefWidth(-1);
-			double preferredHeight = parent.prefHeight(preferredWidth);
-
-			currentStage.setWidth(preferredWidth);
-			currentStage.setHeight(preferredHeight);
-
-			currentStage.setScene(scene);
-			currentStage.setTitle("Inventory Page");
-		} catch (IOException e) {
-			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
-			errorPopup.setContentText(e.getMessage());
-			errorPopup.showAndWait();
-		}
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.close();
 	}
 
 	@FXML

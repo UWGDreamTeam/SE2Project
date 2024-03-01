@@ -69,11 +69,6 @@ public class HomePage {
 	}
 
 	@FXML
-	void adminPageButtonOnClick(MouseEvent event) {
-		// TO DO Add Admin Page
-	}
-
-	@FXML
 	void inventoryPageButtonOnClick(MouseEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
@@ -101,6 +96,7 @@ public class HomePage {
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
+			currentStage.sizeToScene();
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
