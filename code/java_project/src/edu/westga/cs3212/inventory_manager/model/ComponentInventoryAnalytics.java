@@ -5,27 +5,43 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 
+/**
+ * Provides analytics on component usage across all products in the inventory.
+ * This class enables the identification of the most frequently used components in product manufacturing,
+ * allowing for targeted inventory management and procurement strategies.
+ * 
+ * @version Spring 2024
+ * @author Group 1
+ */
 public class ComponentInventoryAnalytics {
 
 	private LocalProductInventory productManager;
-	private final static int MINIMUM_LIST_SIZE = 0;
+	private static final int MINIMUM_LIST_SIZE = 0;
 
+	/**
+     * Initializes a new ComponentInventoryAnalytics instance with a fresh LocalProductInventory.
+     * 
+     * @precondition none
+     * @postcondition a new LocalProductInventory is created and associated with this instance
+     */
 	public ComponentInventoryAnalytics() {
 		this.productManager = new LocalProductInventory();
 	}
 
 	/**
-	 * Returns a map of the most used components in the products
-	 * 
-	 * @precondition listSize >= 0
-	 * @postcondition none
-	 * 
-	 * @param listSize the number of components to return
-	 * @return a map of the most used components
-	 */
+     * Retrieves a map of the most frequently used components in the production of products,
+     * sorted by the frequency of their usage. The size of the returned map is determined by the listSize parameter,
+     * allowing for flexibility in the amount of data retrieved.
+     * 
+     * @param listSize the maximum number of components to include in the result, determining the size of the returned map
+     * @precondition listSize >= 0
+     * @postcondition none
+     * 
+     * @return a Map<Component, Integer> where each key is a Component and each value is the frequency of that component's use across all products. The map is sorted in descending order by value (frequency of use).
+     * @throws IllegalArgumentException if listSize is negative
+     */
 	public Map<Component, Integer> getMostUsedComponents(int listSize) {
 		if (listSize < MINIMUM_LIST_SIZE) {
 			throw new IllegalArgumentException("List size cannot be negative");

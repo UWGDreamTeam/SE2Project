@@ -3,7 +3,6 @@ package edu.westga.cs3212.inventory_manager;
 
 import java.io.IOException;
 
-import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -29,7 +28,6 @@ public class Main extends Application {
 	public static final String EDIT_PRODUCT_PAGE = "view/EditProductPage.fxml";
 	
 	private static Stage primaryStage;
-	public static EmployeeType employeeType;
 
 	/**
 	 * JavaFX entry point.
@@ -49,6 +47,14 @@ public class Main extends Application {
         primaryStage.show();
 	}
 	
+	 /**
+     * Provides access to the primary stage of the application.
+     * This static method allows other parts of the application to retrieve the primary stage to update or modify the scene.
+     *
+     * @return The primary stage of the application.
+     * @precondition none
+     * @postcondition none
+     */
 	public static Stage getPrimaryStage() {
         return primaryStage;
     }

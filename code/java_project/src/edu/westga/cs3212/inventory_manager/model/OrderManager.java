@@ -1,6 +1,5 @@
 package edu.westga.cs3212.inventory_manager.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

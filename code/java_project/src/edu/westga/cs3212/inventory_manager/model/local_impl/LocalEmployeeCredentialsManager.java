@@ -24,8 +24,8 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 * @postcondition getEmployees().size() == 0
 	 */
 	public LocalEmployeeCredentialsManager() {
-		this.employeeCredentialsMap = new HashMap<>();
-		this.employeeCredentialsMap = EmployeeCredentialsStorage.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+		LocalEmployeeCredentialsManager.employeeCredentialsMap = new HashMap<>();
+		LocalEmployeeCredentialsManager.employeeCredentialsMap = EmployeeCredentialsStorage.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
      */
 	public LocalEmployeeCredentials getEmployeeCredentials(String employeeID) {
 		this.checkForValidEmployeeID(employeeID);
-		return this.employeeCredentialsMap.get(employeeID);
+		return LocalEmployeeCredentialsManager.employeeCredentialsMap.get(employeeID);
 	}
 
 	/**
@@ -68,11 +68,11 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
         EmployeeType type = this.checkForValidEmployeeType(employeeType);
         
         LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials(employeeID, firstName, lastName, password, type);
-		while (this.employeeCredentialsMap.containsKey(newEmployee.getEmployeeID())) {
+		while (LocalEmployeeCredentialsManager.employeeCredentialsMap.containsKey(newEmployee.getEmployeeID())) {
 			newEmployee.setEmployeeID(this.generateUniqueEmployeeID());
 		}
-        this.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
-        EmployeeCredentialsStorage.save(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+        LocalEmployeeCredentialsManager.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
+        EmployeeCredentialsStorage.save(LocalEmployeeCredentialsManager.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
     }
     
 	/**
@@ -132,7 +132,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 * @return An List collection of all employees.
 	 */
 	public List<LocalEmployeeCredentials> getEmployees() {
-		return List.copyOf(this.employeeCredentialsMap.values());
+		return List.copyOf(LocalEmployeeCredentialsManager.employeeCredentialsMap.values());
 	}
 
     /**
@@ -149,9 +149,9 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	@Override
 	public boolean removeEmployee(String employeeID) {
 		this.checkForValidEmployeeID(employeeID);
-		if (this.employeeCredentialsMap.containsKey(employeeID)) {
-			this.employeeCredentialsMap.remove(employeeID);
-			EmployeeCredentialsStorage.save(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+		if (LocalEmployeeCredentialsManager.employeeCredentialsMap.containsKey(employeeID)) {
+			LocalEmployeeCredentialsManager.employeeCredentialsMap.remove(employeeID);
+			EmployeeCredentialsStorage.save(LocalEmployeeCredentialsManager.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 			return true;
 		}
 		return false;
@@ -172,10 +172,10 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	public boolean updateEmployeePassword(String employeeID, String password) {
 		this.checkForValidEmployeeID(employeeID);
 		this.checkForValidPassword(password);
-		if (this.employeeCredentialsMap.containsKey(employeeID)) {
-			LocalEmployeeCredentials employee = this.employeeCredentialsMap.get(employeeID);
+		if (LocalEmployeeCredentialsManager.employeeCredentialsMap.containsKey(employeeID)) {
+			LocalEmployeeCredentials employee = LocalEmployeeCredentialsManager.employeeCredentialsMap.get(employeeID);
 			employee.setPassword(password);
-			EmployeeCredentialsStorage.save(this.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+			EmployeeCredentialsStorage.save(LocalEmployeeCredentialsManager.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 			return true;
 		}
 		return false;
@@ -196,8 +196,8 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	public boolean attemptLogin(String employeeID, String password) {
 		this.checkForValidEmployeeID(employeeID);
 		this.checkForValidPassword(password);
-		if (this.employeeCredentialsMap.containsKey(employeeID)) {
-			LocalEmployeeCredentials employee = this.employeeCredentialsMap.get(employeeID);
+		if (LocalEmployeeCredentialsManager.employeeCredentialsMap.containsKey(employeeID)) {
+			LocalEmployeeCredentials employee = LocalEmployeeCredentialsManager.employeeCredentialsMap.get(employeeID);
 			if (employee.getPassword().equals(password)) {
 				return true;
 			}
@@ -217,8 +217,8 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	@Override
 	public String getEmployeePassword(String employeeID) {
 		this.checkForValidEmployeeID(employeeID);
-		if (this.employeeCredentialsMap.containsKey(employeeID)) {
-			return this.employeeCredentialsMap.get(employeeID).getPassword();
+		if (LocalEmployeeCredentialsManager.employeeCredentialsMap.containsKey(employeeID)) {
+			return LocalEmployeeCredentialsManager.employeeCredentialsMap.get(employeeID).getPassword();
 		}
 		return null;
 	}

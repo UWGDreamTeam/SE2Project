@@ -5,10 +5,12 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * The Class Product.
+ * Represents a product with a name, production cost, sale price, and a recipe of components necessary for its creation.
+ * The product is an extension of the Item class, incorporating additional attributes and functionalities specific to products,
+ * such as managing recipes (components and their quantities required for production).
  * 
- * @author Group 1
  * @version Spring 2024
+ * @author Group 1
  */
 public class Product extends Item {
 
@@ -28,6 +30,23 @@ public class Product extends Item {
 	 * */
 	private Map<Component, Integer> recipe;
 	
+	/**
+     * Constructs a new Product with the specified name, production cost, sale price, and recipe.
+     * 
+     * @param name the name of the product
+     * @param productionCost the cost to produce the product
+     * @param salePrice the price at which the product is sold
+     * @param recipe a map of components and their quantities required to produce the product
+     * 
+     * @precondition name != null && !name.isEmpty()
+     * @precondition productionCost >= 0
+     * @precondition salePrice >= 0
+     * @precondition recipe != null && !recipe.isEmpty()
+     * @postcondition getName() == name && getProductionCost() == productionCost && getSalePrice() == salePrice
+     * @postcondition getRecipe().equals(recipe)
+     * 
+     * @throws IllegalArgumentException if the recipe is null or empty, if sale price or production cost is negative
+     */
 	public Product(String name, double productionCost, double salePrice, Map<Component, Integer> recipe) {
 		super(name, productionCost);
 		this.setSalePrice(salePrice);
@@ -48,16 +67,18 @@ public class Product extends Item {
 	
 	
 	/**
-	 * Adds the component and quantity to the list of necessaryComponents if it does not contain that compoent. 
-	 *
-	 * @param component the component to be added to the list
-	 * @param quantity the quantity of necessaryComponents needed for this product
-	 * 
-	 * @precondition component != null && quantity >= MINIMUM_QUANTITY
-	 * @postcondition 
-	 * 
-	 * @return true, if successful and false if list already contains the component.
-	 */
+     * Adds a component and its quantity to the product's recipe if the component is not already in the recipe.
+     * 
+     * @param component the component to add
+     * @param quantity the quantity of the component needed
+     * 
+     * @precondition component != null
+     * @precondition quantity >= MINIMUM_QUANTITY
+     * @postcondition getRecipe().containsKey(component) && getRecipe().get(component) == quantity if component was not already in the recipe
+     * 
+     * @return true if the component was added to the recipe, false if the component was already in the recipe
+     * @throws IllegalArgumentException if the component is null or the quantity is less than the minimum required quantity
+     */
 	public boolean addComponent(Component component, int quantity) {
 		if (component == null) {
 			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
@@ -73,7 +94,16 @@ public class Product extends Item {
 	    return true;
 	}
 	
-	
+	/**
+     * Sets the sale price of the product.
+     * 
+     * @param newPurchasePrice the new sale price for the product
+     * 
+     * @precondition newPurchasePrice >= MINIMUM_PURCHASE_PRICE
+     * @postcondition getSalePrice() == newPurchasePrice
+     * 
+     * @throws IllegalArgumentException if the new sale price is negative
+     */
 	public void setSalePrice(double newPurchasePrice) {
 		if (newPurchasePrice < MINIMUM_PURCHASE_PRICE) {
 			throw new IllegalArgumentException(PURCHASE_PRICE_CANNOT_BE_NEGATIVE);
@@ -82,13 +112,16 @@ public class Product extends Item {
 	}
 
 	/**
-	 * Sets the necessaryComponents list to the map passed in.
-	 * The current list of component is cleared before it is reset.
-	 *
-	 * @param newComponents the new necessaryComponents
-	 * @precondition newComponents != null && newComponents > 0
-	 * @postcondition this.getComponentsList().size() == newComponents.size()
-	 */
+     * Replaces the current recipe with a new set of components and their quantities.
+     * 
+     * @param newComponents the new recipe for the product
+     * 
+     * @precondition newComponents != null && !newComponents.isEmpty()
+     * @precondition newComponents does not contain null keys
+     * @postcondition getRecipe().equals(newComponents)
+     * 
+     * @throws IllegalArgumentException if the new components map is null, empty, or contains null keys
+     */
 	public void setRecipe(Map<Component, Integer> newComponents) {
 		if (newComponents == null) {
 			throw new IllegalArgumentException(COMPONENT_CANNOT_BE_NULL);
@@ -105,35 +138,23 @@ public class Product extends Item {
 		this.recipe.putAll(newComponents);
 	}
 	
-	/**
-	 * Gets the necessaryComponents necessaryComponents.
-	 *
-	 * @precondition none
-	 * @postcondition none
-	 * 
-	 * @return the list of necessaryComponents and quantities
-	 */
+	 /**
+     * Returns the recipe of the product, a map of components and their quantities.
+     * 
+     * @precondition none
+     * @postcondition none
+     * 
+     * @return a new map representing the recipe of the product
+     */
 	public Map<Component, Integer> getRecipe() {
 		return new HashMap<>(this.recipe);
 	}
 	
-	/**
-	 * Hash code.
-	 *
-	 * @return the int hashcode for this product
-	 */
 	@Override
 	public int hashCode() {
 		return "Product".hashCode() + this.getID().hashCode();
 	}
 	
-	/**
-	 * Equals.
-	 *
-	 * @param obj the obj
-	 * 
-	 * @return true, if successful
-	 */
 	@Override
 	public boolean equals(Object obj) {
         if (this == obj) {
@@ -149,13 +170,15 @@ public class Product extends Item {
         return Objects.equals(this.getID(), other.getID());
 	}
 
+	/**
+     * Gets the sale price of the product.
+     * 
+     * @precondition none
+     * @postcondition none
+     * 
+     * @return the sale price of
+     */
 	public double getSalePrice() {
 		return this.salePrice;
 	}
-	
-	public String toString() {
-		return "Product{" + "id=" + this.getID() + ", name='" + this.getName() + '\'' + ", productionCost="
-				+ this.getProductionCost() + ", salePrice=" + this.getSalePrice() + '}';
-	}
-
 }

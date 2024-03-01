@@ -10,7 +10,7 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 public class ProductInventoryAnalytics {
 
 	private LocalOrderManager orderManager;
-	private final static int MINIMUM_LIST_SIZE = 0;
+	private static final int MINIMUM_LIST_SIZE = 0;
 	
 	public ProductInventoryAnalytics() {
 		this.orderManager = new LocalOrderManager();

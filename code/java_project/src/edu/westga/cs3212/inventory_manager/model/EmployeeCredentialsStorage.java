@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;

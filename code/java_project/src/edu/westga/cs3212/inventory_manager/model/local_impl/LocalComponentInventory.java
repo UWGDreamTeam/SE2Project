@@ -33,22 +33,22 @@ public class LocalComponentInventory implements ItemInventoryManager {
 	 * @postcondition LocalComponentsInventory.components != null
 	 */
 	public LocalComponentInventory() {
-		if (this.components == null) {
-			this.components = ComponentInventoryStorage.load(Constants.COMPONENT_INVENTORY_FILE_LOCATION);
-			if (this.components.isEmpty()) {
-				this.components = DemoDataUtility.createDemoComponents();
+		if (LocalComponentInventory.components == null) {
+			LocalComponentInventory.components = ComponentInventoryStorage.load(Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+			if (LocalComponentInventory.components.isEmpty()) {
+				LocalComponentInventory.components = DemoDataUtility.createDemoComponents();
 				this.save();
 			}
 		}
 	}
 
 	private void save() {
-		ComponentInventoryStorage.save(this.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 	}
 	
 	@Override
 	public Iterable<Item> getItems() {
-		return new ArrayList<>(this.components.keySet());
+		return new ArrayList<>(LocalComponentInventory.components.keySet());
 	}
 
 	@Override
@@ -56,13 +56,13 @@ public class LocalComponentInventory implements ItemInventoryManager {
 		if (newItem == null) {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}	
-		if (this.components.containsKey(newItem)) {
+		if (LocalComponentInventory.components.containsKey(newItem)) {
 			throw new IllegalArgumentException(NEW_ITEM_ALREADY_EXISTS);
 		}		
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(QUANTITY_CANNOT_BE_NEGATIVE);
 		}
-		if (this.components.put((Component) newItem, quantity) == null) {
+		if (LocalComponentInventory.components.put((Component) newItem, quantity) == null) {
 			this.save();
 			return true;
 		}
@@ -74,7 +74,7 @@ public class LocalComponentInventory implements ItemInventoryManager {
 		if (item == null) {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
 		}
-		if (this.components.remove(item) != null) {
+		if (LocalComponentInventory.components.remove(item) != null) {
 			this.save();
 			return true;
 		}
@@ -90,7 +90,7 @@ public class LocalComponentInventory implements ItemInventoryManager {
 		if (itemID.isBlank()) {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
 		}
-		for (Component component : this.components.keySet()) {
+		for (Component component : LocalComponentInventory.components.keySet()) {
 			if (component.getID().equals(itemID)) {
 				return component;
 			}
@@ -100,14 +100,14 @@ public class LocalComponentInventory implements ItemInventoryManager {
 
 	@Override
 	public void clear() {
-		this.components = new HashMap<>();
+		LocalComponentInventory.components = new HashMap<>();
 		this.save();
 	}
 
 	@Override
 	public boolean editItem(Item newItem) {
 		this.validItemAndWithinInventory(newItem);
-		if (this.components.put((Component) newItem, this.components.get(newItem)) != null) {
+		if (LocalComponentInventory.components.put((Component) newItem, LocalComponentInventory.components.get(newItem)) != null) {
 			this.save();
 			return true;
 		}
@@ -117,7 +117,7 @@ public class LocalComponentInventory implements ItemInventoryManager {
 	@Override
 	public int getQuantityOfItem(Item item) {
 		this.validItemAndWithinInventory(item);
-		return this.components.get(item);
+		return LocalComponentInventory.components.get(item);
 	}
 
 	@Override
@@ -126,21 +126,21 @@ public class LocalComponentInventory implements ItemInventoryManager {
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(QUANTITY_CANNOT_BE_NEGATIVE);
 		}
-		this.components.put((Component) item, quantity);
+		LocalComponentInventory.components.put((Component) item, quantity);
 	}
 
 	private void validItemAndWithinInventory(Item item) {
 		if (item == null) {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
 		}
-		if (this.components.get(item) == null) {
+		if (LocalComponentInventory.components.get(item) == null) {
 			throw new IllegalArgumentException(COMPONENT_DOES_NOT_EXIST);
 		}
 	}
 
 	@Override
 	public Map<Item, Integer> getItemsWithQuantities() {
-		return new HashMap<>(this.components);
+		return new HashMap<>(LocalComponentInventory.components);
 	}
 
 }
