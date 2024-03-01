@@ -27,5 +27,4 @@ public class TestGetters {
 		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
 		assertTrue(testOrderAnalytics.getOrdersCount() == 1);
 	}
-	
 }
