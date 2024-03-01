@@ -16,5 +16,11 @@ public class TestConstructor {
 		LocalProductInventory productInventory = new LocalProductInventory();
 		AddProductViewModel testViewModel = new AddProductViewModel(componentInventory, productInventory);
 		assertNotNull(testViewModel);
+		assertNotNull(testViewModel.getSelectedComponentProperty());
+		assertNotNull(testViewModel.getObservableComponentList());
+		assertNotNull(testViewModel.getName());
+		assertNotNull(testViewModel.getProductionCost());
+		assertNotNull(testViewModel.getSellingPrice());
+		assertNotNull(testViewModel.getQuantity());
 	}
 }
