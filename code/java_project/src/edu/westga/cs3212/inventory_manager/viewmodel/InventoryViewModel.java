@@ -85,6 +85,16 @@ public class InventoryViewModel {
 	public LocalComponentInventory getComponentsInventory() {
 		return this.componentsInventory;
 	}
+	/**
+	 * Sets the selected component.
+	 * @precondition none
+	 * @postcondition The selected component is set to the provided value.
+	 * 
+	 * @param selectedComponent 	    The selected component.
+	 */
+	public void setSelectedComponent(Item selectedComponent) {
+		this.selectedComponent.set(selectedComponent);
+	}
 
 	/**
 	 * Gets the LocalProductInventory instance being managed by this ViewModel.
@@ -122,6 +132,16 @@ public class InventoryViewModel {
 	 */
 	public ObjectProperty<Item> getSelectedProduct() {
 		return this.selectedProduct;
+	}
+	
+	/**
+	 * Sets the selected component.
+	 * @precondition none
+	 * @postcondition The selected component is set to the provided value.
+	 * @param selectedProduct The selected component.
+	 */
+	public void setSelectedProduct(Item selectedProduct) {
+		this.selectedProduct.set(selectedProduct);
 	}
 
 	/**
