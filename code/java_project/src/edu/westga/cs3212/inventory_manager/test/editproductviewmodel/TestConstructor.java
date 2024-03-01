@@ -1,7 +1,6 @@
 package edu.westga.cs3212.inventory_manager.test.editproductviewmodel;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 

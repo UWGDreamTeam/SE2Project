@@ -17,14 +17,13 @@ public class TestSetSelectedComponent {
 		Component testComponent = new Component("Name", 20);
 		componentInventory.addItem(testComponent, 20);
 		testViewModel.setSelectedComponent(testComponent);
-		assert(testViewModel.getName().getValue().equals("Name"));
-		assert(testViewModel.getCost().getValue().equals("20.0"));
-		assert(testViewModel.getQuantity().getValue().equals("20"));
+		assert (testViewModel.getName().getValue().equals("Name"));
+		assert (testViewModel.getCost().getValue().equals("20.0"));
+		assert (testViewModel.getQuantity().getValue().equals("20"));
 	}
-	
+
 	@Test
 	void testInvalidSelectedComponent() {
-		LocalComponentInventory componentInventory = new LocalComponentInventory();
 		EditComponentViewModel testViewModel = new EditComponentViewModel();
 		Component testComponent = new Component("Name", 20);
 		assertThrows(IllegalArgumentException.class, () -> testViewModel.setSelectedComponent(testComponent));
