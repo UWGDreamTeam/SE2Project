@@ -1,16 +1,25 @@
 import zmq
 from request_server import constants
+import json
 
-systems_db = {}
+components = {}
+
+def get
 
 def log(message):
     print(f"SERVER::{message}")
 
 def handle_request(request_str):
-    parts = request_str.split(',')
-    request_type = parts[0]
-    handler = request_handlers.get(request_type, lambda x: "bad format")
-    return handler(parts[1:])
+    try:
+        request_data = json.loads(request_str)
+        request_type = request_data.get('type')
+        parts = request_data.get('data', [])
+        handler = request_handlers.get(request_type, lambda x: {"status": "error", "message": "Bad format or unknown request"})
+        response = handler(parts)
+        return json.dumps({"status": "success", "data": response})
+    except json.JSONDecodeError:
+        return json.dumps({"status": "error", "message": "Invalid JSON format"})
+
 
 request_handlers = {
 

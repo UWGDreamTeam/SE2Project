@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="lib/javafx-sdk/lib/javafx.web.jar"/>
 	<classpathentry kind="lib" path="lib/javafx-sdk/lib/javafx-swt.jar"/>
 	<classpathentry kind="lib" path="lib/jeromq-0.3.4.jar"/>
+	<classpathentry kind="lib" path="lib/json-20240303.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
