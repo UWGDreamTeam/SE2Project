@@ -1,26 +1,108 @@
-import zmq
 from request_server import constants
 import json
 import random
 import string
+import zmq
 
 components = {}
+products = {}
 
 def generate_unique_id():
     while True:
         # Generate a random 4-character alphanumeric ID
         new_id = ''.join(random.choices(string.ascii_letters + string.digits, k=4))
-        if new_id not in components:
+        if new_id not in components and new_id not in products:
             return new_id
 
 def log(msg):
     print(f"Server: {msg}")
 
+def add_product(data):
+    product_id = generate_unique_id()
+    name = data.get('Name')
+    quantity = data.get('Quantity')
+    recipe = data.get('Recipe')
+    if not product_id or not name or quantity is None or not recipe:
+        log(f"Missing data for adding product: {data}")
+        return {"status": "error", "message": "Missing data for adding product"}
+    for recipe_item in recipe:
+        if recipe_item.get('ComponentID') not in components:
+            log(f"Component not found: {recipe_item.get('ComponentID')}")
+            return {"status": "error", "message": "Component not found"}
+    for recipe_item in recipe:
+        if recipe_item.get('Quantity') is None:
+            log(f"Missing quantity for component: {recipe_item.get('ComponentID')}")
+            return {"status": "error", "message": "Missing quantity for component"}
+    production_cost = sum([components[recipe_item.get('ComponentID')]["ProductionCost"] * recipe_item.get('Quantity') for recipe_item in recipe])
+    products[product_id] = {"Name": name, "Quantity": quantity, "Recipe": recipe, "ProductionCost": production_cost}
+    log(f"Added product: {product_id}")
+    return {"ProductID": product_id}
+
+def produce_product(data):    
+    product_id = data.get('ProductID')
+    quantity = data.get('Quantity')
+    if not product_id or quantity is None:
+        log(f"Missing data for producing product: {data}")
+        return {"status": "error", "message": "Missing data for producing product"}
+    if not product_id in products:
+        log(f"Product not found: {product_id}")
+        return {"status": "error", "message": "Product not found"}
+    if products[product_id]["Quantity"] < quantity:
+        log(f"Insufficient quantity for product: {product_id}")
+        return {"status": "error", "message": "Insufficient quantity for product"}
+    products[product_id]["Quantity"] += quantity
+    return {"status": "success"}
+
+def remove_product(data):
+    product_id = data.get('ProductID')
+    if not product_id:
+        log(f"Missing data for removing product: {data}")
+        return {"status": "error", "message": "Missing data for removing product"}
+    if product_id in products:
+        del products[product_id]
+        log(f"Removed product: {product_id}")
+        return {"status": "success"}
+    else:
+        log(f"Product not found: {product_id}")
+        return {"status": "error", "message": "Product not found"}
+
+def update_component(data):
+    component_id = data.get('ComponentID')
+    new_name = data.get('Name')
+    new_production_cost = data.get('ProductionCost')
+    quantity = data.get('Quantity')
+    if not component_id or not new_name or new_production_cost is None or quantity is None:
+        log(f"Missing data for updating component: {data}")
+        return {"status": "error", "message": "Missing data for updating component"}
+    if component_id in components:
+        components[component_id] = {"Name": new_name, "ProductionCost": new_production_cost, "Quantity": quantity}
+        log(f"Updated component: {component_id}")
+        return {"status": "success"}
+    else:
+        log(f"Component not found: {component_id}")
+        return {"status": "error", "message": "Component not found"}
+
+def order_component(data):
+    component_id = data.get('ComponentID')
+    quantity = data.get('Quantity')
+    if not component_id or quantity is None:
+        log(f"Missing data for ordering component: {data}")
+        return {"status": "error", "message": "Missing data for ordering component"}
+    if component_id in components:
+        if components[component_id]["Quantity"] < quantity:
+            log(f"Insufficient quantity for component: {component_id}")
+            return {"status": "error", "message": "Insufficient quantity for component"}
+        components[component_id]["Quantity"] += quantity
+    else:
+        log(f"Component not found: {component_id}")
+        return {"status": "error", "message": "Component not found"}
+
 def add_component(data):
     component_id = generate_unique_id()
     name = data.get('Name')
+    quantity = data.get('Quantity')
     production_cost = data.get('ProductionCost')
-    if not component_id or not name or production_cost is None:
+    if not component_id or not name or quantity is None or production_cost is None:
         log(f"Missing data for adding component: {data}")
         return {"status": "error", "message": "Missing data for adding component"}
 
@@ -28,27 +110,16 @@ def add_component(data):
         log(f"Component already exists: {component_id}")
         return {"status": "error", "message": "Component already exists"}
 
-    components[component_id] = {"Name": name, "ProductionCost": production_cost}
+    components[component_id] = {"Name": name, "ProductionCost": production_cost, "Quantity": quantity}
     log(f"Added component: {component_id}")
     return {"ComponentID": component_id}
+
 
 def remove_component(data):
     component_id = data.get('ComponentID')
     if component_id and component_id in components:
         del components[component_id]
         log(f"Removed component: {component_id}")
-        return {"status": "success"}
-    else:
-        log(f"Component not found: {component_id}")
-        return {"status": "error", "message": "Component not found"}
-
-def edit_component(data):
-    component_id = data.get('ComponentID')
-    new_name = data.get('Name')
-    new_production_cost = data.get('ProductionCost')
-    if component_id in components:
-        components[component_id] = {"Name": new_name, "ProductionCost": new_production_cost}
-        log(f"Edited component: {component_id}")
         return {"status": "success"}
     else:
         log(f"Component not found: {component_id}")
@@ -79,7 +150,7 @@ def handle_request(request_str):
 request_handlers = {
     "addComponent": add_component,
     "removeComponent": remove_component,
-    "editComponent": edit_component,
+    "updateComponent": update_component,
     "getComponent": get_component,
 }
 
