@@ -84,6 +84,44 @@ public class ProductInventory {
 		return (boolean) responseMap.get("Success");
 	}
 	
+	public boolean updateProduct(String productID, String productName, Map<Component, Integer> recipe, int quantity) {
+		if (productID == null) {
+			throw new IllegalArgumentException("Product ID cannot be null");
+		}
+		if (productID.isBlank()) {
+			throw new IllegalArgumentException("Product ID cannot be blank");
+		}
+		if (productName == null) {
+			throw new IllegalArgumentException("Product name cannot be null");
+		}
+		if (productName.isBlank()) {
+			throw new IllegalArgumentException("Product name cannot be blank");
+		}
+		if (recipe == null) {
+			throw new IllegalArgumentException("Recipe cannot be null");
+		}
+		if (recipe.isEmpty()) {
+			throw new IllegalArgumentException("Recipe cannot be empty");
+		}
+		if (quantity < 0) {
+			throw new IllegalArgumentException("Quantity cannot be negative");
+		}
+		Map<String, Object> requestData = new HashMap<>();
+		requestData.put("type", "updateProduct");
+		requestData.put("data",
+				Map.of("ProductID", productID, "Name", productName, "Recipe", recipe, "Quantity", quantity));
+
+		Gson gson = new Gson();
+		String requestJson = gson.toJson(requestData);
+
+		String response = Server.sendRequest(requestJson);
+		Type responseType = new TypeToken<Map<String, Object>>() {
+		}.getType();
+		Map<String, Object> responseMap = gson.fromJson(response, responseType);
+
+		return (boolean) responseMap.get("Success");
+	}
+	
 	
 	
 }

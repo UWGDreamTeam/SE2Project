@@ -38,13 +38,37 @@ def add_product(data):
     log(f"Added product: {product_id}")
     return {"ProductID": product_id}
 
+def update_product(data):
+    product_id = data.get('ProductID')
+    new_name = data.get('Name')
+    new_quantity = data.get('Quantity')
+    new_recipe = data.get('Recipe')
+    if not product_id or not new_name or new_quantity is None or not new_recipe:
+        log(f"Missing data for updating product: {data}")
+        return {"status": "error", "message": "Missing data for updating product"}
+    if product_id in products:
+        for recipe_item in new_recipe:
+            if recipe_item.get('ComponentID') not in components:
+                log(f"Component not found: {recipe_item.get('ComponentID')}")
+                return {"status": "error", "message": "Component not found"}
+            if recipe_item.get('Quantity') is None:
+                log(f"Missing quantity for component: {recipe_item.get('ComponentID')}")
+                return {"status": "error", "message": "Missing quantity for component"}
+        production_cost = sum([components[recipe_item.get('ComponentID')]["ProductionCost"] * recipe_item.get('Quantity') for recipe_item in new_recipe])
+        products[product_id] = {"Name": new_name, "Quantity": new_quantity, "Recipe": new_recipe, "ProductionCost": production_cost}
+        log(f"Updated product: {product_id}")
+        return {"status": "success"}
+    else:
+        log(f"Product not found: {product_id}")
+        return {"status": "error", "message": "Product not found"}
+
 def produce_product(data):    
     product_id = data.get('ProductID')
     quantity = data.get('Quantity')
     if not product_id or quantity is None:
         log(f"Missing data for producing product: {data}")
         return {"status": "error", "message": "Missing data for producing product"}
-    if not product_id in products:
+    if product_id not in products:
         log(f"Product not found: {product_id}")
         return {"status": "error", "message": "Product not found"}
     if products[product_id]["Quantity"] < quantity:
@@ -70,12 +94,12 @@ def update_component(data):
     component_id = data.get('ComponentID')
     new_name = data.get('Name')
     new_production_cost = data.get('ProductionCost')
-    quantity = data.get('Quantity')
-    if not component_id or not new_name or new_production_cost is None or quantity is None:
+    new_quantity = data.get('Quantity')
+    if not component_id or not new_name or new_production_cost is None or new_quantity is None:
         log(f"Missing data for updating component: {data}")
         return {"status": "error", "message": "Missing data for updating component"}
     if component_id in components:
-        components[component_id] = {"Name": new_name, "ProductionCost": new_production_cost, "Quantity": quantity}
+        components[component_id] = {"Name": new_name, "ProductionCost": new_production_cost, "Quantity": new_quantity}
         log(f"Updated component: {component_id}")
         return {"status": "success"}
     else:
@@ -134,7 +158,6 @@ def get_component(data):
         log(f"Component not found: {component_id}")
         return {"status": "error", "message": "Component not found"}
 
-
 def handle_request(request_str):
     try:
         request_data = json.loads(request_str)
@@ -152,6 +175,10 @@ request_handlers = {
     "removeComponent": remove_component,
     "updateComponent": update_component,
     "getComponent": get_component,
+    "addProduct": add_product,
+    "produceProduct": produce_product,
+    "removeProduct": remove_product,
+    "updateProduct": update_product
 }
 
 
