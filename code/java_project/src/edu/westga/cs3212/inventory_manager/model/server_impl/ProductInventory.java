@@ -8,9 +8,33 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import edu.westga.cs3212.inventory_manager.model.Component;
+import edu.westga.cs3212.inventory_manager.model.Product;
 
 public class ProductInventory {
 
+	public Product getProduct(String productID) {
+		if (productID == null) {
+			throw new IllegalArgumentException("Product ID cannot be null");
+		}
+		if (productID.isBlank()) {
+			throw new IllegalArgumentException("Product ID cannot be blank");
+		}
+		Map<String, Object> requestData = new HashMap<>();
+		requestData.put("type", "getProduct");
+		requestData.put("data", Map.of("ProductID", productID));
+
+		Gson gson = new Gson();
+		String requestJson = gson.toJson(requestData);
+
+		String response = Server.sendRequest(requestJson);
+		Type responseType = new TypeToken<Map<String, Object>>() {
+		}.getType();
+		Map<String, Object> responseMap = gson.fromJson(response, responseType);
+
+		return new Product((String) responseMap.get("ProductID"), (double) responseMap.get("Name"), (double) responseMap.get("ProductionCost"),
+				(Map<Component, Integer>) responseMap.get("Recipe"));
+	}
+	
 	public String addProduct(String productName, Map<Component, Integer> recipe, int quantity) {
 		if (productName == null) {
 			throw new IllegalArgumentException("Product name cannot be null");

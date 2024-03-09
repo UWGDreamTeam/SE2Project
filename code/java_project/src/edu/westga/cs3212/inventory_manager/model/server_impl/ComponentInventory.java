@@ -15,6 +15,30 @@ import edu.westga.cs3212.inventory_manager.model.Component;
 
 public class ComponentInventory {
 
+	
+	public Component getComponent(String componentID) {
+		if (componentID == null) {
+			throw new IllegalArgumentException("Component ID cannot be null");
+		}
+		if (componentID.isBlank()) {
+			throw new IllegalArgumentException("Component ID cannot be blank");
+		}
+		Map<String, Object> requestData = new HashMap<>();
+		requestData.put("type", "getComponent");
+		requestData.put("data", Map.of("ComponentID", componentID));
+
+		Gson gson = new Gson();
+		String requestJson = gson.toJson(requestData);
+
+		String response = Server.sendRequest(requestJson);
+		Type responseType = new TypeToken<Map<String, Object>>() {
+		}.getType();
+		Map<String, Object> responseMap = gson.fromJson(response, responseType);
+
+		return new Component((String) responseMap.get("ComponentID"), (double) responseMap.get("ProductionCost"));
+	}
+	
+	
 	public String addComponent(String componentName, double productionCost, int quantity) {
 		if (componentName == null) {
 			throw new IllegalArgumentException("Component name cannot be null");

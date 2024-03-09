@@ -1,5 +1,7 @@
 package edu.westga.cs3212.inventory_manager.model.server_impl;
 
+import java.io.Console;
+
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;
@@ -34,7 +36,7 @@ public class Server {
         byte[] reply = socket.recv(0);
         String response = new String(reply, ZMQ.CHARSET);
         if (response.equals("bad format")) {
-        	throw new IllegalArgumentException("Must provide a valid request type (see README)");
+        	//throw new IllegalArgumentException("Must provide a valid request type (see README)");
         }
 		return response;
 	}

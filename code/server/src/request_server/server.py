@@ -18,6 +18,7 @@ def log(msg):
     print(f"Server: {msg}")
 
 def add_product(data):
+    log(f"Adding product: {data}")
     product_id = generate_unique_id()
     name = data.get('Name')
     quantity = data.get('Quantity')
@@ -159,6 +160,7 @@ def get_component(data):
         return {"status": "error", "message": "Component not found"}
 
 def handle_request(request_str):
+    log(f"Handling request: {request_str}")
     try:
         request_data = json.loads(request_str)
         request_type = request_data.get('type')
@@ -192,8 +194,10 @@ def main(protocol, ipAddress, port):
         request_str = socket.recv_string()
         log(f"Received request: {request_str}")
         if request_str == "exit":
+            log("Exiting...")
             break
         else:
+            log(f"Handling request: {request_str}")
             response = handle_request(request_str)
             socket.send_string(response)
 
