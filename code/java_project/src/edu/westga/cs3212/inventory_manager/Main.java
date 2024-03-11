@@ -26,6 +26,7 @@ public class Main extends Application {
 	public static final String EDIT_COMPONENT_PAGE = "view/EditComponentPage.fxml";
 	public static final String ADD_PRODUCT_PAGE = "view/AddProductPage.fxml";
 	public static final String EDIT_PRODUCT_PAGE = "view/EditProductPage.fxml";
+	public static final String ADMIN_PAGE = "view/AdminPage.fxml";
 	
 	private static Stage primaryStage;
 

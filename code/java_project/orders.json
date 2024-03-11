@@ -1,248 +1,244 @@
 [
   {
-    "id": "78edb1d4-8df9-4175-8905-2f05730efae9",
+    "id": "98fb8c87-ff97-4ef6-a788-296a846b3d33",
     "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@9f4768d7": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@4c4ca268": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@18913194": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@d0cffe39": 10,
-      "edu.westga.cs3212.inventory_manager.model.Product@811c8b1b": 5,
-      "edu.westga.cs3212.inventory_manager.model.Product@4bcf4717": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@8b492c65": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 2
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 2971.4699999999993,
-    "productionCost": 2494.66
-  },
-  {
-    "id": "4eca16c8-fe5a-4ef1-ab88-1a1b850c9f6d",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@9f4768d7": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@eb3040a0": 7,
-      "edu.westga.cs3212.inventory_manager.model.Product@b111c490": 10,
-      "edu.westga.cs3212.inventory_manager.model.Product@18913194": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@eed38675": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@efcffa68": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@811c8b1b": 10,
-      "edu.westga.cs3212.inventory_manager.model.Product@cab4527d": 10,
-      "edu.westga.cs3212.inventory_manager.model.Product@ba80a19b": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 5
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 3998.96,
-    "productionCost": 3754.36
-  },
-  {
-    "id": "83d9af4c-4fa3-475c-95f3-3bb65b8f530e",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@acb05e14": 7,
-      "edu.westga.cs3212.inventory_manager.model.Product@c38340e6": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@18913194": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@d0cffe39": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@4bcf4717": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@ba80a19b": 5,
-      "edu.westga.cs3212.inventory_manager.model.Product@8b492c65": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@6658fa74": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@6b0a2e57": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@4f4c7653": 9
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 3024.89,
-    "productionCost": 2669.42
-  },
-  {
-    "id": "5c394ca0-558e-4af1-a1f5-1d5883554341",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@9f4768d7": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@b111c490": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@18913194": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@eed38675": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@ba80a19b": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@6b0a2e57": 7,
-      "edu.westga.cs3212.inventory_manager.model.Product@4f4c7653": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 1
-    },
-    "completionStatus": "INCOMPLETE",
-    "salePrice": 3426.39,
-    "productionCost": 3222.0200000000004
-  },
-  {
-    "id": "444b14f3-52f2-4f4a-a09c-cc9946792f2d",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@18913194": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@efcffa68": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@4bcf4717": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@cab4527d": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@6658fa74": 7,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@4f4c7653": 3
+      "edu.westga.cs3212.inventory_manager.model.Product@3ea41fa4": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@9227cbe7": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@55b56056": 4,
+      "edu.westga.cs3212.inventory_manager.model.Product@8104c547": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@240e0e39": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@3b05df7f": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@d812fadc": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@4233f17c": 1
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 2097.42,
-    "productionCost": 1567.3600000000001
+    "salePrice": 2337.82,
+    "productionCost": 3039.6899999999996
   },
   {
-    "id": "6bf112e6-cfbb-4ccd-9bfe-9266b7bbe6e7",
+    "id": "5f7a78a7-c274-4656-afe0-9f6aea04f537",
     "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@eb3040a0": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@b111c490": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@53fe1a1f": 5,
-      "edu.westga.cs3212.inventory_manager.model.Product@4c4ca268": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@18913194": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@c38340e6": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@efcffa68": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@811c8b1b": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@8b492c65": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 1
+      "edu.westga.cs3212.inventory_manager.model.Product@3ea41fa4": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@bbd3c0d5": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@240e0e39": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@767414cc": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@fc050ccc": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@18a12dcc": 4
     },
     "completionStatus": "INCOMPLETE",
-    "salePrice": 4036.4599999999996,
-    "productionCost": 2505.19
+    "salePrice": 3876.04,
+    "productionCost": 1217.6200000000001
   },
   {
-    "id": "42474d8e-af41-4d39-845a-2484f15d1b46",
+    "id": "12c9f8a0-e225-4c46-aab7-b9485d2fab5b",
     "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@b111c490": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@3b86f2d3": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@d0cffe39": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@eed38675": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@d981bd1d": 5,
-      "edu.westga.cs3212.inventory_manager.model.Product@8b492c65": 5,
-      "edu.westga.cs3212.inventory_manager.model.Product@f2a589f8": 5,
-      "edu.westga.cs3212.inventory_manager.model.Product@6b0a2e57": 7
+      "edu.westga.cs3212.inventory_manager.model.Product@f31fd15": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@3cf0db76": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@fc050ccc": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@3b05df7f": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@e5fbaf10": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@2b12bcec": 2
+    },
+    "completionStatus": "COMPLETE",
+    "salePrice": 2169.9100000000003,
+    "productionCost": 1007.73
+  },
+  {
+    "id": "007224b1-4329-4b1a-96b0-9db427edad87",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@55b56056": 4,
+      "edu.westga.cs3212.inventory_manager.model.Product@b686fd63": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@bbd3c0d5": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@240e0e39": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@3b05df7f": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@6a1ac5d0": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@18a12dcc": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@2b12bcec": 4
+    },
+    "completionStatus": "COMPLETE",
+    "salePrice": 2277.56,
+    "productionCost": 1332.7599999999998
+  },
+  {
+    "id": "5bb00d8c-8837-4449-afca-e93800211d66",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@55b56056": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@8f01867": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@240e0e39": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@fc050ccc": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@e5fbaf10": 7,
+      "edu.westga.cs3212.inventory_manager.model.Product@18a12dcc": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@2b12bcec": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@a821ca4e": 6
+    },
+    "completionStatus": "COMPLETE",
+    "salePrice": 4066.5100000000007,
+    "productionCost": 1386.9199999999998
+  },
+  {
+    "id": "016c4ca3-cef4-4f62-821f-8708ebc3423d",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@9227cbe7": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@55b56056": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@b686fd63": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@3cf0db76": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@8f01867": 4,
+      "edu.westga.cs3212.inventory_manager.model.Product@fc050ccc": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@eb646738": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@d812fadc": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@4233f17c": 4
     },
     "completionStatus": "INCOMPLETE",
-    "salePrice": 3589.86,
-    "productionCost": 2362.35
+    "salePrice": 2622.18,
+    "productionCost": 2372.61
   },
   {
-    "id": "b19aa317-e49b-4ad5-9975-09a3be56b691",
+    "id": "68225c10-47dd-4ff4-a15e-d762bbb19c2a",
     "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@eb3040a0": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@53fe1a1f": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@b111c490": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@c38340e6": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@d0cffe39": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@6658fa74": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@f2a589f8": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 10
+      "edu.westga.cs3212.inventory_manager.model.Product@3ea41fa4": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@8104c547": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@b686fd63": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@3b05df7f": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@e5fbaf10": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@f75b5d00": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@d812fadc": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@a821ca4e": 4
     },
     "completionStatus": "INCOMPLETE",
-    "salePrice": 1469.68,
-    "productionCost": 2229.44
+    "salePrice": 2406.27,
+    "productionCost": 2809.46
   },
   {
-    "id": "188f7cf2-3770-452f-9f61-28b2a1420ba1",
+    "id": "60900b13-2299-4e36-a482-94cd8bcd0db8",
     "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@acb05e14": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@3b86f2d3": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@efcffa68": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@811c8b1b": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@361dacf5": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@4bcf4717": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@f2a589f8": 7
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 3356.54,
-    "productionCost": 1729.7500000000002
-  },
-  {
-    "id": "36b91be2-d283-43ab-a948-3bffb60ae084",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@9f4768d7": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@acb05e14": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@c38340e6": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@ba80a19b": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@8b492c65": 7,
-      "edu.westga.cs3212.inventory_manager.model.Product@6b0a2e57": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@f2a589f8": 10,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 3
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 2688.27,
-    "productionCost": 1696.1
-  },
-  {
-    "id": "cd4caa28-2d1f-4ea5-80ed-265c04b18654",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@b111c490": 5,
-      "edu.westga.cs3212.inventory_manager.model.Product@acb05e14": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@c38340e6": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@cab4527d": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@d981bd1d": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@f2a589f8": 10,
-      "edu.westga.cs3212.inventory_manager.model.Product@6b0a2e57": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 10
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 2684.74,
-    "productionCost": 2278.79
-  },
-  {
-    "id": "707df8e8-0cbb-4854-8d51-79bc9ce6aa36",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@9f4768d7": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@c38340e6": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@efcffa68": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@361dacf5": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@4bcf4717": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@8b492c65": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@6b0a2e57": 9
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 2476.6899999999996,
-    "productionCost": 1807.1799999999998
-  },
-  {
-    "id": "91630327-b8f0-4c27-93c2-13f2a156f2a8",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@b111c490": 10,
-      "edu.westga.cs3212.inventory_manager.model.Product@acb05e14": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@3b86f2d3": 5,
-      "edu.westga.cs3212.inventory_manager.model.Product@d0cffe39": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@efcffa68": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@811c8b1b": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@4bcf4717": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@d981bd1d": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@f2a589f8": 3
-    },
-    "completionStatus": "COMPLETE",
-    "salePrice": 2963.3500000000004,
-    "productionCost": 1840.37
-  },
-  {
-    "id": "072894d2-e858-4d36-8c5e-8f868a701caa",
-    "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@eb3040a0": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@b111c490": 7,
-      "edu.westga.cs3212.inventory_manager.model.Product@d0cffe39": 4,
-      "edu.westga.cs3212.inventory_manager.model.Product@811c8b1b": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@efcffa68": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@4bcf4717": 1,
-      "edu.westga.cs3212.inventory_manager.model.Product@cab4527d": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@ba80a19b": 9,
-      "edu.westga.cs3212.inventory_manager.model.Product@f2a589f8": 3,
-      "edu.westga.cs3212.inventory_manager.model.Product@6b0a2e57": 5
+      "edu.westga.cs3212.inventory_manager.model.Product@3ea41fa4": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@767414cc": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@fc050ccc": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@c3f13cdb": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@d812fadc": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@a821ca4e": 3
     },
     "completionStatus": "INCOMPLETE",
-    "salePrice": 3864.73,
-    "productionCost": 2807.05
+    "salePrice": 2782.71,
+    "productionCost": 2135.57
   },
   {
-    "id": "df0176d4-d061-489a-9071-34d1266bb75e",
+    "id": "e655e4c1-0bab-4165-bbcb-aec54f678839",
     "items": {
-      "edu.westga.cs3212.inventory_manager.model.Product@9f4768d7": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@eb3040a0": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@acb05e14": 2,
-      "edu.westga.cs3212.inventory_manager.model.Product@eed38675": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@efcffa68": 8,
-      "edu.westga.cs3212.inventory_manager.model.Product@cab4527d": 6,
-      "edu.westga.cs3212.inventory_manager.model.Product@f2a589f8": 10,
-      "edu.westga.cs3212.inventory_manager.model.Product@84e73348": 10
+      "edu.westga.cs3212.inventory_manager.model.Product@3ea41fa4": 4,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@240e0e39": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@8f01867": 7,
+      "edu.westga.cs3212.inventory_manager.model.Product@767414cc": 5,
+      "edu.westga.cs3212.inventory_manager.model.Product@3b05df7f": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@eb646738": 10,
+      "edu.westga.cs3212.inventory_manager.model.Product@d812fadc": 7,
+      "edu.westga.cs3212.inventory_manager.model.Product@a821ca4e": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@4233f17c": 10
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 4061.8,
+    "productionCost": 2679.7
+  },
+  {
+    "id": "3d9f2593-ba94-48d8-8cb4-013d58f49f8d",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@b686fd63": 5,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@240e0e39": 7,
+      "edu.westga.cs3212.inventory_manager.model.Product@767414cc": 5,
+      "edu.westga.cs3212.inventory_manager.model.Product@3b05df7f": 5,
+      "edu.westga.cs3212.inventory_manager.model.Product@e5fbaf10": 4,
+      "edu.westga.cs3212.inventory_manager.model.Product@2b12bcec": 1
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 1714.2600000000002,
+    "productionCost": 640.55
+  },
+  {
+    "id": "f5e4fb18-3621-400f-b56f-8a75f13ce2f1",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@55b56056": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@8104c547": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@b686fd63": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@3cf0db76": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@bbd3c0d5": 5,
+      "edu.westga.cs3212.inventory_manager.model.Product@767414cc": 4,
+      "edu.westga.cs3212.inventory_manager.model.Product@3d42e51b": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@18a12dcc": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@2b12bcec": 5
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 2343.76,
+    "productionCost": 1343.0099999999998
+  },
+  {
+    "id": "057dd912-4326-4fa7-b22f-a87d05849661",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@9227cbe7": 5,
+      "edu.westga.cs3212.inventory_manager.model.Product@f31fd15": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 7,
+      "edu.westga.cs3212.inventory_manager.model.Product@3d42e51b": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@fc050ccc": 7,
+      "edu.westga.cs3212.inventory_manager.model.Product@18a12dcc": 5,
+      "edu.westga.cs3212.inventory_manager.model.Product@d812fadc": 4,
+      "edu.westga.cs3212.inventory_manager.model.Product@a821ca4e": 1
     },
     "completionStatus": "COMPLETE",
-    "salePrice": 3260.2599999999998,
-    "productionCost": 3057.2999999999997
+    "salePrice": 2316.21,
+    "productionCost": 1114.99
+  },
+  {
+    "id": "33bec7e2-d9d1-4a02-b66c-a7d7464bfb5f",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@3ea41fa4": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@f31fd15": 3,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@3d42e51b": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@c3f13cdb": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@3b05df7f": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@d812fadc": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@a821ca4e": 6
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 2280.19,
+    "productionCost": 1696.54
+  },
+  {
+    "id": "ea56baa3-fdbc-4da6-b9a2-d8d73103f306",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@3ea41fa4": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@9227cbe7": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@f31fd15": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@3cf0db76": 4,
+      "edu.westga.cs3212.inventory_manager.model.Product@767414cc": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@3b05df7f": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@eb646738": 9,
+      "edu.westga.cs3212.inventory_manager.model.Product@a821ca4e": 10
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 3186.61,
+    "productionCost": 1924.9900000000002
+  },
+  {
+    "id": "538ca47a-b536-47ed-93cb-70c5a64ce1c0",
+    "items": {
+      "edu.westga.cs3212.inventory_manager.model.Product@55b56056": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@a7eff15a": 6,
+      "edu.westga.cs3212.inventory_manager.model.Product@bbd3c0d5": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@240e0e39": 2,
+      "edu.westga.cs3212.inventory_manager.model.Product@fc050ccc": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@e5fbaf10": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@eb646738": 8,
+      "edu.westga.cs3212.inventory_manager.model.Product@2b12bcec": 1,
+      "edu.westga.cs3212.inventory_manager.model.Product@4233f17c": 8
+    },
+    "completionStatus": "INCOMPLETE",
+    "salePrice": 2309.08,
+    "productionCost": 1462.1100000000001
   }
 ]
