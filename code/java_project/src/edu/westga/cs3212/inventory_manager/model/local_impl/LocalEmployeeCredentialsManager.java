@@ -19,6 +19,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 
 	/**
 	 * Initializes the credentials manager and loads existing credentials from storage.
+	 * If LocalEmployeeCredentialsManager.employeeCredentialsMap == null creates a admin user
 	 * 
 	 * @precondition none
 	 * @postcondition getEmployees().size() == 0
