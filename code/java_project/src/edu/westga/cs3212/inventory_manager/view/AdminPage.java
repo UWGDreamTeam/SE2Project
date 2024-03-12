@@ -71,12 +71,25 @@ public class AdminPage {
     }
 
     @FXML
-    void editUser(ActionEvent event) {
-    	String id = this.usersTableView.getSelectionModel().selectedItemProperty().get().getEmployeeID();
-    	String firstName = this.usersTableView.getSelectionModel().selectedItemProperty().get().getFirstName();
-    	String lastName = this.usersTableView.getSelectionModel().selectedItemProperty().get().getLastName();
+    void editUser(ActionEvent event) throws IOException {
     	
+    	LocalEmployeeCredentials userSelected = this.usersTableView.getSelectionModel().getSelectedItem();
     	
+    	FXMLLoader loader = new FXMLLoader(Main.class.getResource(Main.ADMIN_EDIT_CREDENTIALS_PAGE));
+		Parent parent = loader.load();
+
+		AdminEditCredentialsPage editCredentialsPage = loader.getController();
+		editCredentialsPage.initializeWithItem(userSelected);
+
+		Stage modalStage = new Stage();
+		Scene scene = new Scene(parent);
+		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.setScene(scene);
+		modalStage.initModality(Modality.WINDOW_MODAL);
+		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+		modalStage.showAndWait();
+		
+		this.refreshUsersTableView();
     }
 
     @FXML
@@ -109,8 +122,6 @@ public class AdminPage {
     	this.setupUsersTableView();
     }
     
-    
-
 	private void refreshUsersTableView() {
 		this.usersTableView.setItems(this.adminVM.getObservableUsersList());
 		this.usersTableView.refresh();
