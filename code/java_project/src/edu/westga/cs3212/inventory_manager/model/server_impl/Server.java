@@ -1,7 +1,5 @@
 package edu.westga.cs3212.inventory_manager.model.server_impl;
 
-import java.io.Console;
-
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;

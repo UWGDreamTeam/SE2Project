@@ -69,9 +69,6 @@ public class ComponentInventory {
         Type responseType = new TypeToken<Map<String, Object>>(){}.getType();
         Map<String, Object> responseMap = gson.fromJson(response, responseType);
         Map<String, Object> dataMap = (Map<String, Object>) responseMap.get("data");
-		if (responseMap.get("status").equals("error")) {
-			throw new IllegalArgumentException((String) responseMap.get("message"));
-		}
         String componentID = (String) dataMap.get("ComponentID");
         return componentID;
 	}
