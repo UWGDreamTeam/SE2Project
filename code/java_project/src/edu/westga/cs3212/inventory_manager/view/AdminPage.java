@@ -35,7 +35,6 @@ public class AdminPage {
     @FXML
     private TableColumn<LocalEmployeeCredentials, String> firstNameCol;
 
-
     @FXML
     private TableColumn<LocalEmployeeCredentials, String> lastNameCol;
 
@@ -73,6 +72,10 @@ public class AdminPage {
 
     @FXML
     void editUser(ActionEvent event) {
+    	String id = this.usersTableView.getSelectionModel().selectedItemProperty().get().getEmployeeID();
+    	String firstName = this.usersTableView.getSelectionModel().selectedItemProperty().get().getFirstName();
+    	String lastName = this.usersTableView.getSelectionModel().selectedItemProperty().get().getLastName();
+    	
     	
     }
 

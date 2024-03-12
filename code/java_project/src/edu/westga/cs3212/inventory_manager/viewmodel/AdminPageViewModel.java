@@ -2,15 +2,12 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import java.util.ArrayList;
 
-import edu.westga.cs3212.inventory_manager.model.Component;
-import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 
 /**
  * The Class AdminPageViewModel.
@@ -22,7 +19,6 @@ public class AdminPageViewModel {
 	
 	/** The selected user. */
 	private ObjectProperty<LocalEmployeeCredentials> selectedUser;
-	private ListView<String> usersView;
 	private LocalEmployeeCredentialsManager credentialsManager;
 
 	/**
