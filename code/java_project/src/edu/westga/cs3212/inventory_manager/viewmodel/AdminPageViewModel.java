@@ -17,12 +17,14 @@ import javafx.collections.ObservableList;
  */
 public class AdminPageViewModel {
 	
-	/** The selected user. */
 	private ObjectProperty<LocalEmployeeCredentials> selectedUser;
 	private LocalEmployeeCredentialsManager credentialsManager;
 
 	/**
 	 * Instantiates a new admin page view model.
+	 * @preconditions none
+     * @postconditions 	this.getSelectedUser() != null && 
+     * 					this.credentialsManager != null
 	 */
 	public AdminPageViewModel() {
 		this.credentialsManager = new LocalEmployeeCredentialsManager();
@@ -46,7 +48,10 @@ public class AdminPageViewModel {
 	/**
      * Provides an observable list of employees for the UI, derived from the Local Component Credentials Manager.
      * 
-     * @return An observable list of all employees in the system.
+     * @preconditions none
+     * @postconditions none
+     * 
+     * @return ObservableList&lt;LocalEmployeeCredentials&gt; An observable list of all employees in the system.
      */
 	public ObservableList<LocalEmployeeCredentials> getObservableUsersList() {
 		ArrayList<LocalEmployeeCredentials> users = new ArrayList<LocalEmployeeCredentials>();
@@ -59,6 +64,9 @@ public class AdminPageViewModel {
 	/**
 	 * Gets the selected user.
 	 *
+	 * @preconditions none
+	 * @postcondition none
+	 * 
 	 * @return the selected user
 	 */
 	public ObjectProperty<LocalEmployeeCredentials> getSelectedUser() {
