@@ -30,7 +30,6 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 			LocalEmployeeCredentialsManager.employeeCredentialsMap = EmployeeCredentialsStorage.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 			this.addAdminUser();
 		}
-		
 	}
 	
 	private void addAdminUser() {

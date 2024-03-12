@@ -18,9 +18,9 @@ import edu.westga.cs3212.inventory_manager.model.ProductInventoryStorage;
  */
 public class LocalProductInventory implements ItemInventoryManager {
 	
+	private static final int MINIMUM_QUANTITY = 0;
 	private static final String ITEM_ID_CANNOT_BE_NULL = "Product ID cannot be null";
 	private static final String ITEM_ID_CANNOT_BE_BLANK = "Product ID cannot be blank";
-	private static final int MINIMUM_QUANTITY = 0;
 	private static final String QUANTITY_CANNOT_BE_NEGATIVE = "Quantity cannot be negative";
 	private static final String NEW_ITEM_CANNOT_BE_NULL = "New Product Cannot be null";
 	private static final String NEW_ITEM_ALREADY_EXISTS = "Product Already Exists";
