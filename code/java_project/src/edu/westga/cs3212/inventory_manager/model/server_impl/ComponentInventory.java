@@ -16,7 +16,7 @@ import edu.westga.cs3212.inventory_manager.model.Component;
 public class ComponentInventory {
 
 	
-	public Component getComponent(String componentID) {
+	public static Component getComponent(String componentID) {
 		if (componentID == null) {
 			throw new IllegalArgumentException("Component ID cannot be null");
 		}
@@ -34,12 +34,17 @@ public class ComponentInventory {
 		Type responseType = new TypeToken<Map<String, Object>>() {
 		}.getType();
 		Map<String, Object> responseMap = gson.fromJson(response, responseType);
-
-		return new Component((String) responseMap.get("ComponentID"), (double) responseMap.get("ProductionCost"));
+		Map<String, Object> dataMap = (Map<String, Object>) responseMap.get("data");
+		if (responseMap.get("status").equals("error")) {
+			throw new IllegalArgumentException((String) responseMap.get("message"));
+		}
+		Component component = new Component((String) dataMap.get("Name"), ((Number) dataMap.get("ProductionCost")).doubleValue());
+		component.setID(componentID);
+		return component;
 	}
 	
 	
-	public String addComponent(String componentName, double productionCost, int quantity) {
+	public static String addComponent(String componentName, double productionCost, int quantity) {
 		if (componentName == null) {
 			throw new IllegalArgumentException("Component name cannot be null");
 		}
@@ -63,11 +68,15 @@ public class ComponentInventory {
         String response = Server.sendRequest(requestJson);
         Type responseType = new TypeToken<Map<String, Object>>(){}.getType();
         Map<String, Object> responseMap = gson.fromJson(response, responseType);
-
-        return (String) responseMap.get("ComponentID");
+        Map<String, Object> dataMap = (Map<String, Object>) responseMap.get("data");
+		if (responseMap.get("status").equals("error")) {
+			throw new IllegalArgumentException((String) responseMap.get("message"));
+		}
+        String componentID = (String) dataMap.get("ComponentID");
+        return componentID;
 	}
 	
-	public boolean removeComponent(String componentID) {
+	public static boolean deleteComponent(String componentID) {
 		if (componentID == null) {
 			throw new IllegalArgumentException("Component ID cannot be null");
 		}
@@ -75,21 +84,22 @@ public class ComponentInventory {
 			throw new IllegalArgumentException("Component ID cannot be blank");
 		}
 		Map<String, Object> requestData = new HashMap<>();
-		requestData.put("type", "removeComponent");
+		requestData.put("type", "deleteComponent");
 		requestData.put("data", Map.of("ComponentID", componentID));
 
 		Gson gson = new Gson();
 		String requestJson = gson.toJson(requestData);
 
 		String response = Server.sendRequest(requestJson);
-		Type responseType = new TypeToken<Map<String, Object>>() {
-		}.getType();
+		Type responseType = new TypeToken<Map<String, Object>>(){}.getType();
 		Map<String, Object> responseMap = gson.fromJson(response, responseType);
-
-		return (boolean) responseMap.get("Success");
+		if (responseMap.get("status").equals("error")) {
+			throw new IllegalArgumentException((String) responseMap.get("message"));
+		}
+		return true;
 	}
 	
-	public boolean updateComponent(String componentID, String componentName, double productionCost, int quantity) {
+	public static boolean updateComponent(String componentID, String componentName, double productionCost, int quantity) {
 		if (componentID == null) {
 			throw new IllegalArgumentException("Component ID cannot be null");
 		}
@@ -115,10 +125,13 @@ public class ComponentInventory {
 		String response = Server.sendRequest(requestJson);
 		Type responseType = new TypeToken<Map<String, Object>>(){}.getType();
 		Map<String, Object> responseMap = gson.fromJson(response, responseType);
-		return (boolean) responseMap.get("Success");
+		if (responseMap.get("status").equals("error")) {
+			throw new IllegalArgumentException((String) responseMap.get("message"));
+		}
+		return true;
     }
 	
-	public boolean orderComponent(String componentID, int quantity) {
+	public static int orderComponent(String componentID, int quantity) {
 		if (componentID == null) {
             throw new IllegalArgumentException("Component ID cannot be null");
         }
@@ -135,7 +148,36 @@ public class ComponentInventory {
         String response = Server.sendRequest(requestJson);
         Type responseType = new TypeToken<Map<String, Object>>(){}.getType();
         Map<String, Object> responseMap = gson.fromJson(response, responseType);
-        
-        return (boolean) responseMap.get("Success");
+        Map<String, Object> dataMap = (Map<String, Object>) responseMap.get("data");
+		if (responseMap.get("status").equals("error")) {
+			throw new IllegalArgumentException((String) responseMap.get("message"));
+		}
+		return ((Number) dataMap.get("Quantity")).intValue();
+
 	}	
+	
+	public static int getQuantity(String componentID) {
+		if (componentID == null) {
+			throw new IllegalArgumentException("Component ID cannot be null");
+		}
+		if (componentID.isBlank()) {
+			throw new IllegalArgumentException("Component ID cannot be blank");
+		}
+		Map<String, Object> requestData = new HashMap<>();
+		requestData.put("type", "getQuantityOfComponent");
+		requestData.put("data", Map.of("ComponentID", componentID));
+
+		Gson gson = new Gson();
+		String requestJson = gson.toJson(requestData);
+
+		String response = Server.sendRequest(requestJson);
+		Type responseType = new TypeToken<Map<String, Object>>() {
+		}.getType();
+		Map<String, Object> responseMap = gson.fromJson(response, responseType);
+		Map<String, Object> dataMap = (Map<String, Object>) responseMap.get("data");
+		if (responseMap.get("status").equals("error")) {
+			throw new IllegalArgumentException((String) responseMap.get("message"));
+		}
+		return ((Number) dataMap.get("Quantity")).intValue();
+	}
 }
