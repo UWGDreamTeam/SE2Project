@@ -15,6 +15,7 @@ class TestOrderManagerRemoveOrder {
 	@BeforeEach
 	public void setUp() {
 		this.orderManager = new LocalOrderManager();
+		this.orderManager.clearOrders();
 	}
 
 	@Test

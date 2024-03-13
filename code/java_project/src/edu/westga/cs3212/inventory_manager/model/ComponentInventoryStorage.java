@@ -1,49 +1,65 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
-
 /**
- * The Class ComponentInventoryStorage is used to save and load components from local storage.
+ * The Class ComponentInventoryStorage is used to save and load components from
+ * local storage.
  * 
  * It uses the Gson library to serialize and deserialize components.
+ * 
  * @author Jason Nunez
  * @version Spring 2024
  */
 public final class ComponentInventoryStorage {
 
-	private static final String UTILITY_CLASS_ERROR = "Utility class";
-	
+	public static final String UTILITY_CLASS_ERROR = "Utility class";
+
 	private ComponentInventoryStorage() {
 		throw new IllegalStateException(UTILITY_CLASS_ERROR);
-	}	
-	
+	}
+
 	/**
 	 * Saves components to local storage.
 	 * 
 	 * @precondition none
 	 * @postcondition none
 	 * 
-	 * @param components  The list of components to save.
-	 * @param filePath  The file path where products are saved.
+	 * @param components The list of components to save.
+	 * @param filePath   The file path where products are saved.
 	 */
-	public static void save(List<Component> components, String filePath) {
+	public static void save(Map<Component, Integer> components, String filePath) {
+		Map<String, Component> componentMap = new HashMap<>();
+		Map<String, Integer> quantityMap = new HashMap<>();
+
+		for (Map.Entry<Component, Integer> entry : components.entrySet()) {
+			String componentId = entry.getKey().getID();
+			componentMap.put(componentId, entry.getKey());
+			quantityMap.put(componentId, entry.getValue());
+		}
+
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		try (FileWriter writer = new FileWriter(filePath)) {
-			gson.toJson(components, writer);
-		} catch (IOException exception) {
-			exception.printStackTrace();
+		String componentJson = gson.toJson(componentMap);
+		String quantityJson = gson.toJson(quantityMap);
+
+		try (FileWriter componentWriter = new FileWriter(filePath)) {
+			componentWriter.write(componentJson);
+		} catch (Exception e) {
+
+		}
+
+		try (FileWriter quantityWriter = new FileWriter(filePath + "1")) {
+			quantityWriter.write(quantityJson);
+		} catch (Exception e) {
+
 		}
 	}
 
@@ -56,17 +72,31 @@ public final class ComponentInventoryStorage {
 	 * @param filePath The file path from where products are to be loaded.
 	 * @return A list of products.
 	 */
-	public static List<Component> load(String filePath) {
-		List<Component> components;
+	public static Map<Component, Integer> load(String filePath) {
+		Gson gson = new Gson();
+		Map<Component, Integer> components = new HashMap<>();
+
 		try {
-			String json = new String(Files.readAllBytes(Paths.get(filePath)));
-			Gson gson = new Gson();
-			Type type = new TypeToken<List<Component>>() {
+			String componentJson = new String(Files.readAllBytes(Paths.get(filePath)));
+			Type componentType = new TypeToken<Map<String, Component>>() {
 			}.getType();
-			components = gson.fromJson(json, type);
-		} catch (IOException e) {
-			components = new ArrayList<>();
+			Map<String, Component> componentMap = gson.fromJson(componentJson, componentType);
+
+			String quantityJson = new String(Files.readAllBytes(Paths.get(filePath + "1")));
+			Type quantityType = new TypeToken<Map<String, Integer>>() {
+			}.getType();
+			Map<String, Integer> quantityMap = gson.fromJson(quantityJson, quantityType);
+
+			for (Map.Entry<String, Component> entry : componentMap.entrySet()) {
+				String componentId = entry.getKey();
+				Component component = entry.getValue();
+				Integer quantity = quantityMap.get(componentId);
+				components.put(component, quantity);
+			}
+		} catch (Exception e) {
+
 		}
+
 		return components;
 	}
 }

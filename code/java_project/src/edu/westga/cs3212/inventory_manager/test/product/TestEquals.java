@@ -1,72 +1,60 @@
 package edu.westga.cs3212.inventory_manager.test.product;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
+import edu.westga.cs3212.inventory_manager.model.Component;
+import edu.westga.cs3212.inventory_manager.model.Product;
 
-class TestEquals {
+public class TestEquals {
 
+	
 	@Test
-	void testEqualsSelf() {
-		//Arrange
-		Product product = new Product("ID528", "arrow");
-		
-		//Act
-		
-		//Assert
-		assertTrue(product.equals(product));
+	void testEqualsWithSameObject() {
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
+		assert (product.equals(product));
 	}
 	
 	@Test
 	void testEqualsWithNull() {
-		//Arrange
-		Product product = new Product("ID527", "feather");
-		
-		//Act
-		
-		//Assert
-		assertFalse(product.equals(null));
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
+		assert (!product.equals(null));
 	}
 	
 	@Test
 	void testEqualsWithDifferentClass() {
-		//Arrange
-		Product product = new Product("ID523", "furnace");
-		Object product1 = new Object();
-		
-		//Act
-		
-		//Assert
-		assertFalse(product.equals(product1));
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product = new Product("Name", 2, 3, recipe);
+		assert (!product.equals("String"));
 	}
 	
 	@Test
-	void testEqualsWithSameClassAndHashCode() {
-		//Arrange
-		String id = "ID529";
-		String name = "table";
-		
-		Product product = new Product(id, name);
-		Product product1 = new Product(id, name);
-		//Act
-		
-		//Assert
-		assertTrue(product.equals(product1));
+	void testEqualsWithDifferentIDs() {
+		Component component = new Component("Name", 2);
+        HashMap<Component, Integer> recipe = new HashMap<>();
+        recipe.put(component, 1);
+        Product product1 = new Product("Name", 2, 3, recipe);
+        Product product2 = new Product("Name", 2, 3, recipe);
+        assert (!product1.equals(product2));
 	}
 	
 	@Test
-	void testEqualsWithSameClassDifferentHashCode() {
-		//Arrange
-		Product product = new Product("ID526", "grass");
-		Product product1 = new Product("ID991", "water");
-		
-		//Act
-		
-		//Assert
-		assertFalse(product.equals(product1));
+	void testEqualsWithSameIDs() {
+		Component component = new Component("Name", 2);
+		HashMap<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		Product product1 = new Product("Name", 2, 3, recipe);
+		Product product2 = new Product("Name", 2, 3, recipe);
+		product2.setID(product1.getID());
+		assert (product1.equals(product2));
 	}
-
 }

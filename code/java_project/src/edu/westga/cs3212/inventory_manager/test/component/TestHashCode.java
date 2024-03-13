@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
 
 class TestHashCode {
@@ -14,12 +14,12 @@ class TestHashCode {
 	@Test
 	void testHashCode() {
 		//Arrange
-		int id = "ID321".hashCode();
-		int name = "bow".hashCode();
+		String id = "1";
 		
-		int hashCode = "component".hashCode() + id + name;
+		int hashCode = "Component".hashCode() + id.hashCode();
 		
-		Item product = new Component("ID321", "bow");
+		Item product = new Component("bow", 20);
+		product.setID(id);
 		
 		//Act
 		
