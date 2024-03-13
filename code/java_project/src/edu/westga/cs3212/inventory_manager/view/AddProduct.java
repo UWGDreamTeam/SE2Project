@@ -71,6 +71,7 @@ public class AddProduct {
 		}
 		if (result) {
 			this.returnToInventoryPage(event);
+			this.showAlert("Product Added", "The product was successfully added.", Alert.AlertType.INFORMATION);
 		}
 	}
 
@@ -136,6 +137,13 @@ public class AddProduct {
 	private void refreshComponentTableView() {
 		this.componentRecipeTableView.setItems(this.addProductVM.getObservableComponentList());
 		this.componentRecipeTableView.refresh();
+	}
+	
+	private void showAlert(String title, String content, Alert.AlertType alertType) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setContentText(content);
+		alert.showAndWait();
 	}
 
 }

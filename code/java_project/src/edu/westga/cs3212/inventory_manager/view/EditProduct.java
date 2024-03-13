@@ -73,6 +73,7 @@ public class EditProduct {
 		}
 		if (result) {
 			this.returnToInventoryPage(event);
+			this.showAlert("Product Edited", "The product was successfully edited.", Alert.AlertType.INFORMATION);
 		}
 	}
 
@@ -159,6 +160,13 @@ public class EditProduct {
 	private void refreshComponentTableView() {
 		this.componentRecipeTableView.setItems(this.editProductVM.getObservableComponentList());
 		this.componentRecipeTableView.refresh();
+	}
+	
+	private void showAlert(String title, String content, Alert.AlertType alertType) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setContentText(content);
+		alert.showAndWait();
 	}
 
 }
