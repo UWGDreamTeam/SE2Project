@@ -5,13 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.Item;
-import edu.westga.cs3212.inventory_manager.model.local_impl.Component;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 
 class TestClear {
@@ -25,16 +22,16 @@ class TestClear {
 	void testClearWhenInventoryIsEmpty() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
 		inventory.clear();
-		assertEquals(0, inventory.getQuantity());
+		assertEquals(0, inventory.getItemsWithQuantities().size());
 	}
 	
 	@Test
 	void testWhenInventoryIsNotEmpty() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
-		Item item = new Component("ID123", "test");
-		inventory.addNewItem(item);
+		Component component = new Component("component", 5.0);
+		inventory.addItem(component, 1);
 		inventory.clear();
-		assertEquals(0, inventory.getListOfItems().size());
+		assertEquals(0, inventory.getItemsWithQuantities().size());
 	}
 
 }

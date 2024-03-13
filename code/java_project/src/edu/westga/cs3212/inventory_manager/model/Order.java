@@ -1,9 +1,8 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.util.Map;
-import java.util.Random;
+import java.util.UUID;
 import java.util.HashMap;
-import java.time.LocalDateTime;
 
 /**
  * The Order Class.
@@ -14,19 +13,23 @@ import java.time.LocalDateTime;
 public class Order {
 
 	private static final int MINIMUM_QUANTITY = 0;
+	private static final int MINIMUM_PURCHASE_PRICE = 0;
 	private static final String QUANTITY_TO_REMOVE_IS_GREATER_THAN_QUANTITY_IN_ORDER = "Quantity to remove is greater than quantity in order";
 	private static final String PRODUCT_NOT_FOUND_IN_ORDER = "Product not found in order";
 	private static final String QUANTITY_MUST_BE_GREATER_THAN_0 = "Quantity must be greater than 0";
 	private static final String PRODUCT_CANNOT_BE_NULL = "Product cannot be null";
 	private static final String COMPLETION_STATUS_CANNOT_BE_NULL = "Completion status cannot be null";
-
+	private static final String ID_CANNOT_BE_NULL = "ID cannot be null";
+	private static final String ID_CANNOT_BE_BLANK = "ID cannot be blank";
+	
 	private String id;
-
-	private LocalDateTime dateCreated;
 
 	private Map<Product, Integer> items;
 
 	private CompletionStatus completionStatus;
+	
+	private double salePrice;
+	private double productionCost;
 
 	/**
 	 * Instantiates a new order. Contains a list of items and the date the order was
@@ -36,11 +39,10 @@ public class Order {
 	 * @postcondition none
 	 */
 	public Order() {
-		this.dateCreated = LocalDateTime.now();
-		// This id implementation is a placeholder until we add a class that handles
-		// random generation.
-		this.id = "3212" + this.dateCreated.getNano() + new Random().nextInt();
+		this.id = this.generateID();
 		this.items = new HashMap<>();
+		this.salePrice = MINIMUM_PURCHASE_PRICE;
+		this.productionCost = MINIMUM_PURCHASE_PRICE;
 		this.completionStatus = CompletionStatus.INCOMPLETE;
 	}
 
@@ -57,7 +59,13 @@ public class Order {
 		this.checkProductAndQuantityInput(product, quantity);
 
 		int currQuantity = this.items.getOrDefault(product, 0);
+		this.updatePricing(product, quantity);
 		this.items.put(product, currQuantity + quantity);
+	}
+
+	private void updatePricing(Product product, int quantity) {
+		this.salePrice += product.getSalePrice() * quantity;
+		this.productionCost += product.getProductionCost() * quantity;
 	}
 
 	/**
@@ -97,24 +105,12 @@ public class Order {
 	 *
 	 * @return the id
 	 */
-	public String getId() {
+	public String getID() {
 		return this.id;
-	}
-
-	/**
-	 * Gets the date the order was created.
-	 *
-	 * @precondition none
-	 * @postcondition none
-	 * 
-	 * @return the date created
-	 */
-	public LocalDateTime getDateCreated() {
-		return this.dateCreated;
 	}
 	
 	/**
-	 * Gets the items of the order.
+	 * Gets the products of the order along with their quantities.
 	 *
 	 * @precondition none
 	 * @postcondition none
@@ -122,8 +118,7 @@ public class Order {
 	 * @return the items in the order
 	 */
 	public Map<Product, Integer> getItems() {
-		var items = new HashMap<Product, Integer>(this.items);
-		return items;
+		return new HashMap<>(this.items);
 	}
 
 	/**
@@ -161,10 +156,32 @@ public class Order {
 			throw new IllegalArgumentException(QUANTITY_MUST_BE_GREATER_THAN_0);
 		}
 	}
+	
+	private String generateID() {
+		return UUID.randomUUID().toString();
+	}
+	
+	/**
+	 * Sets the ID for this order.
+	 * 
+	 * @param id The new ID to be assigned to the order.
+	 * @precondition id != null && !id.isBlank()
+	 * @postcondition this.getID() == id
+	 * @throws IllegalArgumentException if id is null or blank
+	 */
+	public void setID(String id) {
+		if (id == null) {
+			throw new IllegalArgumentException(ID_CANNOT_BE_NULL);
+		}
+		if (id.isBlank()) {
+			throw new IllegalArgumentException(ID_CANNOT_BE_BLANK);
+		}
+		this.id = id;
+	}
 
 	@Override
 	public int hashCode() {
-		return this.id.hashCode() + this.dateCreated.hashCode();
+		return "Order".hashCode() + this.id.hashCode();
 	}
 	
 	@Override
@@ -176,6 +193,28 @@ public class Order {
 			return false;
 		}
 		Order other = (Order) obj;
-		return this.id.equals(other.id) && this.dateCreated.equals(other.dateCreated);
+		return this.id.equals(other.id);
+	}
+
+	/**
+	 * Gets the sale price of this order.
+	 * 
+	 * @return The sale price of the order.
+	 * @precondition none
+	 * @postcondition none
+	 */
+	public double getSalePrice() {
+		return this.salePrice;
+	}
+
+	/**
+	 * Gets the production cost of this order.
+	 * 
+	 * @return The production cost of the order.
+	 * @precondition none
+	 * @postcondition none
+	 */
+	public double getProductionCost() {
+		return this.productionCost;
 	}
 }

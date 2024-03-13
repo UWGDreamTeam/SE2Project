@@ -1,18 +1,15 @@
 package edu.westga.cs3212.inventory_manager.model;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
-import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
 
 /**
  * The Class ProductInventoryStorage is used to save and load products from local storage.
@@ -22,7 +19,7 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.Product;
  */
 public final class ProductInventoryStorage {
 
-	private static final String UTILITY_CLASS_ERROR = "Utility class";
+	public static final String UTILITY_CLASS_ERROR = "Utility class";
 	
 	private ProductInventoryStorage() {
 		throw new IllegalStateException(ProductInventoryStorage.UTILITY_CLASS_ERROR);
@@ -37,12 +34,12 @@ public final class ProductInventoryStorage {
 	 * @param products  The list of products to save.
 	 * @param filePath  The file path where products are saved.
 	 */
-	public static void save(List<Product> products, String filePath) {
+	public static void save(Map<Product, Integer> products, String filePath) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(products, writer);
-		} catch (IOException exception) {
-			exception.printStackTrace();
+		} catch (Exception exception) {
+			
 		}
 	}
 
@@ -55,16 +52,16 @@ public final class ProductInventoryStorage {
 	 * @param filePath The file path from where products are to be loaded.
 	 * @return A list of products.
 	 */
-	public static List<Product> load(String filePath) {
-		List<Product> products;
+	public static Map<Product, Integer> load(String filePath) {
+		Map<Product, Integer> products;
 		try {
 			String json = new String(Files.readAllBytes(Paths.get(filePath)));
 			Gson gson = new Gson();
-			Type type = new TypeToken<List<Product>>() {
+			Type type = new TypeToken<Map<Product, Integer>>() {
 			}.getType();
 			products = gson.fromJson(json, type);
-		} catch (IOException e) {
-			products = new ArrayList<>();
+		} catch (Exception e) {
+			products = new HashMap<>();
 		}
 		return products;
 	}

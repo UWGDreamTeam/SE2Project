@@ -1,11 +1,11 @@
 package edu.westga.cs3212.inventory_manager.test.localordermanager;
 
-import static org.junit.jupiter.api.Assertions.*;
-import java.time.LocalDateTime;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
@@ -17,6 +17,7 @@ class TestOrderManagerGetOrders {
 	@BeforeEach
 	public void setUp() {
 		this.orderManager = new LocalOrderManager();
+		this.orderManager.clearOrders();
 	}
 
 	@Test
@@ -157,47 +158,4 @@ class TestOrderManagerGetOrders {
 		// Assert
 		assertEquals(0, orders.size());
 	}
-
-	@Test
-	public void testGetOrdersByDateSomeMatch() {
-		// Arrange
-		LocalDateTime date = LocalDateTime.now();
-		Order order1 = new Order();
-		Order order2 = new Order();
-		this.orderManager.addOrder(order1);
-		this.orderManager.addOrder(order2);
-
-		// Act
-		List<Order> orders = this.orderManager.getOrdersByDate(date);
-
-		// Assert
-		assertEquals(2, orders.size());
-		assertTrue(orders.contains(order1));
-		assertTrue(orders.contains(order2));
-	}
-
-	@Test
-	public void testGetOrdersByDateInvalidDate() {
-		// Act and Assert
-		assertThrows(IllegalArgumentException.class, () -> {
-			this.orderManager.getOrdersByDate(null);
-		});
-	}
-
-	@Test
-	public void testGetOrdersByDateNoneMatch() {
-		// Arrange
-		LocalDateTime date = LocalDateTime.MAX;
-		Order order1 = new Order();
-		Order order2 = new Order();
-		this.orderManager.addOrder(order1);
-		this.orderManager.addOrder(order2);
-
-		// Act
-		List<Order> orders = this.orderManager.getOrdersByDate(date);
-
-		// Assert
-		assertEquals(0, orders.size());
-	}
-
 }

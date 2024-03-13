@@ -1,16 +1,27 @@
-[
-  {
-    "necessaryComponents": {},
-    "id": "ID01",
-    "name": "name1",
-    "unitCost": 0.0,
-    "quantity": 0
-  },
-  {
-    "necessaryComponents": {},
-    "id": "ID02",
-    "name": "name2",
-    "unitCost": 0.0,
-    "quantity": 0
-  }
-]
+{
+  "edu.westga.cs3212.inventory_manager.model.Product@42bc4dbe": 16,
+  "edu.westga.cs3212.inventory_manager.model.Product@e91e93dc": 33,
+  "edu.westga.cs3212.inventory_manager.model.Product@2e9988d2": 2,
+  "edu.westga.cs3212.inventory_manager.model.Product@a4da64d7": 11,
+  "edu.westga.cs3212.inventory_manager.model.Product@502bf9a6": 10,
+  "edu.westga.cs3212.inventory_manager.model.Product@d7c4dbcb": 6,
+  "edu.westga.cs3212.inventory_manager.model.Product@22eff47e": 9,
+  "edu.westga.cs3212.inventory_manager.model.Product@fa9f14ce": 18,
+  "edu.westga.cs3212.inventory_manager.model.Product@c866f3f4": 48,
+  "edu.westga.cs3212.inventory_manager.model.Product@d7921480": 49,
+  "edu.westga.cs3212.inventory_manager.model.Product@35a48d37": 21,
+  "edu.westga.cs3212.inventory_manager.model.Product@5f7aecee": 10,
+  "edu.westga.cs3212.inventory_manager.model.Product@1d8f551b": 23,
+  "edu.westga.cs3212.inventory_manager.model.Product@82958883": 5,
+  "edu.westga.cs3212.inventory_manager.model.Product@1f7548a3": 39,
+  "edu.westga.cs3212.inventory_manager.model.Product@38a2453b": 46,
+  "edu.westga.cs3212.inventory_manager.model.Product@e73b0fe0": 19,
+  "edu.westga.cs3212.inventory_manager.model.Product@8d17df77": 1,
+  "edu.westga.cs3212.inventory_manager.model.Product@22061124": 25,
+  "edu.westga.cs3212.inventory_manager.model.Product@25b86f5a": 42,
+  "edu.westga.cs3212.inventory_manager.model.Product@8ea6aac0": 33,
+  "edu.westga.cs3212.inventory_manager.model.Product@4bfb3e5c": 38,
+  "edu.westga.cs3212.inventory_manager.model.Product@6ded8303": 18,
+  "edu.westga.cs3212.inventory_manager.model.Product@b6b38643": 10,
+  "edu.westga.cs3212.inventory_manager.model.Product@7f51542a": 27
+}

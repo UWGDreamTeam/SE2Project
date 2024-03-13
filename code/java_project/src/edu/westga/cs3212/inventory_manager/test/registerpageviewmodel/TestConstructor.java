@@ -8,8 +8,6 @@ import edu.westga.cs3212.inventory_manager.viewmodel.RegisterPageViewModel;
 
 class TestConstructor {
 
-	private RegisterPageViewModel viewModel;
-	
 	@Test
     public void testConstructorInitializesProperties() {
         RegisterPageViewModel viewModel = new RegisterPageViewModel();

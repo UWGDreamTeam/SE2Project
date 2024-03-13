@@ -1,6 +1,5 @@
 package edu.westga.cs3212.inventory_manager.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -36,16 +35,6 @@ public interface OrderManager {
      */
 	List<Order> getOrdersByCompletionStatus(CompletionStatus status);
 	
-	/**
-     * Retrieves a list of orders created on a specified date.
-     * 
-     * @precondition date != null
-     * @postcondition none
-     * 
-     * @param date the date to filter orders by
-     * @return a list of orders created on the specified date
-     */
-	List<Order> getOrdersByDate(LocalDateTime date);
 	
 	/**
      * Adds an order to the order manager.
@@ -88,4 +77,10 @@ public interface OrderManager {
      * @param status the completion status to set
      */
 	void setOrderCompletionStatus(Order order, CompletionStatus status);
+	
+	
+	/**
+	 * Clear the orders.
+	 */
+	void clearOrders();
 }
