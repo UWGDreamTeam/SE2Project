@@ -329,6 +329,8 @@ public class InventoryPage {
 		if (selectedComponent != null) {
 			this.inventoryVM.orderComponent(selectedComponent, quantity);
 			this.refreshComponentsTableView();
+			String content = String.format("We have received %d units of '%s'.", quantity, selectedComponent.getName());
+	        this.showAlert("Ordered Components", content, AlertType.INFORMATION);
 		} else {
 			this.showAlert("Order Error", "No component selected.", AlertType.ERROR);
 		}
