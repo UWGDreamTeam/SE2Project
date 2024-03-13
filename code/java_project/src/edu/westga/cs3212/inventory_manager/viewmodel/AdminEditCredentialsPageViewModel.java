@@ -2,7 +2,6 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,8 +9,6 @@ import javafx.beans.property.StringProperty;
 
 public class AdminEditCredentialsPageViewModel {
 
-	private LocalEmployeeCredentialsManager credentialsManager;
-	
 	private StringProperty firstName;
 	private StringProperty lastName;
 	private StringProperty password;
@@ -21,32 +18,18 @@ public class AdminEditCredentialsPageViewModel {
 	/**
 	 * Constructs an AdminEditCredentialsPageViewModel initializing the properties for managing user credentials.
 	 * 
-	 * Initializes a credentials manager for local employee credentials management, and properties for first name, last name, password,
+	 * Initializes properties for first name, last name, password,
 	 * selected user, and selected employee type. These properties are bound to UI components in the view.
 	 *
 	 * @precondition None, as this is a constructor initializing properties.
 	 * @postcondition A new instance of AdminEditCredentialsPageViewModel is created with initialized properties.
 	 */
 	public AdminEditCredentialsPageViewModel() {
-		this.credentialsManager = new LocalEmployeeCredentialsManager();
-		
 		this.firstName = new SimpleStringProperty();
 		this.lastName = new SimpleStringProperty();
 		this.password = new SimpleStringProperty();
 		this.selectedUser = new SimpleObjectProperty<LocalEmployeeCredentials>();
 		this.selectedEmployeeType = new SimpleObjectProperty<EmployeeType>();
-	}
-
-	/**
-	 * Returns the credentials manager handling employee credentials.
-	 * 
-	 * @return The LocalEmployeeCredentialsManager instance used for managing employee credentials.
-	 *
-	 * @precondition None.
-	 * @postcondition None.
-	 */
-	public LocalEmployeeCredentialsManager getCredentialsManager() {
-		return this.credentialsManager;
 	}
 
 	/**
@@ -96,6 +79,18 @@ public class AdminEditCredentialsPageViewModel {
 	public ObjectProperty<EmployeeType> getSelectedEmployeeType() {
 		return this.selectedEmployeeType;
 	}
+	
+	/**
+	 * Returns the property for the selected user.
+	 * 
+	 * @return The ObjectProperty for the selected user.
+	 *
+	 * @precondition None.
+	 * @postcondition None.
+	 */
+	public ObjectProperty<LocalEmployeeCredentials> getSelectedUser() {
+		return this.selectedUser;
+	}
 
 	/**
 	 * Sets the selected user and updates the corresponding properties to reflect the user's details.
@@ -131,11 +126,8 @@ public class AdminEditCredentialsPageViewModel {
 		LocalEmployeeCredentials selectedUser = this.selectedUser.getValue();
 		
 		selectedUser.setFirstName(newFirstName);
-		selectedUser.setFirstName(newLastName);
-		selectedUser.setFirstName(newPassword);
+		selectedUser.setLastName(newLastName);
+		selectedUser.setPassword(newPassword);
 		selectedUser.setEmployeeType(newEmployeeType);
 	}
-	
-	
-	
 }

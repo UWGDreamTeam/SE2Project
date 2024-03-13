@@ -15,8 +15,8 @@
          </font>
       </Label>
       <Button layoutX="23.0" layoutY="129.0" mnemonicParsing="false" onAction="#addUser" prefHeight="26.0" prefWidth="91.0" text="Add User" />
-      <Button layoutX="23.0" layoutY="182.0" mnemonicParsing="false" onAction="#editUser" prefHeight="26.0" prefWidth="91.0" text="Edit User" />
-      <Button layoutX="23.0" layoutY="237.0" mnemonicParsing="false" onAction="#removeUser" text="Remove User" />
+      <Button fx:id="editButton" layoutX="23.0" layoutY="182.0" mnemonicParsing="false" onAction="#editUser" prefHeight="26.0" prefWidth="91.0" text="Edit User" />
+      <Button fx:id="removeButton" layoutX="23.0" layoutY="237.0" mnemonicParsing="false" onAction="#removeUser" text="Remove User" />
       <TableView fx:id="usersTableView" layoutX="126.0" layoutY="82.0" prefHeight="260.0" prefWidth="324.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />

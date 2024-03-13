@@ -1,6 +1,5 @@
 package edu.westga.cs3212.inventory_manager;
 
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -12,7 +11,7 @@ import javafx.scene.Scene;
 /**
  * Entry point for the program
  *
- * @author	Group 5
+ * @author	Group 1
  * @version Spring 2024
  */
 public class Main extends Application {

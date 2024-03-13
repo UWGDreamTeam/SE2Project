@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.viewmodel.AdminPageViewModel;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,15 +46,28 @@ public class AdminPage {
     @FXML
     private TableView<LocalEmployeeCredentials> usersTableView;
     
+    @FXML
+	private Button editButton;
+    
+    @FXML
+	private Button removeButton;
+    
     private AdminPageViewModel adminVM;
     
-    private void setupUsersTableView() {
+    private void setupButtonsVisibility() {
 		this.refreshUsersTableView();
 		
 		this.idCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmployeeID()));
 		this.firstNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName()));
 		this.lastNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastName()));
 		this.roleCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmployeeType().toString()));
+	}
+    
+	private void setupProductButtons() {
+		this.editButton.disableProperty()
+				.bind(Bindings.isNull(this.usersTableView.getSelectionModel().selectedItemProperty()));
+		this.removeButton.disableProperty()
+				.bind(Bindings.isNull(this.usersTableView.getSelectionModel().selectedItemProperty()));
 	}
 
     @FXML
@@ -116,10 +131,10 @@ public class AdminPage {
 
     @FXML
     void initialize() {
-    	
     	this.adminVM = new AdminPageViewModel();
     	this.adminVM.getSelectedUser().bind(this.usersTableView.getSelectionModel().selectedItemProperty());
-    	this.setupUsersTableView();
+    	this.setupProductButtons();
+    	this.setupButtonsVisibility();
     }
     
 	private void refreshUsersTableView() {
