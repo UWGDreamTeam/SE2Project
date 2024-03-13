@@ -20,9 +20,9 @@
       </Text>
       <ToolBar layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0">
          <items>
-            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Home" />
-            <Button fx:id="ordersButton" mnemonicParsing="false" onMouseClicked="#ordersPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Orders" />
-            <Button fx:id="inventoryButton" mnemonicParsing="false" onMouseClicked="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
+            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Home" />
+            <Button fx:id="inventoryButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
+            <Button fx:id="ordersButton" mnemonicParsing="false" onAction="#orderPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Orders" />
          </items>
       </ToolBar>
       <TabPane fx:id="invendoryTreeView" layoutX="150.0" layoutY="100.0" prefHeight="400.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE">
@@ -33,10 +33,10 @@
                      <children>
                         <TableView fx:id="componentsTableView" layoutX="80.0" layoutY="10.0" prefHeight="350.0" prefWidth="500.0">
                           <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="90.0" text="ID" />
-                            <TableColumn fx:id="nameColumn" prefWidth="138.0" text="Name" />
-                              <TableColumn fx:id="quantityColumn" prefWidth="129.0" text="Quantity" />
-                              <TableColumn fx:id="costColumn" prefWidth="142.0" text="Production Cost" />
+                            <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
+                            <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
+                              <TableColumn fx:id="quantityColumn" prefWidth="100.0" text="Quantity" />
+                              <TableColumn fx:id="costColumn" prefWidth="150.0" text="Production Cost" />
                           </columns>
                         </TableView>
                         <ToolBar layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="350.0" prefWidth="80.0">
@@ -57,17 +57,17 @@
                      <children>
                         <TableView fx:id="productsTableView" layoutX="80.0" layoutY="10.0" prefHeight="350.0" prefWidth="500.0">
                            <columns>
-                              <TableColumn fx:id="productIDColumn" prefWidth="72.0" text="ID" />
-                              <TableColumn fx:id="productNameColumn" prefWidth="118.0" text="Name" />
-                              <TableColumn fx:id="productQuantityColumn" prefWidth="113.0" text="Quantity" />
-                              <TableColumn fx:id="productProductionCostColumn" prefWidth="106.0" text="Production Cost" />
-                              <TableColumn fx:id="productSellingPrice" prefWidth="90.0" text="Selling Price" />
+                              <TableColumn fx:id="productIDColumn" prefWidth="100.0" text="ID" />
+                              <TableColumn fx:id="productNameColumn" prefWidth="150.0" text="Name" />
+                              <TableColumn fx:id="productQuantityColumn" prefWidth="100.0" text="Quantity" />
+                              <TableColumn fx:id="productProductionCostColumn" prefWidth="75.0" text="Production Cost" />
+                              <TableColumn fx:id="productSellingPrice" prefWidth="68.0" text="Selling Price" />
                            </columns>
                         </TableView>
                         <ToolBar layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="350.0" prefWidth="80.0">
                            <items>
                               <Button fx:id="productProduceButton" mnemonicParsing="false" onAction="#produceProductButtonOnClick" prefHeight="20.0" prefWidth="60.0" text="Produce" />
-                              <Button fx:id="productAddButton" mnemonicParsing="false" onAction="#addProdcutManagerOnClick" prefHeight="20.0" prefWidth="60.0" text="Add" textFill="#fa0000" />
+                              <Button fx:id="productAddButton" mnemonicParsing="false" onAction="#addProductManagerOnClick" prefHeight="20.0" prefWidth="60.0" text="Add" textFill="#fa0000" />
                               <Button fx:id="removeProductButton" mnemonicParsing="false" onAction="#removeProductManagerOnClick" prefHeight="20.0" prefWidth="60.0" text="Remove" textFill="#fa0000" />
                               <Button fx:id="editProductButton" mnemonicParsing="false" onAction="#editProductManagerOnClick" prefHeight="20.0" prefWidth="60.0" text="Edit" textFill="#fa0000" />
                            </items>
@@ -81,6 +81,6 @@
       <Text fx:id="employeeFullNameLabel" layoutX="600.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
       <Text fx:id="employeeIdLabel" layoutX="600.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
       <Text fx:id="employeeRoleLabel" layoutX="600.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
-      <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
+      <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
    </children>
 </Pane>

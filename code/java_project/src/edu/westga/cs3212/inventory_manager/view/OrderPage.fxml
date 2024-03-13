@@ -20,9 +20,9 @@
       </Text>
       <ToolBar layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0">
          <items>
-            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Home" />
-            <Button fx:id="ordersButton" mnemonicParsing="false" onMouseClicked="#ordersPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Orders" />
-            <Button fx:id="inventoryButton" mnemonicParsing="false" onMouseClicked="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
+            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Home" />
+            <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
+            <Button fx:id="ordersButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Orders" />
          </items>
       </ToolBar>
       <TabPane fx:id="ordersTabPane" layoutX="150.0" layoutY="100.0" prefHeight="400.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE">
@@ -69,6 +69,6 @@
       <Text fx:id="employeeFullNameLabel" layoutX="600.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
       <Text fx:id="employeeIdLabel" layoutX="600.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
       <Text fx:id="employeeRoleLabel" layoutX="600.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
-      <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
+      <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
    </children>
 </Pane>

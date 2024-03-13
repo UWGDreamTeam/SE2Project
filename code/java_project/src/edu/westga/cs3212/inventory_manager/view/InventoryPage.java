@@ -348,7 +348,7 @@ public class InventoryPage {
 	/* PRODUCT TABS */
 
 	@FXML
-	void addProdcutManagerOnClick(ActionEvent event) throws IOException {
+	void addProductManagerOnClick(ActionEvent event) throws IOException {
 		Stage modalStage = new Stage();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PRODUCT_PAGE));
 		Scene scene = new Scene(parent);

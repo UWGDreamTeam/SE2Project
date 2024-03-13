@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class HomePage {
@@ -69,27 +68,27 @@ public class HomePage {
 	}
 
 	@FXML
-	void inventoryPageButtonOnClick(MouseEvent event) throws IOException {
+	void inventoryPageButtonOnClick(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Home Page");
+		stage.setTitle("Inventory Page");
 		stage.show();
 	}
 
 	@FXML
-	void ordersPageButtonOnClick(MouseEvent event) throws IOException {
+	void ordersPageButtonOnClick(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Home Page");
+		stage.setTitle("Order Page");
 		stage.show();
 	}
 
 	@FXML
-	void logOutButton(ActionEvent event) {
+	void logOutButtonOnClick(ActionEvent event) {
 		try {
 			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
