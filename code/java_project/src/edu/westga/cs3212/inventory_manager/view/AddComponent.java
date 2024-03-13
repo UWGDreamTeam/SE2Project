@@ -49,7 +49,7 @@ public class AddComponent {
 				errorPopup.setContentText(UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
 				errorPopup.showAndWait();
 			}
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
 			errorPopup.showAndWait();
