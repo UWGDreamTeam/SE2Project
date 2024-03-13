@@ -5,34 +5,45 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.OrderPage">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.OrderPage">
    <children>
-      <Button layoutX="34.0" layoutY="140.0" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Home" />
-      <Button layoutX="34.0" layoutY="183.0" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Inventory" />
-      <Text layoutX="33.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders">
+      <Text layoutX="10.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <TabPane fx:id="ordersTabPane" layoutX="130.0" layoutY="140.0" prefHeight="383.0" prefWidth="569.0" tabClosingPolicy="UNAVAILABLE">
+      <ToolBar layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0">
+         <items>
+            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Home" />
+            <Button fx:id="ordersButton" mnemonicParsing="false" onMouseClicked="#ordersPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Orders" />
+            <Button fx:id="inventoryButton" mnemonicParsing="false" onMouseClicked="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
+         </items>
+      </ToolBar>
+      <TabPane fx:id="ordersTabPane" layoutX="150.0" layoutY="100.0" prefHeight="400.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="openOrdersTabPage" text="Open Orders">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="openOrders" layoutX="16.0" layoutY="19.0" prefHeight="328.0" prefWidth="528.0">
+                        <TableView fx:id="openOrders" layoutX="80.0" layoutY="10.0" prefHeight="350.0" prefWidth="500.0">
                           <columns>
-                            <TableColumn fx:id="openOrderNumberColumn" prefWidth="136.0" text="Order Number" />
-                              <TableColumn fx:id="openProductionCostColumn" prefWidth="143.0" text="Production Cost" />
-                              <TableColumn fx:id="openFulfillmentStatusColumn" minWidth="5.0" prefWidth="152.0" text="Fulfillment Status" />
-                              <TableColumn fx:id="openSalesPriceColumn" minWidth="0.0" prefWidth="95.0" text="Sales Price" />
+                            <TableColumn fx:id="openOrderNumberColumn" prefWidth="150.0" text="Order Number" />
+                              <TableColumn fx:id="openFulfillmentStatusColumn" prefWidth="150.0" text="Fulfillment Status" />
+                              <TableColumn fx:id="openProductionCostColumn" prefWidth="100.0" text="Production Cost" />
+                              <TableColumn fx:id="openSalesPriceColumn" prefWidth="100.0" text="Sales Price" />
                           </columns>
                         </TableView>
+                        <ToolBar layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="350.0" prefWidth="80.0">
+                           <items>
+                              <Button fx:id="fulfillButton" mnemonicParsing="false" onAction="#fullfillButtonOnClick" prefHeight="20.0" prefWidth="60.0" text="Fullfill" />
+                           </items>
+                        </ToolBar>
                      </children>
                   </AnchorPane>
             </content>
@@ -41,12 +52,12 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="closedOrders" layoutX="16.0" layoutY="17.0" prefHeight="330.0" prefWidth="528.0">
+                        <TableView fx:id="closedOrders" layoutX="80.0" layoutY="10.0" prefHeight="350.0" prefWidth="500.0">
                            <columns>
-                              <TableColumn fx:id="closedOrderNumberColumn" prefWidth="136.0" text="Order Number" />
-                              <TableColumn fx:id="closedProductionCostColumn" prefWidth="143.0" text="Production Cost" />
-                              <TableColumn fx:id="closedFulfillmentStatusColumn" minWidth="5.0" prefWidth="152.0" text="Fulfillment Status" />
-                              <TableColumn fx:id="closedSalesPriceColumn" minWidth="0.0" prefWidth="95.0" text="Sales Price" />
+                              <TableColumn fx:id="closedOrderNumberColumn" prefWidth="150.0" text="Order Number" />
+                              <TableColumn fx:id="closedFulfillmentStatusColumn" prefWidth="150.0" text="Fulfillment Status" />
+                              <TableColumn fx:id="closedProductionCostColumn" prefWidth="100.0" text="Production Cost" />
+                              <TableColumn fx:id="closedSalesPriceColumn" prefWidth="100.0" text="Sales Price" />
                            </columns>
                         </TableView>
                      </children>
@@ -55,10 +66,9 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="37.0" layoutY="477.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" text="Log Out" />
-      <Text fx:id="employeeFullNameLabel" layoutX="541.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
-      <Text fx:id="employeeIdLabel" layoutX="593.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
-      <Text fx:id="employeeRoleLabel" layoutX="592.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
-      <Button fx:id="fulfillButton" layoutX="34.0" layoutY="268.0" mnemonicParsing="false" onAction="#fullfillButtonOnClick" prefHeight="25.0" prefWidth="66.0" text="Fullfill" />
+      <Text fx:id="employeeFullNameLabel" layoutX="600.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
+      <Text fx:id="employeeIdLabel" layoutX="600.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
+      <Text fx:id="employeeRoleLabel" layoutX="600.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
+      <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
    </children>
 </Pane>
