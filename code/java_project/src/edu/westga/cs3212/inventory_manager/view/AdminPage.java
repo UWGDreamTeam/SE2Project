@@ -61,6 +61,7 @@ public class AdminPage {
 		this.firstNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName()));
 		this.lastNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastName()));
 		this.roleCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmployeeType().toString()));
+		
 	}
     
 	private void setupProductButtons() {
@@ -115,8 +116,13 @@ public class AdminPage {
     	
     	Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationDialog.setTitle("Confirmation");
-        confirmationDialog.setHeaderText("Remove User: ID: " + id + " First Name: " + firstName + " Last Name: " + lastName);
-        confirmationDialog.setContentText("Are you sure you want to remove the selected user?");
+        confirmationDialog.setHeaderText(
+        		"Are you sure you want to remove the selected user?" + System.lineSeparator()
+        		+ System.lineSeparator()
+        		+ "ID: " + id + System.lineSeparator()
+        		+ "First Name: " + firstName + System.lineSeparator()
+        		+ "Last Name: " + lastName);
+        confirmationDialog.setContentText("This cannot be undone");
         
         confirmationDialog.initModality(Modality.APPLICATION_MODAL);
         confirmationDialog.initOwner(((Node) event.getSource()).getScene().getWindow());

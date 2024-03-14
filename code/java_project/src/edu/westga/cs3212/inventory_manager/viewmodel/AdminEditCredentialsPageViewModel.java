@@ -12,7 +12,7 @@ public class AdminEditCredentialsPageViewModel {
 	private StringProperty firstName;
 	private StringProperty lastName;
 	private StringProperty password;
-	private ObjectProperty<LocalEmployeeCredentials> selectedUser;
+	private ObjectProperty<LocalEmployeeCredentials> selectedUserProperty;
 	private ObjectProperty<EmployeeType> selectedEmployeeType;
 	
 	/**
@@ -28,8 +28,8 @@ public class AdminEditCredentialsPageViewModel {
 		this.firstName = new SimpleStringProperty();
 		this.lastName = new SimpleStringProperty();
 		this.password = new SimpleStringProperty();
-		this.selectedUser = new SimpleObjectProperty<LocalEmployeeCredentials>();
-		this.selectedEmployeeType = new SimpleObjectProperty<EmployeeType>();
+		this.selectedUserProperty = new SimpleObjectProperty<>();
+		this.selectedEmployeeType = new SimpleObjectProperty<>();
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class AdminEditCredentialsPageViewModel {
 	 * @postcondition None.
 	 */
 	public ObjectProperty<LocalEmployeeCredentials> getSelectedUser() {
-		return this.selectedUser;
+		return this.selectedUserProperty;
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class AdminEditCredentialsPageViewModel {
 	 * @postcondition firstName, lastName, password, and selectedEmployeeType properties are updated to reflect the selected user's details.
 	 */
 	public void setSelectedUser(LocalEmployeeCredentials selectedUser) {
-		this.selectedUser.set(selectedUser);
+		this.selectedUserProperty.set(selectedUser);
 		
 		this.firstName.set(selectedUser.getFirstName());
 		this.lastName.set(selectedUser.getLastName());
@@ -123,7 +123,7 @@ public class AdminEditCredentialsPageViewModel {
 		String newPassword = this.password.getValue();
 		EmployeeType newEmployeeType = this.selectedEmployeeType.getValue();
 		
-		LocalEmployeeCredentials selectedUser = this.selectedUser.getValue();
+		LocalEmployeeCredentials selectedUser = this.selectedUserProperty.getValue();
 		
 		selectedUser.setFirstName(newFirstName);
 		selectedUser.setLastName(newLastName);

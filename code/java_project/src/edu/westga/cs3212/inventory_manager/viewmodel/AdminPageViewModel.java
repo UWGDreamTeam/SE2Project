@@ -28,7 +28,7 @@ public class AdminPageViewModel {
 	 */
 	public AdminPageViewModel() {
 		this.credentialsManager = new LocalEmployeeCredentialsManager();
-		this.selectedUser = new SimpleObjectProperty<LocalEmployeeCredentials>();
+		this.selectedUser = new SimpleObjectProperty<>();
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class AdminPageViewModel {
      * @return ObservableList&lt;LocalEmployeeCredentials&gt; An observable list of all employees in the system.
      */
 	public ObservableList<LocalEmployeeCredentials> getObservableUsersList() {
-		ArrayList<LocalEmployeeCredentials> users = new ArrayList<LocalEmployeeCredentials>();
+		ArrayList<LocalEmployeeCredentials> users = new ArrayList<>();
 		for (LocalEmployeeCredentials user : this.credentialsManager.getEmployees()) {
 			users.add(user);
 		}

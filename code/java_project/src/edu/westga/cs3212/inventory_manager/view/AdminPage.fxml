@@ -7,23 +7,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="472.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.AdminPage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.AdminPage">
    <children>
-      <Label layoutX="160.0" layoutY="22.0" prefHeight="34.0" prefWidth="149.0" text="Admin Page">
+      <Label layoutX="194.0" layoutY="28.0" prefHeight="34.0" prefWidth="143.0" text="Admin Page">
          <font>
-            <Font name="System Bold" size="28.0" />
+            <Font size="28.0" />
          </font>
       </Label>
-      <Button layoutX="23.0" layoutY="129.0" mnemonicParsing="false" onAction="#addUser" prefHeight="26.0" prefWidth="91.0" text="Add User" />
-      <Button fx:id="editButton" layoutX="23.0" layoutY="182.0" mnemonicParsing="false" onAction="#editUser" prefHeight="26.0" prefWidth="91.0" text="Edit User" />
-      <Button fx:id="removeButton" layoutX="23.0" layoutY="237.0" mnemonicParsing="false" onAction="#removeUser" text="Remove User" />
-      <TableView fx:id="usersTableView" layoutX="126.0" layoutY="82.0" prefHeight="260.0" prefWidth="324.0">
+      <Button layoutX="29.0" layoutY="130.0" mnemonicParsing="false" onAction="#addUser" prefHeight="26.0" prefWidth="91.0" text="Add User" />
+      <Button fx:id="editButton" layoutX="29.0" layoutY="183.0" mnemonicParsing="false" onAction="#editUser" prefHeight="26.0" prefWidth="91.0" text="Edit User" />
+      <Button fx:id="removeButton" layoutX="29.0" layoutY="234.0" mnemonicParsing="false" onAction="#removeUser" text="Remove User" />
+      <TableView fx:id="usersTableView" layoutX="146.0" layoutY="78.0" prefHeight="286.0">
         <columns>
-          <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="firstNameCol" prefWidth="75.0" text="First Name" />
-            <TableColumn fx:id="lastNameCol" prefWidth="75.0" text="Last Name" />
-            <TableColumn fx:id="roleCol" prefWidth="75.0" text="Role" />
+          <TableColumn fx:id="idCol" prefWidth="70.0" text="ID" />
+          <TableColumn fx:id="firstNameCol" prefWidth="100.0" text="First Name" />
+            <TableColumn fx:id="lastNameCol" prefWidth="100.0" text="Last Name" />
+            <TableColumn fx:id="roleCol" text="Role" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </children>
 </AnchorPane>
