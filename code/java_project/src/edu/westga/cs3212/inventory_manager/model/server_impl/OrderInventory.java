@@ -16,8 +16,14 @@ import edu.westga.cs3212.inventory_manager.model.Product;
 public class OrderInventory {
 
 	public static String createOrder(Map<Product, Integer> products, CompletionStatus status) {
+		if (status == null) {
+			throw new IllegalArgumentException("Status cannot be null");
+		}
 		if (products == null) {
 			throw new IllegalArgumentException("Items cannot be null");
+		}
+		if (products.isEmpty()) {
+			throw new IllegalArgumentException("Items cannot be empty");
 		}
 		List<Map<String,Object>> productList = prepareProductListForJSON(products);
 		Map<String, Object> requestData = new HashMap<>();
