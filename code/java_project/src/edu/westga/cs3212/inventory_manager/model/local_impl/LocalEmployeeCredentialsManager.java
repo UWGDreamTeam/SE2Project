@@ -19,13 +19,24 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 
 	/**
 	 * Initializes the credentials manager and loads existing credentials from storage.
+	 * If LocalEmployeeCredentialsManager.employeeCredentialsMap == null creates a admin user
 	 * 
 	 * @precondition none
 	 * @postcondition getEmployees().size() == 0
 	 */
 	public LocalEmployeeCredentialsManager() {
-		LocalEmployeeCredentialsManager.employeeCredentialsMap = new HashMap<>();
-		LocalEmployeeCredentialsManager.employeeCredentialsMap = EmployeeCredentialsStorage.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+		if (LocalEmployeeCredentialsManager.employeeCredentialsMap == null) {
+			LocalEmployeeCredentialsManager.employeeCredentialsMap = new HashMap<>();
+			LocalEmployeeCredentialsManager.employeeCredentialsMap = EmployeeCredentialsStorage.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+			this.addAdminUser();
+		}
+	}
+	
+	private void addAdminUser() {
+		String admin = "admin";
+        LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials(admin, admin, admin, admin, EmployeeType.MANAGER);
+        LocalEmployeeCredentialsManager.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);
+        EmployeeCredentialsStorage.save(LocalEmployeeCredentialsManager.employeeCredentialsMap, Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 	}
 
 	/**

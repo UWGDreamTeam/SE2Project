@@ -16,6 +16,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class HomePage {
@@ -87,6 +88,19 @@ public class HomePage {
 		stage.setTitle("Home Page");
 		stage.show();
 	}
+
+    @FXML
+    void openAdminPage(ActionEvent event) throws IOException {
+    	Stage modalStage = new Stage();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADMIN_PAGE));
+		Scene scene = new Scene(parent);
+
+		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.setScene(scene);
+		modalStage.initModality(Modality.WINDOW_MODAL);
+		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+		modalStage.showAndWait();
+    }
 
 	@FXML
 	void logOutButton(ActionEvent event) {
