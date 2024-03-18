@@ -15,7 +15,6 @@ import edu.westga.cs3212.inventory_manager.model.Component;
 
 public class ComponentInventory {
 
-	
 	public static Component getComponent(String componentID) {
 		if (componentID == null) {
 			throw new IllegalArgumentException("Component ID cannot be null");

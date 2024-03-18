@@ -188,7 +188,7 @@ public class ProductInventory {
 			throw new IllegalArgumentException("Product ID cannot be blank");
 		}
 		Map<String, Object> requestData = new HashMap<>();
-		requestData.put("type", "getProductQuantity");
+		requestData.put("type", "getQuantityOfProduct");
 		requestData.put("data", Map.of("ProductID", productID));
 
 		Gson gson = new Gson();
@@ -198,10 +198,11 @@ public class ProductInventory {
 		Type responseType = new TypeToken<Map<String, Object>>() {
 		}.getType();
 		Map<String, Object> responseMap = gson.fromJson(response, responseType);
+		Map<String, Object> productData = (Map<String, Object>) responseMap.get("data");
 		if (responseMap.get("status").equals("error")) {
 			throw new IllegalArgumentException((String) responseMap.get("message"));
 		}
-		return ((Number) responseMap.get("data")).intValue();
+		return ((Number) productData.get("Quantity")).intValue();
 	}
 
 	private static Map<Component, Integer> extractRecipeFromJson(Map<String, Object> productData) {

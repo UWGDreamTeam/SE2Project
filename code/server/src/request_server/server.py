@@ -287,6 +287,7 @@ request_handlers = {
     "deleteProduct": delete_product,
     "updateProduct": update_product,
     "getProduct": get_product,
+    "getQuantityOfProduct": get_quantity_of_product,
     "createOrder": create_order,
     "deleteOrder": delete_order,
     "updateOrder": update_order,
