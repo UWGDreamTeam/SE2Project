@@ -81,6 +81,20 @@ def produce_product(data):
     if products[product_id]["Quantity"] + quantity < 0:
         log(f"Insufficient quantity for product: {product_id}")
         return {"status": "error", "message": "Insufficient quantity for product"}
+    recipe = products[product_id]["Recipe"]
+    for recipe_item in recipe:
+        component_id = recipe_item.get('ComponentID')
+        number_of_components_needed = recipe_item.get('Quantity') * quantity
+        if component_id not in components:
+            log(f"Component not found: {component_id}")
+            return {"status": "error", "message": "Component not found"}
+        if components[component_id]["Quantity"] - number_of_components_needed < 0:
+            log(f"Insufficient quantity for component: {component_id}")
+            return {"status": "error", "message": f"Insufficient quantity for component {component_id}"}
+    for recipe_item in recipe:
+        component_id = recipe_item.get('ComponentID')
+        component_quantity = recipe_item.get('Quantity')
+        components[component_id]["Quantity"] -= component_quantity * quantity
     products[product_id]["Quantity"] += quantity
     return {"status": "success", "data": {"Quantity": products[product_id]["Quantity"]}}
 
