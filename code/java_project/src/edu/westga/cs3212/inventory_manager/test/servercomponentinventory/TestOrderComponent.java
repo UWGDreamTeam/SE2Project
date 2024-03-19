@@ -25,7 +25,7 @@ class TestOrderComponent {
 	@Test 
 	void testOrderComponentWhenCompoentIDIsNotInInventory() {
         assertThrows(IllegalArgumentException.class, () -> {
-            ComponentInventory.orderComponent("123", 0);
+            ComponentInventory.orderComponent("thiscomponentdoesnoteist", 0);
         });
     }
 	

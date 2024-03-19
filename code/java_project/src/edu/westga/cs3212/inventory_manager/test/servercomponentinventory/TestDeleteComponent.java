@@ -31,7 +31,7 @@ class TestDeleteComponent {
 	@Test
 	void testDeleteComponentWithInvalidComponentID() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			ComponentInventory.deleteComponent("invalid");
+			ComponentInventory.deleteComponent("thiscomponentdoesnoteist");
 		});
 	}
 

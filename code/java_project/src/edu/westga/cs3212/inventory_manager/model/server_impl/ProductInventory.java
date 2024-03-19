@@ -261,11 +261,7 @@ public class ProductInventory {
 
     @SuppressWarnings("unchecked")
     private static Map<String, Object> safelyCastToMap(Object object) {
-	if (object instanceof Map<?, ?>) {
-	    return (Map<String, Object>) object;
-	} else {
-	    throw new IllegalArgumentException(Constants.INVALID_RESPONSE_FROM_SERVER);
-	}
+	return (Map<String, Object>) object;
     }
     
 

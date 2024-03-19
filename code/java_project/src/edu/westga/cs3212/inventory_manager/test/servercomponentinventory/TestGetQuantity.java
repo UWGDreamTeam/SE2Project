@@ -25,7 +25,7 @@ class TestGetQuantity {
 	@Test
 	void testGetQuantityWithComponentNotInInventory() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			ComponentInventory.getQuantity("123");
+			ComponentInventory.getQuantity("thiscomponentdoesnoteist");
 		});
 	}
 	
