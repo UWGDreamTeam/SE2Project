@@ -113,6 +113,12 @@ public class OrderInventory {
 	if (products == null) {
 	    throw new IllegalArgumentException(Constants.ITEMS_CANNOT_BE_NULL);
 	}
+	if (products.isEmpty()) {
+	    throw new IllegalArgumentException(Constants.ITEMS_CANNOT_BE_EMPTY);
+	}
+	if (status == null) {
+	    throw new IllegalArgumentException(Constants.COMPLETION_STATUS_CANNOT_BE_NULL);
+	}
 	List<Map<String, Object>> productList = prepareProductListForJSON(products);
 	Map<String, Object> requestData = new HashMap<>();
 	requestData.put("type", "updateOrder");

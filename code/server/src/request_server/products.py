@@ -1,9 +1,20 @@
-from .utilities import generate_unique_id, log
-from .components import components
+from request_server.utilities import log, generate_unique_id
+from request_server.components import components
 
+# A dictionary to store products information with their IDs as keys
 products = {}
 
+
 def add_product(data):
+    """
+    Adds a new product to the inventory.
+
+    Parameters:
+    - data (dict): A dictionary containing the new product's details such as name, quantity, recipe, and sale price.
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and the new product's ID if successful.
+    """
     log(f"Adding product: {data}")
     product_id = generate_unique_id(set(products.keys()))
     name = data.get('Name')
@@ -25,7 +36,17 @@ def add_product(data):
     log(f"Added product: {product_id}")
     return {"status": "success", "data": {"ProductID": product_id}}
 
+
 def update_product(data):
+    """
+    Updates details of an existing product.
+
+    Parameters:
+    - data (dict): A dictionary containing the product's ID and new details (name, quantity, recipe, and sale price).
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and a message about the update.
+    """
     log(f"Updating product: {data}")
     product_id = data.get('ProductID')
     new_name = data.get('Name')
@@ -51,7 +72,17 @@ def update_product(data):
         log(f"Product not found: {product_id}")
         return {"status": "error", "message": "Product not found"}
 
-def produce_product(data):    
+
+def produce_product(data): 
+    """
+    Adjusts the inventory quantity of a product based on production or sale.
+
+    Parameters:
+    - data (dict): Contains the product's ID and the quantity to adjust by. Quantity can be negative for sales.
+
+    Returns:
+    - dict: A response object indicating the success or failure of the operation, and the updated quantity if successful.
+    """
     product_id = data.get('ProductID')
     quantity = data.get('Quantity')
     if not product_id or quantity is None:
@@ -80,7 +111,17 @@ def produce_product(data):
     products[product_id]["Quantity"] += quantity
     return {"status": "success", "data": {"Quantity": products[product_id]["Quantity"]}}
 
+
 def delete_product(data):
+    """
+    Removes a product from the inventory.
+
+    Parameters:
+    - data (dict): Contains the ID of the product to be removed.
+
+    Returns:
+    - dict: A response object indicating the success or failure of the operation.
+    """
     product_id = data.get('ProductID')
     if not product_id:
         log(f"Missing data for removing product: {data}")
@@ -92,8 +133,18 @@ def delete_product(data):
     else:
         log(f"Product not found: {product_id}")
         return {"status": "error", "message": "Product not found"}
+
     
 def get_product(data):
+    """
+    Retrieves detailed information about a specific product.
+
+    Parameters:
+    - data (dict): Contains the ID of the product to retrieve.
+
+    Returns:
+    - dict: A response object including the product's details if successful, or an error message if not.
+    """
     product_id = data.get('ProductID')
     if product_id in products:
         log(f"Retrieved product: {product_id}")
@@ -101,8 +152,18 @@ def get_product(data):
     else:
         log(f"Product not found: {product_id}")
         return {"status": "error", "message": "Product not found"}
+
     
 def get_quantity_of_product(data):
+    """
+    Retrieves the current stock quantity of a specified product.
+
+    Parameters:
+    - data (dict): Contains the ID of the product for which to retrieve the stock quantity.
+
+    Returns:
+    - dict: A response object including the current quantity of the product if found, or an error message if not.
+    """
     product_id = data.get('ProductID')
     if product_id in products:
         log(f"Retrieved stock of product: {product_id}, {products[product_id]['Quantity']}")

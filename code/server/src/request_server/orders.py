@@ -1,9 +1,19 @@
 from .utilities import generate_unique_id, log
-from .products import products
+from request_server.products import products
 
+# A dictionary to store orders information with their IDs as keys
 orders = {}
 
 def create_order(data):
+    """
+    Creates a new order with the given data.
+
+    Parameters:
+    - data (dict): Contains details of the order, including completion status and a list of products (each with a product ID and quantity).
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and the new order's ID if successful.
+    """
     log(f"Creating order: {data}")
     order_id = generate_unique_id(set(orders.keys()));
     completion_status = data.get('CompletionStatus')
@@ -30,6 +40,15 @@ def create_order(data):
     return {"status": "success", "data": {"OrderID": order_id}}
     
 def delete_order(data):
+    """
+    Deletes an existing order based on the order ID.
+
+    Parameters:
+    - data (dict): Contains the ID of the order to delete.
+
+    Returns:
+    - dict: A response object with a status message indicating success or error.
+    """
     order_id = data.get('OrderID')
     if not order_id:
         log(f"Missing data for removing order: {data}")
@@ -43,6 +62,15 @@ def delete_order(data):
         return {"status": "error", "message": "Order not found"}
 
 def update_order(data):
+    """
+    Updates the details of an existing order.
+
+    Parameters:
+    - data (dict): Contains the order ID and new details to update (completion status and products list).
+
+    Returns:
+    - dict: A response object with a status message indicating success or error.
+    """
     order_id = data.get('OrderID')
     new_completion_status = data.get('CompletionStatus')
     new_product_list = data.get('Products')
@@ -59,6 +87,15 @@ def update_order(data):
   
   
 def get_order(data):
+    """
+    Retrieves detailed information about a specific order.
+
+    Parameters:
+    - data (dict): Contains the ID of the order to retrieve.
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and the order's details if found.
+    """
     order_id = data.get('OrderID')
     if order_id in orders:
         log(f"Retrieved order: {order_id}")

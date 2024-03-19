@@ -1,8 +1,18 @@
 from .utilities import generate_unique_id, log
 
+# A dictionary to store component information with their IDs as keys
 components = {}
 
 def update_component(data):
+    """
+    Updates the information of an existing component.
+
+    Parameters:
+    - data (dict): A dictionary containing the component's ID and its new details (name, production cost, and quantity).
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and additional data if applicable.
+    """
     component_id = data.get('ComponentID')
     new_name = data.get('Name')
     new_production_cost = data.get('ProductionCost')
@@ -19,6 +29,15 @@ def update_component(data):
         return {"status": "error", "message": "Component not found"}
 
 def order_component(data):
+    """
+    Adjusts the quantity of a specific component based on an order.
+
+    Parameters:
+    - data (dict): A dictionary containing the component's ID and the ordered quantity (can be negative).
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and the updated quantity if successful.
+    """
     component_id = data.get('ComponentID')
     quantity = data.get('Quantity')
     if not component_id or quantity is None:
@@ -35,6 +54,15 @@ def order_component(data):
         return {"status": "error", "message": "Component not found"}
 
 def add_component(data):
+    """
+    Adds a new component to the inventory.
+
+    Parameters:
+    - data (dict): A dictionary containing the new component's name, quantity, and production cost.
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and the new component's ID if successful.
+    """
     component_id = generate_unique_id(set(components.keys()))
     name = data.get('Name')
     quantity = data.get('Quantity')
@@ -53,6 +81,15 @@ def add_component(data):
 
 
 def delete_component(data):
+    """
+    Deletes a component from the inventory.
+
+    Parameters:
+    - data (dict): A dictionary containing the ID of the component to delete.
+
+    Returns:
+    - dict: A response object with a status message indicating success or error.
+    """
     component_id = data.get('ComponentID')
     if component_id and component_id in components:
         del components[component_id]
@@ -63,6 +100,15 @@ def delete_component(data):
         return {"status": "error", "message": "Component not found"}
 
 def get_component(data):
+    """
+    Retrieves detailed information about a specific component.
+
+    Parameters:
+    - data (dict): A dictionary containing the ID of the component to retrieve.
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and the component's details if found.
+    """
     component_id = data.get('ComponentID')
     if component_id in components:
         log(f"Retrieved component: {component_id}")
@@ -72,6 +118,15 @@ def get_component(data):
         return {"status": "error", "message": "Component not found"}
 
 def get_quantity_of_component(data):
+    """
+    Retrieves the current stock quantity of a specified component.
+
+    Parameters:
+    - data (dict): A dictionary containing the ID of the component for which to retrieve the stock quantity.
+
+    Returns:
+    - dict: A response object with a status message indicating success or error, and the current quantity if the component was found.
+    """
     component_id = data.get('ComponentID')
     if component_id in components:
         log(f"Retrieved stock of component: {component_id}, {components[component_id]['Quantity']}")
