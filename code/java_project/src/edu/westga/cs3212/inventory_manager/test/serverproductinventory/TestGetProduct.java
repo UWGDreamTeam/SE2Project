@@ -1,6 +1,6 @@
-package edu.westga.cs3212.inventory_model.test.serverproductinventory;
+package edu.westga.cs3212.inventory_manager.test.serverproductinventory;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,41 +12,40 @@ import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-
-class TestGetQuantity {
+class TestGetProduct {
 
 	@Test
 	void testWhenProductIDIsNull() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			ProductInventory.getQuantity(null);
+			ProductInventory.getProduct(null);
 		});
 	}
 	
 	@Test
 	void testWhenProductIDIsBlank() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			ProductInventory.getQuantity("");
+			ProductInventory.getProduct("");
 		});
 	}
 	
 	@Test
 	void testWhenProductIsNotInInventory() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			ProductInventory.getQuantity("1");
+			ProductInventory.getProduct("1");
 		});
 	}
 	
 	@Test
 	void testWhenProductIsInInventory() {
-		String componentID = ComponentInventory.addComponent("TestGetQuantityComponent", 1.0, 1);
+		String componentID = ComponentInventory.addComponent("Component1", 1.0, 1);
 		Component component = ComponentInventory.getComponent(componentID);
 		Map<Component, Integer> recipe = new HashMap<>();
 		recipe.put(component, 1);
-		String productID = ProductInventory.addProduct("TestGetQuantityProduct", 2.0, recipe, 1);
-		int quantity = ProductInventory.getQuantity(productID);
-		assert (quantity == 1);
+		String productID = ProductInventory.addProduct("Product1", 2.0, recipe, 1);
+		Product product = ProductInventory.getProduct(productID);
+		assert(product.getName().equals("Product1"));
+		assert(product.getSalePrice() == 2.0);
+		assert(product.getProductionCost() == 1.0);
 	}
 
 }

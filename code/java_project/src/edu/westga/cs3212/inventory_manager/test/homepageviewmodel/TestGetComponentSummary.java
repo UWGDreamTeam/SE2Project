@@ -17,12 +17,10 @@ import javafx.beans.property.StringProperty;
 
 class TestGetComponentSummary {
 	private LocalOrderManager orderManager;
-	private ProductInventoryAnalytics analytics;
-
 	@BeforeEach
 	void setUp() {
 		this.orderManager = new LocalOrderManager();
-		this.analytics = new ProductInventoryAnalytics();
+		new ProductInventoryAnalytics();
 
 		Component componentA = new Component("ComponentA", 1.0);
 		Component componentB = new Component("ComponentB", 2.0);

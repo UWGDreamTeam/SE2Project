@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_model.test.serverproductinventory;
+package edu.westga.cs3212.inventory_manager.test.serverproductinventory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
