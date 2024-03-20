@@ -8,40 +8,40 @@ package edu.westga.cs3212.inventory_manager.model;
  */
 public class Component extends Item {
 
-    /**
-     * Instantiates a new raw material.
-     *
-     * @param name           the name
-     * @param productionCost the production cost of this component
-     */
-    public Component(String name, double productionCost) {
-	super(name, productionCost);
-    }
-
-    @Override
-    public int hashCode() {
-	return "Component".hashCode() + this.getID().hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj) {
-	    return true;
+	/**
+	 * Instantiates a new raw material.
+	 *
+	 * @param name           the name
+	 * @param productionCost the production cost of this component
+	 */
+	public Component(String name, double productionCost) {
+		super(name, productionCost);
 	}
 
-	if (obj == null || getClass() != obj.getClass()) {
-	    return false;
+	@Override
+	public int hashCode() {
+		return "Component".hashCode() + this.getID().hashCode();
 	}
 
-	Item other = (Item) obj;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-	return this.hashCode() == other.hashCode();
-    }
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
 
-    @Override
-    public String toString() {
-	return "Component{" + "id=" + this.getID() + ", name='" + this.getName() + '\'' + ", productionCost="
-		+ this.getProductionCost() + '}';
-    }
+		Item other = (Item) obj;
+
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "Component{" + "id=" + this.getID() + ", name='" + this.getName() + '\'' + ", productionCost="
+				+ this.getProductionCost() + '}';
+	}
 
 }
