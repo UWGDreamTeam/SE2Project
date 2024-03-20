@@ -1,8 +1,15 @@
 package edu.westga.cs3212.inventory_manager.model.server_impl;
 
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Supports making requests to the server.
@@ -38,6 +45,39 @@ public class Server {
 	    throw new IllegalArgumentException("Must provide a valid request type (see README)");
 	}
 	return response;
+    }
+
+    public static Map<String, Object> sendRequestAndGetResponse(String requestType, Map<String, Object> requestData)
+	    throws IllegalArgumentException {
+	Map<String, Object> fullRequestData = new HashMap<>();
+	fullRequestData.put("type", requestType);
+	fullRequestData.put("data", requestData.get("data"));
+
+	Gson gson = new Gson();
+	String requestJson = gson.toJson(fullRequestData);
+
+	String response = Server.sendRequest(requestJson);
+	Type responseType = new TypeToken<Map<String, Object>>() {
+	}.getType();
+	Map<String, Object> responseMap = gson.fromJson(response, responseType);
+
+	if (!responseMap.containsKey("status")) {
+	    throw new IllegalArgumentException("Response from server is missing the status key.");
+	}
+
+	String status = (String) responseMap.get("status");
+	if ("error".equals(status)) {
+	    String errorMessage = responseMap.containsKey("message") ? (String) responseMap.get("message")
+		    : "Unknown error occurred";
+	    throw new IllegalArgumentException(errorMessage);
+	}
+
+	return safelyCastToMap(responseMap.get("data"));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> safelyCastToMap(Object object) {
+	return (Map<String, Object>) object;
     }
 
 }

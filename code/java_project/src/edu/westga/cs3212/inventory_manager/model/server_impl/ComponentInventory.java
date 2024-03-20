@@ -1,11 +1,7 @@
 package edu.westga.cs3212.inventory_manager.model.server_impl;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
@@ -24,57 +20,35 @@ public class ComponentInventory {
      *
      * @param componentID The ID of the component to retrieve.
      * @return The requested component.
-     * @throws IllegalArgumentException If the componentID is null or blank, or if the server returns an error.
+     * @throws IllegalArgumentException If the componentID is null or blank, or if
+     *                                  the server returns an error.
      */
     public static Component getComponent(String componentID) {
 	checkValidComponentID(componentID);
-	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("type", "getComponent");
-	requestData.put("data", Map.of("ComponentID", componentID));
-
-	Gson gson = new Gson();
-	String requestJson = gson.toJson(requestData);
-
-	String response = Server.sendRequest(requestJson);
-	Type responseType = new TypeToken<Map<String, Object>>() {
-	}.getType();
-	Map<String, Object> responseMap = gson.fromJson(response, responseType);
-	Map<String, Object> dataMap = safelyCastToMap(responseMap.get("data"));
-	if (responseMap.get("status").equals("error")) {
-	    throw new IllegalArgumentException((String) responseMap.get("message"));
-	}
-	Component component = new Component((String) dataMap.get("Name"),
-		((Number) dataMap.get("ProductionCost")).doubleValue());
-	component.setID(componentID);
+	Map<String, Object> requestData = Map.of("ComponentID", componentID);
+	Map<String, Object> dataMap = Server.sendRequestAndGetResponse("getComponent", Map.of("data", requestData));
+	Component component = parseComponent(dataMap, componentID);
 	return component;
     }
 
     /**
      * Adds a new component to the inventory.
      *
-     * @param componentName The name of the component to add.
+     * @param componentName  The name of the component to add.
      * @param productionCost The production cost of the component.
-     * @param quantity The quantity of the component.
+     * @param quantity       The quantity of the component.
      * @return The ID of the newly added component.
-     * @throws IllegalArgumentException If any input parameters are invalid or if the server returns an error.
+     * @throws IllegalArgumentException If any input parameters are invalid or if
+     *                                  the server returns an error.
      */
     public static String addComponent(String componentName, double productionCost, int quantity) {
 	checkValidComponentName(componentName);
 	checkValidProductionCost(productionCost);
-	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("type", "addComponent");
-	requestData.put("data", Map.of("Name", componentName, "ProductionCost", productionCost, "Quantity", quantity));
+	Map<String, Object> requestData = Map.of("data",
+		Map.of("Name", componentName, "ProductionCost", productionCost, "Quantity", quantity));
 
-	Gson gson = new Gson();
-	String requestJson = gson.toJson(requestData);
-
-	String response = Server.sendRequest(requestJson);
-	Type responseType = new TypeToken<Map<String, Object>>() {
-	}.getType();
-	Map<String, Object> responseMap = gson.fromJson(response, responseType);
-	Map<String, Object> dataMap = safelyCastToMap(responseMap.get("data"));
-	String componentID = (String) dataMap.get("ComponentID");
-	return componentID;
+	Map<String, Object> dataMap = Server.sendRequestAndGetResponse("addComponent", requestData);
+	return (String) dataMap.get("ComponentID");
     }
 
     /**
@@ -82,57 +56,38 @@ public class ComponentInventory {
      *
      * @param componentID The ID of the component to delete.
      * @return true if the operation was successful.
-     * @throws IllegalArgumentException If the componentID is null or blank, or if the server returns an error.
+     * @throws IllegalArgumentException If the componentID is null or blank, or if
+     *                                  the server returns an error.
      */
     public static boolean deleteComponent(String componentID) {
 	checkValidComponentID(componentID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("type", "deleteComponent");
 	requestData.put("data", Map.of("ComponentID", componentID));
-
-	Gson gson = new Gson();
-	String requestJson = gson.toJson(requestData);
-
-	String response = Server.sendRequest(requestJson);
-	Type responseType = new TypeToken<Map<String, Object>>() {
-	}.getType();
-	Map<String, Object> responseMap = gson.fromJson(response, responseType);
-	if (responseMap.get("status").equals("error")) {
-	    throw new IllegalArgumentException((String) responseMap.get("message"));
-	}
+	Server.sendRequestAndGetResponse("deleteComponent", requestData);
 	return true;
     }
 
     /**
      * Updates the information of an existing component in the inventory.
      *
-     * @param componentID The ID of the component to update.
-     * @param componentName The new name of the component.
+     * @param componentID    The ID of the component to update.
+     * @param componentName  The new name of the component.
      * @param productionCost The new production cost of the component.
-     * @param quantity The new quantity of the component.
+     * @param quantity       The new quantity of the component.
      * @return true if the operation was successful.
-     * @throws IllegalArgumentException If any input parameters are invalid or if the server returns an error.
+     * @throws IllegalArgumentException If any input parameters are invalid or if
+     *                                  the server returns an error.
      */
     public static boolean updateComponent(String componentID, String componentName, double productionCost,
 	    int quantity) {
 	checkValidComponentID(componentID);
 	checkValidComponentName(componentName);
 	checkValidProductionCost(productionCost);
-	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("type", "updateComponent");
-	requestData.put("data", Map.of("ComponentID", componentID, "Name", componentName, "ProductionCost",
-		productionCost, "Quantity", quantity));
 
-	Gson gson = new Gson();
-	String requestJson = gson.toJson(requestData);
+	Map<String, Object> requestData = Map.of("data", Map.of("ComponentID", componentID, "Name", componentName,
+		"ProductionCost", productionCost, "Quantity", quantity));
 
-	String response = Server.sendRequest(requestJson);
-	Type responseType = new TypeToken<Map<String, Object>>() {
-	}.getType();
-	Map<String, Object> responseMap = gson.fromJson(response, responseType);
-	if (responseMap.get("status").equals("error")) {
-	    throw new IllegalArgumentException((String) responseMap.get("message"));
-	}
+	Server.sendRequestAndGetResponse("updateComponent", requestData);
 	return true;
     }
 
@@ -140,27 +95,17 @@ public class ComponentInventory {
      * Orders a specified quantity of a component by its ID.
      *
      * @param componentID The ID of the component to order.
-     * @param quantity The quantity to order.
+     * @param quantity    The quantity to order.
      * @return The updated quantity of the component.
-     * @throws IllegalArgumentException If the componentID is null or blank, the quantity is invalid, or if the server returns an error.
+     * @throws IllegalArgumentException If the componentID is null or blank, the
+     *                                  quantity is invalid, or if the server
+     *                                  returns an error.
      */
     public static int orderComponent(String componentID, int quantity) {
 	checkValidComponentID(componentID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("type", "orderComponent");
 	requestData.put("data", Map.of("ComponentID", componentID, "Quantity", quantity));
-
-	Gson gson = new Gson();
-	String requestJson = gson.toJson(requestData);
-
-	String response = Server.sendRequest(requestJson);
-	Type responseType = new TypeToken<Map<String, Object>>() {
-	}.getType();
-	Map<String, Object> responseMap = gson.fromJson(response, responseType);
-	Map<String, Object> dataMap = safelyCastToMap(responseMap.get("data"));
-	if (responseMap.get("status").equals("error")) {
-	    throw new IllegalArgumentException((String) responseMap.get("message"));
-	}
+	Map<String, Object> dataMap = Server.sendRequestAndGetResponse("orderComponent", requestData);
 	return ((Number) dataMap.get("Quantity")).intValue();
 
     }
@@ -170,25 +115,14 @@ public class ComponentInventory {
      *
      * @param componentID The ID of the component.
      * @return The current quantity of the component.
-     * @throws IllegalArgumentException If the componentID is null or blank, or if the server returns an error.
+     * @throws IllegalArgumentException If the componentID is null or blank, or if
+     *                                  the server returns an error.
      */
     public static int getQuantity(String componentID) {
 	checkValidComponentID(componentID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("type", "getQuantityOfComponent");
 	requestData.put("data", Map.of("ComponentID", componentID));
-
-	Gson gson = new Gson();
-	String requestJson = gson.toJson(requestData);
-
-	String response = Server.sendRequest(requestJson);
-	Type responseType = new TypeToken<Map<String, Object>>() {
-	}.getType();
-	Map<String, Object> responseMap = gson.fromJson(response, responseType);
-	Map<String, Object> dataMap = safelyCastToMap(responseMap.get("data"));
-	if (responseMap.get("status").equals("error")) {
-	    throw new IllegalArgumentException((String) responseMap.get("message"));
-	}
+	Map<String, Object> dataMap = Server.sendRequestAndGetResponse("getQuantityOfComponent", requestData);
 	return ((Number) dataMap.get("Quantity")).intValue();
     }
 
@@ -215,9 +149,13 @@ public class ComponentInventory {
 	    throw new IllegalArgumentException(Constants.MINIMUM_PRODUCTION_COST + " is the minimum production cost");
 	}
     }
-    
-    @SuppressWarnings("unchecked")
-    private static Map<String, Object> safelyCastToMap(Object object) {
-	return (Map<String, Object>) object;
+
+    private static Component parseComponent(Map<String, Object> componentData, String componentID) {
+	String name = (String) componentData.get("Name");
+	double productionCost = ((Number) componentData.get("ProductionCost")).doubleValue();
+
+	Component component = new Component(name, productionCost);
+	component.setID(componentID);
+	return component;
     }
 }
