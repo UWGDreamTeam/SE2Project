@@ -64,7 +64,7 @@ class TestUpdateOrder {
 	recipe.put(ComponentInventory.getComponent(componentID), 1);
 	String productID = ProductInventory.addProduct("name", 2, recipe, 5);
 	products.put(ProductInventory.getProduct(productID), 1);
-	String orderID = OrderInventory.createOrder(products, CompletionStatus.INCOMPLETE);
+	OrderInventory.createOrder(products, CompletionStatus.INCOMPLETE);
 	assertThrows(IllegalArgumentException.class, () -> {
 	    OrderInventory.updateOrder("RattaRatta", products, CompletionStatus.COMPLETE);
 	});
