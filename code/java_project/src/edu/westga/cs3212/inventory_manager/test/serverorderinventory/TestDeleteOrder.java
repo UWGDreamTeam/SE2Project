@@ -39,8 +39,9 @@ class TestDeleteOrder {
 		String productID = ProductInventory.addProduct("name", 2, recipe, 5);
 		products.put(ProductInventory.getProduct(productID), 1);
 		String orderID = OrderInventory.createOrder(products, CompletionStatus.INCOMPLETE);
-		boolean result = OrderInventory.deleteOrder(orderID);
-		assertTrue(result);
+		assertDoesNotThrow(() -> {
+		    OrderInventory.deleteOrder(orderID);
+		});
 	}
 	
 	@Test

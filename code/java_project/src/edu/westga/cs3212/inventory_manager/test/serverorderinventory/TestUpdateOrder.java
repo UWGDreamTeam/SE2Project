@@ -18,33 +18,33 @@ class TestUpdateOrder {
 
     @Test
     void testWhenOrderIDIsNull() {
-	        assertThrows(IllegalArgumentException.class, () -> {
-            OrderInventory.updateOrder(null, null, CompletionStatus.INCOMPLETE);
-        });
+	assertThrows(IllegalArgumentException.class, () -> {
+	    OrderInventory.updateOrder(null, null, CompletionStatus.INCOMPLETE);
+	});
     }
-    
+
     @Test
     void testWhenOrderIDIsBlank() {
 	assertThrows(IllegalArgumentException.class, () -> {
 	    OrderInventory.updateOrder("", null, CompletionStatus.INCOMPLETE);
 	});
     }
-    
+
     @Test
     void testWhenProductsIsNull() {
 	assertThrows(IllegalArgumentException.class, () -> {
-        OrderInventory.updateOrder("valid", null, CompletionStatus.INCOMPLETE);
-        });
+	    OrderInventory.updateOrder("valid", null, CompletionStatus.INCOMPLETE);
+	});
     }
-    
+
     @Test
     void testWhenProductsIsEmpty() {
 	Map<Product, Integer> products = new HashMap<>();
 	assertThrows(IllegalArgumentException.class, () -> {
-        OrderInventory.updateOrder("valid", products, CompletionStatus.INCOMPLETE);
-        });
+	    OrderInventory.updateOrder("valid", products, CompletionStatus.INCOMPLETE);
+	});
     }
-    
+
     @Test
     void testWhenCompletionStatusIsNull() {
 	Map<Product, Integer> products = new HashMap<>();
@@ -52,10 +52,10 @@ class TestUpdateOrder {
 	components.put(new Component("name", 2), 1);
 	products.put(new Product("name", 2, 5, components), 1);
 	assertThrows(IllegalArgumentException.class, () -> {
-        OrderInventory.updateOrder("valid", products, null);
-        });
+	    OrderInventory.updateOrder("valid", products, null);
+	});
     }
-    
+
     @Test
     void testWhenOrderDoesNotExist() {
 	Map<Product, Integer> products = new HashMap<>();
@@ -69,7 +69,7 @@ class TestUpdateOrder {
 	    OrderInventory.updateOrder("RattaRatta", products, CompletionStatus.COMPLETE);
 	});
     }
-    
+
     @Test
     void testWhenOrderIsValid() {
 	Map<Product, Integer> products = new HashMap<>();
@@ -79,8 +79,9 @@ class TestUpdateOrder {
 	String productID = ProductInventory.addProduct("name", 2, recipe, 5);
 	products.put(ProductInventory.getProduct(productID), 1);
 	String orderID = OrderInventory.createOrder(products, CompletionStatus.INCOMPLETE);
-	boolean result = OrderInventory.updateOrder(orderID, products, CompletionStatus.COMPLETE);
-	assertTrue(result);
+	assertDoesNotThrow(() -> {
+	    OrderInventory.updateOrder(orderID, products, CompletionStatus.COMPLETE);
+	});
     }
 
 }

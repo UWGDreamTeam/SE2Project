@@ -55,16 +55,14 @@ public class ComponentInventory {
      * Deletes a component from the inventory by its ID.
      *
      * @param componentID The ID of the component to delete.
-     * @return true if the operation was successful.
      * @throws IllegalArgumentException If the componentID is null or blank, or if
      *                                  the server returns an error.
      */
-    public static boolean deleteComponent(String componentID) {
+    public static void deleteComponent(String componentID) {
 	checkValidComponentID(componentID);
 	Map<String, Object> requestData = new HashMap<>();
 	requestData.put("data", Map.of("ComponentID", componentID));
 	Server.sendRequestAndGetResponse("deleteComponent", requestData);
-	return true;
     }
 
     /**
@@ -74,12 +72,10 @@ public class ComponentInventory {
      * @param componentName  The new name of the component.
      * @param productionCost The new production cost of the component.
      * @param quantity       The new quantity of the component.
-     * @return true if the operation was successful.
      * @throws IllegalArgumentException If any input parameters are invalid or if
      *                                  the server returns an error.
      */
-    public static boolean updateComponent(String componentID, String componentName, double productionCost,
-	    int quantity) {
+    public static void updateComponent(String componentID, String componentName, double productionCost, int quantity) {
 	checkValidComponentID(componentID);
 	checkValidComponentName(componentName);
 	checkValidProductionCost(productionCost);
@@ -88,7 +84,6 @@ public class ComponentInventory {
 		"ProductionCost", productionCost, "Quantity", quantity));
 
 	Server.sendRequestAndGetResponse("updateComponent", requestData);
-	return true;
     }
 
     /**
