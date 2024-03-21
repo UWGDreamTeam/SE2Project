@@ -41,6 +41,8 @@ public final class Constants {
     public static final String COMPONENT_NAME_CANNOT_BE_NULL = "Component name cannot be null";
     public static final String COMPONENT_NAME_CANNOT_BE_BLANK = "Component name cannot be blank";
     public static final double MINIMUM_PRODUCTION_COST = 0;
+    public static final String PRODUCT_INVENTORY_CANNOT_BE_INSTANTIATED = "Product inventory cannot be instantiated";
+    public static final double MINIMUM_SALES_PRICE = 0;
     
 
     private Constants() {

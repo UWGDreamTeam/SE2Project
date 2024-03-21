@@ -1,14 +1,10 @@
 package edu.westga.cs3212.inventory_manager.model.server_impl;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
@@ -22,12 +18,32 @@ import edu.westga.cs3212.inventory_manager.model.Product;
  * @author Jason Nunez
  * @version Spring 2024
  */
-public class ProductInventory {
+public final class ProductInventory {
+    
+    private static final String KEY_DATA_COMPONENT_ID = "ComponentID";
+    private static final String ACTION_GET_QUANTITY_OF_PRODUCT = "getQuantityOfProduct";
+    private static final String ACTION_UPDATE_PRODUCT = "updateProduct";
+    private static final String ACTION_DELETE_PRODUCT = "deleteProduct";
+    private static final String ACTION_PRODUCE_PRODUCT = "produceProduct";
+    private static final String ACTION_ADD_PRODUCT = "addProduct";
+    private static final String KEY_DATA_QUANTITY = "Quantity";
+    private static final String KEY_DATA_RECIPE = "Recipe";
+    private static final String KEY_DATA_SALE_PRICE = "SalePrice";
+    private static final String KEY_DATA_NAME = "Name";
+    private static final String KEY_DATA = "data";
+    private static final String ACTION_GET_PRODUCT = "getProduct";
+    private static final String PRODUCT_ID = "ProductID";
+
+    private ProductInventory() {
+	throw new IllegalStateException(Constants.PRODUCT_INVENTORY_CANNOT_BE_INSTANTIATED);
+    }
 
     /**
      * Retrieves a Product object by its ID from the server.
      *
      * @param productID The unique identifier for the product.
+     * @precondition productID != null && productID is not blank
+     * @postcondition none
      * @return The Product object corresponding to the provided ID.
      * @throws IllegalArgumentException If the productID is null, blank, or if the
      *                                  server returns an error.
@@ -35,9 +51,9 @@ public class ProductInventory {
     public static Product getProduct(String productID) {
 	productIDValid(productID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("ProductID", productID));
+	requestData.put(KEY_DATA, Map.of(PRODUCT_ID, productID));
 
-	Map<String, Object> productData = Server.sendRequestAndGetResponse("getProduct", requestData);
+	Map<String, Object> productData = Server.sendRequestAndGetResponse(ACTION_GET_PRODUCT, requestData);
 	Map<Component, Integer> recipe = extractRecipeFromJson(productData);
 
 	return extractProduct(productID, productData, recipe);
@@ -51,24 +67,30 @@ public class ProductInventory {
      * @param recipe      The recipe components and their quantities for the
      *                    product.
      * @param quantity    The initial quantity of the product.
+     * @precondition productName != null && productName is not blank 
+     *                     && salePrice >= 0 && recipe != null
+     *                     && recipe is not empty && quantity >= 0
+     *                     && recipe contains only valid components
+     *                     && recipe contains only positive quantities
+     * @postcondition A new product is added to the inventory with the given details.
      * @return The unique identifier for the newly added product.
      * @throws IllegalArgumentException If any input validation fails or if the
      *                                  server returns an error.
      */
     public static String addProduct(String productName, double salePrice, Map<Component, Integer> recipe,
 	    int quantity) {
-	productNameValid(productName);
+	checkValidProductName(productName);
 	checkValidRecipe(recipe);
 	checkValidQuantity(quantity);
 	checkValidSalesPrice(salePrice);
 	List<Map<String, Object>> recipeList = prepareRecipeListForJSON(recipe);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data",
-		Map.of("Name", productName, "SalePrice", salePrice, "Recipe", recipeList, "Quantity", quantity));
+	requestData.put(KEY_DATA,
+		Map.of(KEY_DATA_NAME, productName, KEY_DATA_SALE_PRICE, salePrice, KEY_DATA_RECIPE, recipeList, KEY_DATA_QUANTITY, quantity));
 
-	Map<String, Object> productData = Server.sendRequestAndGetResponse("addProduct", requestData);
+	Map<String, Object> productData = Server.sendRequestAndGetResponse(ACTION_ADD_PRODUCT, requestData);
 
-	return (String) productData.get("ProductID");
+	return (String) productData.get(PRODUCT_ID);
     }
 
     /**
@@ -77,6 +99,9 @@ public class ProductInventory {
      *
      * @param productID The unique identifier for the product.
      * @param quantity  The quantity of the product to be produced.
+     * @precondition productID != null && productID is not blank
+     *              && quantity >= 0
+     * @postcondition The quantity of the product is updated after production.
      * @return The new quantity of the product after production.
      * @throws IllegalArgumentException If the productID is invalid, quantity is
      *                                  negative, or if the server returns an error.
@@ -85,11 +110,11 @@ public class ProductInventory {
 	productIDValid(productID);
 
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("ProductID", productID, "Quantity", quantity));
+	requestData.put(KEY_DATA, Map.of(PRODUCT_ID, productID, KEY_DATA_QUANTITY, quantity));
 
-	Map<String, Object> productData = Server.sendRequestAndGetResponse("produceProduct", requestData);
+	Map<String, Object> productData = Server.sendRequestAndGetResponse(ACTION_PRODUCE_PRODUCT, requestData);
 
-	return ((Number) productData.get("Quantity")).intValue();
+	return ((Number) productData.get(KEY_DATA_QUANTITY)).intValue();
 
     }
 
@@ -97,15 +122,17 @@ public class ProductInventory {
      * Deletes a product from the inventory by its ID.
      *
      * @param productID The unique identifier for the product to be deleted.
+     * @precondition productID != null && productID is not blank && productID exists
+     * @postcondition The product is deleted from the inventory.
      * @throws IllegalArgumentException If the productID is invalid or if the server
      *                                  returns an error.
      */
     public static void deleteProduct(String productID) {
 	productIDValid(productID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("ProductID", productID));
+	requestData.put(KEY_DATA, Map.of(PRODUCT_ID, productID));
 
-	Server.sendRequestAndGetResponse("deleteProduct", requestData);
+	Server.sendRequestAndGetResponse(ACTION_DELETE_PRODUCT, requestData);
     }
 
     /**
@@ -117,29 +144,36 @@ public class ProductInventory {
      * @param recipe      The new recipe components and their quantities for the
      *                    product.
      * @param quantity    The new quantity of the product.
+     * @precondition productID != null && productID is not blank && productName != null
+     *                    && productName is not blank && salePrice >= 0 && recipe != null
+     *                    && recipe is not empty && quantity >= 0
+     *                    && recipe contains only valid components
+     * @postcondition The product details are updated in the inventory.
      * @throws IllegalArgumentException If any input validation fails or if the
      *                                  server returns an error.
      */
     public static void updateProduct(String productID, String productName, double salePrice,
 	    Map<Component, Integer> recipe, int quantity) {
 	productIDValid(productID);
-	productNameValid(productName);
+	checkValidProductName(productName);
 	checkValidRecipe(recipe);
 	checkValidQuantity(quantity);
 	checkValidSalesPrice(salePrice);
 
 	List<Map<String, Object>> recipeList = prepareRecipeListForJSON(recipe);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("ProductID", productID, "Name", productName, "SalePrice", salePrice, "Recipe",
-		recipeList, "Quantity", quantity));
+	requestData.put(KEY_DATA, Map.of(PRODUCT_ID, productID, KEY_DATA_NAME, productName, KEY_DATA_SALE_PRICE, salePrice, KEY_DATA_RECIPE,
+		recipeList, KEY_DATA_QUANTITY, quantity));
 
-	Server.sendRequestAndGetResponse("updateProduct", requestData);
+	Server.sendRequestAndGetResponse(ACTION_UPDATE_PRODUCT, requestData);
     }
 
     /**
      * Retrieves the current quantity of a specified product.
      *
      * @param productID The unique identifier for the product.
+     * @precondition productID != null && productID is not blank
+     * @postcondition none
      * @return The current quantity of the product.
      * @throws IllegalArgumentException If the productID is invalid or if the server
      *                                  returns an error.
@@ -147,11 +181,11 @@ public class ProductInventory {
     public static int getQuantity(String productID) {
 	productIDValid(productID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("ProductID", productID));
+	requestData.put(KEY_DATA, Map.of(PRODUCT_ID, productID));
 
-	Map<String, Object> productData = Server.sendRequestAndGetResponse("getQuantityOfProduct", requestData);
+	Map<String, Object> productData = Server.sendRequestAndGetResponse(ACTION_GET_QUANTITY_OF_PRODUCT, requestData);
 
-	return ((Number) productData.get("Quantity")).intValue();
+	return ((Number) productData.get(KEY_DATA_QUANTITY)).intValue();
     }
 
     private static void productIDValid(String productID) {
@@ -165,11 +199,11 @@ public class ProductInventory {
 
     @SuppressWarnings("unchecked")
     private static Map<Component, Integer> extractRecipeFromJson(Map<String, Object> productData) {
-	List<Map<String, Object>> recipeData = (List<Map<String, Object>>) productData.get("Recipe");
+	List<Map<String, Object>> recipeData = (List<Map<String, Object>>) productData.get(KEY_DATA_RECIPE);
 	Map<Component, Integer> recipe = new HashMap<>();
 	for (Map<String, Object> componentData : recipeData) {
-	    Component component = ComponentInventory.getComponent((String) componentData.get("ComponentID"));
-	    recipe.put(component, ((Number) componentData.get("Quantity")).intValue());
+	    Component component = ComponentInventory.getComponent((String) componentData.get(KEY_DATA_COMPONENT_ID));
+	    recipe.put(component, ((Number) componentData.get(KEY_DATA_QUANTITY)).intValue());
 	}
 	return recipe;
     }
@@ -178,19 +212,14 @@ public class ProductInventory {
 	List<Map<String, Object>> recipeList = new ArrayList<>();
 	for (Entry<Component, Integer> entry : recipe.entrySet()) {
 	    Map<String, Object> componentMap = new HashMap<>();
-	    componentMap.put("ComponentID", entry.getKey().getID());
-	    componentMap.put("Quantity", entry.getValue());
+	    componentMap.put(KEY_DATA_COMPONENT_ID, entry.getKey().getID());
+	    componentMap.put(KEY_DATA_QUANTITY, entry.getValue());
 	    recipeList.add(componentMap);
 	}
 	return recipeList;
     }
 
-    @SuppressWarnings("unchecked")
-    private static Map<String, Object> safelyCastToMap(Object object) {
-	return (Map<String, Object>) object;
-    }
-
-    private static void productNameValid(String productName) {
+    private static void checkValidProductName(String productName) {
 	if (productName == null) {
 	    throw new IllegalArgumentException(Constants.PRODUCT_NAME_CANNOT_BE_NULL);
 	}
@@ -201,21 +230,21 @@ public class ProductInventory {
 
     private static Product extractProduct(String productID, Map<String, Object> productData,
 	    Map<Component, Integer> recipe) {
-	Product product = new Product((String) productData.get("Name"),
+	Product product = new Product((String) productData.get(KEY_DATA_NAME),
 		((Number) productData.get("ProductionCost")).doubleValue(),
-		((Number) productData.get("SalePrice")).doubleValue(), recipe);
+		((Number) productData.get(KEY_DATA_SALE_PRICE)).doubleValue(), recipe);
 	product.setID(productID);
 	return product;
     }
 
     private static void checkValidSalesPrice(double salePrice) {
-	if (salePrice < 0) {
+	if (salePrice < Constants.MINIMUM_SALES_PRICE) {
 	    throw new IllegalArgumentException(Constants.PRODUCT_SALE_PRICE_CANNOT_BE_NEGATIVE);
 	}
     }
 
     private static void checkValidQuantity(int quantity) {
-	if (quantity < 0) {
+	if (quantity < Constants.MINIMUM_QUANTITY_SPINNER_VALUE) {
 	    throw new IllegalArgumentException(Constants.PRODUCT_QUANTITY_CANNOT_BE_NEGATIVE);
 	}
     }
