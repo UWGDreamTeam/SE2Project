@@ -43,6 +43,7 @@ public final class Constants {
     public static final double MINIMUM_PRODUCTION_COST = 0;
     public static final String PRODUCT_INVENTORY_CANNOT_BE_INSTANTIATED = "Product inventory cannot be instantiated";
     public static final double MINIMUM_SALES_PRICE = 0;
+    public static final String ORDER_INVENTORY_CANNOT_BE_INSTANTIATED = "Order inventory cannot be instantiated";
     
 
     private Constants() {

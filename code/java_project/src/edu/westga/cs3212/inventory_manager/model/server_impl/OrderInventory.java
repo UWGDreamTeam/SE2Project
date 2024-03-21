@@ -18,6 +18,19 @@ import edu.westga.cs3212.inventory_manager.model.Product;
  * @version Spring 2024
  */
 public class OrderInventory {
+    
+    private static final String ACTION_GET_ORDER = "getOrder";
+    private static final String ACTION_UPDATE_ORDER = "updateOrder";
+    private static final String ACTION_DELETE_ORDER = "deleteOrder";
+    private static final String KEY_DATA_ORDER_ID = "OrderID";
+    private static final String ACTION_CREATE_ORDER = "createOrder";
+    private static final String KEY_DATA_COMPLETION_STATUS = "CompletionStatus";
+    private static final String KEY_DATA_PRODUCTS = "Products";
+    private static final String KEY_DATA = "data";
+
+    private OrderInventory() {
+	throw new IllegalStateException(Constants.ORDER_INVENTORY_CANNOT_BE_INSTANTIATED);
+    }
 
     /**
      * Creates a new order with the specified products and completion status.
@@ -25,6 +38,11 @@ public class OrderInventory {
      * @param products A map of products and their quantities to be included in the
      *                 order.
      * @param status   The completion status of the order.
+     * @precondition products != null && !products.isEmpty() && status != null
+     *               && !status.isBlank() && products contains valid products and
+     *               quantities and products are in the inventory && components in
+     *               products are in the inventory and valid
+     * @postcondition A new order is created with the specified products and status 
      * @return The unique identifier for the newly created order.
      * @throws IllegalArgumentException If the status is null, products map is null
      *                                  or empty, or if the server returns an error.
@@ -34,25 +52,28 @@ public class OrderInventory {
 	checkValidProducts(products);
 	List<Map<String, Object>> productList = prepareProductListForJSON(products);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("Products", productList, "CompletionStatus", status.toString()));
+	requestData.put(KEY_DATA, Map.of(KEY_DATA_PRODUCTS, productList, KEY_DATA_COMPLETION_STATUS, status.toString()));
 
-	Map<String, Object> orderData = Server.sendRequestAndGetResponse("createOrder", requestData);
+	Map<String, Object> orderData = Server.sendRequestAndGetResponse(ACTION_CREATE_ORDER, requestData);
 
-	return (String) orderData.get("OrderID");
+	return (String) orderData.get(KEY_DATA_ORDER_ID);
     }
 
     /**
      * Deletes an existing order from the inventory by its ID.
      *
      * @param orderID The unique identifier of the order to be deleted.
+     * @precondition orderID != null && !orderID.isBlank() && orderID is a valid
+     *               && orderID is in the inventory
+     * @postcondition The order with the specified ID is deleted from the inventory
      * @throws IllegalArgumentException If the orderID is null, blank, or if the
      *                                  server returns an error.
      */
     public static void deleteOrder(String orderID) {
 	checkValidOrderID(orderID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("OrderID", orderID));
-	Server.sendRequestAndGetResponse("deleteOrder", requestData);
+	requestData.put(KEY_DATA, Map.of(KEY_DATA_ORDER_ID, orderID));
+	Server.sendRequestAndGetResponse(ACTION_DELETE_ORDER, requestData);
     }
 
     /**
@@ -62,6 +83,13 @@ public class OrderInventory {
      * @param orderID  The unique identifier of the order to be updated.
      * @param products A map of products and their quantities for the order.
      * @param status   The new completion status of the order.
+     * @precondition orderID != null && !orderID.isBlank() && orderID is in the
+     *              inventory && products != null && !products.isEmpty() && status
+     *              != null && !status.isBlank() && products contains valid products
+     *              and quantities and products are in the inventory && components
+     *              in products are in the inventory and valid
+     * @postcondition The order with the specified ID is updated with the new products
+     *               and status
      * @throws IllegalArgumentException If the orderID is null or blank, products
      *                                  map is null, or if the server returns an
      *                                  error.
@@ -73,24 +101,27 @@ public class OrderInventory {
 
 	List<Map<String, Object>> productList = prepareProductListForJSON(products);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data",
-		Map.of("OrderID", orderID, "Products", productList, "CompletionStatus", status.toString()));
+	requestData.put(KEY_DATA,
+		Map.of(KEY_DATA_ORDER_ID, orderID, KEY_DATA_PRODUCTS, productList, KEY_DATA_COMPLETION_STATUS, status.toString()));
 
-	Server.sendRequestAndGetResponse("updateOrder", requestData);
+	Server.sendRequestAndGetResponse(ACTION_UPDATE_ORDER, requestData);
     }
 
     /**
      * Retrieves an existing order from the inventory by its ID.
      *
      * @param orderID The unique identifier of the order to be retrieved.
+     * @precondition orderID != null && !orderID.isBlank() && orderID is in the
+     *               inventory 
+     * @postcondition The order with the specified ID is retrieved from the inventory
      * @return The Order object corresponding to the provided ID.
      * @throws IllegalArgumentException If the orderID is null, blank, or if the
      *                                  server returns an error.
      */
     public static Order getOrder(String orderID) {
 	checkValidOrderID(orderID);
-	Map<String, Object> requestData = Map.of("data", Map.of("OrderID", orderID));
-	Map<String, Object> orderData = Server.sendRequestAndGetResponse("getOrder", requestData);
+	Map<String, Object> requestData = Map.of(KEY_DATA, Map.of(KEY_DATA_ORDER_ID, orderID));
+	Map<String, Object> orderData = Server.sendRequestAndGetResponse(ACTION_GET_ORDER, requestData);
 
 	return extractOrder(orderData);
     }
@@ -102,8 +133,8 @@ public class OrderInventory {
 	    order.addItem(entry.getKey(), entry.getValue());
 	}
 
-	order.setID((String) orderData.get("OrderID"));
-	order.setCompletionStatus(CompletionStatus.valueOf((String) orderData.get("CompletionStatus")));
+	order.setID((String) orderData.get(KEY_DATA_ORDER_ID));
+	order.setCompletionStatus(CompletionStatus.valueOf((String) orderData.get(KEY_DATA_COMPLETION_STATUS)));
 	return order;
     }
 
@@ -120,7 +151,7 @@ public class OrderInventory {
 
     @SuppressWarnings("unchecked")
     private static Map<Product, Integer> extractProductListFromJson(Map<String, Object> productData) {
-	List<Map<String, Object>> productList = (List<Map<String, Object>>) productData.get("Products");
+	List<Map<String, Object>> productList = (List<Map<String, Object>>) productData.get(KEY_DATA_PRODUCTS);
 	Map<Product, Integer> products = new HashMap<>();
 	for (Map<String, Object> product : productList) {
 	    Product productObject = ProductInventory.getProduct((String) product.get("ProductID"));
