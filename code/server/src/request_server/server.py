@@ -1,6 +1,6 @@
 from request_server import constants
 from request_server.request_handler import handle_request
-from request_server.utilities import log
+from model.utilities import log
 import zmq
 
 successMessage = "Success";

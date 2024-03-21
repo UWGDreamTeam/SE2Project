@@ -19,17 +19,16 @@ import com.google.gson.reflect.TypeToken;
  */
 public class Server {
 
+	/** The Constant CONNECTION_STRING. */
 	private static final String CONNECTION_STRING = "tcp://127.0.0.1:5555";
 
 	/**
 	 * Creates a server object to send requests to the server.
-	 * 
+	 *
+	 * @param request the request string to send to the server
+	 * @return the response string from the server
 	 * @precondition request != null && request is valid (see README)
 	 * @postondition none
-	 * 
-	 * @param request the request string to send to the server
-	 * 
-	 * @return the response string from the server
 	 */
 	public static String sendRequest(String request) {
 		if (request == null) {
@@ -47,6 +46,15 @@ public class Server {
 		return response;
 	}
 
+	
+	/**
+	 * Send request and get response.
+	 *
+	 * @param requestType the request type
+	 * @param requestData the request data
+	 * @return the map
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
 	public static Map<String, Object> sendRequestAndGetResponse(String requestType, Map<String, Object> requestData)
 			throws IllegalArgumentException {
 		Map<String, Object> fullRequestData = new HashMap<>();
@@ -55,10 +63,11 @@ public class Server {
 
 		Gson gson = new Gson();
 		String requestJson = gson.toJson(fullRequestData);
-
 		String response = Server.sendRequest(requestJson);
+		
 		Type responseType = new TypeToken<Map<String, Object>>() {
 		}.getType();
+		
 		Map<String, Object> responseMap = gson.fromJson(response, responseType);
 
 		if (!responseMap.containsKey("status")) {
@@ -75,6 +84,12 @@ public class Server {
 		return safelyCastToMap(responseMap.get("data"));
 	}
 
+	/**
+	 * Safely cast to map.
+	 *
+	 * @param object the object
+	 * @return the map
+	 */
 	@SuppressWarnings("unchecked")
 	private static Map<String, Object> safelyCastToMap(Object object) {
 		return (Map<String, Object>) object;

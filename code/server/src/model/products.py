@@ -1,5 +1,5 @@
-from request_server.utilities import log, generate_unique_id
-from request_server.components import components
+from model.utilities import log, generate_unique_id
+from model import components
 
 # A dictionary to store products information with their IDs as keys
 products = {}

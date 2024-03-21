@@ -1,5 +1,5 @@
 from .utilities import generate_unique_id, log
-from request_server.products import products
+from model import products.products
 
 # A dictionary to store orders information with their IDs as keys
 orders = {}

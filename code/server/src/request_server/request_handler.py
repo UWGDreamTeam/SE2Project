@@ -1,8 +1,8 @@
 import json
-from request_server.products import add_product, update_product, delete_product, get_product, produce_product, get_quantity_of_product
-from request_server.components import add_component, update_component, delete_component, get_component, get_quantity_of_component, order_component
-from request_server.orders import create_order, update_order, delete_order, get_order
-from request_server.utilities import log
+from model.products import add_product, update_product, delete_product, get_product, produce_product, get_quantity_of_product
+from model.components import add_component, update_component, delete_component, get_component, get_quantity_of_component, order_component
+from model.orders import create_order, update_order, delete_order, get_order
+from model.utilities import log
 
 request_handlers = {
     "addComponent": add_component,
