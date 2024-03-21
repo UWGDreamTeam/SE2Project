@@ -45,8 +45,7 @@ public class ComponentInventory {
 	checkValidComponentID(componentID);
 	Map<String, Object> requestData = Map.of(KEY_DATA_COMPONENT_ID, componentID);
 	Map<String, Object> dataMap = Server.sendRequestAndGetResponse(ACTION_GET_COMPONENT, Map.of(KEY_DATA, requestData));
-	Component component = parseComponent(dataMap, componentID);
-	return component;
+	return parseComponent(dataMap, componentID);
     }
 
     /**
