@@ -14,19 +14,37 @@ import edu.westga.cs3212.inventory_manager.model.Constants;
  * @version Spring 2024
  */
 public class ComponentInventory {
+    
+    private static final String ACTION_GET_QUANTITY_OF_COMPONENT = "getQuantityOfComponent";
+    private static final String ACTION_ORDER_COMPONENT = "orderComponent";
+    private static final String ACTION_UPDATE_COMPONENT = "updateComponent";
+    private static final String ACTION_DELETE_COMPONENT = "deleteComponent";
+    private static final String KEY_DATA_QUANTITY = "Quantity";
+    private static final String KEY_DATA_PRODUCTION_COST = "ProductionCost";
+    private static final String KEY_DATA_NAME = "Name";
+    private static final String KEY_DATA = "data";
+    private static final String ACTION_GET_COMPONENT = "getComponent";
+    private static final String KEY_DATA_COMPONENT_ID = "ComponentID";
+
+    private ComponentInventory() {
+	throw new IllegalStateException(Constants.COMPONENT_INVENTORY_CANNOT_BE_INSTANTIATED);
+    }
 
     /**
      * Retrieves a component by its ID.
      *
      * @param componentID The ID of the component to retrieve.
+     * @precondition componentID != null && !componentID.isBlank()
+     *               && component is in the inventory
+     * @postcondition none
      * @return The requested component.
      * @throws IllegalArgumentException If the componentID is null or blank, or if
      *                                  the server returns an error.
      */
     public static Component getComponent(String componentID) {
 	checkValidComponentID(componentID);
-	Map<String, Object> requestData = Map.of("ComponentID", componentID);
-	Map<String, Object> dataMap = Server.sendRequestAndGetResponse("getComponent", Map.of("data", requestData));
+	Map<String, Object> requestData = Map.of(KEY_DATA_COMPONENT_ID, componentID);
+	Map<String, Object> dataMap = Server.sendRequestAndGetResponse(ACTION_GET_COMPONENT, Map.of(KEY_DATA, requestData));
 	Component component = parseComponent(dataMap, componentID);
 	return component;
     }
@@ -37,6 +55,10 @@ public class ComponentInventory {
      * @param componentName  The name of the component to add.
      * @param productionCost The production cost of the component.
      * @param quantity       The quantity of the component.
+     * @precondition componentName != null && !componentName.isBlank() &&
+     *              productionCost >= Constants.MINIMUM_PRODUCTION_COST
+     *              && quantity >= Constants.MINIMUM_QUANTITY_SPINNER_VALUE
+     * @postcondition a new component is added to the inventory
      * @return The ID of the newly added component.
      * @throws IllegalArgumentException If any input parameters are invalid or if
      *                                  the server returns an error.
@@ -44,25 +66,28 @@ public class ComponentInventory {
     public static String addComponent(String componentName, double productionCost, int quantity) {
 	checkValidComponentName(componentName);
 	checkValidProductionCost(productionCost);
-	Map<String, Object> requestData = Map.of("data",
-		Map.of("Name", componentName, "ProductionCost", productionCost, "Quantity", quantity));
+	Map<String, Object> requestData = Map.of(KEY_DATA,
+		Map.of(KEY_DATA_NAME, componentName, KEY_DATA_PRODUCTION_COST, productionCost, KEY_DATA_QUANTITY, quantity));
 
 	Map<String, Object> dataMap = Server.sendRequestAndGetResponse("addComponent", requestData);
-	return (String) dataMap.get("ComponentID");
+	return (String) dataMap.get(KEY_DATA_COMPONENT_ID);
     }
 
     /**
      * Deletes a component from the inventory by its ID.
      *
      * @param componentID The ID of the component to delete.
+     * @precondition componentID != null && !componentID.isBlank() &&
+     *              component is in the inventory
+     * @postcondition the component is removed from the inventory
      * @throws IllegalArgumentException If the componentID is null or blank, or if
      *                                  the server returns an error.
      */
     public static void deleteComponent(String componentID) {
 	checkValidComponentID(componentID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("ComponentID", componentID));
-	Server.sendRequestAndGetResponse("deleteComponent", requestData);
+	requestData.put(KEY_DATA, Map.of(KEY_DATA_COMPONENT_ID, componentID));
+	Server.sendRequestAndGetResponse(ACTION_DELETE_COMPONENT, requestData);
     }
 
     /**
@@ -72,6 +97,12 @@ public class ComponentInventory {
      * @param componentName  The new name of the component.
      * @param productionCost The new production cost of the component.
      * @param quantity       The new quantity of the component.
+     * @precondition componentID != null && !componentID.isBlank() && 
+     *              componentName != null && !componentName.isBlank() &&
+     *              productionCost >= Constants.MINIMUM_PRODUCTION_COST
+     *              && quantity >= Constants.MINIMUM_QUANTITY_SPINNER_VALUE
+     *              && component is in the inventory
+     * @postcondition the component's information is updated
      * @throws IllegalArgumentException If any input parameters are invalid or if
      *                                  the server returns an error.
      */
@@ -80,10 +111,10 @@ public class ComponentInventory {
 	checkValidComponentName(componentName);
 	checkValidProductionCost(productionCost);
 
-	Map<String, Object> requestData = Map.of("data", Map.of("ComponentID", componentID, "Name", componentName,
-		"ProductionCost", productionCost, "Quantity", quantity));
+	Map<String, Object> requestData = Map.of(KEY_DATA, Map.of(KEY_DATA_COMPONENT_ID, componentID, KEY_DATA_NAME, componentName,
+		KEY_DATA_PRODUCTION_COST, productionCost, KEY_DATA_QUANTITY, quantity));
 
-	Server.sendRequestAndGetResponse("updateComponent", requestData);
+	Server.sendRequestAndGetResponse(ACTION_UPDATE_COMPONENT, requestData);
     }
 
     /**
@@ -91,6 +122,10 @@ public class ComponentInventory {
      *
      * @param componentID The ID of the component to order.
      * @param quantity    The quantity to order.
+     * @precondition componentID != null && !componentID.isBlank() &&
+     *             quantity >= Constants.MINIMUM_QUANTITY_SPINNER_VALUE
+     *             && component is in the inventory
+     *@postcondition the component's quantity is updated
      * @return The updated quantity of the component.
      * @throws IllegalArgumentException If the componentID is null or blank, the
      *                                  quantity is invalid, or if the server
@@ -99,9 +134,9 @@ public class ComponentInventory {
     public static int orderComponent(String componentID, int quantity) {
 	checkValidComponentID(componentID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("ComponentID", componentID, "Quantity", quantity));
-	Map<String, Object> dataMap = Server.sendRequestAndGetResponse("orderComponent", requestData);
-	return ((Number) dataMap.get("Quantity")).intValue();
+	requestData.put(KEY_DATA, Map.of(KEY_DATA_COMPONENT_ID, componentID, KEY_DATA_QUANTITY, quantity));
+	Map<String, Object> dataMap = Server.sendRequestAndGetResponse(ACTION_ORDER_COMPONENT, requestData);
+	return ((Number) dataMap.get(KEY_DATA_QUANTITY)).intValue();
 
     }
 
@@ -109,6 +144,9 @@ public class ComponentInventory {
      * Retrieves the current quantity of a component by its ID.
      *
      * @param componentID The ID of the component.
+     * @precondition componentID != null && !componentID.isBlank() &&
+     *              component is in the inventory
+     * @postcondition none
      * @return The current quantity of the component.
      * @throws IllegalArgumentException If the componentID is null or blank, or if
      *                                  the server returns an error.
@@ -116,9 +154,9 @@ public class ComponentInventory {
     public static int getQuantity(String componentID) {
 	checkValidComponentID(componentID);
 	Map<String, Object> requestData = new HashMap<>();
-	requestData.put("data", Map.of("ComponentID", componentID));
-	Map<String, Object> dataMap = Server.sendRequestAndGetResponse("getQuantityOfComponent", requestData);
-	return ((Number) dataMap.get("Quantity")).intValue();
+	requestData.put(KEY_DATA, Map.of(KEY_DATA_COMPONENT_ID, componentID));
+	Map<String, Object> dataMap = Server.sendRequestAndGetResponse(ACTION_GET_QUANTITY_OF_COMPONENT, requestData);
+	return ((Number) dataMap.get(KEY_DATA_QUANTITY)).intValue();
     }
 
     private static void checkValidComponentID(String componentID) {
@@ -146,8 +184,8 @@ public class ComponentInventory {
     }
 
     private static Component parseComponent(Map<String, Object> componentData, String componentID) {
-	String name = (String) componentData.get("Name");
-	double productionCost = ((Number) componentData.get("ProductionCost")).doubleValue();
+	String name = (String) componentData.get(KEY_DATA_NAME);
+	double productionCost = ((Number) componentData.get(KEY_DATA_PRODUCTION_COST)).doubleValue();
 
 	Component component = new Component(name, productionCost);
 	component.setID(componentID);
