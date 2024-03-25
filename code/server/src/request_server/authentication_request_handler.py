@@ -7,8 +7,6 @@ from model.employee_credentials import EmployeeCredentials
 from model.utilities import log
 
 employees = {}
-
-
     
 def attemptLogin(data):
     """
@@ -57,6 +55,33 @@ def clear():
         None.
     """
     employees.clear()
+    
+    
+def get_employees_list():
+    """
+    Retrieves a list of all employee credentials stored in the global employees dictionary.
+
+    Parameters:
+        None.
+
+    Preconditions:
+        - The global 'employees' dictionary is accessible.
+        - The function does not require any input parameters.
+
+    Postconditions:
+        - If the 'employees' dictionary is not empty, returns a collection view of EmployeeCredentials objects.
+        - If the 'employees' dictionary is empty, an exception is raised, indicating that there are no employees to list.
+
+    Returns:
+        A collection view (dict_values) of EmployeeCredentials objects if the 'employees' dictionary is not empty.
+        
+    Raises:
+        Exception: If the 'employees' dictionary is empty, indicating there are no employees to list.
+    """
+    if len(employees) == 0:
+        raise Exception("Employees list is empty")
+    
+    return employees.values()
     
 def registerUser(data):
     """

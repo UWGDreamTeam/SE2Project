@@ -1,12 +1,15 @@
+'''
+Created on Mar 20, 2024
+
+@author: Vitor dos Santos
+'''
 import unittest
-from request_server.authentication_request_handler import attemptLogin, registerUser, updateUser, removeUser, getUser, clear
-# Ensure 'your_module_name_here' is replaced with the actual name of your Python file containing the functions.
+from request_server.authentication_request_handler import attemptLogin, registerUser, updateUser, removeUser, getUser, clear, get_employees_list
 
 class TestEmployeeManagement(unittest.TestCase):
 
     def setUp(self):
-        # This method will run before each test, setting up a clean test environment
-        clear()  # Ensure the employee dictionary is empty before each test
+        clear()
         self.test_data = {
             "Id": "123",
             "firstName": "John",
@@ -35,7 +38,7 @@ class TestEmployeeManagement(unittest.TestCase):
 
     def test_updateUser_nonexistent_user(self):
         updated_data = self.test_data.copy()
-        updated_data["Id"] = "456"  # Non-existent user ID
+        updated_data["Id"] = "456"
         self.assertFalse(updateUser(updated_data))
 
     def test_removeUser_success(self):
@@ -43,14 +46,25 @@ class TestEmployeeManagement(unittest.TestCase):
         self.assertIsNone(getUser("123"))
 
     def test_removeUser_nonexistent_user(self):
-        self.assertFalse(removeUser("456"))  # Non-existent user ID
+        self.assertFalse(removeUser("456"))
 
     def test_getUser_existing_user(self):
         self.assertIsNotNone(getUser("123"))
         self.assertEqual(getUser("123").getFirstName(), "John")
 
     def test_getUser_nonexistent_user(self):
-        self.assertIsNone(getUser("456"))  # Non-existent user ID
+        self.assertIsNone(getUser("456"))
+        
+    def test_get_employees_list_non_empty(self):
+        employees_list = list(get_employees_list())
+        self.assertEqual(len(employees_list), 1)
+        self.assertEqual(employees_list[0].getEmployeeID(), "123")
+
+    def test_get_employees_list_empty(self):
+        clear()
+        with self.assertRaises(Exception) as context:
+            get_employees_list()
+        self.assertTrue('Employees list is empty' in str(context.exception))
 
 if __name__ == '__main__':
     unittest.main()
