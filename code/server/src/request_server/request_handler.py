@@ -9,7 +9,7 @@ from model.products import add_product, update_product, delete_product, get_prod
 from model.components import add_component, update_component, delete_component, get_component, get_quantity_of_component, order_component
 from model.orders import create_order, delete_order, update_order, get_order
 from model.utilities import log
-from request_server.authentication_request_handler import attemptLogin, registerUser, updateUser, removeUser
+from request_server.authentication_request_handler import attemptLogin, registerUser, updateUser, removeUser, getEmployee, clear
 
 request_handlers = {
     "addComponent": add_component,
@@ -35,6 +35,8 @@ request_handlers = {
     "registerUser": registerUser,
     "updateUser": updateUser,
     "removeUser": removeUser,
+    "getEmployee": getEmployee,
+    "clearCredentials" : clear
 }
 
 def handle_request(request_str):

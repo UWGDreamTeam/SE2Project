@@ -4,7 +4,7 @@ Created on Mar 20, 2024
 @author: Vitor dos Santos
 '''
 import unittest
-from request_server.authentication_request_handler import attemptLogin, registerUser, updateUser, removeUser, getUser, clear, get_employees_list
+from request_server.authentication_request_handler import attemptLogin, registerUser, updateUser, removeUser, getEmployee, clear, get_employees_list
 
 class TestEmployeeManagement(unittest.TestCase):
 
@@ -34,7 +34,7 @@ class TestEmployeeManagement(unittest.TestCase):
         updated_data["firstName"] = "Jane"
         
         self.assertTrue(updateUser(updated_data))
-        self.assertEqual(getUser("123").getFirstName(), "Jane")
+        self.assertEqual(getEmployee("123").getFirstName(), "Jane")
 
     def test_updateUser_nonexistent_user(self):
         updated_data = self.test_data.copy()
@@ -43,17 +43,17 @@ class TestEmployeeManagement(unittest.TestCase):
 
     def test_removeUser_success(self):
         self.assertTrue(removeUser("123"))
-        self.assertIsNone(getUser("123"))
+        self.assertIsNone(getEmployee("123"))
 
     def test_removeUser_nonexistent_user(self):
         self.assertFalse(removeUser("456"))
 
     def test_getUser_existing_user(self):
-        self.assertIsNotNone(getUser("123"))
-        self.assertEqual(getUser("123").getFirstName(), "John")
+        self.assertIsNotNone(getEmployee("123"))
+        self.assertEqual(getEmployee("123").getFirstName(), "John")
 
     def test_getUser_nonexistent_user(self):
-        self.assertIsNone(getUser("456"))
+        self.assertIsNone(getEmployee("456"))
         
     def test_get_employees_list_non_empty(self):
         employees_list = list(get_employees_list())
