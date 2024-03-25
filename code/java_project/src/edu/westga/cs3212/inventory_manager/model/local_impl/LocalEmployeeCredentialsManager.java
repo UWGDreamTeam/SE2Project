@@ -27,8 +27,7 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 	 */
 	public LocalEmployeeCredentialsManager() {
 		LocalEmployeeCredentialsManager.employeeCredentialsMap = new HashMap<>();
-		LocalEmployeeCredentialsManager.employeeCredentialsMap = EmployeeCredentialsStorage
-				.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
+		LocalEmployeeCredentialsManager.employeeCredentialsMap = EmployeeCredentialsStorage.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
 	}
 
 	/**
