@@ -133,7 +133,7 @@ def getEmployeesList(data):
         Exception: If the 'employees' dictionary is empty, indicating there are no employees to list.
     """
     if len(employees) == 0:
-        raise Exception("Employees list is empty")
+        return {"status": "error", "message": "Employee list is empty"}
     
     employees_dict = {"status": "success", "data": {}}
     
@@ -144,7 +144,7 @@ def getEmployeesList(data):
             "Password": employee.getPassword(),
             "Role": employee.getRole()
         }
-    
+    log(employees_dict)
     return {"status": "success", "data": employees_dict}
     
 def updateUser(data):
