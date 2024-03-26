@@ -79,6 +79,13 @@ public class Server {
 
 		return safelyCastToMap(responseMap.get("data"));
 	}
+	
+	public static Map<String, Object> sendRequestAndGetResponse(
+			String requestType) throws IllegalArgumentException {
+		Map<String, Object> requestData = new HashMap<>();
+		requestData.put("data", new HashMap<>());
+		return Server.sendRequestAndGetResponse(requestType, requestData);
+	}
 
 	@SuppressWarnings("unchecked")
 	private static Map<String, Object> safelyCastToMap(Object object) {

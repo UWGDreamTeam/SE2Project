@@ -17,7 +17,7 @@ public class TestAdd {
 	void testValidAdd() {
 		LocalComponentInventory componentInventory = new LocalComponentInventory();
 		LocalProductInventory productInventory = new LocalProductInventory();
-		AddProductViewModel testViewModel = new AddProductViewModel(componentInventory, productInventory);
+		AddProductViewModel testViewModel = new AddProductViewModel(productInventory);
 		testViewModel.getName().set("Test Product");
 		testViewModel.getProductionCost().set("10.00");
 		testViewModel.getSellingPrice().set("20.00");
@@ -31,7 +31,7 @@ public class TestAdd {
 	void testInvalidAdd() {
 		LocalComponentInventory componentInventory = new LocalComponentInventory();
 		LocalProductInventory productInventory = new LocalProductInventory();
-		AddProductViewModel testViewModel = new AddProductViewModel(componentInventory, productInventory);
+		AddProductViewModel testViewModel = new AddProductViewModel(productInventory);
 		testViewModel.getName().set("Test Product");
 		testViewModel.getProductionCost().set("10.00");
 		testViewModel.getSellingPrice().set("20.00");

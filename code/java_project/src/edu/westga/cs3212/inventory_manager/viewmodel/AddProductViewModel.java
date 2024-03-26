@@ -8,6 +8,7 @@ import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +19,6 @@ import javafx.collections.ObservableList;
 public class AddProductViewModel {
 
 	private ObjectProperty<Component> selectedComponent;
-	private LocalComponentInventory componentInventory;
 	private StringProperty name;
 	private StringProperty productionCost;
 	private StringProperty sellingPrice;
@@ -34,9 +34,8 @@ public class AddProductViewModel {
 	 * @param productInventory
 	 *            The inventory where the new product will be added.
 	 */
-	public AddProductViewModel(LocalComponentInventory componentInventory,
+	public AddProductViewModel(
 			LocalProductInventory productInventory) {
-		this.componentInventory = componentInventory;
 		this.productInventory = productInventory;
 		this.name = new SimpleStringProperty();
 		this.productionCost = new SimpleStringProperty();
@@ -62,8 +61,8 @@ public class AddProductViewModel {
 	 */
 	public ObservableList<Component> getObservableComponentList() {
 		ArrayList<Component> items = new ArrayList<Component>();
-		for (Item item : this.componentInventory.getItems()) {
-			items.add((Component) item);
+		for (Component currentComponent : ComponentInventory.getComponents()) {
+			items.add(currentComponent);
 		}
 		return FXCollections.observableArrayList(items);
 	}

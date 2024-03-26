@@ -8,6 +8,7 @@ import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,7 +25,6 @@ public class EditProductViewModel {
 	private StringProperty quantity;
 	private ObjectProperty<Component> selectedComponent;
 	private LocalProductInventory productInventory;
-	private LocalComponentInventory componentInventory;
 
 	/**
 	 * Initializes a new instance of the EditProductViewModel. Sets up property
@@ -38,9 +38,7 @@ public class EditProductViewModel {
 	 *            An instance of LocalComponentInventory for accessing component
 	 *            information.
 	 */
-	public EditProductViewModel(LocalProductInventory productInventory,
-			LocalComponentInventory componentInventory) {
-		this.componentInventory = componentInventory;
+	public EditProductViewModel(LocalProductInventory productInventory) {
 		this.productInventory = productInventory;
 		this.name = new SimpleStringProperty();
 		this.productionCost = new SimpleStringProperty();
@@ -157,8 +155,8 @@ public class EditProductViewModel {
 	 */
 	public ObservableList<Component> getObservableComponentList() {
 		ArrayList<Component> items = new ArrayList<Component>();
-		for (Item item : this.componentInventory.getItems()) {
-			items.add((Component) item);
+		for (Component currentComponent : ComponentInventory.getComponents()) {
+			items.add(currentComponent);
 		}
 		return FXCollections.observableArrayList(items);
 	}

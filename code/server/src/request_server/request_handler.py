@@ -29,7 +29,8 @@ from request_server.products import (
 )
 from request_server.components import (
     add_component, update_component, delete_component,
-    get_component, get_quantity_of_component, order_component
+    get_component, get_quantity_of_component, order_component,
+    get_all_components, clear_inventory
 )
 from request_server.orders import (
     create_order, update_order, delete_order, get_order
@@ -57,6 +58,8 @@ request_handlers = {
     "deleteOrder": delete_order,
     "updateOrder": update_order,
     "getOrder": get_order,
+    "getComponents": get_all_components,
+    "clearInventory": clear_inventory
 }
 
 def handle_request(request_str):
@@ -81,6 +84,9 @@ def handle_request(request_str):
         data = request_data.get('data', {})
         handler = request_handlers.get(request_type)
 
+        if len(data) == 0:
+            response = handler()
+            return json.dumps(response)
         if handler:
             response = handler(data)
             return json.dumps(response)

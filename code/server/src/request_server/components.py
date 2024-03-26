@@ -172,3 +172,23 @@ def get_quantity_of_component(data):
         return {"status": "success", "data": {"Quantity": components[component_id]["Quantity"]}}
     log(f"Component not found: {component_id}")
     return {"status": "error", "message": "Component not found"}
+
+def get_all_components():
+    """
+    Retrieves all components in the inventory.
+    
+    Returns:
+    - dict: A response object with a status message indicating success and the
+        components' details.
+    """
+    return {"status": "success", "data": components}
+
+def clear_inventory():
+    """
+    Clears all components from the inventory.
+    
+    Returns:
+    - dict: A response object with a status message indicating success.
+    """
+    components.clear()
+    return {"status": "success", "message": "Inventory cleared"}

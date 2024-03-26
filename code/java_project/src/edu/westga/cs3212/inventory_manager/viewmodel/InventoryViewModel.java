@@ -7,6 +7,7 @@ import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -22,8 +23,6 @@ public class InventoryViewModel {
 
 	private ObjectProperty<Item> selectedComponent;
 	private ObjectProperty<Item> selectedProduct;
-
-	private LocalComponentInventory componentsInventory;
 	private LocalProductInventory productInventory;
 
 	/**
@@ -36,9 +35,7 @@ public class InventoryViewModel {
 	 * @param productInventory
 	 *            The inventory of products to be managed.
 	 */
-	public InventoryViewModel(LocalComponentInventory componentsInventory,
-			LocalProductInventory productInventory) {
-		this.componentsInventory = componentsInventory;
+	public InventoryViewModel(LocalProductInventory productInventory) {
 		this.productInventory = productInventory;
 
 		this.selectedComponent = new SimpleObjectProperty<Item>();
@@ -55,8 +52,8 @@ public class InventoryViewModel {
 	 */
 	public ObservableList<Component> getObservableComponentList() {
 		ArrayList<Component> items = new ArrayList<Component>();
-		for (Item item : this.componentsInventory.getItems()) {
-			items.add((Component) item);
+		for (Component currentComponent : ComponentInventory.getComponents()) {
+			items.add(currentComponent);
 		}
 		return FXCollections.observableArrayList(items);
 	}
@@ -71,7 +68,7 @@ public class InventoryViewModel {
 	 *                exists.
 	 */
 	public void removeComponent() {
-		this.componentsInventory.removeItem(this.selectedComponent.getValue());
+		ComponentInventory.deleteComponent(this.selectedComponent.get().getID());
 	}
 
 	/**
@@ -83,17 +80,6 @@ public class InventoryViewModel {
 	 */
 	public ObjectProperty<Item> getSelectedComponent() {
 		return this.selectedComponent;
-	}
-
-	/**
-	 * Gets the LocalComponentInventory instance being managed by this
-	 * ViewModel. Provides access to the underlying component inventory
-	 * operations and data.
-	 *
-	 * @return The instance of LocalComponentInventory used by this ViewModel.
-	 */
-	public LocalComponentInventory getComponentsInventory() {
-		return this.componentsInventory;
 	}
 
 	/**
@@ -172,10 +158,12 @@ public class InventoryViewModel {
 	 * @postcondition The specified component's quantity is incremented by the
 	 *                provided amount.
 	 */
-	public void orderComponent(Component selectedComponent2, int quantity) {
-		this.componentsInventory.setQuantityOfItem(selectedComponent2,
-				quantity + this.componentsInventory
-						.getQuantityOfItem(selectedComponent2));
+	public void orderComponent(Component selectedComponent, int quantity) {
+		try {
+			ComponentInventory.orderComponent(selectedComponent.getID(), quantity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -206,12 +194,5 @@ public class InventoryViewModel {
 	public void produceProduct(Product selectedProduct, int quantity) {
 		this.productInventory.setQuantityOfItem(selectedProduct, quantity
 				+ this.productInventory.getQuantityOfItem(selectedProduct));
-
-		for (Component component : selectedProduct.getRecipe().keySet()) {
-			this.componentsInventory.setQuantityOfItem(component,
-					this.componentsInventory.getQuantityOfItem(component)
-							- selectedProduct.getRecipe().get(component)
-									* quantity);
-		}
 	}
 }

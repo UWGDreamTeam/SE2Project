@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,8 +16,6 @@ public class EditComponentViewModel {
 
 	private ObjectProperty<Item> selectedComponent;
 
-	private LocalComponentInventory componentInventory;
-
 	/**
 	 * Initializes a new instance of the EditComponentViewModel class. Sets up
 	 * property bindings and initializes the connection to the component
@@ -24,7 +23,6 @@ public class EditComponentViewModel {
 	 */
 	public EditComponentViewModel() {
 
-		this.componentInventory = new LocalComponentInventory();
 		this.selectedComponent = new SimpleObjectProperty<Item>();
 		this.name = new SimpleStringProperty();
 		this.cost = new SimpleStringProperty();
@@ -44,8 +42,8 @@ public class EditComponentViewModel {
 
 		this.name.set(item.getName());
 		this.cost.set(String.valueOf(item.getProductionCost()));
-		this.quantity.set(String
-				.valueOf(this.componentInventory.getQuantityOfItem(item)));
+		this.quantity.set(
+				String.valueOf(ComponentInventory.getQuantity(item.getID())));
 	}
 
 	/**
@@ -60,13 +58,14 @@ public class EditComponentViewModel {
 		String newName = this.name.getValue();
 		Double newCost = Double.parseDouble(this.cost.getValue());
 		int newQuantity = Integer.parseInt(this.quantity.getValue());
-		Item item = this.selectedComponent.getValue();
-
-		item.setName(newName);
-		item.setProductionCost(newCost);
-		this.componentInventory.setQuantityOfItem(item, newQuantity);
-
-		return this.componentInventory.editItem(item);
+		String ID = this.selectedComponent.get().getID();
+		try {
+			ComponentInventory.updateComponent(ID, newName, newCost,
+					newQuantity);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
