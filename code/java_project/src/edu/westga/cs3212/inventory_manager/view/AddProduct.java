@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.Component;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.viewmodel.AddProductViewModel;
@@ -65,7 +66,8 @@ public class AddProduct {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Error");
 			alert.setHeaderText("Error Adding Product");
-			alert.setContentText(UNABLE_TO_ADD_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN);
+			alert.setContentText(
+					UNABLE_TO_ADD_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN);
 			alert.showAndWait();
 			result = false;
 		}
@@ -88,23 +90,35 @@ public class AddProduct {
 	void initialize() {
 		this.componentInventory = new LocalComponentInventory();
 		this.productInventory = new LocalProductInventory();
-		this.addProductVM = new AddProductViewModel(this.componentInventory, this.productInventory);
-		this.productionCostTextField.textProperty().bindBidirectional(this.addProductVM.getProductionCost());
-		this.sellingPriceTextField.textProperty().bindBidirectional(this.addProductVM.getSellingPrice());
-		this.quantityTextField.textProperty().bindBidirectional(this.addProductVM.getQuantity());
-		this.nameTextField.textProperty().bindBidirectional(this.addProductVM.getName());
+		this.addProductVM = new AddProductViewModel(this.componentInventory,
+				this.productInventory);
+		this.productionCostTextField.textProperty()
+				.bindBidirectional(this.addProductVM.getProductionCost());
+		this.sellingPriceTextField.textProperty()
+				.bindBidirectional(this.addProductVM.getSellingPrice());
+		this.quantityTextField.textProperty()
+				.bindBidirectional(this.addProductVM.getQuantity());
+		this.nameTextField.textProperty()
+				.bindBidirectional(this.addProductVM.getName());
 		this.componentList = new HashMap<Component, Integer>();
-		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
+		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+				Constants.MINIMUM_QUANTITY_SPINNER_VALUE,
+				Constants.MAXIMUM_QUANTITY_SPINNER_VALUE, 0);
 		this.currentComponentQuantity.setValueFactory(valueFactory);
 		this.addProductVM.getSelectedComponentProperty()
-				.bind(this.componentRecipeTableView.getSelectionModel().selectedItemProperty());
+				.bind(this.componentRecipeTableView.getSelectionModel()
+						.selectedItemProperty());
 		this.setupComponentTableView();
 	}
 
 	private void setupComponentTableView() {
 		this.refreshComponentTableView();
-		this.componentIDColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
-		this.componentName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		this.componentIDColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(
+						cellData.getValue().getID()));
+		this.componentName
+				.setCellValueFactory(cellData -> new SimpleStringProperty(
+						cellData.getValue().getName()));
 		this.quantityColumn.setCellValueFactory(cellData -> {
 			try {
 				int quantity = this.componentList.get(cellData.getValue());
@@ -117,24 +131,29 @@ public class AddProduct {
 		this.componentRecipeTableView.getSelectionModel().selectedItemProperty()
 				.addListener((obs, oldSelection, newSelection) -> {
 					if (newSelection != null) {
-						Integer quantity = this.componentList.getOrDefault(newSelection, 0);
-						this.currentComponentQuantity.getValueFactory().setValue(quantity);
+						Integer quantity = this.componentList
+								.getOrDefault(newSelection, 0);
+						this.currentComponentQuantity.getValueFactory()
+								.setValue(quantity);
 					}
 				});
 
-		this.currentComponentQuantity.valueProperty().addListener((obs, oldValue, newValue) -> {
-			Component selectedComponent = this.componentRecipeTableView.getSelectionModel().getSelectedItem();
-			if (selectedComponent != null && newValue != null) {
-				this.componentList.put(selectedComponent, newValue);
+		this.currentComponentQuantity.valueProperty()
+				.addListener((obs, oldValue, newValue) -> {
+					Component selectedComponent = this.componentRecipeTableView
+							.getSelectionModel().getSelectedItem();
+					if (selectedComponent != null && newValue != null) {
+						this.componentList.put(selectedComponent, newValue);
 
-				this.componentRecipeTableView.refresh();
-			}
-		});
+						this.componentRecipeTableView.refresh();
+					}
+				});
 
 	}
 
 	private void refreshComponentTableView() {
-		this.componentRecipeTableView.setItems(this.addProductVM.getObservableComponentList());
+		this.componentRecipeTableView
+				.setItems(this.addProductVM.getObservableComponentList());
 		this.componentRecipeTableView.refresh();
 	}
 

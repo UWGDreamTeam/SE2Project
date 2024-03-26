@@ -51,8 +51,6 @@ class TestAddItem {
 		LocalProductInventory inventory = new LocalProductInventory();
 		Map<Component, Integer> recipe = new HashMap<>();
 		recipe.put(new Component("component", 1.0), 1);
-		Product product1 = new Product("name", 5.0, 20.0, recipe);
-		
 		assertThrows(IllegalArgumentException.class, () -> 
 				inventory.addItem(new Product("product", 5.0, 20.0, recipe), -1));
 	}

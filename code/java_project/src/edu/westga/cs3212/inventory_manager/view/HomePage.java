@@ -64,15 +64,19 @@ public class HomePage {
 
 	private void bindToViewModel() {
 		this.viewModel = new HomePageViewModel();
-		this.componentSummaryTextArea.textProperty().bind(this.viewModel.getComponentSumarryTextArea());
-		this.productSummaryTextArea.textProperty().bind(this.viewModel.getProductSumarryTextArea());
-		this.orderSummaryTextArea.textProperty().bind(this.viewModel.getOrderSumarryTextArea());
+		this.componentSummaryTextArea.textProperty()
+				.bind(this.viewModel.getComponentSumarryTextArea());
+		this.productSummaryTextArea.textProperty()
+				.bind(this.viewModel.getProductSumarryTextArea());
+		this.orderSummaryTextArea.textProperty()
+				.bind(this.viewModel.getOrderSumarryTextArea());
 	}
 
 	@FXML
 	void inventoryPageButtonOnClick(MouseEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
+		Parent parent = FXMLLoader
+				.load(Main.class.getResource(Main.INVENTORY_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
 		stage.setTitle("Home Page");
@@ -82,7 +86,8 @@ public class HomePage {
 	@FXML
 	void ordersPageButtonOnClick(MouseEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
+		Parent parent = FXMLLoader
+				.load(Main.class.getResource(Main.ORDER_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
 		stage.setTitle("Home Page");
@@ -105,8 +110,10 @@ public class HomePage {
 	@FXML
 	void logOutButton(ActionEvent event) {
 		try {
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene()
+					.getWindow();
+			Parent parent = FXMLLoader
+					.load(Main.class.getResource(Main.LOGIN_PAGE));
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);

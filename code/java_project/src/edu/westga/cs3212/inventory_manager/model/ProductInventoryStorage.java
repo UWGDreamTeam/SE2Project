@@ -12,7 +12,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * The Class ProductInventoryStorage is used to save and load products from local storage.
+ * The Class ProductInventoryStorage is used to save and load products from
+ * local storage.
  * 
  * @author Jason Nunez
  * @version Spring 2024
@@ -20,26 +21,29 @@ import com.google.gson.reflect.TypeToken;
 public final class ProductInventoryStorage {
 
 	public static final String UTILITY_CLASS_ERROR = "Utility class";
-	
+
 	private ProductInventoryStorage() {
-		throw new IllegalStateException(ProductInventoryStorage.UTILITY_CLASS_ERROR);
+		throw new IllegalStateException(
+				ProductInventoryStorage.UTILITY_CLASS_ERROR);
 	}
-	
+
 	/**
 	 * Saves products to local storage.
 	 * 
 	 * @precondition none
 	 * @postcondition products are saved to local storage.
 	 * 
-	 * @param products  The list of products to save.
-	 * @param filePath  The file path where products are saved.
+	 * @param products
+	 *            The list of products to save.
+	 * @param filePath
+	 *            The file path where products are saved.
 	 */
 	public static void save(Map<Product, Integer> products, String filePath) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (FileWriter writer = new FileWriter(filePath)) {
 			gson.toJson(products, writer);
 		} catch (Exception exception) {
-			
+
 		}
 	}
 
@@ -49,7 +53,8 @@ public final class ProductInventoryStorage {
 	 * @precondition none
 	 * @postcondition none
 	 * 
-	 * @param filePath The file path from where products are to be loaded.
+	 * @param filePath
+	 *            The file path from where products are to be loaded.
 	 * @return A list of products.
 	 */
 	public static Map<Product, Integer> load(String filePath) {

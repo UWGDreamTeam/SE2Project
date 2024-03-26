@@ -29,9 +29,12 @@ public class AddComponent {
 	void initialize() {
 		this.addComponentVM = new AddComponentViewModel();
 
-		this.cost.textProperty().bindBidirectional(this.addComponentVM.getCost());
-		this.name.textProperty().bindBidirectional(this.addComponentVM.getName());
-		this.quantity.textProperty().bindBidirectional(this.addComponentVM.getQuantity());
+		this.cost.textProperty()
+				.bindBidirectional(this.addComponentVM.getCost());
+		this.name.textProperty()
+				.bindBidirectional(this.addComponentVM.getName());
+		this.quantity.textProperty()
+				.bindBidirectional(this.addComponentVM.getQuantity());
 	}
 
 	@FXML
@@ -46,12 +49,14 @@ public class AddComponent {
 				this.closeWindow(event);
 			} else {
 				Alert errorPopup = new Alert(AlertType.ERROR);
-				errorPopup.setContentText(UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
+				errorPopup.setContentText(
+						UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
 				errorPopup.showAndWait();
 			}
 		} catch (IllegalArgumentException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
-			errorPopup.setContentText(UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
+			errorPopup.setContentText(
+					UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
 			errorPopup.showAndWait();
 		}
 	}

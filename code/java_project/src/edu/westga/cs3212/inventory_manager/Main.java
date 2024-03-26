@@ -41,24 +41,26 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		primaryStage = stage;
-        Parent parent = FXMLLoader.load(getClass().getResource(Main.LOGIN_PAGE));
-        Scene scene = new Scene(parent);
-        primaryStage.setTitle(WINDOW_TITLE);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+		Parent parent = FXMLLoader
+				.load(getClass().getResource(Main.LOGIN_PAGE));
+		Scene scene = new Scene(parent);
+		primaryStage.setTitle(WINDOW_TITLE);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
-	
-	 /**
-     * Provides access to the primary stage of the application.
-     * This static method allows other parts of the application to retrieve the primary stage to update or modify the scene.
-     *
-     * @return The primary stage of the application.
-     * @precondition none
-     * @postcondition none
-     */
+
+	/**
+	 * Provides access to the primary stage of the application. This static
+	 * method allows other parts of the application to retrieve the primary
+	 * stage to update or modify the scene.
+	 *
+	 * @return The primary stage of the application.
+	 * @precondition none
+	 * @postcondition none
+	 */
 	public static Stage getPrimaryStage() {
-        return primaryStage;
-    }
+		return primaryStage;
+	}
 
 	/**
 	 * Primary Java entry point.

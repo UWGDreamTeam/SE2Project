@@ -33,10 +33,13 @@ public final class ComponentInventoryStorage {
 	 * @precondition none
 	 * @postcondition none
 	 * 
-	 * @param components The list of components to save.
-	 * @param filePath   The file path where products are saved.
+	 * @param components
+	 *            The list of components to save.
+	 * @param filePath
+	 *            The file path where products are saved.
 	 */
-	public static void save(Map<Component, Integer> components, String filePath) {
+	public static void save(Map<Component, Integer> components,
+			String filePath) {
 		Map<String, Component> componentMap = new HashMap<>();
 		Map<String, Integer> quantityMap = new HashMap<>();
 
@@ -69,7 +72,8 @@ public final class ComponentInventoryStorage {
 	 * @precondition none
 	 * @postcondition none
 	 * 
-	 * @param filePath The file path from where products are to be loaded.
+	 * @param filePath
+	 *            The file path from where products are to be loaded.
 	 * @return A list of products.
 	 */
 	public static Map<Component, Integer> load(String filePath) {
@@ -77,15 +81,19 @@ public final class ComponentInventoryStorage {
 		Map<Component, Integer> components = new HashMap<>();
 
 		try {
-			String componentJson = new String(Files.readAllBytes(Paths.get(filePath)));
+			String componentJson = new String(
+					Files.readAllBytes(Paths.get(filePath)));
 			Type componentType = new TypeToken<Map<String, Component>>() {
 			}.getType();
-			Map<String, Component> componentMap = gson.fromJson(componentJson, componentType);
+			Map<String, Component> componentMap = gson.fromJson(componentJson,
+					componentType);
 
-			String quantityJson = new String(Files.readAllBytes(Paths.get(filePath + "1")));
+			String quantityJson = new String(
+					Files.readAllBytes(Paths.get(filePath + "1")));
 			Type quantityType = new TypeToken<Map<String, Integer>>() {
 			}.getType();
-			Map<String, Integer> quantityMap = gson.fromJson(quantityJson, quantityType);
+			Map<String, Integer> quantityMap = gson.fromJson(quantityJson,
+					quantityType);
 
 			for (Map.Entry<String, Component> entry : componentMap.entrySet()) {
 				String componentId = entry.getKey();

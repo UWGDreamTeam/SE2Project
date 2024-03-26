@@ -130,11 +130,13 @@ public class InventoryPage {
 	void initialize() {
 		this.localComponentInventory = new LocalComponentInventory();
 		this.localProductInventory = new LocalProductInventory();
-		this.inventoryVM = new InventoryViewModel(this.localComponentInventory, this.localProductInventory);
+		this.inventoryVM = new InventoryViewModel(this.localComponentInventory,
+				this.localProductInventory);
 
-		this.inventoryVM.getSelectedComponent()
-				.bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
-		this.inventoryVM.getSelectedProduct().bind(this.productsTableView.getSelectionModel().selectedItemProperty());
+		this.inventoryVM.getSelectedComponent().bind(this.componentsTableView
+				.getSelectionModel().selectedItemProperty());
+		this.inventoryVM.getSelectedProduct().bind(this.productsTableView
+				.getSelectionModel().selectedItemProperty());
 
 		this.setupComponentsTableView();
 		this.setupProductsTableView();
@@ -144,58 +146,77 @@ public class InventoryPage {
 
 	private void setupProductButtons() {
 		this.editProductButton.disableProperty()
-				.bind(Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()));
+				.bind(Bindings.isNull(this.productsTableView.getSelectionModel()
+						.selectedItemProperty()));
 
 		this.productProduceButton.disableProperty()
-				.bind(Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()));
+				.bind(Bindings.isNull(this.productsTableView.getSelectionModel()
+						.selectedItemProperty()));
 		this.removeProductButton.disableProperty()
-				.bind(Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()));
+				.bind(Bindings.isNull(this.productsTableView.getSelectionModel()
+						.selectedItemProperty()));
 	}
 
 	private void setupComponentButtons() {
 		this.componentEditButton.disableProperty()
-				.bind(Bindings.isNull(this.componentsTableView.getSelectionModel().selectedItemProperty()));
+				.bind(Bindings.isNull(this.componentsTableView
+						.getSelectionModel().selectedItemProperty()));
 		this.componentOrderButton.disableProperty()
-				.bind(Bindings.isNull(this.componentsTableView.getSelectionModel().selectedItemProperty()));
+				.bind(Bindings.isNull(this.componentsTableView
+						.getSelectionModel().selectedItemProperty()));
 		this.componentRemoveButton.disableProperty()
-				.bind(Bindings.isNull(this.componentsTableView.getSelectionModel().selectedItemProperty()));
+				.bind(Bindings.isNull(this.componentsTableView
+						.getSelectionModel().selectedItemProperty()));
 	}
 
 	private void setupProductsTableView() {
 		this.refreshProductsTableView();
 
-		this.productIDColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
-		this.productNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		this.productIDColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(
+						cellData.getValue().getID()));
+		this.productNameColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(
+						cellData.getValue().getName()));
 		this.productProductionCostColumn
-				.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
+				.setCellValueFactory(cellData -> new SimpleDoubleProperty(
+						cellData.getValue().getProductionCost()));
 		this.productQuantityColumn.setCellValueFactory(cellData -> {
 			try {
-				int quantity = this.localProductInventory.getQuantityOfItem(cellData.getValue());
+				int quantity = this.localProductInventory
+						.getQuantityOfItem(cellData.getValue());
 				return new SimpleIntegerProperty(quantity).asObject();
 			} catch (IllegalArgumentException e) {
 				return new SimpleIntegerProperty(0).asObject();
 			}
 		});
 		this.productSellingPrice
-				.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSalePrice()));
+				.setCellValueFactory(cellData -> new SimpleDoubleProperty(
+						cellData.getValue().getSalePrice()));
 
 	}
 
 	private void refreshProductsTableView() {
-		this.productsTableView.setItems(this.inventoryVM.getObservableProductList());
+		this.productsTableView
+				.setItems(this.inventoryVM.getObservableProductList());
 		this.productsTableView.refresh();
 	}
 
 	private void setupComponentsTableView() {
 		this.refreshComponentsTableView();
 
-		this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
-		this.nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(
+				cellData.getValue().getID()));
+		this.nameColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(
+						cellData.getValue().getName()));
 		this.costColumn
-				.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
+				.setCellValueFactory(cellData -> new SimpleDoubleProperty(
+						cellData.getValue().getProductionCost()));
 		this.quantityColumn.setCellValueFactory(cellData -> {
 			try {
-				int quantity = this.localComponentInventory.getQuantityOfItem(cellData.getValue());
+				int quantity = this.localComponentInventory
+						.getQuantityOfItem(cellData.getValue());
 				return new SimpleIntegerProperty(quantity).asObject();
 			} catch (IllegalArgumentException e) {
 				return new SimpleIntegerProperty(0).asObject();
@@ -207,7 +228,8 @@ public class InventoryPage {
 	void homePageButtonOnClick(ActionEvent event) throws IOException {
 
 		try {
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene()
+					.getWindow();
 			Parent parent;
 			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
 			Scene currentScene = currentStage.getScene();
@@ -224,7 +246,8 @@ public class InventoryPage {
 	void orderPageButtonOnClick(ActionEvent event) throws IOException {
 
 		try {
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene()
+					.getWindow();
 			Parent parent;
 			parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
 			Scene currentScene = currentStage.getScene();
@@ -241,8 +264,10 @@ public class InventoryPage {
 	void logOutButtonOnClick(ActionEvent event) {
 
 		try {
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene()
+					.getWindow();
+			Parent parent = FXMLLoader
+					.load(Main.class.getResource(Main.LOGIN_PAGE));
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
@@ -258,7 +283,8 @@ public class InventoryPage {
 	/* COMPONENTS TAB */
 
 	@FXML
-	void addComponentButtonManagerOnClick(ActionEvent event) throws IOException {
+	void addComponentButtonManagerOnClick(ActionEvent event)
+			throws IOException {
 		Stage modalStage = new Stage();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PAGE));
 		Scene scene = new Scene(parent);
@@ -280,10 +306,13 @@ public class InventoryPage {
 	}
 
 	@FXML
-	void editComponentButtonManagerOnClick(ActionEvent event) throws IOException {
-		Item selectedItem = this.componentsTableView.getSelectionModel().getSelectedItem();
+	void editComponentButtonManagerOnClick(ActionEvent event)
+			throws IOException {
+		Item selectedItem = this.componentsTableView.getSelectionModel()
+				.getSelectedItem();
 
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource(Main.EDIT_COMPONENT_PAGE));
+		FXMLLoader loader = new FXMLLoader(
+				Main.class.getResource(Main.EDIT_COMPONENT_PAGE));
 		Parent parent = loader.load();
 
 		EditComponentPage editComponentPage = loader.getController();
@@ -314,26 +343,31 @@ public class InventoryPage {
 				if (quantity > 0) {
 					this.tryToOrderComponent(quantity);
 				} else {
-					this.showAlert("Invalid Quantity", "Please enter a positive number.", AlertType.ERROR);
+					this.showAlert("Invalid Quantity",
+							"Please enter a positive number.", AlertType.ERROR);
 				}
 			} catch (NumberFormatException e) {
-				this.showAlert("Invalid Input", "Please enter a valid number.", AlertType.ERROR);
+				this.showAlert("Invalid Input", "Please enter a valid number.",
+						AlertType.ERROR);
 			}
 		}
 		this.refreshComponentsTableView();
 	}
 
 	private void tryToOrderComponent(int quantity) {
-		Component selectedComponent = this.componentsTableView.getSelectionModel().getSelectedItem();
+		Component selectedComponent = this.componentsTableView
+				.getSelectionModel().getSelectedItem();
 		if (selectedComponent != null) {
 			this.inventoryVM.orderComponent(selectedComponent, quantity);
 			this.refreshComponentsTableView();
 		} else {
-			this.showAlert("Order Error", "No component selected.", AlertType.ERROR);
+			this.showAlert("Order Error", "No component selected.",
+					AlertType.ERROR);
 		}
 	}
 
-	private void showAlert(String title, String content, Alert.AlertType alertType) {
+	private void showAlert(String title, String content,
+			Alert.AlertType alertType) {
 		Alert alert = new Alert(alertType);
 		alert.setTitle(title);
 		alert.setContentText(content);
@@ -341,7 +375,8 @@ public class InventoryPage {
 	}
 
 	private void refreshComponentsTableView() {
-		this.componentsTableView.setItems(this.inventoryVM.getObservableComponentList());
+		this.componentsTableView
+				.setItems(this.inventoryVM.getObservableComponentList());
 		this.componentsTableView.refresh();
 	}
 
@@ -350,7 +385,8 @@ public class InventoryPage {
 	@FXML
 	void addProdcutManagerOnClick(ActionEvent event) throws IOException {
 		Stage modalStage = new Stage();
-		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PRODUCT_PAGE));
+		Parent parent = FXMLLoader
+				.load(Main.class.getResource(Main.ADD_PRODUCT_PAGE));
 		Scene scene = new Scene(parent);
 
 		modalStage.setTitle(Main.WINDOW_TITLE);
@@ -364,9 +400,11 @@ public class InventoryPage {
 
 	@FXML
 	void editProductManagerOnClick(ActionEvent event) throws IOException {
-		Item selectedItem = this.productsTableView.getSelectionModel().getSelectedItem();
+		Item selectedItem = this.productsTableView.getSelectionModel()
+				.getSelectedItem();
 
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource(Main.EDIT_PRODUCT_PAGE));
+		FXMLLoader loader = new FXMLLoader(
+				Main.class.getResource(Main.EDIT_PRODUCT_PAGE));
 		Parent parent = loader.load();
 
 		EditProduct editProduct = loader.getController();
@@ -386,7 +424,8 @@ public class InventoryPage {
 	@FXML
 	void produceProductButtonOnClick(ActionEvent event) {
 		try {
-			this.inventoryVM.produceProduct(this.productsTableView.getSelectionModel().getSelectedItem(), 1);
+			this.inventoryVM.produceProduct(this.productsTableView
+					.getSelectionModel().getSelectedItem(), 1);
 		} catch (IllegalArgumentException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());

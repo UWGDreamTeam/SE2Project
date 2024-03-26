@@ -9,11 +9,12 @@ public class LoginViewModel {
 	private final LocalEmployeeCredentialsManager manager;
 	private final StringProperty employeeID;
 	private final StringProperty password;
-    
+
 	/**
-	 * ViewModel for the Login Page, encapsulating the logic for user authentication
-	 * and interaction with the LocalEmployeeCredentialsManager. It provides properties
-	 * for binding to UI components in a JavaFX application.
+	 * ViewModel for the Login Page, encapsulating the logic for user
+	 * authentication and interaction with the LocalEmployeeCredentialsManager.
+	 * It provides properties for binding to UI components in a JavaFX
+	 * application.
 	 * 
 	 * @author Jason Nunez
 	 */
@@ -22,9 +23,10 @@ public class LoginViewModel {
 		this.employeeID = new SimpleStringProperty();
 		this.password = new SimpleStringProperty();
 	}
-	
+
 	/**
-	 * Attempts to authenticate the user with the given employee ID and password.
+	 * Attempts to authenticate the user with the given employee ID and
+	 * password.
 	 * 
 	 * @precondition none
 	 * @postcondition none
@@ -42,19 +44,19 @@ public class LoginViewModel {
 		}
 		return result;
 	}
-	
+
 	/**
-     * Returns the employee ID property for binding to a UI component.
-     * 
-     * @precondition none
-     * @postcondition none
-     * 
-     * @return the employee ID property
-     */
+	 * Returns the employee ID property for binding to a UI component.
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return the employee ID property
+	 */
 	public StringProperty employeeIDProperty() {
 		return this.employeeID;
 	}
-	
+
 	/**
 	 * Returns the password property for binding to a UI component.
 	 * 

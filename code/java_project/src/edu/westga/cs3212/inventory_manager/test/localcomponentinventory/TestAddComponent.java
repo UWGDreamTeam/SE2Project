@@ -11,19 +11,20 @@ import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 
-
 class TestAddComponent {
 
 	@BeforeEach
 	void setUp() throws IOException {
-		Files.deleteIfExists(Paths.get(Constants.COMPONENT_INVENTORY_FILE_LOCATION));
+		Files.deleteIfExists(
+				Paths.get(Constants.COMPONENT_INVENTORY_FILE_LOCATION));
 	}
 
 	@Test
 	void testAddComponentWithNull() {
 		LocalComponentInventory inventory = new LocalComponentInventory();
 
-		assertThrows(IllegalArgumentException.class, () -> inventory.addItem(null, 0),
+		assertThrows(IllegalArgumentException.class,
+				() -> inventory.addItem(null, 0),
 				"Adding new item with null param should throw IAE");
 	}
 
@@ -34,7 +35,8 @@ class TestAddComponent {
 
 		inventory.addItem(component, 1);
 
-		assertThrows(IllegalArgumentException.class, () -> inventory.addItem(component, 1));
+		assertThrows(IllegalArgumentException.class,
+				() -> inventory.addItem(component, 1));
 	}
 
 	@Test
@@ -42,7 +44,8 @@ class TestAddComponent {
 		LocalComponentInventory inventory = new LocalComponentInventory();
 		Component component = new Component("component", 1.0);
 
-		assertThrows(IllegalArgumentException.class, () -> inventory.addItem(component, -1));
+		assertThrows(IllegalArgumentException.class,
+				() -> inventory.addItem(component, -1));
 	}
 
 	@Test

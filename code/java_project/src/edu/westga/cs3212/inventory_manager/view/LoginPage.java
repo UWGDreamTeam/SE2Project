@@ -43,8 +43,10 @@ public class LoginPage {
 	@FXML
 	void initialize() {
 		this.viewModel = new LoginViewModel();
-		this.employeeIDTextField.textProperty().bindBidirectional(this.viewModel.employeeIDProperty());
-		this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
+		this.employeeIDTextField.textProperty()
+				.bindBidirectional(this.viewModel.employeeIDProperty());
+		this.passwordTextField.textProperty()
+				.bindBidirectional(this.viewModel.passwordProperty());
 	}
 
 	private void showErrorPopup() {

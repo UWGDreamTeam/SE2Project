@@ -43,18 +43,24 @@ public class EditComponentPage {
 
 	/**
 	 * Initializes the UI with the data from the specified item for editing.
-	 * Binds the item's properties (name, cost, and quantity) to the corresponding input fields in the UI,
-	 * allowing for the editing of the item's attributes.
+	 * Binds the item's properties (name, cost, and quantity) to the
+	 * corresponding input fields in the UI, allowing for the editing of the
+	 * item's attributes.
 	 *
-	 * @param item The item whose data is to be loaded into the UI for editing.
+	 * @param item
+	 *            The item whose data is to be loaded into the UI for editing.
 	 * @precondition item != null
-	 * @postcondition The UI input fields are bound to the properties of the specified item, enabling their edit.
+	 * @postcondition The UI input fields are bound to the properties of the
+	 *                specified item, enabling their edit.
 	 */
 	public void initializeWithItem(Item item) {
 		this.editComponentVM.setSelectedComponent(item);
-		this.nameTextField.textProperty().bindBidirectional(this.editComponentVM.getName());
-		this.costTextField.textProperty().bindBidirectional(this.editComponentVM.getCost());
-		this.quantityTextField.textProperty().bindBidirectional(this.editComponentVM.getQuantity());
+		this.nameTextField.textProperty()
+				.bindBidirectional(this.editComponentVM.getName());
+		this.costTextField.textProperty()
+				.bindBidirectional(this.editComponentVM.getCost());
+		this.quantityTextField.textProperty()
+				.bindBidirectional(this.editComponentVM.getQuantity());
 	}
 
 	@FXML
@@ -70,21 +76,23 @@ public class EditComponentPage {
 	@FXML
 	void updateEditingComponent(ActionEvent event) {
 		try {
-            boolean result = this.editComponentVM.update();
-            if (result) {
+			boolean result = this.editComponentVM.update();
+			if (result) {
 				Alert successPopup = new Alert(AlertType.INFORMATION);
 				successPopup.setContentText(COMPONENT_UPDATED_SUCCESSFULLY);
 				successPopup.showAndWait();
 				this.closeWindow(event);
 			} else {
 				Alert errorPopup = new Alert(AlertType.ERROR);
-				errorPopup.setContentText(UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
+				errorPopup.setContentText(
+						UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
 				errorPopup.showAndWait();
 			}
-        } catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
-			errorPopup.setContentText(UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
+			errorPopup.setContentText(
+					UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
 			errorPopup.showAndWait();
-        }
+		}
 	}
 }
