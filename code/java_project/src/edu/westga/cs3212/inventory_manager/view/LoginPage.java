@@ -20,58 +20,60 @@ import javafx.stage.Stage;
 
 public class LoginPage {
 
-    @FXML
-    private Text companyTitleLabel;
+	@FXML
+	private Text companyTitleLabel;
 
-    @FXML
-    private TextField employeeIDTextField;
+	@FXML
+	private TextField employeeIDTextField;
 
-    @FXML
-    private PasswordField passwordTextField;
+	@FXML
+	private PasswordField passwordTextField;
 
-    private LoginViewModel viewModel;
+	private LoginViewModel viewModel;
 
-    @FXML
-    void attemptLogin(ActionEvent event) throws IOException {
-	if (this.viewModel.attemptLogin()) {
-	    this.showSuccessPopup(event);
-	} else {
-	    this.showErrorPopup();
+	@FXML
+	void attemptLogin(ActionEvent event) throws IOException {
+		if (this.viewModel.attemptLogin()) {
+			this.showSuccessPopup(event);
+		} else {
+			this.showErrorPopup();
+		}
 	}
-    }
 
-    @FXML
-    void initialize() {
-	this.viewModel = new LoginViewModel();
-	this.employeeIDTextField.textProperty().bindBidirectional(this.viewModel.employeeIDProperty());
-	this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
-    }
+	@FXML
+	void initialize() {
+		this.viewModel = new LoginViewModel();
+		this.employeeIDTextField.textProperty()
+				.bindBidirectional(this.viewModel.employeeIDProperty());
+		this.passwordTextField.textProperty()
+				.bindBidirectional(this.viewModel.passwordProperty());
+	}
 
-    private void showErrorPopup() {
-	Alert errorPopup = new Alert(AlertType.ERROR);
-	errorPopup.setContentText(Constants.LOGIN_ERROR_MESSAGE);
-	errorPopup.showAndWait();
-    }
+	private void showErrorPopup() {
+		Alert errorPopup = new Alert(AlertType.ERROR);
+		errorPopup.setContentText(Constants.LOGIN_ERROR_MESSAGE);
+		errorPopup.showAndWait();
+	}
 
-    private void showSuccessPopup(ActionEvent event) throws IOException {
-	Alert successPopup = new Alert(AlertType.CONFIRMATION);
-	successPopup.setContentText(Constants.LOGIN_SUCCESS_MESSAGE);
-	successPopup.showAndWait();
-	this.closeWindow(event);
-	this.showHomePage(event);
-    }
+	private void showSuccessPopup(ActionEvent event) throws IOException {
+		Alert successPopup = new Alert(AlertType.CONFIRMATION);
+		successPopup.setContentText(Constants.LOGIN_SUCCESS_MESSAGE);
+		successPopup.showAndWait();
+		this.closeWindow(event);
+		this.showHomePage(event);
+	}
 
-    private void closeWindow(ActionEvent event) {
-	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	stage.close();
-    }
+	private void closeWindow(ActionEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.close();
+	}
 
-    void showHomePage(ActionEvent event) throws IOException {
-	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
-	Scene scene = new Scene(parent);
-	stage.setScene(scene);
-	stage.setTitle("Home Page");
-	stage.show();
-    }
+	void showHomePage(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
+		Scene scene = new Scene(parent);
+		stage.setScene(scene);
+		stage.setTitle("Home Page");
+		stage.show();
+	}
 }

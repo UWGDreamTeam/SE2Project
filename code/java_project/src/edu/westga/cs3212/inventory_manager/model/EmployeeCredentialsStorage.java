@@ -22,53 +22,59 @@ import java.util.Map;
  */
 public final class EmployeeCredentialsStorage {
 
-    public static final String UTILITY_CLASS_ERROR = "Utility class";
+	public static final String UTILITY_CLASS_ERROR = "Utility class";
 
-    private EmployeeCredentialsStorage() {
-	throw new IllegalStateException(EmployeeCredentialsStorage.UTILITY_CLASS_ERROR);
-    }
-
-    /**
-     * Saves employee credentials to local storage.
-     * 
-     * @preconditions none
-     * @postconditions employeeCredentialsMap is saved to filePath
-     * 
-     * @param employeeCredentialsMap The map of employee credentials to save.
-     * @param filePath               The file path where credentials are saved.
-     */
-    public static void save(Map<String, LocalEmployeeCredentials> employeeCredentialsMap, String filePath) {
-	Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	try (FileWriter writer = new FileWriter(filePath)) {
-	    gson.toJson(employeeCredentialsMap, writer);
-	} catch (Exception exception) {
-
+	private EmployeeCredentialsStorage() {
+		throw new IllegalStateException(
+				EmployeeCredentialsStorage.UTILITY_CLASS_ERROR);
 	}
-    }
 
-    /**
-     * Loads employee credentials from local storage.
-     * 
-     * @preconditions none
-     * @postconditions none
-     * 
-     * @param filePath The file path from where credentials are to be loaded.
-     * @return A map of employee credentials.
-     */
-    public static Map<String, LocalEmployeeCredentials> load(String filePath) {
-	HashMap<String, LocalEmployeeCredentials> employeeCredentialsMap;
-	try {
-	    String json = new String(Files.readAllBytes(Paths.get(filePath)));
-	    Gson gson = new Gson();
-	    Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>() {
-	    }.getType();
-	    employeeCredentialsMap = gson.fromJson(json, type);
-	} catch (Exception e) {
-	    employeeCredentialsMap = new HashMap<>();
+	/**
+	 * Saves employee credentials to local storage.
+	 * 
+	 * @preconditions none
+	 * @postconditions employeeCredentialsMap is saved to filePath
+	 * 
+	 * @param employeeCredentialsMap
+	 *            The map of employee credentials to save.
+	 * @param filePath
+	 *            The file path where credentials are saved.
+	 */
+	public static void save(
+			Map<String, LocalEmployeeCredentials> employeeCredentialsMap,
+			String filePath) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		try (FileWriter writer = new FileWriter(filePath)) {
+			gson.toJson(employeeCredentialsMap, writer);
+		} catch (Exception exception) {
+
+		}
 	}
-	LocalEmployeeCredentials admin = new LocalEmployeeCredentials("admin", "admin1", "admin2", "password",
-		EmployeeType.MANAGER);
-	employeeCredentialsMap.put(admin.getEmployeeID(), admin);
-	return employeeCredentialsMap;
-    }
+
+	/**
+	 * Loads employee credentials from local storage.
+	 * 
+	 * @preconditions none
+	 * @postconditions none
+	 * 
+	 * @param filePath
+	 *            The file path from where credentials are to be loaded.
+	 * @return A map of employee credentials.
+	 */
+	public static Map<String, LocalEmployeeCredentials> load(String filePath) {
+		HashMap<String, LocalEmployeeCredentials> employeeCredentialsMap;
+		try {
+			String json = new String(Files.readAllBytes(Paths.get(filePath)));
+			Gson gson = new Gson();
+			Type type = new TypeToken<HashMap<String, LocalEmployeeCredentials>>() {
+			}.getType();
+			employeeCredentialsMap = gson.fromJson(json, type);
+		} catch (Exception e) {
+			employeeCredentialsMap = new HashMap<>();
+		}
+		LocalEmployeeCredentials admin = new LocalEmployeeCredentials("admin",
+				"admin1", "admin2", "password", EmployeeType.MANAGER);
+		employeeCredentialsMap.put(admin.getEmployeeID(), admin);
+		return employeeCredentialsMap;
+	}
 }

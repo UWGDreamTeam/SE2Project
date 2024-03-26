@@ -13,43 +13,47 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInvent
 
 class TestAddComponent {
 
-    @BeforeEach
-    void setUp() throws IOException {
-	Files.deleteIfExists(Paths.get(Constants.COMPONENT_INVENTORY_FILE_LOCATION));
-    }
+	@BeforeEach
+	void setUp() throws IOException {
+		Files.deleteIfExists(
+				Paths.get(Constants.COMPONENT_INVENTORY_FILE_LOCATION));
+	}
 
-    @Test
-    void testAddComponentWithNull() {
-	LocalComponentInventory inventory = new LocalComponentInventory();
+	@Test
+	void testAddComponentWithNull() {
+		LocalComponentInventory inventory = new LocalComponentInventory();
 
-	assertThrows(IllegalArgumentException.class, () -> inventory.addItem(null, 0),
-		"Adding new item with null param should throw IAE");
-    }
+		assertThrows(IllegalArgumentException.class,
+				() -> inventory.addItem(null, 0),
+				"Adding new item with null param should throw IAE");
+	}
 
-    @Test
-    void testAddComponentWithDuplicated() {
-	LocalComponentInventory inventory = new LocalComponentInventory();
-	Component component = new Component("component", 1.0);
+	@Test
+	void testAddComponentWithDuplicated() {
+		LocalComponentInventory inventory = new LocalComponentInventory();
+		Component component = new Component("component", 1.0);
 
-	inventory.addItem(component, 1);
+		inventory.addItem(component, 1);
 
-	assertThrows(IllegalArgumentException.class, () -> inventory.addItem(component, 1));
-    }
+		assertThrows(IllegalArgumentException.class,
+				() -> inventory.addItem(component, 1));
+	}
 
-    @Test
-    void testAddComponentLessThanMinimumQuantityNegative() {
-	LocalComponentInventory inventory = new LocalComponentInventory();
-	Component component = new Component("component", 1.0);
+	@Test
+	void testAddComponentLessThanMinimumQuantityNegative() {
+		LocalComponentInventory inventory = new LocalComponentInventory();
+		Component component = new Component("component", 1.0);
 
-	assertThrows(IllegalArgumentException.class, () -> inventory.addItem(component, -1));
-    }
+		assertThrows(IllegalArgumentException.class,
+				() -> inventory.addItem(component, -1));
+	}
 
-    @Test
-    void testAddComponentValid() {
-	LocalComponentInventory inventory = new LocalComponentInventory();
-	inventory.clear();
-	Component component = new Component("component", 1.0);
+	@Test
+	void testAddComponentValid() {
+		LocalComponentInventory inventory = new LocalComponentInventory();
+		inventory.clear();
+		Component component = new Component("component", 1.0);
 
-	assertTrue(inventory.addItem(component, 1));
-    }
+		assertTrue(inventory.addItem(component, 1));
+	}
 }
