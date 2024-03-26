@@ -1,7 +1,7 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
-
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +18,6 @@ public class AddComponentViewModel {
 	private StringProperty name;
 	private StringProperty cost;
 	private StringProperty quantity;
-	private LocalComponentInventory componentInventory;
 
 	/**
 	 * Instantiates a new adds the component view model.
@@ -27,8 +26,6 @@ public class AddComponentViewModel {
 		this.name = new SimpleStringProperty();
 		this.cost = new SimpleStringProperty();
 		this.quantity = new SimpleStringProperty();
-
-		this.componentInventory = new LocalComponentInventory();
 	}
 
 	/**
@@ -41,12 +38,15 @@ public class AddComponentViewModel {
 	 * @return true, if successfully added to the system, false otherwise
 	 */
 	public boolean add() {
-		String itemName = this.name.getValue();
-		Double itemCost = Double.parseDouble(this.cost.get());
-		int quantityOfItem = Integer.parseInt(this.quantity.get());
-
-		Item newComponent = new Component(itemName, itemCost);
-		return this.componentInventory.addItem(newComponent, quantityOfItem);
+		String componentName = this.name.getValue();
+		Double productionCost = Double.parseDouble(this.cost.get());
+		int quantity = Integer.parseInt(this.quantity.get());
+		try {
+			ComponentInventory.addComponent(componentName, productionCost, quantity);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
