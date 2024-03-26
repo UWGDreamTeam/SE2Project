@@ -163,10 +163,12 @@ public class ProductInventory {
 	private static Map<Component, Integer> extractRecipeFromJson(Map<String, Object> productData) {
 		List<Map<String, Object>> recipeData = (List<Map<String, Object>>) productData.get("Recipe");
 		Map<Component, Integer> recipe = new HashMap<>();
+		
 		for (Map<String, Object> componentData : recipeData) {
 			Component component = ComponentInventory.getComponent((String) componentData.get("ComponentID"));
 			recipe.put(component, ((Number) componentData.get("Quantity")).intValue());
 		}
+		
 		return recipe;
 	}
 

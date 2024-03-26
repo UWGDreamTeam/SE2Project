@@ -90,41 +90,6 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		return UUID.randomUUID().toString().replace("-", "").substring(0, 8);
 	}
 
-	private EmployeeType checkForValidEmployeeType(String employeeType) {
-		if (employeeType == null || employeeType.isBlank()) {
-			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
-		}
-		try {
-			return EmployeeType.valueOf(employeeType.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException(Constants.EMPLOYEE_MUST_BE_VALID_TYPE);
-		}
-	}
-
-	private void checkForValidPassword(String password) {
-		if (password == null || password.isBlank()) {
-			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);
-		}
-	}
-
-	private void checkForValidLastName(String lastName) {
-		if (lastName == null || lastName.isBlank()) {
-			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL_OR_EMPTY);
-		}
-	}
-
-	private void checkForValidEmployeeID(String employeeID) {
-		if (employeeID == null || employeeID.isBlank()) {
-			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL_OR_EMPTY);
-		}
-	}
-
-	private void checkForValidFirstName(String firstName) {
-		if (firstName == null || firstName.isBlank()) {
-			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL_OR_EMPTY);
-		}
-	}
-
 	/**
 	 * Retrieves all employees from local storage.
 	 * 
@@ -224,5 +189,40 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 			return LocalEmployeeCredentialsManager.employeeCredentialsMap.get(employeeID).getPassword();
 		}
 		return null;
+	}
+	
+	private EmployeeType checkForValidEmployeeType(String employeeType) {
+		if (employeeType == null || employeeType.isBlank()) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
+		}
+		try {
+			return EmployeeType.valueOf(employeeType.toUpperCase());
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_MUST_BE_VALID_TYPE);
+		}
+	}
+
+	private void checkForValidPassword(String password) {
+		if (password == null || password.isBlank()) {
+			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
+	private void checkForValidLastName(String lastName) {
+		if (lastName == null || lastName.isBlank()) {
+			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
+	private void checkForValidEmployeeID(String employeeID) {
+		if (employeeID == null || employeeID.isBlank()) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
+	private void checkForValidFirstName(String firstName) {
+		if (firstName == null || firstName.isBlank()) {
+			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL_OR_EMPTY);
+		}
 	}
 }

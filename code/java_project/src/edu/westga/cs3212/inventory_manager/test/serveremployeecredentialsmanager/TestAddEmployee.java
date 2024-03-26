@@ -39,7 +39,13 @@ class TestAddEmployee {
 	
 	@Test
 	void testAddDuplicatedEmployee() {
+		EmployeeCredentialsManager.clearCredentials();
+		
 		EmployeeCredentialsManager.addEmployee(this.employee);
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmployeeCredentialsManager.addEmployee(this.employee);
+		});
 	}
 
 }

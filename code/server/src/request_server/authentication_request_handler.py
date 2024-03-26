@@ -37,19 +37,18 @@ def registerUser(data):
         last_name = data.get("LastName")
         password = data.get("Password")
         role = data.get("Role")
-        
         employee = EmployeeCredentials(employee_id, first_name, last_name, password, role)
         
         employees[employee_id] = employee
         log(f"User {employee_id} Registered successfully")
         return {"status": "success", "data": {"EmployeeID": employee_id}}
     
-def getEmployee(employee_id):
+def getEmployee(data):
     """
     Retrieves a employee's credentials from the global employees dictionary.
 
     Parameters:
-        employee_id (str): The ID of the employee whose credentials are to be retrieved.
+        data (dict): Must contain "EmployeeID" of the employee whose credentials are to be retrieved.
 
     Preconditions:
         - 'employee_id' must correspond to an existing employee in the global 'employees' dictionary.
@@ -60,18 +59,20 @@ def getEmployee(employee_id):
     Returns:
         EmployeeCredentials: The credentials of the employee if they exist, None otherwise.
     """
+    employee_id = data.get("EmployeeID")
     
     if employee_id not in employees.keys():
         log(f"User {employee_id} not found")
-        return {"status": "error", "data": "User does not exists"}
+        return {"status": "error", "message": "User does not exists"}
     
-    employee = EmployeeCredentials(employees.get(employee_id))
+    employee = employees.get(employee_id)
     
     firstName = employee.getFirstName()
     lastName = employee.getLastName()
     password = employee.getPassword()
     role = employee.getRole()
     
+    log(f"User {employee_id} found successfully!")
     return {"status": "success", "data": {"EmployeeID": employee_id, "FirstName" : firstName, "LastName": lastName, "Password" : password, "Role" : role}}
 
 def attemptLogin(data):
@@ -79,7 +80,7 @@ def attemptLogin(data):
     Attempts to log in an employee by verifying their password against the stored credentials.
 
     Parameters:
-        data (dict): Must contain 'Id' as the employee ID and 'password' for verification.
+        data (dict): Must contain 'EmployeeID' as the employee ID and 'password' for verification.
 
     Preconditions:
         - 'data' must not be None and should be a dictionary.
@@ -91,27 +92,28 @@ def attemptLogin(data):
     Returns:
         bool: True if the password is correct, False otherwise.
     """
-    employee_id = data.get("Id")
-    password = data.get("password")
+    employee_id = data.get("EmployeeID")
+    password = data.get("Password")
     
     if len(employees.keys()) == 0:
         return False
     
     elif employee_id not in employees.keys():
-        return False
+        return {"status": "error", "message": "Invalid credentials for Login"}
     
     else:
         employee = employees.get(employee_id)
         is_valid = password == employee.getPassword()
         
         if is_valid:
-            return {"status": "success", "data": {"EmployeeID": employee_id}}
+            log("Login Successful")
+            return {"status": "success", "data": {"LoginStatus": "true"}}
         else:
-            return {"status": "error", "message": "Invalid credentials"}
+            return {"status": "error", "message": "Invalid credentials for Login"}
     
-def get_employees_list():
+def getEmployeesList(data):
     """
-    Retrieves a list of all employee credentials stored in the global employees dictionary.
+    Retrieves a list of all employee credentials stored in the global employees dictionary and formats them into a structured dictionary.
 
     Parameters:
         None.
@@ -121,11 +123,11 @@ def get_employees_list():
         - The function does not require any input parameters.
 
     Postconditions:
-        - If the 'employees' dictionary is not empty, returns a collection view of EmployeeCredentials objects.
+        - If the 'employees' dictionary is not empty, returns a structured dictionary containing employee credentials.
         - If the 'employees' dictionary is empty, an exception is raised, indicating that there are no employees to list.
 
     Returns:
-        A collection view (dict_values) of EmployeeCredentials objects if the 'employees' dictionary is not empty.
+        dict: A structured dictionary with the status and a nested dictionary of employee credentials if the 'employees' dictionary is not empty.
         
     Raises:
         Exception: If the 'employees' dictionary is empty, indicating there are no employees to list.
@@ -133,7 +135,17 @@ def get_employees_list():
     if len(employees) == 0:
         raise Exception("Employees list is empty")
     
-    return employees.values()
+    employees_dict = {"status": "success", "data": {}}
+    
+    for employee_id, employee in employees.items():
+        employees_dict["data"][employee_id] = {
+            "FirstName": employee.getFirstName(),
+            "LastName": employee.getLastName(),
+            "Password": employee.getPassword(),
+            "Role": employee.getRole()
+        }
+    
+    return {"status": "success", "data": employees_dict}
     
 def updateUser(data):
     """
