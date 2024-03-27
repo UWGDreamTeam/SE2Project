@@ -1,6 +1,9 @@
 package edu.westga.cs3212.inventory_manager.test.serveremployeecredentialsmanager;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,14 +31,10 @@ class TestGetEmployeeCredentials {
 	void testGetIdNotFound() {
 		EmployeeCredentialsManager.clearCredentials();
 		
-		LocalEmployeeCredentials employee = new LocalEmployeeCredentials(
-        		"testId",
-        		"testFirstName",
+		EmployeeCredentialsManager.addEmployee("testFirstName",
         		"testLastName",
         		"testPassword",
         		EmployeeType.MANAGER);
-		
-		EmployeeCredentialsManager.addEmployee(employee);
 		
 		assertThrows(IllegalArgumentException.class, () -> {
 			EmployeeCredentialsManager.getEmployeeCredentials("anotherId");
@@ -47,20 +46,17 @@ class TestGetEmployeeCredentials {
 		//ARRANGE
 		EmployeeCredentialsManager.clearCredentials();
 		
-		LocalEmployeeCredentials employee = new LocalEmployeeCredentials(
-        		"testId",
-        		"testFirstName",
+		EmployeeCredentialsManager.addEmployee("testFirstName",
         		"testLastName",
         		"testPassword",
         		EmployeeType.MANAGER);
-		EmployeeCredentialsManager.addEmployee(employee);
 		
 		//ACT
-		LocalEmployeeCredentials actualEmployee = EmployeeCredentialsManager.getEmployeeCredentials("testId");
+		LocalEmployeeCredentials actualEmployee = EmployeeCredentialsManager.getEmployeeCredentials("tt0001");
 		
 		//ASSERT
 		assertAll("Verify Employee Properties",
-				  () -> assertEquals("testId", actualEmployee.getEmployeeID()),
+				  () -> assertEquals("tt0001", actualEmployee.getEmployeeID()),
 				  () -> assertEquals("testFirstName", actualEmployee.getFirstName()),
 				  () -> assertEquals("testLastName", actualEmployee.getLastName()),
 				  () -> assertEquals("testPassword", actualEmployee.getPassword()),

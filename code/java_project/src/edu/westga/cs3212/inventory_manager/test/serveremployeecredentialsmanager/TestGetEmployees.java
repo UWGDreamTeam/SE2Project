@@ -1,6 +1,9 @@
 package edu.westga.cs3212.inventory_manager.test.serveremployeecredentialsmanager;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -27,13 +30,10 @@ class TestGetEmployees {
 		//ARRANGE
 		EmployeeCredentialsManager.clearCredentials();
 		
-		LocalEmployeeCredentials employee = new LocalEmployeeCredentials(
-	    		"testId",
-	    		"testFirstName",
-	    		"testLastName",
-	    		"testPassword",
-	    		EmployeeType.MANAGER);
-		EmployeeCredentialsManager.addEmployee(employee);
+		EmployeeCredentialsManager.addEmployee("testFirstName",
+        		"testLastName",
+        		"testPassword",
+        		EmployeeType.MANAGER);
 		
 		//ACT
 		List<LocalEmployeeCredentials> employeesList = EmployeeCredentialsManager.getEmployees(); 
@@ -42,7 +42,7 @@ class TestGetEmployees {
 		//ASSERT
 		assertEquals(1, employeesList.size());
 		assertAll("Verify Employee Properties",
-				  () -> assertEquals("testId", addedEmployee.getEmployeeID()),
+				  () -> assertEquals("tt0001", addedEmployee.getEmployeeID()),
 				  () -> assertEquals("testFirstName", addedEmployee.getFirstName()),
 				  () -> assertEquals("testLastName", addedEmployee.getLastName()),
 				  () -> assertEquals("testPassword", addedEmployee.getPassword()),
@@ -58,13 +58,10 @@ class TestGetEmployees {
 			
 			EmployeeType role = quantity % 2 == 0 ?  EmployeeType.MANAGER : EmployeeType.WORKER;
 			
-			LocalEmployeeCredentials employee = new LocalEmployeeCredentials(
-		    		"testId" + quantity,
-		    		"testFirstName" + quantity,
-		    		"testLastName" + quantity,
-		    		"testPassword" + quantity,
-		    		role);
-			EmployeeCredentialsManager.addEmployee(employee);
+			EmployeeCredentialsManager.addEmployee("testFirstName" + quantity,
+	        		"testLastName" + quantity,
+	        		"testPassword" + quantity,
+	        		role);
 		}
 		
 		//ACT
@@ -77,21 +74,21 @@ class TestGetEmployees {
 		assertEquals(3, employeesList.size());
 		
 		assertAll("Employee 1",
-				  () -> assertEquals("testId1", employee1.getEmployeeID()),
+				  () -> assertEquals("tt0001", employee1.getEmployeeID()),
 				  () -> assertEquals("testFirstName1", employee1.getFirstName()),
 				  () -> assertEquals("testLastName1", employee1.getLastName()),
 				  () -> assertEquals("testPassword1", employee1.getPassword()),
 				  () -> assertEquals(EmployeeType.WORKER, employee1.getEmployeeType()));
 		
 		assertAll("Employee 2",
-				  () -> assertEquals("testId2", employee2.getEmployeeID()),
+				  () -> assertEquals("tt0002", employee2.getEmployeeID()),
 				  () -> assertEquals("testFirstName2", employee2.getFirstName()),
 				  () -> assertEquals("testLastName2", employee2.getLastName()),
 				  () -> assertEquals("testPassword2", employee2.getPassword()),
 				  () -> assertEquals(EmployeeType.MANAGER, employee2.getEmployeeType()));
 		
 		assertAll("Employee 3",
-				  () -> assertEquals("testId3", employee3.getEmployeeID()),
+				  () -> assertEquals("tt0003", employee3.getEmployeeID()),
 				  () -> assertEquals("testFirstName3", employee3.getFirstName()),
 				  () -> assertEquals("testLastName3", employee3.getLastName()),
 				  () -> assertEquals("testPassword3", employee3.getPassword()),

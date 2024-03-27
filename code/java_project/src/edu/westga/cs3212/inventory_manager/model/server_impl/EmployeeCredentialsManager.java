@@ -41,6 +41,7 @@ public class EmployeeCredentialsManager {
 		checkForValidFirstName(firstName);
 		checkForValidLastName(lastName);
 		checkForValidPassword(password);
+		checkForValidRole(role);
 		
 		Map<String, Object> requestData = Map.of("data",
 				Map.of("FirstName", firstName, 
@@ -53,6 +54,12 @@ public class EmployeeCredentialsManager {
 		return (String) dataMap.get("EmployeeID");
 	}
 	
+	private static void checkForValidRole(EmployeeType role) {
+		if (role == null) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
 	private static void checkForValidPassword(String password) {
 		if (password == null || password.isBlank()) {
 			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);

@@ -1,11 +1,12 @@
 package edu.westga.cs3212.inventory_manager.test.serveremployeecredentialsmanager;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 
 class TestAttemptLogin {
@@ -13,10 +14,12 @@ class TestAttemptLogin {
 	@Test
 	void testValidLogin() {
 		
-		LocalEmployeeCredentials employee = new LocalEmployeeCredentials("admin", "testFirstName", "testLastName", "testPassword", EmployeeType.MANAGER);
-		EmployeeCredentialsManager.addEmployee(employee);
+		EmployeeCredentialsManager.addEmployee("testFirstName",
+        		"testLastName",
+        		"testPassword",
+        		EmployeeType.MANAGER);
 		
-		assertTrue(EmployeeCredentialsManager.attemptLogin(employee.getEmployeeID(), employee.getPassword()));
+		assertTrue(EmployeeCredentialsManager.attemptLogin("tt0001", "testPassword"));
 		
 	}
 	
@@ -24,11 +27,13 @@ class TestAttemptLogin {
 	void testInvalidPassword() {
 		EmployeeCredentialsManager.clearCredentials();
 		
-		LocalEmployeeCredentials employee = new LocalEmployeeCredentials("admin", "testFirstName", "testLastName", "testPassword", EmployeeType.MANAGER);
-		EmployeeCredentialsManager.addEmployee(employee);
+		EmployeeCredentialsManager.addEmployee("testFirstName",
+        		"testLastName",
+        		"testPassword",
+        		EmployeeType.MANAGER);
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			EmployeeCredentialsManager.attemptLogin(employee.getEmployeeID(), "testLastname");
+			EmployeeCredentialsManager.attemptLogin("tt0001", "testLastname");
 		});
 	}
 	
@@ -36,11 +41,13 @@ class TestAttemptLogin {
 	void testInvaliID() {
 		EmployeeCredentialsManager.clearCredentials();
 		
-		LocalEmployeeCredentials employee = new LocalEmployeeCredentials("admin", "testFirstName", "testLastName", "testPassword", EmployeeType.MANAGER);
-		EmployeeCredentialsManager.addEmployee(employee);
+		EmployeeCredentialsManager.addEmployee("testFirstName",
+        		"testLastName",
+        		"testPassword",
+        		EmployeeType.MANAGER);
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			EmployeeCredentialsManager.attemptLogin("Admin", employee.getPassword());
+			EmployeeCredentialsManager.attemptLogin("Admin", "testLastname");
 		});
 	}
 

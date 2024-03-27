@@ -30,6 +30,38 @@ class TestAddEmployee {
 			EmployeeCredentialsManager.addEmployee(null, this.lastName, this.password, this.role);
 		});
 	}
+	
+	@Test
+	void testAddBlankFirstName() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmployeeCredentialsManager.addEmployee("", this.lastName, this.password, this.role);
+		});
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmployeeCredentialsManager.addEmployee(" ", this.lastName, this.password, this.role);
+		});
+	}
+	
+	@Test
+	void testAddNullLastName() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmployeeCredentialsManager.addEmployee(this.firstName, null, this.password, this.role);
+		});
+	}
+	
+	@Test
+	void testAddNullPassword() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmployeeCredentialsManager.addEmployee(this.firstName, this.lastName, null, this.role);
+		});
+	}
+	
+	@Test
+	void testAddNullRole() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmployeeCredentialsManager.addEmployee(this.firstName, this.lastName, this.password, null);
+		});
+	}
 
 	@Test
 	void testAddEmployeeWithValidCredentials() {
