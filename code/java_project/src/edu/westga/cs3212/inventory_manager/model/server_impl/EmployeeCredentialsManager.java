@@ -21,29 +21,29 @@ public class EmployeeCredentialsManager {
 	/**
 	 * Adds a new employee to the system by sending their credentials to the server.
 	 * 
-	 * @param employee The employee credentials to add. Must not be null.
+	 * @param password     	The password for the new employee.
+	 * @param role 			The type of the employee (e.g., ADMIN, USER).
+	 * @param firstName    	The first name of the new employee.
+	 * @param lastName     	The last name of the new employee.
 	 * 
-	 * @precondition The employee object must not be null.
+	 * @precondition password != null && !password.isBlank && employeeType != null
+	 *               && !role.isBlank() && firstName != null &&
+	 *               !firstName.isBlank() && lastName != null && !lastName.isBlank()
+	 *               
 	 * @postcondition A new employee is registered in the system with the provided credentials.
 	 * 
 	 * @return The employee ID assigned by the server if the addition is successful.
 	 * 
 	 * @throws IllegalArgumentException If the employee object is null.
 	 */
-	public static String addEmployee(LocalEmployeeCredentials employee) {
-		if (employee == null) {
-			throw new IllegalArgumentException("Cannot add null employee");
-		}
+	public static String addEmployee(String firstName, String lastName, String password, EmployeeType role) {
 		
-		String employeeId = employee.getEmployeeID();
-		String firstName = employee.getFirstName();
-		String lastName = employee.getLastName();
-		String password = employee.getPassword();
-		EmployeeType role = employee.getEmployeeType();
+		checkForValidFirstName(firstName);
+		checkForValidLastName(lastName);
+		checkForValidPassword(password);
 		
 		Map<String, Object> requestData = Map.of("data",
-				Map.of("EmployeeID", employeeId, 
-						"FirstName", firstName, 
+				Map.of("FirstName", firstName, 
 						"LastName", lastName,
 						"Password", password,
 						"Role", role
@@ -53,6 +53,23 @@ public class EmployeeCredentialsManager {
 		return (String) dataMap.get("EmployeeID");
 	}
 	
+	private static void checkForValidPassword(String password) {
+		if (password == null || password.isBlank()) {
+			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
+	private static void checkForValidLastName(String lastName) {
+		if (lastName == null || lastName.isBlank()) {
+			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
+	private static void checkForValidFirstName(String firstName) {
+		if (firstName == null || firstName.isBlank()) {
+			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
 	
 	/**
 	 * Attempts to log in a user by verifying their credentials with the server.
@@ -86,11 +103,11 @@ public class EmployeeCredentialsManager {
 	 * @precondition The employeeID must not be null or empty.
 	 * @postcondition Contacts the server to fetch the employee's credentials.
 	 * 
-	 * @return An object containing the retrieved employee's credentials. If the employee does not exist, the behavior depends on the server's response (typically, an exception is thrown or null is returned).
+	 * @return A {@link LocalEmployeeCredentials} object containing the retrieved employee's credentials. 
 	 * 
 	 * @throws IllegalArgumentException If the employeeID is null or empty.
 	 */
-	public static LocalEmployeeCredentials getEmployee(String employeeID) {
+	public static LocalEmployeeCredentials getEmployeeCredentials(String employeeID) {
 		
 		checkValidEmployeeID(employeeID);
 		
@@ -102,7 +119,19 @@ public class EmployeeCredentialsManager {
 		return employee;
 	}
 	
-	public static List<LocalEmployeeCredentials> getEmployees(){
+	/**
+	 * Retrieves a list of all employees from the server. This method sends a request to the server to get a list of
+	 * employees. The response is then parsed to create a list of {@link LocalEmployeeCredentials}.
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return A list of {@link LocalEmployeeCredentials} representing all employees fetched from the server.
+	 * 
+	 * @throws ServerCommunicationException If there is an issue communicating with the server or if the server response
+	 *         cannot be parsed into a list of employees.
+	 */
+	public static List<LocalEmployeeCredentials> getEmployees() {
 		Map<String, Object> requestData = Map.of("NoArgs", "NoArgs");
 		Map<String, Object> dataMap = Server.sendRequestAndGetResponse("getEmployeesList", Map.of("data", requestData));
 		
@@ -135,13 +164,42 @@ public class EmployeeCredentialsManager {
 	    
 	    return employees;
 	}
-
+	
+	/**
+	 * Removes an employee from the system based on their unique employee ID. This method sends a request to the server
+	 * to remove a user identified by the provided {@code employeeID}. The method checks the validity of the employee ID
+	 * before sending the request. After the request, it interprets the server's response to determine whether the removal
+	 * was successful.
+	 *
+	 * @precondition 	employeeID != null && 
+	 * 					employeeID.isBlank() == false
+	 * @postcondition 	If the employee exists and is successfully removed, the server will return a status indicating success.
+	 *                	If the employee does not exist, or the removal is unsuccessful, the server's response will indicate failure.
+	 *
+	 * @param 	employeeID The unique identifier of the employee to be removed. Must not be null or empty.
+	 * 
+	 * @return 	{@code true} if the server successfully removed the employee, {@code false} otherwise. The method interprets
+	 *         	the server's response, specifically looking for a "true" string value (case-insensitive) in the "RemoveStatus"
+	 *         	field of the response data map.
+	 * @throws 	IllegalArgumentException If the provided {@code employeeID} is null or does not meet the validity criteria
+	 *         	established by {@link #checkValidEmployeeID(String)}. This includes checks for null or empty employee ID values.
+	 */
+	public static boolean removeEmployee(String employeeID) {
+		checkValidEmployeeID(employeeID);
+		
+		Map<String, Object> requestData = Map.of("data",
+				Map.of("EmployeeID", employeeID));
+		
+		Map<String, Object> dataMap = Server.sendRequestAndGetResponse("removeUser", requestData);
+		
+		return "true".equalsIgnoreCase((String) dataMap.get("RemoveStatus"));
+	}
 
 	/**
-	 * Clears all employee credentials from the system.
+	 * Sends a request to the server to clear all employee credentials from the system.
 	 * 
 	 * @precondition 	None.
-	 * @postcondition 	Sends a request to the server to clear all employee credentials. 
+	 * @postcondition 	List of employees in the server is empty. 
 	 * 					This might be used for resetting the system or during testing.
 	 */
 	public static void clearCredentials() {
@@ -152,6 +210,8 @@ public class EmployeeCredentialsManager {
 	 * Check valid employee ID.
 	 *
 	 * @param employeeID the employee ID
+	 * @throws IllegalArgumentException If the employeeID is null or blank.
+	 * 
 	 */
 	private static void checkValidEmployeeID(String employeeID) {
 		if (employeeID == null || employeeID.isBlank()) {

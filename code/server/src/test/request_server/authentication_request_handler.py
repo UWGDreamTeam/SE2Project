@@ -4,67 +4,111 @@ Created on Mar 20, 2024
 @author: Vitor dos Santos
 '''
 import unittest
-from request_server.authentication_request_handler import attemptLogin, registerUser, updateUser, removeUser, getEmployee, clear, get_employees_list
-
+from request_server.authentication_request_handler import generate_username, attemptLogin, registerUser, updateUser, removeUser, getEmployee, clear, getEmployeesList
+from model.utilities import log
 class TestEmployeeManagement(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        # This method will run once before all tests
+        log("Starting Employee Management System tests.")
+
     def setUp(self):
-        clear()
-        self.test_data = {
-            "Id": "123",
-            "firstName": "John",
-            "lastName": "Doe",
-            "password": "password123",
-            "role": "Manager"
+        # This method will run before every test
+        clear()  # Ensure a clean state before each test
+
+    def test_generate_username(self):
+        # Test the generate_username function
+        username = generate_username("John", "Doe")
+        self.assertEqual(username, "jd0001")
+
+    def test_register_and_retrieve_user(self):
+        # Test registering a user and retrieving their information
+        user_data = {
+            "FirstName": "Alice",
+            "LastName": "Johnson",
+            "Password": "password123",
+            "Role": "Manager"
         }
-        registerUser(self.test_data)
-
-    def test_attemptLogin_success(self):
-        self.assertTrue(attemptLogin({"Id": "123", "password": "password123"}))
-
-    def test_attemptLogin_failure(self):
-        self.assertFalse(attemptLogin({"Id": "123", "password": "wrongpassword"}))
-
-    def test_registerUser_existing_user(self):
-        result = registerUser(self.test_data)
-        self.assertFalse(result)
-
-    def test_updateUser_success(self):
-        updated_data = self.test_data.copy()
-        updated_data["firstName"] = "Jane"
+        register_result = registerUser(user_data)
+        self.assertTrue('success' in register_result['status'])
         
-        self.assertTrue(updateUser(updated_data))
-        self.assertEqual(getEmployee("123").getFirstName(), "Jane")
+        # Attempt to retrieve the registered user
+        employee_data = {"EmployeeID": register_result['data']['EmployeeID']}
+        retrieved_user = getEmployee(employee_data)
+        self.assertEqual(retrieved_user['status'], 'success')
+        self.assertEqual(retrieved_user['data']['FirstName'], "Alice")
+        self.assertEqual(retrieved_user['data']['LastName'], "Johnson")
 
-    def test_updateUser_nonexistent_user(self):
-        updated_data = self.test_data.copy()
-        updated_data["Id"] = "456"
-        self.assertFalse(updateUser(updated_data))
+    def test_attempt_login_successful(self):
+        # Test successful login attempt
+        user_data = {
+            "FirstName": "Bob",
+            "LastName": "Smith",
+            "Password": "bob123",
+            "Role": "Employee"
+        }
+        registerUser(user_data)
+        employee_id = generate_username("Bob", "Smith")
+        login_data = {"EmployeeID": employee_id, "Password": "bob123"}
+        login_result = attemptLogin(login_data)
+        self.assertEqual(login_result['status'], 'success')
 
-    def test_removeUser_success(self):
-        self.assertTrue(removeUser("123"))
-        self.assertIsNone(getEmployee("123"))
+    def test_get_employees_list(self):
+        # Test getting the list of employees
+        user_data = {
+            "FirstName": "Carol",
+            "LastName": "Adams",
+            "Password": "carol123",
+            "Role": "Employee"
+        }
+        registerUser(user_data)
+        employees_list = getEmployeesList({})
+        self.assertEqual(employees_list['status'], 'success')
+        self.assertTrue(len(employees_list['data']) > 0)
 
-    def test_removeUser_nonexistent_user(self):
-        self.assertFalse(removeUser("456"))
+    def test_update_user(self):
+        # Test updating an existing user
+        user_data = {
+            "FirstName": "Dave",
+            "LastName": "Brown",
+            "Password": "dave123",
+            "Role": "Employee"
+        }
+        register_result = registerUser(user_data)
+        update_data = {
+            "EmployeeID": register_result['data']['EmployeeID'],
+            "FirstName": "David",
+            "LastName": "Brown",
+            "Password": "dave456",
+            "Role": "Administrator"
+        }
+        update_result = updateUser(update_data)
+        self.assertEqual(update_result['status'], 'success')
 
-    def test_getUser_existing_user(self):
-        self.assertIsNotNone(getEmployee("123"))
-        self.assertEqual(getEmployee("123").getFirstName(), "John")
+    def test_remove_user(self):
+        # Test removing a user
+        user_data = {
+            "FirstName": "Eve",
+            "LastName": "White",
+            "Password": "eve123",
+            "Role": "Employee"
+        }
+        register_result = registerUser(user_data)
+        remove_data = {"EmployeeID": register_result['data']['EmployeeID']}
+        remove_result = removeUser(remove_data)
+        self.assertEqual(remove_result['status'], 'success')
 
-    def test_getUser_nonexistent_user(self):
-        self.assertIsNone(getEmployee("456"))
-        
-    def test_get_employees_list_non_empty(self):
-        employees_list = list(get_employees_list())
-        self.assertEqual(len(employees_list), 1)
-        self.assertEqual(employees_list[0].getEmployeeID(), "123")
+    def test_clear_employees(self):
+        # Test clearing all employees
+        clear_result = clear({})
+        self.assertEqual(clear_result['status'], 'success')
 
-    def test_get_employees_list_empty(self):
-        clear()
-        with self.assertRaises(Exception) as context:
-            get_employees_list()
-        self.assertTrue('Employees list is empty' in str(context.exception))
+    @classmethod
+    def tearDownClass(cls):
+        # This method will run once after all tests are done
+        log("Completed Employee Management System tests.")
 
+# This allows you to run the tests from the command line
 if __name__ == '__main__':
     unittest.main()

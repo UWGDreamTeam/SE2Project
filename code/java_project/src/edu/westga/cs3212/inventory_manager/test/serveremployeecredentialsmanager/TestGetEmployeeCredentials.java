@@ -8,19 +8,19 @@ import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 
-class TestGetEmployee {
+class TestGetEmployeeCredentials {
 
 	@Test
 	void testGetNullEmployeeID() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			EmployeeCredentialsManager.getEmployee(null);
+			EmployeeCredentialsManager.getEmployeeCredentials(null);
 		});
 	}
 	
 	@Test
 	void testGetEmptyEmployeeID() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			EmployeeCredentialsManager.getEmployee("");
+			EmployeeCredentialsManager.getEmployeeCredentials("");
 		});
 	}
 	
@@ -38,7 +38,7 @@ class TestGetEmployee {
 		EmployeeCredentialsManager.addEmployee(employee);
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			EmployeeCredentialsManager.getEmployee("anotherId");
+			EmployeeCredentialsManager.getEmployeeCredentials("anotherId");
 		});
 	}
 	
@@ -56,7 +56,7 @@ class TestGetEmployee {
 		EmployeeCredentialsManager.addEmployee(employee);
 		
 		//ACT
-		LocalEmployeeCredentials actualEmployee = EmployeeCredentialsManager.getEmployee("testId");
+		LocalEmployeeCredentials actualEmployee = EmployeeCredentialsManager.getEmployeeCredentials("testId");
 		
 		//ASSERT
 		assertAll("Verify Employee Properties",

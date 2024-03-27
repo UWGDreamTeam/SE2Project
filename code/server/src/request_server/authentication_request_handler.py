@@ -8,12 +8,49 @@ from model.utilities import log
 
 employees = {}
 
+def generate_username(first_name, last_name):
+    """
+    Generates a unique username based on the first character of the first and last names provided,
+    followed by a four-digit number. The function ensures uniqueness within an existing collection
+    of employees by incrementing the number until an unused username is found.
+    
+    Pre-conditions:
+    first_name != None && last_name != None
+    
+    Post-conditions:
+    - Returns a unique username string consisting of the lowercase first letter of the first name,
+      the lowercase first letter of the last name, followed by a four-digit number.
+      I.e.: John Doe --> jd0001
+    - The generated username is unique among the keys of the 'employees' dictionary.
+    
+    Args:
+    - first_name (str): The first name of the person.
+    - last_name (str): The last name of the person.
+    
+    Returns:
+    - str: A unique username.
+    """
+    base_username = f"{first_name[0].lower()}{last_name[0].lower()}"
+    
+    count = 1;
+    
+    for user in employees.keys():
+        first = user[0]
+        last = user[1]
+        
+        if base_username == first + last:
+            count+=1
+    
+    username = f"{base_username}{count:04}"
+    
+    return username
+    
 def registerUser(data):
     """
     Registers a new user with the provided credentials and adds them to the global employees dictionary.
 
     Parameters:
-        data (dict): Must contain 'Id', 'firstName', 'lastName', 'password', and 'role'.
+        data (dict): Must contain the following keys 'FirstName', 'LastName', 'Password', and 'Role'.
 
     Preconditions:
         - 'data' must not be None and should be a dictionary.
@@ -26,22 +63,19 @@ def registerUser(data):
         bool: True if the registration is successful, False if the user already exists.
     """
     
-    employee_id = data.get("EmployeeID")
+    first_name = data.get("FirstName")
+    last_name = data.get("LastName")
+    password = data.get("Password")
+    role = data.get("Role")
     
-    if employee_id in employees.keys():
-        log(f"User {employee_id} already exists")
-        return {"status": "error", "message": "User already exists"}
+    employee_id = generate_username(first_name, last_name)
     
-    else:
-        first_name = data.get("FirstName")
-        last_name = data.get("LastName")
-        password = data.get("Password")
-        role = data.get("Role")
-        employee = EmployeeCredentials(employee_id, first_name, last_name, password, role)
-        
-        employees[employee_id] = employee
-        log(f"User {employee_id} Registered successfully")
-        return {"status": "success", "data": {"EmployeeID": employee_id}}
+    employee = EmployeeCredentials(employee_id, first_name, last_name, password, role)
+    
+    employees[employee_id] = employee
+    
+    log(f"User {employee_id} Registered successfully")
+    return {"status": "success", "data": {"EmployeeID": employee_id}}
     
 def getEmployee(data):
     """
@@ -165,25 +199,25 @@ def updateUser(data):
         bool: True if the update is successful, False if the user does not exist.
     """
     
-    employee_id = data.get("Id")
+    employee_id = data.get("EmployeeID")
     
     if employee_id not in employees.keys():
         log(f"User {employee_id} not found for updating")
-        return False
+        return {"status": "error", "message": "Cannot edit, User does not exist"}
     
     else:
-        first_name = data.get("firstName")
-        last_name = data.get("lastName")
-        password = data.get("password")
-        role = data.get("role")
+        first_name = data.get("FirstName")
+        last_name = data.get("LastName")
+        password = data.get("Password")
+        role = data.get("Role")
         
         employee = EmployeeCredentials(employee_id, first_name, last_name, password, role)
         
         employees[employee_id] = employee
         log(f"User {employee_id} updated successfully")
-        return True
+        return {"status": "success", "data": {"RemoveStatus": "true"}}
         
-def removeUser(employee_id):
+def removeUser(data):
     """
     Removes an employee's credentials from the global employees dictionary.
 
@@ -200,15 +234,17 @@ def removeUser(employee_id):
         bool: True if the removal is successful, False if the user does not exist.
     """
     
+    employee_id = data.get("EmployeeID")
+    
     if employee_id not in employees.keys():
         log(f"User {employee_id} not found for removing")
-        return False
+        return {"status": "error", "message": "Cannot remove, user does not exist"}
         
     else:
         employees.pop(employee_id)
         log(f"User {employee_id} removed successfully")
         
-        return True
+        return {"status": "success", "data": {"RemoveStatus": "true"}}
     
 def clear(data):
     """
