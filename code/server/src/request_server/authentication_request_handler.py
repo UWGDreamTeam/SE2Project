@@ -11,24 +11,22 @@ employees = {}
 def generate_username(first_name, last_name):
     """
     Generates a unique username based on the first character of the first and last names provided,
-    followed by a four-digit number. The function ensures uniqueness within an existing collection
-    of employees by incrementing the number until an unused username is found.
+    followed by a sequential four-digit number starting at '0001'. If a username already exists,
+    it increments the number by one to ensure uniqueness.
+    
+    Parameters:
+        first_name (str): The first name of the person.
+        last_name (str): The last name of the person.
     
     Pre-conditions:
-    first_name != None && last_name != None
+    - first_name != None
+    - last_name != None
     
     Post-conditions:
-    - Returns a unique username string consisting of the lowercase first letter of the first name,
-      the lowercase first letter of the last name, followed by a four-digit number.
-      I.e.: John Doe --> jd0001
-    - The generated username is unique among the keys of the 'employees' dictionary.
-    
-    Args:
-    - first_name (str): The first name of the person.
-    - last_name (str): The last name of the person.
+    - A username is generated that is unique in the 'employees' dictionary.
     
     Returns:
-    - str: A unique username.
+    - str: A unique username in the format <first initial><last initial><four-digit number>.
     """
     base_username = f"{first_name[0].lower()}{last_name[0].lower()}"
     
@@ -50,18 +48,22 @@ def registerUser(data):
     Registers a new user with the provided credentials and adds them to the global employees dictionary.
 
     Parameters:
-        data (dict): Must contain the following keys 'FirstName', 'LastName', 'Password', and 'Role'.
+        data (dict): Must contain 'FirstName', 'LastName', 'Password', and 'Role'.
 
     Preconditions:
-        - 'data' must not be None and should be a dictionary.
-        - 'Id' must not already be present in the global 'employees' dictionary.
+        - 'data' must not be None and should be a dictionary with all required keys present.
+        - A unique 'EmployeeID' is generated and should not already exist in the 'employees' dictionary.
 
     Postconditions:
-        - If successful, a new EmployeeCredentials object is created and added to 'employees'.
-
+        - A new EmployeeCredentials object is created with a unique 'EmployeeID' and added to 'employees'.
+    
     Returns:
-        bool: True if the registration is successful, False if the user already exists.
+        dict: A dictionary with the status 'success' and the new 'EmployeeID', or 'error' if the user cannot be registered.
     """
+    
+    if data == None:
+        log(f"Cannot register user, Data map is None")
+        return {"status": "error", "message": "Cannot register user, Data map is None"}
     
     first_name = data.get("FirstName")
     last_name = data.get("LastName")
@@ -79,19 +81,19 @@ def registerUser(data):
     
 def getEmployee(data):
     """
-    Retrieves a employee's credentials from the global employees dictionary.
+    Retrieves an employee's credentials from the global employees dictionary based on their 'EmployeeID'.
 
     Parameters:
-        data (dict): Must contain "EmployeeID" of the employee whose credentials are to be retrieved.
+        data (dict): Must contain 'EmployeeID' of the employee whose credentials are to be retrieved.
 
     Preconditions:
-        - 'employee_id' must correspond to an existing employee in the global 'employees' dictionary.
+        - 'EmployeeID' must be a key that corresponds to an existing entry in the 'employees' dictionary.
 
     Postconditions:
         - None.
 
     Returns:
-        EmployeeCredentials: The credentials of the employee if they exist, None otherwise.
+        dict: A response object with a status 'success' and the employee's data if found, or status 'error' if not found.
     """
     employee_id = data.get("EmployeeID")
     
@@ -111,20 +113,19 @@ def getEmployee(data):
 
 def attemptLogin(data):
     """
-    Attempts to log in an employee by verifying their password against the stored credentials.
+    Attempts to log in an employee by verifying their 'EmployeeID' and 'Password' against the stored credentials.
 
     Parameters:
-        data (dict): Must contain 'EmployeeID' as the employee ID and 'password' for verification.
+        data (dict): Must contain 'EmployeeID' and 'Password' for verification.
 
     Preconditions:
-        - 'data' must not be None and should be a dictionary.
-        - 'Id' must correspond to an existing employee in the global 'employees' dictionary.
+        - 'EmployeeID' must correspond to an existing employee in the 'employees' dictionary.
 
     Postconditions:
-        - None
+        - None.
 
     Returns:
-        bool: True if the password is correct, False otherwise.
+        dict: A response object with status 'success' and login status if credentials are valid, or status 'error' if invalid.
     """
     employee_id = data.get("EmployeeID")
     password = data.get("Password")
@@ -222,7 +223,7 @@ def removeUser(data):
     Removes an employee's credentials from the global employees dictionary.
 
     Parameters:
-        employee_id (str): The ID of the employee to remove.
+        data (dic): Must include EmployeeID
 
     Preconditions:
         - 'employee_id' must correspond to an existing employee in the global 'employees' dictionary.

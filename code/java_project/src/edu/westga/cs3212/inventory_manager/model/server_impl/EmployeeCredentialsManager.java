@@ -21,20 +21,21 @@ public class EmployeeCredentialsManager {
 	/**
 	 * Adds a new employee to the system by sending their credentials to the server.
 	 * 
-	 * @param password     	The password for the new employee.
-	 * @param role 			The type of the employee (e.g., ADMIN, USER).
-	 * @param firstName    	The first name of the new employee.
-	 * @param lastName     	The last name of the new employee.
+	 * @param firstName    The first name of the new employee. Must not be null or empty.
+	 * @param lastName     The last name of the new employee. Must not be null or empty.
+	 * @param password     The password for the new employee. Must not be null or empty.
+	 * @param role         The role of the new employee (e.g., EmployeeType.ADMIN, EmployeeType.USER).
 	 * 
-	 * @precondition password != null && !password.isBlank && employeeType != null
-	 *               && !role.isBlank() && firstName != null &&
-	 *               !firstName.isBlank() && lastName != null && !lastName.isBlank()
+	 * @precondition firstName != null && !firstName.isBlank() &&
+	 *               lastName != null && !lastName.isBlank() &&
+	 *               password != null && !password.isBlank() && 
+	 *               role != null
 	 *               
 	 * @postcondition A new employee is registered in the system with the provided credentials.
 	 * 
 	 * @return The employee ID assigned by the server if the addition is successful.
 	 * 
-	 * @throws IllegalArgumentException If the employee object is null.
+	 * @throws IllegalArgumentException If any of the input parameters are null or do not meet validity criteria.
 	 */
 	public static String addEmployee(String firstName, String lastName, String password, EmployeeType role) {
 		
@@ -52,30 +53,6 @@ public class EmployeeCredentialsManager {
 
 		Map<String, Object> dataMap = Server.sendRequestAndGetResponse("registerUser", requestData);
 		return (String) dataMap.get("EmployeeID");
-	}
-	
-	private static void checkForValidRole(EmployeeType role) {
-		if (role == null) {
-			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
-		}
-	}
-
-	private static void checkForValidPassword(String password) {
-		if (password == null || password.isBlank()) {
-			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);
-		}
-	}
-
-	private static void checkForValidLastName(String lastName) {
-		if (lastName == null || lastName.isBlank()) {
-			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL_OR_EMPTY);
-		}
-	}
-
-	private static void checkForValidFirstName(String firstName) {
-		if (firstName == null || firstName.isBlank()) {
-			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL_OR_EMPTY);
-		}
 	}
 	
 	/**
@@ -213,26 +190,6 @@ public class EmployeeCredentialsManager {
 		Server.sendRequestAndGetResponse("clearCredentials", Map.of("data", "none"));
 	}
 	
-	/**
-	 * Check valid employee ID.
-	 *
-	 * @param employeeID the employee ID
-	 * @throws IllegalArgumentException If the employeeID is null or blank.
-	 * 
-	 */
-	private static void checkValidEmployeeID(String employeeID) {
-		if (employeeID == null || employeeID.isBlank()) {
-			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL_OR_EMPTY);
-		}
-	}
-	
-	/**
-	 * Parses the employee.
-	 *
-	 * @param employeeData the employee data
-	 * @param employeeID the employee ID
-	 * @return (LocalEmployeeCredentials) the local employee credentials
-	 */
 	private static LocalEmployeeCredentials parseEmployee(Map<String, Object> employeeData, String employeeID) {
 		String firstName = (String) employeeData.get("FirstName");
 		String lastName = (String) employeeData.get("LastName");
@@ -250,17 +207,41 @@ public class EmployeeCredentialsManager {
 		return employee;
 	}
 	
-	/**
-	 * Convert employee type.
-	 *
-	 * @param role the employee role
-	 * @return the employee type
-	 */
 	private static EmployeeType convertEmployeeType(String role) {
 		if ("manager".equalsIgnoreCase(role)) {
 			return EmployeeType.MANAGER;
 		} else {
 			return EmployeeType.WORKER;
+		}
+	}
+	
+	private static void checkValidEmployeeID(String employeeID) {
+		if (employeeID == null || employeeID.isBlank()) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+	
+	private static void checkForValidRole(EmployeeType role) {
+		if (role == null) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
+	private static void checkForValidPassword(String password) {
+		if (password == null || password.isBlank()) {
+			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
+	private static void checkForValidLastName(String lastName) {
+		if (lastName == null || lastName.isBlank()) {
+			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+
+	private static void checkForValidFirstName(String firstName) {
+		if (firstName == null || firstName.isBlank()) {
+			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL_OR_EMPTY);
 		}
 	}
 }

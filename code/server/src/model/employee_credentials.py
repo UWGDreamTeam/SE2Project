@@ -14,9 +14,6 @@ class EmployeeCredentials:
         """
         Initializes a new EmployeeCredentials instance with the provided employee information.
 
-        Summary:
-        Constructs an EmployeeCredentials object ensuring all the necessary information is not None.
-
         Params:
         employee_id (str): The unique ID of the employee.
         first_name (str): The first name of the employee.
@@ -25,17 +22,25 @@ class EmployeeCredentials:
         employee_role (str): The role of the employee.
 
         Preconditions:
-        - All parameters must be non-None.
+        - employee_id  != None
+        - first_name != None
+        - last_name != None
+        - password != None
+        - employee_role != None
 
         Postconditions:
-        - The instance variables are set to the values of the parameters.
+        - self.getEmployeeID() == employee_id
+        - self.getFirstName() == first_name
+        - self.getLastName() == last_name
+        - self.getPassword() == password
+        - self.getRole() == employee_role
 
         Raises:
         Exception: If any of the parameters are None.
         """
         
         if (employee_id == None):
-            raise Exception("ID is None")
+            raise Exception("Employee ID is None")
         
         if (first_name == None):
             raise Exception("First Name is None")
@@ -59,9 +64,6 @@ class EmployeeCredentials:
         """
         Returns the employee ID.
 
-        Summary:
-        Retrieves the unique ID of the employee.
-
         Preconditions:
         - The employee ID has been set during initialization.
 
@@ -76,9 +78,6 @@ class EmployeeCredentials:
     def getFirstName(self):
         """
         Returns the first name of the employee.
-
-        Summary:
-        Retrieves the first name of the employee.
 
         Preconditions:
         - The first name has been set during initialization.
@@ -95,9 +94,6 @@ class EmployeeCredentials:
         """
         Returns the last name of the employee.
 
-        Summary:
-        Retrieves the last name of the employee.
-
         Preconditions:
         - The last name has been set during initialization.
 
@@ -113,9 +109,6 @@ class EmployeeCredentials:
         """
         Returns the password of the employee.
 
-        Summary:
-        Retrieves the password of the employee.
-
         Preconditions:
         - The password has been set during initialization.
 
@@ -130,9 +123,6 @@ class EmployeeCredentials:
     def getRole(self):
         """
         Returns the role of the employee.
-
-        Summary:
-        Retrieves the role of the employee.
 
         Preconditions:
         - The role has been set during initialization.
