@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class EditComponentPage {
 
-	private static final String UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN = "Unable to update component, please check component information and try again";
+	private static final String UNABLE_TO_UPDATE_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN = "Invalid Component, Make sure you enter valid information.";
 
 	private static final String COMPONENT_UPDATED_SUCCESSFULLY = "Component Updated Successfully";
 

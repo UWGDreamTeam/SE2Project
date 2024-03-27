@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 
 public class AddProduct {
 
-	private static final String UNABLE_TO_ADD_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN = "Unable to add product, please check product information and try again";
+	private static final String UNABLE_TO_ADD_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN = "Invalid Product, Make sure you enter valid information.";
 
 	@FXML
 	private TableColumn<Component, String> componentIDColumn;
