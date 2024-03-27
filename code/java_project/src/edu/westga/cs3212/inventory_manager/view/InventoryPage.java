@@ -426,15 +426,34 @@ public class InventoryPage {
 
 	@FXML
 	void produceProductButtonOnClick(ActionEvent event) {
-		try {
-			this.inventoryVM.produceProduct(this.productsTableView
-					.getSelectionModel().getSelectedItem(), 1);
-		} catch (IllegalArgumentException e) {
-			Alert errorPopup = new Alert(AlertType.ERROR);
-			errorPopup.setContentText(e.getMessage());
-			errorPopup.showAndWait();
-		}
-		this.refreshProductsTableView();
+	    TextInputDialog dialog = new TextInputDialog("1");
+	    dialog.setTitle("Produce Product");
+	    dialog.setHeaderText("Enter Quantity to Produce");
+	    dialog.setContentText("Quantity:");
+
+	    Optional<String> result = dialog.showAndWait();
+	    result.ifPresent(quantityString -> {
+	        try {
+	            int quantity = Integer.parseInt(quantityString);
+	            if (quantity > 0) {
+	                Product selectedProduct = this.productsTableView.getSelectionModel().getSelectedItem();
+	                if (selectedProduct != null) {
+	                    try {
+	                        this.inventoryVM.produceProduct(selectedProduct, quantity);
+	                        this.refreshProductsTableView();
+	                    } catch (IllegalArgumentException e) {
+	                        this.showAlert("Production Error", e.getMessage(), AlertType.ERROR);
+	                    }
+	                } else {
+	                    this.showAlert("Produce Error", "No product selected.", AlertType.ERROR);
+	                }
+	            } else {
+	                this.showAlert("Invalid Quantity", "Please enter a positive number.", AlertType.ERROR);
+	            }
+	        } catch (NumberFormatException e) {
+	            this.showAlert("Invalid Input", "Please enter a valid number.", AlertType.ERROR);
+	        }
+	    });
 	}
 
 	@FXML
