@@ -135,11 +135,12 @@ public class EditProductViewModel {
 	 */
 	public void updateProduct(Map<Component, Integer> recipe) {
 		String productID = this.product.getID();
-		String productName = this.product.getName();
-		double salesPirce = this.product.getProductionCost();
+		String productName = this.name.getValue();
+		double salesPirce = Double.parseDouble(this.sellingPrice.getValue());
 		int quantity = ProductInventory.getQuantity(productID);
 		ProductInventory.updateProduct(productID, productName, salesPirce,
 				recipe, quantity);
+		this.product = ProductInventory.getProduct(productID);
 	}
 
 	/**

@@ -12,11 +12,7 @@ public class TestConstructor {
 
 	@Test
 	void testConstructor() {
-		LocalComponentInventory localComponentInventory = new LocalComponentInventory();
-		LocalProductInventory localProductInventory = new LocalProductInventory();
-		InventoryViewModel testInventoryViewModel = new InventoryViewModel(localComponentInventory, localProductInventory);
-		assertNotNull(testInventoryViewModel.getComponentsInventory());
-		assertNotNull(testInventoryViewModel.getProductInventory());
+		InventoryViewModel testInventoryViewModel = new InventoryViewModel();
 		assertNotNull(testInventoryViewModel.getSelectedComponent());
 		assertNotNull(testInventoryViewModel.getSelectedProduct());
 		assertNotNull(testInventoryViewModel.getObservableComponentList());

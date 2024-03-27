@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.Component;
@@ -29,7 +30,8 @@ public class TestAdd {
 		testViewModel.getSellingPrice().set("20.00");
 		testViewModel.getQuantity().set("5");
 		Component testComponent = new Component("Test Component", 5);
-		ComponentInventory
+		String componentID = ComponentInventory.addComponent("Test Component", 5, 0);
+		testComponent.setID(componentID);
 		Map<Component, Integer> testMap = Map.of(testComponent, 5);
 		testViewModel.addProduct(testMap);
 	}

@@ -59,12 +59,7 @@ public class EditComponentViewModel {
 		Double newCost = Double.parseDouble(this.cost.getValue());
 		int newQuantity = Integer.parseInt(this.quantity.getValue());
 		String ID = this.selectedComponent.get().getID();
-		try {
-			ComponentInventory.updateComponent(ID, newName, newCost,
-					newQuantity);
-		} catch (Exception e) {
-			return false;
-		}
+		ComponentInventory.updateComponent(ID, newName, newCost, newQuantity);
 		return true;
 	}
 
