@@ -33,8 +33,8 @@ public class LoginPage {
 
 	@FXML
 	void attemptLogin(ActionEvent event) throws IOException {
-		if (!this.viewModel.attemptLogin()) {
-			this.showErrorPopup();			
+		if (this.viewModel.attemptLogin()) {
+			this.showHomePage(event);
 		} else {
 			this.showHomePage(event);
 		}
@@ -53,11 +53,6 @@ public class LoginPage {
 		Alert errorPopup = new Alert(AlertType.ERROR);
 		errorPopup.setContentText(Constants.LOGIN_ERROR_MESSAGE);
 		errorPopup.showAndWait();
-	}
-
-	private void closeWindow(ActionEvent event) {
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.close();
 	}
 
 	void showHomePage(ActionEvent event) throws IOException {
