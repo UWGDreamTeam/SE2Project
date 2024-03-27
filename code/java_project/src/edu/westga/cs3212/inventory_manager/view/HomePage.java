@@ -3,6 +3,7 @@ package edu.westga.cs3212.inventory_manager.view;
 import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.viewmodel.HomePageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -73,7 +74,7 @@ public class HomePage {
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Inventory Page");
+		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
 		stage.show();
 	}
 
@@ -83,7 +84,7 @@ public class HomePage {
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Order Page");
+		stage.setTitle(Constants.ORDER_PAGE_TITLE);
 		stage.show();
 	}
 

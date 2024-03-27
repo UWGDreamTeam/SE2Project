@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.viewmodel.OrderPageViewModel;
 import javafx.beans.binding.BooleanBinding;
@@ -89,7 +90,7 @@ public class OrderPage {
     	Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
     	Scene scene = stage.getScene();
     	scene.setRoot(parent);
-    	stage.setTitle("Home Page");
+    	stage.setTitle(Constants.HOME_PAGE_TITLE);
     }
 
     @FXML
@@ -98,7 +99,7 @@ public class OrderPage {
     	Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
     	Scene scene = stage.getScene();
     	scene.setRoot(parent);
-    	stage.setTitle("Inventory Page");
+    	stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
     }
 
     @FXML

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Component;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
@@ -212,7 +213,7 @@ public class InventoryPage {
 			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
-			currentStage.setTitle("Home Page");
+			currentStage.setTitle(Constants.HOME_PAGE_TITLE);
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
@@ -229,7 +230,7 @@ public class InventoryPage {
 			parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
-			currentStage.setTitle("Order Page");
+			currentStage.setTitle(Constants.ORDER_PAGE_TITLE);
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
