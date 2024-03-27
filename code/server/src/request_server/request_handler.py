@@ -41,19 +41,36 @@ request_handlers = {
 }
 
 def handle_request(request_str):
+    """
+    Handles a given request string by parsing it, executing the corresponding handler,
+        and returning the response.
+    The function logs the incoming request, attempts to parse it as JSON, extracts the
+     request type, and delegates the request to the appropriate handler based on the
+     `request_handlers` mapping. If the request type is unknown or the request cannot
+     be parsed, an error response is returned.
+
+    Args:
+        request_str (str): The request in JSON format.
+
+    Returns:
+        str: The response in JSON format, including the outcome of the request or an error message.
+    """
     log(f"Handling request: {request_str}")
     try:
         request_data = json.loads(request_str)
         request_type = request_data.get('type')
-        
         data = request_data.get('data', {})
         handler = request_handlers.get(request_type)
 
+        if len(data) == 0:
+            response = handler()
+            
+            return json.dumps(response)
         if handler:
             response = handler(data)
             return json.dumps(response)
-        else:
-            return json.dumps({"status": "error", "message": "Unknown request type"})
+        return json.dumps({"status": "error", "message": "Unknown request type"})
 
     except json.JSONDecodeError:
         return json.dumps({"status": "error", "message": "Invalid JSON format"})
+    

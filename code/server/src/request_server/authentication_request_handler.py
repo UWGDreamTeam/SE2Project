@@ -146,7 +146,7 @@ def attemptLogin(data):
         else:
             return {"status": "error", "message": "Invalid credentials for Login"}
     
-def getEmployeesList(data):
+def getEmployeesList():
     """
     Retrieves a list of all employee credentials stored in the global employees dictionary and formats them into a structured dictionary.
 
@@ -154,8 +154,7 @@ def getEmployeesList(data):
         None.
 
     Preconditions:
-        - The global 'employees' dictionary is accessible.
-        - The function does not require any input parameters.
+        None
 
     Postconditions:
         - If the 'employees' dictionary is not empty, returns a structured dictionary containing employee credentials.
@@ -247,7 +246,7 @@ def removeUser(data):
         
         return {"status": "success", "data": {"RemoveStatus": "true"}}
     
-def clear(data):
+def clear():
     """
     Clears all employee credentials from the global employees dictionary.
 
@@ -267,12 +266,3 @@ def clear(data):
     log("Employees collection is clear")
     return {"status": "success", "message": "List of employees is empty"}
     
-    
-    
-    
-    
-    
-    
-    
-    
-        

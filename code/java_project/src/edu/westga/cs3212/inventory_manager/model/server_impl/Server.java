@@ -19,7 +19,8 @@ import com.google.gson.reflect.TypeToken;
  */
 public class Server {
 
-	/** The Constant CONNECTION_STRING. */
+	private static final String REQUEST_TYPE_CANNOT_BE_EMPTY_OR_BLANK = "Request Type cannot be empty or blank";
+	private static final String REQUEST_TYPE_CANNOT_BE_NULL = "Request Type cannot be null";
 	private static final String CONNECTION_STRING = "tcp://127.0.0.1:5555";
 
 	/**
@@ -68,8 +69,8 @@ public class Server {
 	 * @param requestType the type of the request, which categorizes the request for the server. Examples include "query", "update", etc.
 	 * @param requestData a map containing the data for the request. This map must include a String key "data" with the request's payload Object.
 	 * 
-	 * @precondition 	requestType is a valid type understood by the server, and requestData contains a valid "data" key with 
-	 * 					data structured according to the operation specified by requestType.
+	 * @precondition 	requestType != null && requestType.isBlank() == false &&
+	 * 					requestData != null
 	 * 
 	 * @postcondition 	The method returns a Map<String, Object> with at least a "status" key. If "status" is "error", 
 	 * 					an IllegalArgumentException is thrown with the error message provided by the server. Otherwise, 
@@ -86,34 +87,70 @@ public class Server {
 	 * An IllegalArgumentException is thrown for any issues with the server's response, including missing "status" key or error status 
 	 * with an optional error message.
 	 */
-	public static Map<String, Object> sendRequestAndGetResponse(String requestType, Map<String, Object> requestData)
-			throws IllegalArgumentException {
+	public static Map<String, Object> sendRequestAndGetResponse(String requestType, Map<String, Object> requestData) throws IllegalArgumentException {
+		checkValidRequestType(requestType);
+		checkRequestDataMap(requestData);
+		
 		Map<String, Object> fullRequestData = new HashMap<>();
 		fullRequestData.put("type", requestType);
 		fullRequestData.put("data", requestData.get("data"));
 
 		Gson gson = new Gson();
 		String requestJson = gson.toJson(fullRequestData);
+
 		String response = Server.sendRequest(requestJson);
-		
 		Type responseType = new TypeToken<Map<String, Object>>() {
 		}.getType();
-		
 		Map<String, Object> responseMap = gson.fromJson(response, responseType);
 
 		if (!responseMap.containsKey("status")) {
-			throw new IllegalArgumentException("Response from server is missing the status key.");
+			throw new IllegalArgumentException(
+					"Response from server is missing the status key.");
 		}
 
 		String status = (String) responseMap.get("status");
-		
 		if ("error".equals(status)) {
-			String errorMessage = responseMap.containsKey("message") ? (String) responseMap.get("message")
+			String errorMessage = responseMap.containsKey("message")
+					? (String) responseMap.get("message")
 					: "Unknown error occurred";
 			throw new IllegalArgumentException(errorMessage);
 		}
 
 		return safelyCastToMap(responseMap.get("data"));
+	}
+	
+	/**
+	 * Overloads the sendRequestAndGetResponse method to send a request without specific data.
+	 *
+	 * @precondition requestType != null && requestType.isBlank() == false
+	 * @postcondition none
+	 * 
+	 * @param requestType the type of the request to be sent
+	 * @return a map representing the response from the server
+	 * @throws IllegalArgumentException if the response from the server does not contain a status key or
+	 *                                  if the status is 'error' with an accompanying message
+	 */
+	public static Map<String, Object> sendRequestAndGetResponse(String requestType) throws IllegalArgumentException {
+		checkValidRequestType(requestType);
+		Map<String, Object> requestData = new HashMap<>();
+		requestData.put("data", new HashMap<>());
+		return Server.sendRequestAndGetResponse(requestType, requestData);
+	}
+	
+	private static void checkRequestDataMap(Map<String, Object> requestData) {
+		if (requestData == null) {
+			throw new IllegalArgumentException(REQUEST_TYPE_CANNOT_BE_NULL);
+		}
+	}
+	
+	private static void checkValidRequestType(String requestType) {
+		if (requestType == null) {
+			throw new IllegalArgumentException(REQUEST_TYPE_CANNOT_BE_NULL);
+		}
+		
+		if (requestType.isBlank()) {
+			throw new IllegalArgumentException(REQUEST_TYPE_CANNOT_BE_EMPTY_OR_BLANK);
+		}
 	}
 
 	/**

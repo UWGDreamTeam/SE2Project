@@ -13,7 +13,7 @@ class TestEmployeeManagement(unittest.TestCase):
         log("Starting Employee Management System tests.")
 
     def setUp(self):
-        clear({})
+        clear()
 
     def test_generate_username(self):
         username = generate_username("John", "Doe")
@@ -56,7 +56,7 @@ class TestEmployeeManagement(unittest.TestCase):
             "Role": "Employee"
         }
         registerUser(user_data)
-        employees_list = getEmployeesList({})
+        employees_list = getEmployeesList()
         self.assertEqual(employees_list['status'], 'success')
         self.assertTrue(len(employees_list['data']) > 0)
 
@@ -91,7 +91,7 @@ class TestEmployeeManagement(unittest.TestCase):
         self.assertEqual(remove_result['status'], 'success')
 
     def test_clear_employees(self):
-        clear_result = clear({})
+        clear_result = clear()
         self.assertEqual(clear_result['status'], 'success')
 
     @classmethod

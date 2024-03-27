@@ -116,8 +116,7 @@ public class EmployeeCredentialsManager {
 	 *         cannot be parsed into a list of employees.
 	 */
 	public static List<LocalEmployeeCredentials> getEmployees() {
-		Map<String, Object> requestData = Map.of("NoArgs", "NoArgs");
-		Map<String, Object> dataMap = Server.sendRequestAndGetResponse("getEmployeesList", Map.of("data", requestData));
+		Map<String, Object> dataMap = Server.sendRequestAndGetResponse("getEmployeesList");
 		
 		List<LocalEmployeeCredentials> employees = parseEmployeesList(dataMap);
 		
@@ -187,7 +186,7 @@ public class EmployeeCredentialsManager {
 	 * 					This might be used for resetting the system or during testing.
 	 */
 	public static void clearCredentials() {
-		Server.sendRequestAndGetResponse("clearCredentials", Map.of("data", "none"));
+		Server.sendRequestAndGetResponse("clearCredentials");
 	}
 	
 	private static LocalEmployeeCredentials parseEmployee(Map<String, Object> employeeData, String employeeID) {
