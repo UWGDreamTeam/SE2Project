@@ -8,6 +8,7 @@ import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -23,7 +24,6 @@ public class InventoryViewModel {
 
 	private ObjectProperty<Item> selectedComponent;
 	private ObjectProperty<Item> selectedProduct;
-	private LocalProductInventory productInventory;
 
 	/**
 	 * Constructs an InventoryViewModel with specified inventories for
@@ -35,8 +35,7 @@ public class InventoryViewModel {
 	 * @param productInventory
 	 *            The inventory of products to be managed.
 	 */
-	public InventoryViewModel(LocalProductInventory productInventory) {
-		this.productInventory = productInventory;
+	public InventoryViewModel() {
 
 		this.selectedComponent = new SimpleObjectProperty<Item>();
 		this.selectedProduct = new SimpleObjectProperty<Item>();
@@ -96,16 +95,6 @@ public class InventoryViewModel {
 	}
 
 	/**
-	 * Gets the LocalProductInventory instance being managed by this ViewModel.
-	 * Provides access to the underlying product inventory operations and data.
-	 *
-	 * @return The instance of LocalProductInventory used by this ViewModel.
-	 */
-	public LocalProductInventory getProductInventory() {
-		return this.productInventory;
-	}
-
-	/**
 	 * Retrieves an observable list of all products in the inventory. This list
 	 * is used for displaying products in the UI.
 	 *
@@ -115,8 +104,8 @@ public class InventoryViewModel {
 	 */
 	public ObservableList<Product> getObservableProductList() {
 		ArrayList<Product> items = new ArrayList<Product>();
-		for (Item item : this.productInventory.getItems()) {
-			items.add((Product) item);
+		for (Product currentProduct : ProductInventory.getProducts()) {
+			items.add(currentProduct);
 		}
 		return FXCollections.observableArrayList(items);
 	}
@@ -175,7 +164,7 @@ public class InventoryViewModel {
 	 *                inventory.
 	 */
 	public void removeProduct() {
-		this.productInventory.removeItem(this.selectedProduct.getValue());
+		ProductInventory.deleteProduct(this.selectedProduct.get().getID());
 	}
 
 	/**
@@ -192,7 +181,6 @@ public class InventoryViewModel {
 	 *                components' quantities are decreased accordingly.
 	 */
 	public void produceProduct(Product selectedProduct, int quantity) {
-		this.productInventory.setQuantityOfItem(selectedProduct, quantity
-				+ this.productInventory.getQuantityOfItem(selectedProduct));
+		ProductInventory.produceProduct(selectedProduct.getID(), quantity);
 	}
 }

@@ -41,11 +41,7 @@ public class AddComponentViewModel {
 		String componentName = this.name.getValue();
 		Double productionCost = Double.parseDouble(this.cost.get());
 		int quantity = Integer.parseInt(this.quantity.get());
-		try {
-			ComponentInventory.addComponent(componentName, productionCost, quantity);
-		} catch (Exception e) {
-			return false;
-		}
+		ComponentInventory.addComponent(componentName, productionCost, quantity);
 		return true;
 	}
 

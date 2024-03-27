@@ -9,6 +9,7 @@ import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,7 +25,6 @@ public class EditProductViewModel {
 	private StringProperty sellingPrice;
 	private StringProperty quantity;
 	private ObjectProperty<Component> selectedComponent;
-	private LocalProductInventory productInventory;
 
 	/**
 	 * Initializes a new instance of the EditProductViewModel. Sets up property
@@ -38,14 +38,12 @@ public class EditProductViewModel {
 	 *            An instance of LocalComponentInventory for accessing component
 	 *            information.
 	 */
-	public EditProductViewModel(LocalProductInventory productInventory) {
-		this.productInventory = productInventory;
+	public EditProductViewModel() {
 		this.name = new SimpleStringProperty();
 		this.productionCost = new SimpleStringProperty();
 		this.sellingPrice = new SimpleStringProperty();
 		this.quantity = new SimpleStringProperty();
 		this.selectedComponent = new SimpleObjectProperty<Component>();
-		this.productInventory = new LocalProductInventory();
 	}
 
 	/**
@@ -63,7 +61,7 @@ public class EditProductViewModel {
 		this.sellingPrice.setValue(String.valueOf(this.product.getSalePrice()));
 		try {
 			this.quantity.setValue(String.valueOf(
-					this.productInventory.getQuantityOfItem(this.product)));
+					ProductInventory.getQuantity(this.product.getID())));
 		} catch (NullPointerException e) {
 			this.quantity.setValue("0");
 		}
@@ -136,15 +134,12 @@ public class EditProductViewModel {
 	 *            product's recipe.
 	 */
 	public void updateProduct(Map<Component, Integer> recipe) {
-		this.product.setName(this.name.getValue());
-		this.product.setProductionCost(
-				Double.parseDouble(this.productionCost.getValue().trim()));
-		this.product.setSalePrice(
-				Double.parseDouble(this.sellingPrice.getValue().trim()));
-		this.product.setRecipe(recipe);
-		this.productInventory.editItem(this.product);
-		int quantity = Integer.parseInt(this.quantity.getValue().trim());
-		this.productInventory.setQuantityOfItem(this.product, quantity);
+		String productID = this.product.getID();
+		String productName = this.product.getName();
+		double salesPirce = this.product.getProductionCost();
+		int quantity = ProductInventory.getQuantity(productID);
+		ProductInventory.updateProduct(productID, productName, salesPirce,
+				recipe, quantity);
 	}
 
 	/**

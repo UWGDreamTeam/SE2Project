@@ -1,10 +1,12 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import java.util.List;
+import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
+import edu.westga.cs3212.inventory_manager.model.Product;
+import edu.westga.cs3212.inventory_manager.model.server_impl.OrderInventory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -18,7 +20,6 @@ import javafx.beans.property.SimpleObjectProperty;
  */
 public class OrderPageViewModel {
 
-	private LocalOrderManager orderManager;
 	private ObjectProperty<Order> selectedOrder;
 
 	/**
@@ -27,7 +28,6 @@ public class OrderPageViewModel {
 	 * interaction.
 	 */
 	public OrderPageViewModel() {
-		this.orderManager = new LocalOrderManager();
 		this.selectedOrder = new SimpleObjectProperty<Order>();
 	}
 
@@ -38,7 +38,8 @@ public class OrderPageViewModel {
 	 *         CompletionStatus.INCOMPLETE.
 	 */
 	public List<Order> getIncompleteOrders() {
-		return this.orderManager
+		
+		return OrderInventory
 				.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE);
 	}
 
@@ -60,7 +61,7 @@ public class OrderPageViewModel {
 	 *         CompletionStatus.COMPLETE.
 	 */
 	public List<Order> getCompleteOrders() {
-		return this.orderManager
+		return OrderInventory
 				.getOrdersByCompletionStatus(CompletionStatus.COMPLETE);
 	}
 
@@ -75,8 +76,9 @@ public class OrderPageViewModel {
 	 * @postcondition selectedOrder2's completion status is set to
 	 *                CompletionStatus.COMPLETE
 	 */
-	public void fulfillSelectedOrder(Order selectedOrder2) {
-		this.orderManager.setOrderCompletionStatus(selectedOrder2,
+	public void fulfillSelectedOrder(Order selectedOrder) {
+		Map<Product, Integer> products = selectedOrder.getItems();
+		OrderInventory.updateOrder(selectedOrder.getID(), products,
 				CompletionStatus.COMPLETE);
 	}
 
@@ -88,7 +90,7 @@ public class OrderPageViewModel {
 	 * @postcondition All orders are removed from the order management system.
 	 */
 	public void clearOrders() {
-		this.orderManager.clearOrders();
+		OrderInventory.clearOrders();
 	}
 
 }

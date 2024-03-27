@@ -183,7 +183,7 @@ def get_all_components():
     """
     return {"status": "success", "data": components}
 
-def clear_inventory():
+def clear_component_inventory():
     """
     Clears all components from the inventory.
     

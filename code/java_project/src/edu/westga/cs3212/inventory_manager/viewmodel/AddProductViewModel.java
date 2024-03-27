@@ -9,6 +9,7 @@ import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,7 +24,6 @@ public class AddProductViewModel {
 	private StringProperty productionCost;
 	private StringProperty sellingPrice;
 	private StringProperty quantity;
-	private LocalProductInventory productInventory;
 
 	/**
 	 * Constructs an AddProductViewModel with references to the component and
@@ -34,9 +34,7 @@ public class AddProductViewModel {
 	 * @param productInventory
 	 *            The inventory where the new product will be added.
 	 */
-	public AddProductViewModel(
-			LocalProductInventory productInventory) {
-		this.productInventory = productInventory;
+	public AddProductViewModel() {
 		this.name = new SimpleStringProperty();
 		this.productionCost = new SimpleStringProperty();
 		this.sellingPrice = new SimpleStringProperty();
@@ -116,16 +114,12 @@ public class AddProductViewModel {
 	 */
 	public void addProduct(Map<Component, Integer> recipe) {
 		String productName = this.name.getValue();
-		Double productionCost = Double
-				.parseDouble(this.productionCost.getValue().trim());
 		Double sellingPrice = Double
 				.parseDouble(this.sellingPrice.getValue().trim());
 		int quantity = Integer.parseInt(this.quantity.getValue().trim());
 
-		Product newProduct = new Product(productName, productionCost,
-				sellingPrice, recipe);
-
-		this.productInventory.addItem(newProduct, quantity);
+		ProductInventory.addProduct(productName, sellingPrice, recipe,
+				quantity);
 	}
 
 }

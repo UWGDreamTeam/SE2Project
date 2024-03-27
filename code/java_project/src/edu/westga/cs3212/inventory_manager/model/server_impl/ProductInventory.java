@@ -20,6 +20,7 @@ import edu.westga.cs3212.inventory_manager.model.Product;
  */
 public final class ProductInventory {
 
+	private static final String ACTION_CLEAR_INVENTORY = "clearProductInventory";
 	private static final String KEY_DATA_COMPONENT_ID = "ComponentID";
 	private static final String ACTION_GET_QUANTITY_OF_PRODUCT = "getQuantityOfProduct";
 	private static final String ACTION_UPDATE_PRODUCT = "updateProduct";
@@ -33,6 +34,7 @@ public final class ProductInventory {
 	private static final String KEY_DATA = "data";
 	private static final String ACTION_GET_PRODUCT = "getProduct";
 	private static final String PRODUCT_ID = "ProductID";
+	private static final String ACTION_GET_PRODUCTS = "getProducts";
 
 	private ProductInventory() {
 		throw new IllegalStateException(
@@ -299,6 +301,30 @@ public final class ProductInventory {
 			throw new IllegalArgumentException(
 					Constants.RECIPE_CANNOT_BE_EMPTY);
 		}
+	}
+
+	public static Product[] getProducts() {
+		Map<String, Object> dataMap = Server
+				.sendRequestAndGetResponse(ACTION_GET_PRODUCTS);
+		return parseProducts(dataMap);
+	}
+
+	private static Product[] parseProducts(Map<String, Object> response) {
+		Product[] products = new Product[response.size()];
+        int index = 0;
+        for (String key : response.keySet()) {
+            Map<String, Object> productData = (Map<String, Object>) response
+                    .get(key);
+            String productID = key;
+            Map<Component, Integer> recipe = extractRecipeFromJson(productData);
+            products[index] = extractProduct(productID, productData, recipe);
+            index++;
+        }
+        return products;
+	}
+	
+	public static void clearInventory() {
+		Server.sendRequestAndGetResponse(ACTION_CLEAR_INVENTORY);
 	}
 
 }

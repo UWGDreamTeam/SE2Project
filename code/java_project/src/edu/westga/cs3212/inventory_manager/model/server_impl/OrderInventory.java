@@ -19,6 +19,7 @@ import edu.westga.cs3212.inventory_manager.model.Product;
  */
 public final class OrderInventory {
 
+	private static final String ACTION_GET_ORDERS_BY_COMPLETION_STATUS = "getOrdersByCompletionStatus";
 	private static final String ACTION_GET_ORDER = "getOrder";
 	private static final String ACTION_UPDATE_ORDER = "updateOrder";
 	private static final String ACTION_DELETE_ORDER = "deleteOrder";
@@ -218,5 +219,30 @@ public final class OrderInventory {
 					Constants.ORDER_ID_CANNOT_BE_BLANK);
 		}
 	}
+
+	public static void clearOrders() {
+		Server.sendRequestAndGetResponse("clearOrders");
+	}
+
+	public static List<Order> getOrdersByCompletionStatus(
+			CompletionStatus complete) {
+		Map<String, Object> requestData = Map.of(KEY_DATA,
+				Map.of(KEY_DATA_COMPLETION_STATUS, complete.toString()));
+		Map<String, Object> orderData = Server.sendRequestAndGetResponse(
+				ACTION_GET_ORDERS_BY_COMPLETION_STATUS, requestData);
+		return parseOrders(orderData);
+	}
+
+    @SuppressWarnings("unchecked")
+	private static List<Order> parseOrders(Map<String, Object> orderData) {
+		List<Order> orders = new ArrayList<>();
+		List<Map<String, Object>> orderList = (List<Map<String, Object>>) orderData
+                .get(KEY_DATA);
+        for (Map<String, Object> order : orderList) {
+            orders.add(extractOrder(order));
+        }
+        return orders;
+	}
+	
 
 }

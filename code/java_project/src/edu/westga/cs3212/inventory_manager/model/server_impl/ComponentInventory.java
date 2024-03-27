@@ -15,7 +15,7 @@ import edu.westga.cs3212.inventory_manager.model.Constants;
  */
 public final class ComponentInventory {
 
-	private static final String ACTION_CLEAR_INVENTORY = "clearInventory";
+	private static final String ACTION_CLEAR_INVENTORY = "clearComponentInventory";
 	private static final String ACTION_GET_COMPONENTS = "getComponents";
 	private static final String ACTION_GET_QUANTITY_OF_COMPONENT = "getQuantityOfComponent";
 	private static final String ACTION_ORDER_COMPONENT = "orderComponent";
@@ -230,23 +230,31 @@ public final class ComponentInventory {
 	}
 
 	public static Component[] getComponents() {
-		Map<String, Object> requestData = new HashMap<>();
-        requestData.put(KEY_DATA, Map.of());
-        Map<String, Object> dataMap = Server.sendRequestAndGetResponse(
-                ACTION_GET_COMPONENTS, requestData);
-        return parseComponents(dataMap);
+		Map<String, Object> dataMap = Server
+				.sendRequestAndGetResponse(ACTION_GET_COMPONENTS);
+		return parseComponents(dataMap);
 	}
 
 	private static Component[] parseComponents(Map<String, Object> dataMap) {
 		Component[] components = new Component[dataMap.size()];
 		int index = 0;
 		for (String key : dataMap.keySet()) {
-			Map<String, Object> componentMap = (Map<String, Object>) dataMap.get(key);
-			Component component = new Component((String) componentMap.get(KEY_DATA_NAME), (double) componentMap.get(KEY_DATA_PRODUCTION_COST));
-			component.setID(key);
+			Map<String, Object> componentMap = (Map<String, Object>) dataMap
+					.get(key);
+			Component component = extractComponent(key, componentMap);
 			components[index] = component;
+			index++;
 		}
 		return components;
+	}
+
+	private static Component extractComponent(String key,
+			Map<String, Object> componentMap) {
+		Component component = new Component(
+				(String) componentMap.get(KEY_DATA_NAME),
+				(double) componentMap.get(KEY_DATA_PRODUCTION_COST));
+		component.setID(key);
+		return component;
 	}
 
 	public static void clearInventory() {

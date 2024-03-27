@@ -53,7 +53,6 @@ public class EditProduct {
 	@FXML
 	private TextField sellingPriceTextField;
 
-	private LocalProductInventory productInventory;
 	private EditProductViewModel editProductVM;
 	private Map<Component, Integer> componentList;
 
@@ -111,8 +110,7 @@ public class EditProduct {
 
 	@FXML
 	void initialize() {
-		this.productInventory = new LocalProductInventory();
-		this.editProductVM = new EditProductViewModel(this.productInventory);
+		this.editProductVM = new EditProductViewModel();
 		this.productionCostTextField.textProperty()
 				.bindBidirectional(this.editProductVM.getProductionCost());
 		this.sellingPriceTextField.textProperty()

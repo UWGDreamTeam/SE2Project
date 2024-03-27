@@ -12,9 +12,7 @@ public class TestConstructor {
 
 	@Test
 	void testValidConstructor() {
-		LocalProductInventory inventory = new LocalProductInventory();
-		LocalComponentInventory componentInventory = new LocalComponentInventory();
-		EditProductViewModel viewModel = new EditProductViewModel(inventory, componentInventory);
+		EditProductViewModel viewModel = new EditProductViewModel();
 		assertNotNull(viewModel);
 		assertNotNull(viewModel.getName());
 		assertNotNull(viewModel.getProductionCost());
