@@ -3,12 +3,20 @@ package edu.westga.cs3212.inventory_manager.test.orderpageviewmodel;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Order;
+import edu.westga.cs3212.inventory_manager.model.Product;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.OrderInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 import edu.westga.cs3212.inventory_manager.viewmodel.OrderPageViewModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -47,7 +55,16 @@ class TestOrderPageViewModel {
 	
 	@Test
 	public void testfulfillSelectedOrder() {
-		Order newOrder = new Order();
+		String componentID = ComponentInventory.addComponent("test", 0, 10);
+		Component component = ComponentInventory.getComponent(componentID);
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		String productID = ProductInventory.addProduct("test", 2, recipe, 10);
+		Product product = ProductInventory.getProduct(productID);
+		Map<Product, Integer> orders = new HashMap<>();
+		orders.put(product, 1);
+		String OrderID = OrderInventory.createOrder(orders, CompletionStatus.COMPLETE);
+		Order newOrder = OrderInventory.getOrder(OrderID);
 		ObjectProperty<Order> selectedOrder = new SimpleObjectProperty<Order>(newOrder);
 		
 		this.viewModel.getSelectedOrderProperty().bindBidirectional(selectedOrder);

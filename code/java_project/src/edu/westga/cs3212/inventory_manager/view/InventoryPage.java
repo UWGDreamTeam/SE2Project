@@ -12,6 +12,7 @@ import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 import edu.westga.cs3212.inventory_manager.viewmodel.InventoryViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -122,13 +123,11 @@ public class InventoryPage {
 	private Tab productsTabPage;
 
 	private InventoryViewModel inventoryVM;
-	private LocalProductInventory localProductInventory;
 
 	/* GENERAL */
 
 	@FXML
 	void initialize() {
-		this.localProductInventory = new LocalProductInventory();
 		this.inventoryVM = new InventoryViewModel();
 
 		this.inventoryVM.getSelectedComponent().bind(this.componentsTableView
@@ -181,8 +180,7 @@ public class InventoryPage {
 						cellData.getValue().getProductionCost()));
 		this.productQuantityColumn.setCellValueFactory(cellData -> {
 			try {
-				int quantity = this.localProductInventory
-						.getQuantityOfItem(cellData.getValue());
+				int quantity = ProductInventory.getQuantity(cellData.getValue().getID());
 				return new SimpleIntegerProperty(quantity).asObject();
 			} catch (IllegalArgumentException e) {
 				return new SimpleIntegerProperty(0).asObject();

@@ -1,6 +1,6 @@
 package edu.westga.cs3212.inventory_manager.model;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
+import edu.westga.cs3212.inventory_manager.model.server_impl.OrderInventory;
 
 /**
  * Provides analytics related to orders within the inventory management system.
@@ -11,20 +11,9 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
  * @author Group 1
  * @version Spring 2024
  */
-public class OrderAnalytics {
-
-	private LocalOrderManager orderManager;
-
-	/**
-	 * Initializes a new instance of OrderAnalytics with its own
-	 * LocalOrderManager.
-	 * 
-	 * @precondition none
-	 * @postcondition a new LocalOrderManager instance is associated with this
-	 *                instance
-	 */
+public final class OrderAnalytics {
+	
 	public OrderAnalytics() {
-		this.orderManager = new LocalOrderManager();
 	}
 
 	/**
@@ -35,7 +24,10 @@ public class OrderAnalytics {
 	 * @postcondition none
 	 */
 	public int getOrdersCount() {
-		return this.orderManager.getOrders().size();
+		int count = 0;
+		count += OrderInventory.getOrdersByCompletionStatus(CompletionStatus.COMPLETE).size();
+		count += OrderInventory.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE).size();
+		return count;
 	}
 
 	/**
@@ -47,10 +39,8 @@ public class OrderAnalytics {
 	 */
 	public double getOrdersSalesTotal() {
 		double total = 0;
-		for (Order order : this.orderManager.getOrders()) {
-			if (order.getCompletionStatus() == CompletionStatus.COMPLETE) {
-				total += order.getSalePrice();
-			}
+		for (Order order : OrderInventory.getOrdersByCompletionStatus(CompletionStatus.COMPLETE)) {
+			total += order.getSalePrice();
 		}
 		return total;
 	}
@@ -64,10 +54,8 @@ public class OrderAnalytics {
 	 */
 	public double getOrdersProductionCostTotal() {
 		double total = 0;
-		for (Order order : this.orderManager.getOrders()) {
-			if (order.getCompletionStatus() == CompletionStatus.COMPLETE) {
-				total += order.getProductionCost();
-			}
+		for (Order order : OrderInventory.getOrdersByCompletionStatus(CompletionStatus.COMPLETE)) {
+			total += order.getProductionCost();
 		}
 		return total;
 	}
@@ -93,8 +81,7 @@ public class OrderAnalytics {
 	 * @postcondition none
 	 */
 	public int getOrdersCompletedCount() {
-		return this.orderManager
-				.getOrdersByCompletionStatus(CompletionStatus.COMPLETE).size();
+		return OrderInventory.getOrdersByCompletionStatus(CompletionStatus.COMPLETE).size();
 	}
 
 	/**
@@ -105,9 +92,7 @@ public class OrderAnalytics {
 	 * @postcondition none
 	 */
 	public int getOrdersInProgressCount() {
-		return this.orderManager
-				.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE)
-				.size();
+		return OrderInventory.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE).size();
 	}
 
 	/**
@@ -117,6 +102,6 @@ public class OrderAnalytics {
 	 * @postcondition all orders are removed from the system
 	 */
 	public void clearOrders() {
-		this.orderManager.clearOrders();
+		OrderInventory.clearOrders();
 	}
 }

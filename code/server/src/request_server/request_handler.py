@@ -36,7 +36,7 @@ from request_server.components import (
 from request_server.orders import (
     create_order, update_order, delete_order, get_order,
     clear_all_orders, get_orders_by_status,
-    clear_order_inventory
+    clear_order_inventory, get_all_orders
 )
 from request_server.utilities import log
 
@@ -67,7 +67,8 @@ request_handlers = {
     "clearOrderInventory": clear_order_inventory,
     "getProducts": get_all_products,
     "clearOrders": clear_all_orders,
-    "getOrdersByCompletionStatus": get_orders_by_status
+    "getOrdersByCompletionStatus": get_orders_by_status,
+    "getOrders": get_all_orders
 }
 
 def handle_request(request_str):

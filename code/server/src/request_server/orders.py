@@ -169,6 +169,7 @@ def get_orders_by_status(data):
     filtered_orders = {order_id: order for order_id, order in orders.items() if
                        order["CompletionStatus"] == completion_status}
     log(f"Retrieved orders by status: {completion_status}")
+    log(f"Orders: {filtered_orders}")
     return {"status": "success", "data": filtered_orders}
 
 def clear_order_inventory():
@@ -181,3 +182,13 @@ def clear_order_inventory():
     orders.clear()
     log("Cleared all orders")
     return {"status": "success", "message": "All orders cleared"}
+
+def get_all_orders():
+    """
+    Retrieves all orders in the system.
+    
+    Returns:
+    - dict: A response object with a status message indicating success and a list of all orders.
+    """
+    log("Retrieved all orders")
+    return {"status": "success", "data": orders}

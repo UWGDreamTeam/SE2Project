@@ -13,13 +13,15 @@ import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.ComponentInventoryAnalytics;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 
 class TestGetMostUsedComponents {
 	
 	@BeforeEach
 	void setup() {
-		LocalProductInventory productInventory = new LocalProductInventory();
-		productInventory.clear();
+		ProductInventory.clearInventory();
+		ComponentInventory.clearInventory();
 	}
 
 	@Test
@@ -72,12 +74,17 @@ class TestGetMostUsedComponents {
 	
 	private ComponentInventoryAnalytics initializeInventoryWithSampleData() {
 	    ComponentInventoryAnalytics analytics = new ComponentInventoryAnalytics();
-	    LocalProductInventory productManager = new LocalProductInventory();
 
 	    // Create components
 	    Component componentA = new Component("ComponentA", 1.0);
+	    String componentID = ComponentInventory.addComponent("ComponentA", 1.0, 50);
+	    componentA.setID(componentID);
 	    Component componentB = new Component("ComponentB", 2.0);
+	    componentID = ComponentInventory.addComponent("ComponentB", 2.0, 50);
+	    componentB.setID(componentID);
 	    Component componentC = new Component("ComponentC", 3.0);
+	    componentID = ComponentInventory.addComponent("ComponentC", 3.0, 50);
+	    componentC.setID(componentID);
 	    
 	    // Create product recipes
 	    Map<Component, Integer> recipe1 = new HashMap<>();
@@ -90,13 +97,11 @@ class TestGetMostUsedComponents {
 	    
 	    // Create products with these recipes
 	    Product product1 = new Product("Product1", 100.0, 150.0, recipe1);
+	    String productID = ProductInventory.addProduct("Product1", 100.0, recipe1, 150);
+	    product1.setID(productID);
 	    Product product2 = new Product("Product2", 200.0, 250.0, recipe2);
-	    
-	    // Assuming the addItem method is accessible and correctly adds products to the inventory
-	    productManager.addItem(product1, 1); // Quantity is a placeholder
-	    productManager.addItem(product2, 1); // Quantity is a placeholder
-
-	    // Inject productManager into analytics if necessary or assume it's already set through the constructor
+	    productID = ProductInventory.addProduct("Product2", 200.0, recipe2, 250);
+	    product2.setID(productID);
 	    
 	    return analytics;
 	}

@@ -19,6 +19,7 @@ import edu.westga.cs3212.inventory_manager.model.Product;
  */
 public final class OrderInventory {
 
+	private static final String ACTION_GET_ORDERS = "getOrders";
 	private static final String ACTION_GET_ORDERS_BY_COMPLETION_STATUS = "getOrdersByCompletionStatus";
 	private static final String ACTION_GET_ORDER = "getOrder";
 	private static final String ACTION_UPDATE_ORDER = "updateOrder";
@@ -149,7 +150,41 @@ public final class OrderInventory {
 		Map<String, Object> orderData = Server
 				.sendRequestAndGetResponse(ACTION_GET_ORDER, requestData);
 
-		return extractOrder(orderData);
+		Order order = extractOrder(orderData);
+		order.setID(orderID);
+        return order;
+	}
+	
+	/**
+	 * Clears all orders from the inventory.
+	 * 
+	 * @precondition none
+	 * @postcondition The inventory is empty.
+	 * 
+	 */
+	public static void clearOrders() {
+		Server.sendRequestAndGetResponse("clearOrders");
+	}
+	
+	/**
+	 * Retrieves all orders from the inventory that have the specified completion
+	 * 
+	 * @param complete The completion status of the orders to retrieve.
+	 * @precondition complete != null
+	 * @postcondition none
+	 * @return
+	 */
+	public static List<Order> getOrdersByCompletionStatus(
+			CompletionStatus complete) {
+		if (complete == null) {
+			throw new IllegalArgumentException(
+					Constants.COMPLETION_STATUS_CANNOT_BE_NULL);
+		}
+		Map<String, Object> requestData = Map.of(KEY_DATA,
+				Map.of(KEY_DATA_COMPLETION_STATUS, complete.toString()));
+		Map<String, Object> orderData = Server.sendRequestAndGetResponse(
+				ACTION_GET_ORDERS_BY_COMPLETION_STATUS, requestData);
+		return parseOrders(orderData);
 	}
 
 	private static Order extractOrder(Map<String, Object> orderData) {
@@ -159,7 +194,6 @@ public final class OrderInventory {
 			order.addItem(entry.getKey(), entry.getValue());
 		}
 
-		order.setID((String) orderData.get(KEY_DATA_ORDER_ID));
 		order.setCompletionStatus(CompletionStatus
 				.valueOf((String) orderData.get(KEY_DATA_COMPLETION_STATUS)));
 		return order;
@@ -220,29 +254,31 @@ public final class OrderInventory {
 		}
 	}
 
-	public static void clearOrders() {
-		Server.sendRequestAndGetResponse("clearOrders");
-	}
-
-	public static List<Order> getOrdersByCompletionStatus(
-			CompletionStatus complete) {
-		Map<String, Object> requestData = Map.of(KEY_DATA,
-				Map.of(KEY_DATA_COMPLETION_STATUS, complete.toString()));
-		Map<String, Object> orderData = Server.sendRequestAndGetResponse(
-				ACTION_GET_ORDERS_BY_COMPLETION_STATUS, requestData);
-		return parseOrders(orderData);
-	}
-
     @SuppressWarnings("unchecked")
 	private static List<Order> parseOrders(Map<String, Object> orderData) {
-		List<Order> orders = new ArrayList<>();
-		List<Map<String, Object>> orderList = (List<Map<String, Object>>) orderData
-                .get(KEY_DATA);
-        for (Map<String, Object> order : orderList) {
-            orders.add(extractOrder(order));
-        }
-        return orders;
+		Order[] orders = new Order[orderData.size()];
+		int index = 0;
+		for (String orderID : orderData.keySet()) {
+			Map<String, Object> order = (Map<String, Object>) orderData
+					.get(orderID);
+			orders[index] = extractOrder(order);
+			index++;
+		}
+		return List.of(orders);
 	}
+    
+    /**
+     * Retrieves all orders from the inventory.
+     * 
+     * @precondition none
+     * @postcondition none
+     * 
+     * @return A List collection of all orders.
+     */
+    public static List<Order> getOrders() {
+    	        Map<String, Object> orderData = Server.sendRequestAndGetResponse(ACTION_GET_ORDERS);
+    	        return parseOrders(orderData);
+    }
 	
 
 }

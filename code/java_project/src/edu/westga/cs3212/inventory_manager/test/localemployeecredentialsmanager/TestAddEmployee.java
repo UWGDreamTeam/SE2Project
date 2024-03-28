@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
 
 class TestAddEmployee {
@@ -19,6 +21,12 @@ class TestAddEmployee {
 	@BeforeEach
 	public void setUp() throws IOException {
 		Files.deleteIfExists(Paths.get(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION));
+	}
+	
+	@AfterEach
+	public void tearDown() throws IOException {
+		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
+		manager.addAdminUser();
 	}
 
 	@Test
@@ -88,11 +96,17 @@ class TestAddEmployee {
 	@Test
 	public void testAddEmployeeWithDuplicateEmployeeID() {
 		LocalEmployeeCredentialsManagerForTest manager = new LocalEmployeeCredentialsManagerForTest();
+		int employeeSize = manager.getEmployees().size();
+		for (LocalEmployeeCredentials currentEmployee : manager
+				.getEmployees()) {
+			manager.removeEmployee(currentEmployee.getEmployeeID());
+		}
 
 		manager.addEmployee("John", "Doe", "Password", EmployeeType.MANAGER.toString());
 		manager.addEmployee("Strong", "Type", "Type", EmployeeType.WORKER.toString());
 
-		assertEquals(2, manager.getEmployees().size());
+		employeeSize = manager.getEmployees().size();
+		assertEquals(2, employeeSize);
 
 	}
 
