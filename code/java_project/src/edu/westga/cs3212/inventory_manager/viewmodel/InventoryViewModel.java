@@ -27,13 +27,17 @@ public class InventoryViewModel {
 	private LocalProductInventory productInventory;
 
 	/**
-	 * Constructs an InventoryViewModel with specified inventories for components and products.
-	 * Initializes properties for tracking selected items in the UI.
+	 * Constructs an InventoryViewModel with specified inventories for
+	 * components and products. Initializes properties for tracking selected
+	 * items in the UI.
 	 *
-	 * @param componentsInventory The inventory of components to be managed.
-	 * @param productInventory The inventory of products to be managed.
+	 * @param componentsInventory
+	 *            The inventory of components to be managed.
+	 * @param productInventory
+	 *            The inventory of products to be managed.
 	 */
-	public InventoryViewModel(LocalComponentInventory componentsInventory, LocalProductInventory productInventory) {
+	public InventoryViewModel(LocalComponentInventory componentsInventory,
+			LocalProductInventory productInventory) {
 		this.componentsInventory = componentsInventory;
 		this.productInventory = productInventory;
 
@@ -43,9 +47,11 @@ public class InventoryViewModel {
 
 	/**
 	 * Creates an observable list of components from the component inventory.
-	 * This list can be used for binding to UI elements, enabling dynamic updates.
+	 * This list can be used for binding to UI elements, enabling dynamic
+	 * updates.
 	 *
-	 * @return An ObservableList containing all components in the component inventory.
+	 * @return An ObservableList containing all components in the component
+	 *         inventory.
 	 */
 	public ObservableList<Component> getObservableComponentList() {
 		ArrayList<Component> items = new ArrayList<Component>();
@@ -59,16 +65,19 @@ public class InventoryViewModel {
 	 * Removes the currently selected component from the component inventory.
 	 * This operation is typically triggered by a user action in the UI.
 	 *
-	 * @precondition A component must be selected (selectedComponent property is not null).
-	 * @postcondition The selected component is removed from the inventory if it exists.
+	 * @precondition A component must be selected (selectedComponent property is
+	 *               not null).
+	 * @postcondition The selected component is removed from the inventory if it
+	 *                exists.
 	 */
 	public void removeComponent() {
 		this.componentsInventory.removeItem(this.selectedComponent.getValue());
 	}
 
 	/**
-	 * Retrieves the property that tracks the currently selected component in the UI.
-	 * This property allows for binding and listening for changes in selection.
+	 * Retrieves the property that tracks the currently selected component in
+	 * the UI. This property allows for binding and listening for changes in
+	 * selection.
 	 *
 	 * @return The property containing the currently selected component.
 	 */
@@ -77,20 +86,24 @@ public class InventoryViewModel {
 	}
 
 	/**
-	 * Gets the LocalComponentInventory instance being managed by this ViewModel.
-	 * Provides access to the underlying component inventory operations and data.
+	 * Gets the LocalComponentInventory instance being managed by this
+	 * ViewModel. Provides access to the underlying component inventory
+	 * operations and data.
 	 *
 	 * @return The instance of LocalComponentInventory used by this ViewModel.
 	 */
 	public LocalComponentInventory getComponentsInventory() {
 		return this.componentsInventory;
 	}
+
 	/**
 	 * Sets the selected component.
+	 * 
 	 * @precondition none
 	 * @postcondition The selected component is set to the provided value.
 	 * 
-	 * @param selectedComponent 	    The selected component.
+	 * @param selectedComponent
+	 *            The selected component.
 	 */
 	public void setSelectedComponent(Item selectedComponent) {
 		this.selectedComponent.set(selectedComponent);
@@ -107,8 +120,8 @@ public class InventoryViewModel {
 	}
 
 	/**
-	 * Retrieves an observable list of all products in the inventory.
-	 * This list is used for displaying products in the UI.
+	 * Retrieves an observable list of all products in the inventory. This list
+	 * is used for displaying products in the UI.
 	 *
 	 * @return An ObservableList of Product objects.
 	 * @precondition none
@@ -123,8 +136,8 @@ public class InventoryViewModel {
 	}
 
 	/**
-	 * Retrieves the property for the currently selected product in the UI.
-	 * This property can be used to bind to UI elements or observe for changes.
+	 * Retrieves the property for the currently selected product in the UI. This
+	 * property can be used to bind to UI elements or observe for changes.
 	 *
 	 * @return An ObjectProperty wrapping the currently selected Product item.
 	 * @precondition none
@@ -133,37 +146,45 @@ public class InventoryViewModel {
 	public ObjectProperty<Item> getSelectedProduct() {
 		return this.selectedProduct;
 	}
-	
+
 	/**
 	 * Sets the selected component.
+	 * 
 	 * @precondition none
 	 * @postcondition The selected component is set to the provided value.
-	 * @param selectedProduct The selected component.
+	 * @param selectedProduct
+	 *            The selected component.
 	 */
 	public void setSelectedProduct(Item selectedProduct) {
 		this.selectedProduct.set(selectedProduct);
 	}
 
 	/**
-	 * Adjusts the inventory quantity for a specified component.
-	 * This method is typically used when a component is ordered, incrementing its quantity in the inventory.
+	 * Adjusts the inventory quantity for a specified component. This method is
+	 * typically used when a component is ordered, incrementing its quantity in
+	 * the inventory.
 	 *
-	 * @param selectedComponent2 The component for which the quantity is to be adjusted.
-	 * @param quantity The amount by which to adjust the component's quantity.
+	 * @param selectedComponent2
+	 *            The component for which the quantity is to be adjusted.
+	 * @param quantity
+	 *            The amount by which to adjust the component's quantity.
 	 * @precondition selectedComponent2 != null && quantity >= 0
-	 * @postcondition The specified component's quantity is incremented by the provided amount.
+	 * @postcondition The specified component's quantity is incremented by the
+	 *                provided amount.
 	 */
 	public void orderComponent(Component selectedComponent2, int quantity) {
 		this.componentsInventory.setQuantityOfItem(selectedComponent2,
-				quantity + this.componentsInventory.getQuantityOfItem(selectedComponent2));
+				quantity + this.componentsInventory
+						.getQuantityOfItem(selectedComponent2));
 	}
 
 	/**
-	 * Removes the currently selected product from the inventory.
-	 * This method is invoked typically in response to a user action in the UI.
+	 * Removes the currently selected product from the inventory. This method is
+	 * invoked typically in response to a user action in the UI.
 	 *
 	 * @precondition The selectedProduct property must not be null.
-	 * @postcondition The selected product is removed from the product inventory.
+	 * @postcondition The selected product is removed from the product
+	 *                inventory.
 	 */
 	public void removeProduct() {
 		this.productInventory.removeItem(this.selectedProduct.getValue());
@@ -171,20 +192,35 @@ public class InventoryViewModel {
 
 	/**
 	 * Manages the production of a specified product, adjusting inventory quantities as necessary.
-	 * This includes decrementing the quantities of the components used in the product's recipe.
+	 * This includes decrementing the quantities of the components used in the product's recipe
+	 * and incrementing the quantity of the finished product.
 	 *
-	 * @param selectedProduct The product to be produced.
-	 * @param quantity The quantity of the product to produce.
+	 * @param selectedProduct The product to be produced. Must not be null.
+	 * @param quantity The quantity of the product to produce. Must be greater than 0.
 	 * @precondition selectedProduct != null && quantity > 0
-	 * @postcondition The selected product's quantity is increased, and the used components' quantities are decreased accordingly.
+	 * @postcondition The selected product's quantity in the inventory is increased by the specified quantity,
+	 *                and the quantities of the components used are decreased accordingly.
+	 *                If insufficient components are available, an IllegalArgumentException is thrown.
+	 * @throws IllegalArgumentException if there are not enough components in the inventory to produce the product.
 	 */
-	public void produceProduct(Product selectedProduct, int quantity) {
-		this.productInventory.setQuantityOfItem(selectedProduct,
-				quantity + this.productInventory.getQuantityOfItem(selectedProduct));
+	public void produceProduct(Product selectedProduct, int quantity) throws IllegalArgumentException {
+	   
+	    for (Component component : selectedProduct.getRecipe().keySet()) {
+	        int requiredQuantity = selectedProduct.getRecipe().get(component) * quantity;
+	        int availableQuantity = this.componentsInventory.getQuantityOfItem(component);
+	        if (availableQuantity < requiredQuantity) {
+	            int missingQuantity = requiredQuantity - availableQuantity;
+	            throw new IllegalArgumentException("Not enough " + component.getName() + ". Missing: " + missingQuantity + " units.");
+	        }
+	    }
 
-		for (Component component : selectedProduct.getRecipe().keySet()) {
-			this.componentsInventory.setQuantityOfItem(component, this.componentsInventory.getQuantityOfItem(component)
-					- selectedProduct.getRecipe().get(component) * quantity);
-		}
+	    
+	    this.productInventory.setQuantityOfItem(selectedProduct,
+	            quantity + this.productInventory.getQuantityOfItem(selectedProduct));
+
+	    for (Component component : selectedProduct.getRecipe().keySet()) {
+	        this.componentsInventory.setQuantityOfItem(component, this.componentsInventory.getQuantityOfItem(component)
+	                - selectedProduct.getRecipe().get(component) * quantity);
+	    }
 	}
 }

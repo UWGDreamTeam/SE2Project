@@ -11,7 +11,7 @@ import edu.westga.cs3212.inventory_manager.model.ItemInventoryManager;
 import edu.westga.cs3212.inventory_manager.model.Item;
 
 public class LocalComponentInventory implements ItemInventoryManager {
-	
+
 	private static final String ITEM_ID_CANNOT_BE_NULL = "Component ID cannot be null";
 	private static final String QUANTITY_CANNOT_BE_NEGATIVE = "Quantity cannot be negative";
 	private static final int MINIMUM_QUANTITY = 0;
@@ -21,11 +21,12 @@ public class LocalComponentInventory implements ItemInventoryManager {
 	private static final String COMPONENT_DOES_NOT_EXIST = "Component does not exist";
 	/**
 	 * The component quantities.
+	 * 
 	 * @key string ID, the ID of the component
-	 * @value int quantity, the quantity of that component  
+	 * @value int quantity, the quantity of that component
 	 */
-	private static Map<Component, Integer> components; 
-	
+	private static Map<Component, Integer> components;
+
 	/**
 	 * Instantiates a new LocalComponentInventory object
 	 * 
@@ -34,14 +35,16 @@ public class LocalComponentInventory implements ItemInventoryManager {
 	 */
 	public LocalComponentInventory() {
 		if (LocalComponentInventory.components == null) {
-			LocalComponentInventory.components = DemoDataUtility.createDemoComponents();
+			LocalComponentInventory.components = DemoDataUtility
+					.createDemoComponents();
 		}
 	}
 
 	private void save() {
-		ComponentInventoryStorage.save(LocalComponentInventory.components, Constants.COMPONENT_INVENTORY_FILE_LOCATION);
+		ComponentInventoryStorage.save(LocalComponentInventory.components,
+				Constants.COMPONENT_INVENTORY_FILE_LOCATION);
 	}
-	
+
 	@Override
 	public Iterable<Item> getItems() {
 		return new ArrayList<>(LocalComponentInventory.components.keySet());
@@ -51,14 +54,15 @@ public class LocalComponentInventory implements ItemInventoryManager {
 	public boolean addItem(Item newItem, int quantity) {
 		if (newItem == null) {
 			throw new IllegalArgumentException(NEW_ITEM_CANNOT_BE_NULL);
-		}	
+		}
 		if (LocalComponentInventory.components.containsKey(newItem)) {
 			throw new IllegalArgumentException(NEW_ITEM_ALREADY_EXISTS);
-		}		
+		}
 		if (quantity < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(QUANTITY_CANNOT_BE_NEGATIVE);
 		}
-		if (LocalComponentInventory.components.put((Component) newItem, quantity) == null) {
+		if (LocalComponentInventory.components.put((Component) newItem,
+				quantity) == null) {
 			this.save();
 			return true;
 		}
@@ -82,11 +86,12 @@ public class LocalComponentInventory implements ItemInventoryManager {
 		if (itemID == null) {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_NULL);
 		}
-		
+
 		if (itemID.isBlank()) {
 			throw new IllegalArgumentException(ITEM_ID_CANNOT_BE_BLANK);
 		}
-		for (Component component : LocalComponentInventory.components.keySet()) {
+		for (Component component : LocalComponentInventory.components
+				.keySet()) {
 			if (component.getID().equals(itemID)) {
 				return component;
 			}
@@ -103,7 +108,8 @@ public class LocalComponentInventory implements ItemInventoryManager {
 	@Override
 	public boolean editItem(Item newItem) {
 		this.validItemAndWithinInventory(newItem);
-		if (LocalComponentInventory.components.put((Component) newItem, LocalComponentInventory.components.get(newItem)) != null) {
+		if (LocalComponentInventory.components.put((Component) newItem,
+				LocalComponentInventory.components.get(newItem)) != null) {
 			this.save();
 			return true;
 		}

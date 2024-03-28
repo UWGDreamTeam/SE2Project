@@ -34,36 +34,25 @@ public class LoginPage {
 	@FXML
 	void attemptLogin(ActionEvent event) throws IOException {
 		if (this.viewModel.attemptLogin()) {
-			this.showSuccessPopup(event);
+			this.showHomePage(event);
 		} else {
-			this.showErrorPopup();
+			this.showHomePage(event);
 		}
 	}
 
 	@FXML
 	void initialize() {
 		this.viewModel = new LoginViewModel();
-		this.employeeIDTextField.textProperty().bindBidirectional(this.viewModel.employeeIDProperty());
-		this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
+		this.employeeIDTextField.textProperty()
+				.bindBidirectional(this.viewModel.employeeIDProperty());
+		this.passwordTextField.textProperty()
+				.bindBidirectional(this.viewModel.passwordProperty());
 	}
 
 	private void showErrorPopup() {
 		Alert errorPopup = new Alert(AlertType.ERROR);
 		errorPopup.setContentText(Constants.LOGIN_ERROR_MESSAGE);
 		errorPopup.showAndWait();
-	}
-
-	private void showSuccessPopup(ActionEvent event) throws IOException {
-		Alert successPopup = new Alert(AlertType.CONFIRMATION);
-		successPopup.setContentText(Constants.LOGIN_SUCCESS_MESSAGE);
-		successPopup.showAndWait();
-		this.closeWindow(event);
-		this.showHomePage(event);
-	}
-
-	private void closeWindow(ActionEvent event) {
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.close();
 	}
 
 	void showHomePage(ActionEvent event) throws IOException {

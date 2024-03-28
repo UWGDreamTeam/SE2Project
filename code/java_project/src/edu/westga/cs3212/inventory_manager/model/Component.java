@@ -11,8 +11,10 @@ public class Component extends Item {
 	/**
 	 * Instantiates a new raw material.
 	 *
-	 * @param name the name
-	 * @param productionCost the production cost of this component
+	 * @param name
+	 *            the name
+	 * @param productionCost
+	 *            the production cost of this component
 	 */
 	public Component(String name, double productionCost) {
 		super(name, productionCost);
@@ -40,8 +42,8 @@ public class Component extends Item {
 
 	@Override
 	public String toString() {
-		return "Component{" + "id=" + this.getID() + ", name='" + this.getName() + '\'' + ", productionCost="
-				+ this.getProductionCost() + '}';
+		return "Component{" + "id=" + this.getID() + ", name='" + this.getName()
+				+ '\'' + ", productionCost=" + this.getProductionCost() + '}';
 	}
 
 }

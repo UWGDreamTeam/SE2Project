@@ -22,8 +22,9 @@ public class OrderPageViewModel {
 	private ObjectProperty<Order> selectedOrder;
 
 	/**
-	 * Initializes a new instance of OrderPageViewModel.
-	 * Sets up the connection to the order management system and initializes properties for UI interaction.
+	 * Initializes a new instance of OrderPageViewModel. Sets up the connection
+	 * to the order management system and initializes properties for UI
+	 * interaction.
 	 */
 	public OrderPageViewModel() {
 		this.orderManager = new LocalOrderManager();
@@ -33,15 +34,18 @@ public class OrderPageViewModel {
 	/**
 	 * Retrieves a list of all orders that are currently marked as incomplete.
 	 *
-	 * @return A List of Order objects with a status of CompletionStatus.INCOMPLETE.
+	 * @return A List of Order objects with a status of
+	 *         CompletionStatus.INCOMPLETE.
 	 */
 	public List<Order> getIncompleteOrders() {
-		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE);
+		return this.orderManager
+				.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE);
 	}
 
 	/**
 	 * Gets the property that tracks the currently selected order in the UI.
-	 * This property allows for binding to UI elements and listening for changes in order selection.
+	 * This property allows for binding to UI elements and listening for changes
+	 * in order selection.
 	 *
 	 * @return An ObjectProperty wrapping the currently selected Order object.
 	 */
@@ -52,27 +56,33 @@ public class OrderPageViewModel {
 	/**
 	 * Retrieves a list of all orders that have been marked as complete.
 	 *
-	 * @return A List of Order objects with a status of CompletionStatus.COMPLETE.
+	 * @return A List of Order objects with a status of
+	 *         CompletionStatus.COMPLETE.
 	 */
 	public List<Order> getCompleteOrders() {
-		return this.orderManager.getOrdersByCompletionStatus(CompletionStatus.COMPLETE);
+		return this.orderManager
+				.getOrdersByCompletionStatus(CompletionStatus.COMPLETE);
 	}
 
 	/**
 	 * Marks the provided order as complete within the order management system.
-	 * This method is typically invoked in response to a user action indicating that an order has been fulfilled.
+	 * This method is typically invoked in response to a user action indicating
+	 * that an order has been fulfilled.
 	 *
-	 * @param selectedOrder2 The order to be marked as complete.
+	 * @param selectedOrder2
+	 *            The order to be marked as complete.
 	 * @precondition none
-	 * @postcondition selectedOrder2's completion status is set to CompletionStatus.COMPLETE
+	 * @postcondition selectedOrder2's completion status is set to
+	 *                CompletionStatus.COMPLETE
 	 */
 	public void fulfillSelectedOrder(Order selectedOrder2) {
-		this.orderManager.setOrderCompletionStatus(selectedOrder2, CompletionStatus.COMPLETE);
+		this.orderManager.setOrderCompletionStatus(selectedOrder2,
+				CompletionStatus.COMPLETE);
 	}
 
 	/**
-	 * Clears all orders from the order management system.
-	 * This operation might be used for resetting the system or removing all order records.
+	 * Clears all orders from the order management system. This operation might
+	 * be used for resetting the system or removing all order records.
 	 *
 	 * @precondition none
 	 * @postcondition All orders are removed from the order management system.

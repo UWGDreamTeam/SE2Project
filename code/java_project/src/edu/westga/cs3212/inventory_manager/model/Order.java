@@ -21,19 +21,19 @@ public class Order {
 	private static final String COMPLETION_STATUS_CANNOT_BE_NULL = "Completion status cannot be null";
 	private static final String ID_CANNOT_BE_NULL = "ID cannot be null";
 	private static final String ID_CANNOT_BE_BLANK = "ID cannot be blank";
-	
+
 	private String id;
 
 	private Map<Product, Integer> items;
 
 	private CompletionStatus completionStatus;
-	
+
 	private double salePrice;
 	private double productionCost;
 
 	/**
-	 * Instantiates a new order. Contains a list of items and the date the order was
-	 * created.
+	 * Instantiates a new order. Contains a list of items and the date the order
+	 * was created.
 	 * 
 	 * @precondition none
 	 * @postcondition none
@@ -50,10 +50,13 @@ public class Order {
 	 * Adds the specified product and its quantity to the order.
 	 * 
 	 * @precondition product != null && quantity > MINIMUM_QUANTITY
-	 * @postcondition this.items.contains(product) && this.items.get(product) == currQuantity + quantity
+	 * @postcondition this.items.contains(product) && this.items.get(product) ==
+	 *                currQuantity + quantity
 	 * 
-	 * @param product  the product to be added
-	 * @param quantity the quantity of the product
+	 * @param product
+	 *            the product to be added
+	 * @param quantity
+	 *            the quantity of the product
 	 */
 	public void addItem(Product product, int quantity) {
 		this.checkProductAndQuantityInput(product, quantity);
@@ -71,11 +74,15 @@ public class Order {
 	/**
 	 * Removes the quantity of the specified product from the order.
 	 * 
-	 * @precondition product != null && quantity > MINIMUM_QUANTITY && this.items.contains(product)
-	 * @postcondition this.items.get(product) == currQuantity - quantity || !this.items.contains(product)
+	 * @precondition product != null && quantity > MINIMUM_QUANTITY &&
+	 *               this.items.contains(product)
+	 * @postcondition this.items.get(product) == currQuantity - quantity ||
+	 *                !this.items.contains(product)
 	 * 
-	 * @param product  the product to be removed
-	 * @param quantity the amount of the product to be removed
+	 * @param product
+	 *            the product to be removed
+	 * @param quantity
+	 *            the amount of the product to be removed
 	 */
 	public void removeItem(Product product, int quantity) {
 		this.checkProductAndQuantityInput(product, quantity);
@@ -87,7 +94,8 @@ public class Order {
 		int currQuantity = this.items.get(product);
 
 		if (currQuantity < quantity) {
-			throw new IllegalArgumentException(QUANTITY_TO_REMOVE_IS_GREATER_THAN_QUANTITY_IN_ORDER);
+			throw new IllegalArgumentException(
+					QUANTITY_TO_REMOVE_IS_GREATER_THAN_QUANTITY_IN_ORDER);
 		}
 
 		if (currQuantity == quantity) {
@@ -108,7 +116,7 @@ public class Order {
 	public String getID() {
 		return this.id;
 	}
-	
+
 	/**
 	 * Gets the products of the order along with their quantities.
 	 *
@@ -136,14 +144,16 @@ public class Order {
 	/**
 	 * Sets the completion status to the specified status.
 	 * 
-	 * @param status the new completion status
+	 * @param status
+	 *            the new completion status
 	 * 
 	 * @precondition status != null && typeOf(status) == CompletionStatus
 	 * @postcondition this.isCompleted == true
 	 */
 	public void setCompletionStatus(CompletionStatus status) {
 		if (status == null) {
-			throw new IllegalArgumentException(COMPLETION_STATUS_CANNOT_BE_NULL);
+			throw new IllegalArgumentException(
+					COMPLETION_STATUS_CANNOT_BE_NULL);
 		}
 		this.completionStatus = status;
 	}
@@ -156,18 +166,20 @@ public class Order {
 			throw new IllegalArgumentException(QUANTITY_MUST_BE_GREATER_THAN_0);
 		}
 	}
-	
+
 	private String generateID() {
 		return UUID.randomUUID().toString();
 	}
-	
+
 	/**
 	 * Sets the ID for this order.
 	 * 
-	 * @param id The new ID to be assigned to the order.
+	 * @param id
+	 *            The new ID to be assigned to the order.
 	 * @precondition id != null && !id.isBlank()
 	 * @postcondition this.getID() == id
-	 * @throws IllegalArgumentException if id is null or blank
+	 * @throws IllegalArgumentException
+	 *             if id is null or blank
 	 */
 	public void setID(String id) {
 		if (id == null) {
@@ -183,7 +195,7 @@ public class Order {
 	public int hashCode() {
 		return "Order".hashCode() + this.id.hashCode();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {

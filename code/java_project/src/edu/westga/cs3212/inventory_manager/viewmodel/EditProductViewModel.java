@@ -27,13 +27,19 @@ public class EditProductViewModel {
 	private LocalComponentInventory componentInventory;
 
 	/**
-	 * Initializes a new instance of the EditProductViewModel.
-	 * Sets up property bindings for product attributes and initializes connections to the product and component inventories.
+	 * Initializes a new instance of the EditProductViewModel. Sets up property
+	 * bindings for product attributes and initializes connections to the
+	 * product and component inventories.
 	 *
-	 * @param productInventory An instance of LocalProductInventory for accessing and updating product information.
-	 * @param componentInventory An instance of LocalComponentInventory for accessing component information.
+	 * @param productInventory
+	 *            An instance of LocalProductInventory for accessing and
+	 *            updating product information.
+	 * @param componentInventory
+	 *            An instance of LocalComponentInventory for accessing component
+	 *            information.
 	 */
-	public EditProductViewModel(LocalProductInventory productInventory, LocalComponentInventory componentInventory) {
+	public EditProductViewModel(LocalProductInventory productInventory,
+			LocalComponentInventory componentInventory) {
 		this.componentInventory = componentInventory;
 		this.productInventory = productInventory;
 		this.name = new SimpleStringProperty();
@@ -45,17 +51,21 @@ public class EditProductViewModel {
 	}
 
 	/**
-	 * Loads the product into the ViewModel for editing, setting the initial values for the product's properties.
+	 * Loads the product into the ViewModel for editing, setting the initial
+	 * values for the product's properties.
 	 *
-	 * @param product The product to be edited.
+	 * @param product
+	 *            The product to be edited.
 	 */
 	public void setProduct(Item product) {
 		this.product = (Product) product;
 		this.name.setValue(product.getName());
-		this.productionCost.setValue(String.valueOf(product.getProductionCost()));
+		this.productionCost
+				.setValue(String.valueOf(product.getProductionCost()));
 		this.sellingPrice.setValue(String.valueOf(this.product.getSalePrice()));
 		try {
-			this.quantity.setValue(String.valueOf(this.productInventory.getQuantityOfItem(this.product)));
+			this.quantity.setValue(String.valueOf(
+					this.productInventory.getQuantityOfItem(this.product)));
 		} catch (NullPointerException e) {
 			this.quantity.setValue("0");
 		}
@@ -64,7 +74,8 @@ public class EditProductViewModel {
 	/**
 	 * Retrieves the recipe of the currently selected product.
 	 *
-	 * @return A map representing the recipe, where each key is a Component and each value is the quantity needed for the product.
+	 * @return A map representing the recipe, where each key is a Component and
+	 *         each value is the quantity needed for the product.
 	 */
 	public Map<Component, Integer> getRecipe() {
 		return this.product.getRecipe();
@@ -100,7 +111,8 @@ public class EditProductViewModel {
 	/**
 	 * Gets the quantity property of the product in inventory.
 	 *
-	 * @return A StringProperty representing the quantity of the product in inventory.
+	 * @return A StringProperty representing the quantity of the product in
+	 *         inventory.
 	 */
 	public StringProperty getQuantity() {
 		return this.quantity;
@@ -109,22 +121,28 @@ public class EditProductViewModel {
 	/**
 	 * Gets the property for the component selected in the product's recipe.
 	 *
-	 * @return An ObjectProperty representing the currently selected component in the product's recipe.
+	 * @return An ObjectProperty representing the currently selected component
+	 *         in the product's recipe.
 	 */
 	public ObjectProperty<Component> getSelectedComponentProperty() {
 		return this.selectedComponent;
 	}
 
 	/**
-	 * Updates the product in the inventory with the changes made in the ViewModel.
-	 * Applies modifications to the product's name, production cost, selling price, and recipe.
+	 * Updates the product in the inventory with the changes made in the
+	 * ViewModel. Applies modifications to the product's name, production cost,
+	 * selling price, and recipe.
 	 *
-	 * @param recipe The updated map of components and their quantities for the product's recipe.
+	 * @param recipe
+	 *            The updated map of components and their quantities for the
+	 *            product's recipe.
 	 */
 	public void updateProduct(Map<Component, Integer> recipe) {
 		this.product.setName(this.name.getValue());
-		this.product.setProductionCost(Double.parseDouble(this.productionCost.getValue().trim()));
-		this.product.setSalePrice(Double.parseDouble(this.sellingPrice.getValue().trim()));
+		this.product.setProductionCost(
+				Double.parseDouble(this.productionCost.getValue().trim()));
+		this.product.setSalePrice(
+				Double.parseDouble(this.sellingPrice.getValue().trim()));
 		this.product.setRecipe(recipe);
 		this.productInventory.editItem(this.product);
 		int quantity = Integer.parseInt(this.quantity.getValue().trim());
@@ -134,7 +152,8 @@ public class EditProductViewModel {
 	/**
 	 * Retrieves an observable list of components for selection in the UI.
 	 *
-	 * @return An ObservableList of Component objects available in the component inventory.
+	 * @return An ObservableList of Component objects available in the component
+	 *         inventory.
 	 */
 	public ObservableList<Component> getObservableComponentList() {
 		ArrayList<Component> items = new ArrayList<Component>();

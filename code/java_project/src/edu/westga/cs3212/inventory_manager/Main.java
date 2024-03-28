@@ -1,6 +1,5 @@
 package edu.westga.cs3212.inventory_manager;
 
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -12,7 +11,7 @@ import javafx.scene.Scene;
 /**
  * Entry point for the program
  *
- * @author	Group 5
+ * @author	Group 1
  * @version Spring 2024
  */
 public class Main extends Application {
@@ -26,6 +25,8 @@ public class Main extends Application {
 	public static final String EDIT_COMPONENT_PAGE = "view/EditComponentPage.fxml";
 	public static final String ADD_PRODUCT_PAGE = "view/AddProductPage.fxml";
 	public static final String EDIT_PRODUCT_PAGE = "view/EditProductPage.fxml";
+	public static final String ADMIN_PAGE = "view/AdminPage.fxml";
+	public static final String ADMIN_EDIT_CREDENTIALS_PAGE = "view/AdminEditCredentialsPage.fxml";
 	
 	private static Stage primaryStage;
 
@@ -40,24 +41,26 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		primaryStage = stage;
-        Parent parent = FXMLLoader.load(getClass().getResource(Main.LOGIN_PAGE));
-        Scene scene = new Scene(parent);
-        primaryStage.setTitle(WINDOW_TITLE);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+		Parent parent = FXMLLoader
+				.load(getClass().getResource(Main.LOGIN_PAGE));
+		Scene scene = new Scene(parent);
+		primaryStage.setTitle(WINDOW_TITLE);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
-	
-	 /**
-     * Provides access to the primary stage of the application.
-     * This static method allows other parts of the application to retrieve the primary stage to update or modify the scene.
-     *
-     * @return The primary stage of the application.
-     * @precondition none
-     * @postcondition none
-     */
+
+	/**
+	 * Provides access to the primary stage of the application. This static
+	 * method allows other parts of the application to retrieve the primary
+	 * stage to update or modify the scene.
+	 *
+	 * @return The primary stage of the application.
+	 * @precondition none
+	 * @postcondition none
+	 */
 	public static Stage getPrimaryStage() {
-        return primaryStage;
-    }
+		return primaryStage;
+	}
 
 	/**
 	 * Primary Java entry point.
