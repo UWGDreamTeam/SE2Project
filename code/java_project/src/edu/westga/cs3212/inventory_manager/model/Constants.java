@@ -45,8 +45,13 @@ public final class Constants {
 	public static final double MINIMUM_SALES_PRICE = 0;
 	public static final String ORDER_INVENTORY_CANNOT_BE_INSTANTIATED = "Order inventory cannot be instantiated";
 	public static final String COMPONENT_INVENTORY_CANNOT_BE_INSTANTIATED = "Component inventory cannot be instantiated";
-	public static final String UTILITY_CLASS_ERROR = "Utility class";
+	public static final String HOME_PAGE_TITLE = "Home Page";
+	public static final String INVENTORY_PAGE_TITLE = "Inventory Page";
+	public static final String ORDER_PAGE_TITLE = "Order Page";
+	public static final String ADMIN_PAGE_TITLE = "Admin Page";
 	
+	public static final String UTILITY_CLASS_ERROR = "Utility class";
+
 	private Constants() {
 		throw new IllegalStateException(Constants.UTILITY_CLASS_ERROR);
 	}

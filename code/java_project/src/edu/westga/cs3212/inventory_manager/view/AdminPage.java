@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.viewmodel.AdminPageViewModel;
 import javafx.beans.binding.Bindings;
@@ -20,6 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -52,6 +55,15 @@ public class AdminPage {
     @FXML
 	private Button removeButton;
     
+    @FXML
+	private Text employeeFullNameLabel;
+
+	@FXML
+	private Text employeeIdLabel;
+
+	@FXML
+	private Text employeeRoleLabel;
+    
     private AdminPageViewModel adminVM;
     
     private void setupButtonsVisibility() {
@@ -69,6 +81,51 @@ public class AdminPage {
 				.bind(Bindings.isNull(this.usersTableView.getSelectionModel().selectedItemProperty()));
 		this.removeButton.disableProperty()
 				.bind(Bindings.isNull(this.usersTableView.getSelectionModel().selectedItemProperty()));
+	}
+	
+	@FXML
+	void homePageButtonOnClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
+		Scene scene = stage.getScene();
+		scene.setRoot(parent);
+		stage.setTitle(Constants.HOME_PAGE_TITLE);
+	}
+
+	@FXML
+	void inventoryPageButtonOnClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader
+				.load(Main.class.getResource(Main.INVENTORY_PAGE));
+		Scene scene = stage.getScene();
+		scene.setRoot(parent);
+		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
+	}
+	
+	@FXML
+	void ordersPageButtonOnClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
+		Scene scene = new Scene(parent);
+		stage.setScene(scene);
+		stage.setTitle(Constants.ORDER_PAGE_TITLE);
+		stage.show();
+	}
+
+	@FXML
+	void logOutButtonOnClick(ActionEvent event) {
+		try {
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
+			Scene currentScene = currentStage.getScene();
+			currentScene.setRoot(parent);
+			currentStage.setTitle(Main.WINDOW_TITLE);
+			currentStage.sizeToScene();
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+			errorPopup.setContentText(e.getMessage());
+			errorPopup.showAndWait();
+		}
 	}
 
     @FXML

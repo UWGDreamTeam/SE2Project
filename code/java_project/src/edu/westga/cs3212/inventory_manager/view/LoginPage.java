@@ -60,7 +60,7 @@ public class LoginPage {
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Home Page");
+		stage.setTitle(Constants.HOME_PAGE_TITLE);
 		stage.show();
 	}
 }

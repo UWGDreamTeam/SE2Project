@@ -3,6 +3,7 @@ package edu.westga.cs3212.inventory_manager.view;
 import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.viewmodel.HomePageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class HomePage {
@@ -64,56 +63,46 @@ public class HomePage {
 
 	private void bindToViewModel() {
 		this.viewModel = new HomePageViewModel();
-		this.componentSummaryTextArea.textProperty()
-				.bind(this.viewModel.getComponentSumarryTextArea());
-		this.productSummaryTextArea.textProperty()
-				.bind(this.viewModel.getProductSumarryTextArea());
-		this.orderSummaryTextArea.textProperty()
-				.bind(this.viewModel.getOrderSumarryTextArea());
+		this.componentSummaryTextArea.textProperty().bind(this.viewModel.getComponentSumarryTextArea());
+		this.productSummaryTextArea.textProperty().bind(this.viewModel.getProductSumarryTextArea());
+		this.orderSummaryTextArea.textProperty().bind(this.viewModel.getOrderSumarryTextArea());
 	}
 
 	@FXML
-	void inventoryPageButtonOnClick(MouseEvent event) throws IOException {
+	void inventoryPageButtonOnClick(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader
-				.load(Main.class.getResource(Main.INVENTORY_PAGE));
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Home Page");
+		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
 		stage.show();
 	}
 
 	@FXML
-	void ordersPageButtonOnClick(MouseEvent event) throws IOException {
+	void ordersPageButtonOnClick(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader
-				.load(Main.class.getResource(Main.ORDER_PAGE));
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Home Page");
+		stage.setTitle(Constants.ORDER_PAGE_TITLE);
 		stage.show();
 	}
-
-    @FXML
-    void openAdminPage(ActionEvent event) throws IOException {
-    	Stage modalStage = new Stage();
+	
+	@FXML
+	void adminPageButtonOnClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADMIN_PAGE));
 		Scene scene = new Scene(parent);
-
-		modalStage.setTitle(Main.WINDOW_TITLE);
-		modalStage.setScene(scene);
-		modalStage.initModality(Modality.WINDOW_MODAL);
-		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-		modalStage.showAndWait();
-    }
+		stage.setScene(scene);
+		stage.setTitle(Constants.ADMIN_PAGE_TITLE);
+		stage.show();
+	}
 
 	@FXML
-	void logOutButton(ActionEvent event) {
+	void logOutButtonOnClick(ActionEvent event) {
 		try {
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene()
-					.getWindow();
-			Parent parent = FXMLLoader
-					.load(Main.class.getResource(Main.LOGIN_PAGE));
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
