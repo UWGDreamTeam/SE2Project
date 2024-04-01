@@ -42,9 +42,9 @@ public final class DemoDataUtility {
 	 *         each value is the quantity of that component.
 	 */
 	static Map<Component, Integer> createDemoComponents() {
-		String[] names = { 	"Iron", "Wood", "Sticks", "Steel", "Copper", "Aluminum", "Plastic", "Glass", "Rubber", 
-							"Silicon", "Gold", "Silver", "Bronze", "Lead", "Nickel", "Zinc", "Tin", "Magnesium", "Titanium",
-							"Brass", "Quartz", "Marble", "Granite", "Ceramic", "Carbon Fiber" };
+		String[] names = { "Iron", "Wood", "Sticks", "Steel", "Copper", "Aluminum", "Plastic", "Glass", "Rubber",
+				"Silicon", "Gold", "Silver", "Bronze", "Lead", "Nickel", "Zinc", "Tin", "Magnesium", "Titanium",
+				"Brass", "Quartz", "Marble", "Granite", "Ceramic", "Carbon Fiber" };
 
 		Map<Component, Integer> components = new HashMap<>();
 		for (int i = 0; i < names.length; i++) {

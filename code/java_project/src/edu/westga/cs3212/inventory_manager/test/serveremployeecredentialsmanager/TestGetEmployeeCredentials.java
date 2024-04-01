@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
@@ -12,6 +13,11 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredent
 import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 
 class TestGetEmployeeCredentials {
+	
+	@BeforeEach
+    void setUp() {
+        EmployeeCredentialsManager.clearCredentials();
+    }
 
 	@Test
 	void testGetNullEmployeeID() {
@@ -29,8 +35,6 @@ class TestGetEmployeeCredentials {
 	
 	@Test
 	void testGetIdNotFound() {
-		EmployeeCredentialsManager.clearCredentials();
-		
 		EmployeeCredentialsManager.addEmployee("testFirstName",
         		"testLastName",
         		"testPassword",
@@ -44,8 +48,6 @@ class TestGetEmployeeCredentials {
 	@Test
 	void getValidEmployee() {
 		//ARRANGE
-		EmployeeCredentialsManager.clearCredentials();
-		
 		EmployeeCredentialsManager.addEmployee("testFirstName",
         		"testLastName",
         		"testPassword",

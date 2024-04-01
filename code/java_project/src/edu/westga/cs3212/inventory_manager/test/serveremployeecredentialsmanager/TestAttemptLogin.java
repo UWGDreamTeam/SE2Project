@@ -4,12 +4,18 @@ package edu.westga.cs3212.inventory_manager.test.serveremployeecredentialsmanage
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 
 class TestAttemptLogin {
+	
+	@BeforeEach
+    void setUp() {
+        EmployeeCredentialsManager.clearCredentials();
+    }
 
 	@Test
 	void testValidLogin() {
@@ -25,8 +31,6 @@ class TestAttemptLogin {
 	
 	@Test
 	void testInvalidPassword() {
-		EmployeeCredentialsManager.clearCredentials();
-		
 		EmployeeCredentialsManager.addEmployee("testFirstName",
         		"testLastName",
         		"testPassword",
@@ -39,8 +43,6 @@ class TestAttemptLogin {
 	
 	@Test
 	void testInvaliID() {
-		EmployeeCredentialsManager.clearCredentials();
-		
 		EmployeeCredentialsManager.addEmployee("testFirstName",
         		"testLastName",
         		"testPassword",

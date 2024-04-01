@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
@@ -15,11 +16,13 @@ import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentials
 
 class TestGetEmployees {
 	
+	@BeforeEach
+    void setUp() {
+        EmployeeCredentialsManager.clearCredentials();
+    }
 	
 	@Test
 	void testGetEmployeesEmptyList() {
-		EmployeeCredentialsManager.clearCredentials();
-		
 		assertThrows(IllegalArgumentException.class, () -> {
 			EmployeeCredentialsManager.getEmployees();
 		});
@@ -28,8 +31,6 @@ class TestGetEmployees {
 	@Test
 	void testGetEmployeesWithOneEmployee() {
 		//ARRANGE
-		EmployeeCredentialsManager.clearCredentials();
-		
 		EmployeeCredentialsManager.addEmployee("testFirstName",
         		"testLastName",
         		"testPassword",
@@ -52,8 +53,6 @@ class TestGetEmployees {
 	@Test
 	void testGetEmployeesWithMultiple() {
 		//ARRANGE
-		EmployeeCredentialsManager.clearCredentials();
-		
 		for (int quantity = 1; quantity < 4; quantity++) {
 			
 			EmployeeType role = quantity % 2 == 0 ?  EmployeeType.MANAGER : EmployeeType.WORKER;
