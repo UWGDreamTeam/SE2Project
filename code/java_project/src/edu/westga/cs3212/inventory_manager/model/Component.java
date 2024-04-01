@@ -40,10 +40,4 @@ public class Component extends Item {
 		return this.hashCode() == other.hashCode();
 	}
 
-	@Override
-	public String toString() {
-		return "Component{" + "id=" + this.getID() + ", name='" + this.getName()
-				+ '\'' + ", productionCost=" + this.getProductionCost() + '}';
-	}
-
 }

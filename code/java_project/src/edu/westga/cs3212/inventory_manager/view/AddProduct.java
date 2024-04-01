@@ -51,9 +51,6 @@ public class AddProduct {
 
 	@FXML
 	private TextField sellingPriceTextField;
-
-	private LocalComponentInventory componentInventory;
-	private LocalProductInventory productInventory;
 	private AddProductViewModel addProductVM;
 	private Map<Component, Integer> componentList;
 
@@ -89,10 +86,7 @@ public class AddProduct {
 
 	@FXML
 	void initialize() {
-		this.componentInventory = new LocalComponentInventory();
-		this.productInventory = new LocalProductInventory();
-		this.addProductVM = new AddProductViewModel(this.componentInventory,
-				this.productInventory);
+		this.addProductVM = new AddProductViewModel();
 		this.productionCostTextField.textProperty()
 				.bindBidirectional(this.addProductVM.getProductionCost());
 		this.sellingPriceTextField.textProperty()

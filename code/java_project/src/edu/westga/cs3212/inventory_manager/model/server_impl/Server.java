@@ -25,7 +25,7 @@ public class Server {
 	 * Creates a server object to send requests to the server.
 	 * 
 	 * @precondition request != null && request is valid (see README)
-	 * @postondition none
+	 * @postcondition none
 	 * 
 	 * @param request
 	 *            the request string to send to the server
@@ -49,6 +49,16 @@ public class Server {
 		return response;
 	}
 
+	/**
+	 * Sends a request to the server and returns the response as a map.
+	 * 
+	 * @param requestType the type of request to send
+	 * @param requestData the data to send with the request
+	 * @precondition requestType != null && requestData != null
+	 * @postcondition none
+	 * @return the response from the server as a map
+	 * @throws IllegalArgumentException
+	 */
 	public static Map<String, Object> sendRequestAndGetResponse(
 			String requestType, Map<String, Object> requestData)
 			throws IllegalArgumentException {
@@ -78,6 +88,21 @@ public class Server {
 		}
 
 		return safelyCastToMap(responseMap.get("data"));
+	}
+	
+	/**
+	 * Sends a request to the server and returns the response as a map.
+	 * @param requestType the type of request to send
+	 * @precondition requestType != null
+	 * @postcondition none
+	 * @return the response from the server as a map
+	 * @throws IllegalArgumentException
+	 */
+	public static Map<String, Object> sendRequestAndGetResponse(
+			String requestType) throws IllegalArgumentException {
+		Map<String, Object> requestData = new HashMap<>();
+		requestData.put("data", new HashMap<>());
+		return Server.sendRequestAndGetResponse(requestType, requestData);
 	}
 
 	@SuppressWarnings("unchecked")

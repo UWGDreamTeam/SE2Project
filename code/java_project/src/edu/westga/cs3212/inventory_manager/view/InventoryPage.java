@@ -11,6 +11,8 @@ import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 import edu.westga.cs3212.inventory_manager.viewmodel.InventoryViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -121,17 +123,12 @@ public class InventoryPage {
 	private Tab productsTabPage;
 
 	private InventoryViewModel inventoryVM;
-	private LocalComponentInventory localComponentInventory;
-	private LocalProductInventory localProductInventory;
 
 	/* GENERAL */
 
 	@FXML
 	void initialize() {
-		this.localComponentInventory = new LocalComponentInventory();
-		this.localProductInventory = new LocalProductInventory();
-		this.inventoryVM = new InventoryViewModel(this.localComponentInventory,
-				this.localProductInventory);
+		this.inventoryVM = new InventoryViewModel();
 
 		this.inventoryVM.getSelectedComponent().bind(this.componentsTableView
 				.getSelectionModel().selectedItemProperty());
@@ -183,8 +180,7 @@ public class InventoryPage {
 						cellData.getValue().getProductionCost()));
 		this.productQuantityColumn.setCellValueFactory(cellData -> {
 			try {
-				int quantity = this.localProductInventory
-						.getQuantityOfItem(cellData.getValue());
+				int quantity = ProductInventory.getQuantity(cellData.getValue().getID());
 				return new SimpleIntegerProperty(quantity).asObject();
 			} catch (IllegalArgumentException e) {
 				return new SimpleIntegerProperty(0).asObject();
@@ -215,8 +211,7 @@ public class InventoryPage {
 						cellData.getValue().getProductionCost()));
 		this.quantityColumn.setCellValueFactory(cellData -> {
 			try {
-				int quantity = this.localComponentInventory
-						.getQuantityOfItem(cellData.getValue());
+				int quantity = ComponentInventory.getQuantity(cellData.getValue().getID());
 				return new SimpleIntegerProperty(quantity).asObject();
 			} catch (IllegalArgumentException e) {
 				return new SimpleIntegerProperty(0).asObject();

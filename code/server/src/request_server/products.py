@@ -209,3 +209,24 @@ def get_quantity_of_product(data):
         return {"status": "success", "data": {"Quantity": products[product_id]["Quantity"]}}
     log(f"Product not found: {product_id}")
     return {"status": "error", "message": "Product not found"}
+
+def get_all_products():
+    """
+    Retrieves detailed information about all products in the inventory.
+
+    Returns:
+    - dict: A response object including the details of all products if successful.
+    """
+    log("Retrieved all products")
+    return {"status": "success", "data": products}
+
+def clear_product_inventory():
+    """
+    Clears all products from the inventory.
+
+    Returns:
+    - dict: A response object indicating the success of the operation.
+    """
+    products.clear()
+    log("Cleared product inventory")
+    return {"status": "success", "message": "Product inventory cleared"}

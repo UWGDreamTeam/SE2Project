@@ -29,11 +29,10 @@ public class LocalEmployeeCredentialsManager extends SystemCredentialsManager {
 		if (LocalEmployeeCredentialsManager.employeeCredentialsMap == null) {
 			LocalEmployeeCredentialsManager.employeeCredentialsMap = new HashMap<>();
 			LocalEmployeeCredentialsManager.employeeCredentialsMap = EmployeeCredentialsStorage.load(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION);
-			this.addAdminUser();
 		}
 	}
 	
-	private void addAdminUser() {
+	public void addAdminUser() {
 		String admin = "admin";
         LocalEmployeeCredentials newEmployee = new LocalEmployeeCredentials(admin, admin, admin, admin, EmployeeType.MANAGER);
         LocalEmployeeCredentialsManager.employeeCredentialsMap.put(newEmployee.getEmployeeID(), newEmployee);

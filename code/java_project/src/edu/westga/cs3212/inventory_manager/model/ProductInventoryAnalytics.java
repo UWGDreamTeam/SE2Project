@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
+import edu.westga.cs3212.inventory_manager.model.server_impl.OrderInventory;
 
 /**
  * Provides analytics on product usage within orders in the inventory management
@@ -17,7 +18,6 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
  */
 public class ProductInventoryAnalytics {
 
-	private LocalOrderManager orderManager;
 	private static final int MINIMUM_LIST_SIZE = 0;
 
 	/**
@@ -29,7 +29,6 @@ public class ProductInventoryAnalytics {
 	 *                instance
 	 */
 	public ProductInventoryAnalytics() {
-		this.orderManager = new LocalOrderManager();
 	}
 
 	/**
@@ -51,7 +50,7 @@ public class ProductInventoryAnalytics {
 		if (listSize < MINIMUM_LIST_SIZE) {
 			throw new IllegalArgumentException("List size cannot be negative");
 		}
-		Iterable<Order> orders = this.orderManager.getOrders();
+		Iterable<Order> orders = OrderInventory.getOrders();
 		Map<Product, Integer> productCount = new HashMap<>();
 
 		for (Order order : orders) {

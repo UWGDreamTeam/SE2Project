@@ -139,3 +139,56 @@ def get_order(data):
 
     log(f"Order not found: {order_id}")
     return {"status": "error", "message": "Order not found"}
+
+def clear_all_orders():
+    """
+    Clears all orders from the system.
+
+    Returns:
+    - dict: A response object with a status message indicating success.
+    """
+    orders.clear()
+    log("Cleared all orders")
+    return {"status": "success", "message": "All orders cleared"}
+
+def get_orders_by_status(data):
+    """
+    Retrieves all orders with a specific completion status.
+
+    Parameters:
+    - data (dict): Contains the completion status to filter orders.
+
+    Returns:
+    - dict: A response object with a status message indicating success or
+        error, and a list of orders with the specified status if found.
+    """
+    completion_status = data.get('CompletionStatus')
+    if not completion_status:
+        log(f"Missing data for getting orders by status: {data}")
+        return {"status": "error", "message": "Missing data for getting orders by status"}
+    filtered_orders = {order_id: order for order_id, order in orders.items() if
+                       order["CompletionStatus"] == completion_status}
+    log(f"Retrieved orders by status: {completion_status}")
+    log(f"Orders: {filtered_orders}")
+    return {"status": "success", "data": filtered_orders}
+
+def clear_order_inventory():
+    """
+    Clears all orders from the system.
+
+    Returns:
+    - dict: A response object with a status message indicating success.
+    """
+    orders.clear()
+    log("Cleared all orders")
+    return {"status": "success", "message": "All orders cleared"}
+
+def get_all_orders():
+    """
+    Retrieves all orders in the system.
+    
+    Returns:
+    - dict: A response object with a status message indicating success and a list of all orders.
+    """
+    log("Retrieved all orders")
+    return {"status": "success", "data": orders}

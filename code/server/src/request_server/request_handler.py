@@ -25,14 +25,18 @@ Imports:
 import json
 from request_server.products import (
     add_product, update_product, delete_product,
-    get_product, produce_product, get_quantity_of_product
+    get_product, produce_product, get_quantity_of_product,
+    get_all_products, clear_product_inventory
 )
 from request_server.components import (
     add_component, update_component, delete_component,
-    get_component, get_quantity_of_component, order_component
+    get_component, get_quantity_of_component, order_component,
+    get_all_components, clear_component_inventory
 )
 from request_server.orders import (
-    create_order, update_order, delete_order, get_order
+    create_order, update_order, delete_order, get_order,
+    clear_all_orders, get_orders_by_status,
+    clear_order_inventory, get_all_orders
 )
 from request_server.utilities import log
 
@@ -57,6 +61,14 @@ request_handlers = {
     "deleteOrder": delete_order,
     "updateOrder": update_order,
     "getOrder": get_order,
+    "getComponents": get_all_components,
+    "clearProductInventory": clear_product_inventory,
+    "clearComponentInventory": clear_component_inventory,
+    "clearOrderInventory": clear_order_inventory,
+    "getProducts": get_all_products,
+    "clearOrders": clear_all_orders,
+    "getOrdersByCompletionStatus": get_orders_by_status,
+    "getOrders": get_all_orders
 }
 
 def handle_request(request_str):
@@ -81,6 +93,10 @@ def handle_request(request_str):
         data = request_data.get('data', {})
         handler = request_handlers.get(request_type)
 
+        if len(data) == 0:
+            response = handler()
+            
+            return json.dumps(response)
         if handler:
             response = handler(data)
             return json.dumps(response)

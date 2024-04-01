@@ -8,44 +8,37 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.ProductInventoryAnalytics;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.OrderInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 
 class TestGetMostUsedProducts {
 	
-	private LocalOrderManager orderManager;
     private ProductInventoryAnalytics analytics;
     
     @BeforeEach
     void setUp() {
-        this.orderManager = new LocalOrderManager();
-        this.analytics = new ProductInventoryAnalytics();
-
-	    Component componentA = new Component("ComponentA", 1.0);
-	    Component componentB = new Component("ComponentB", 2.0);
-	    Component componentC = new Component("ComponentC", 3.0);
-	    
-	    Map<Component, Integer> recipe1 = new HashMap<>();
-	    recipe1.put(componentA, 10);
-	    recipe1.put(componentB, 5);
-
-	    Map<Component, Integer> recipe2 = new HashMap<>();
-	    recipe2.put(componentA, 15);
-	    recipe2.put(componentC, 20);
-	    
-	    Product product1 = new Product("Product1", 100.0, 150.0, recipe1);
-	    Product product2 = new Product("Product2", 200.0, 250.0, recipe2);
-
-        Order order1 = new Order();
-        order1.addItem(product1, 5);
-        Order order2 = new Order();
-        order2.addItem(product2, 3);
-        
-        this.orderManager.addOrder(order1);
-        this.orderManager.addOrder(order2);
+    	this.analytics = new ProductInventoryAnalytics();
+		OrderInventory.clearOrders();
+		ProductInventory.clearInventory();
+		ComponentInventory.clearInventory();
+		
+		String componentID = ComponentInventory.addComponent("test", 0, 10);
+		Component component = ComponentInventory.getComponent(componentID);
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(component, 1);
+		String productID = ProductInventory.addProduct("test", 2, recipe, 10);
+		Product product = ProductInventory.getProduct(productID);
+		Map<Product, Integer> orders = new HashMap<>();
+		orders.put(product, 1);
+		OrderInventory.createOrder(orders, CompletionStatus.COMPLETE);
+		OrderInventory.createOrder(orders, CompletionStatus.INCOMPLETE);
     }
 
 	@Test

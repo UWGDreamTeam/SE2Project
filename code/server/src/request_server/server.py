@@ -12,6 +12,7 @@ from request_server import constants
 from request_server.request_handler import handle_request
 from request_server.utilities import log
 
+
 __author__ = 'Jason Nunez'
 __version__ = '1.0.0'
 __pylint__ = 'Version 2.14.5'

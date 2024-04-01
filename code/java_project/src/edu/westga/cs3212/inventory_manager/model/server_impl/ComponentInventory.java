@@ -15,6 +15,8 @@ import edu.westga.cs3212.inventory_manager.model.Constants;
  */
 public final class ComponentInventory {
 
+	private static final String ACTION_CLEAR_INVENTORY = "clearComponentInventory";
+	private static final String ACTION_GET_COMPONENTS = "getComponents";
 	private static final String ACTION_GET_QUANTITY_OF_COMPONENT = "getQuantityOfComponent";
 	private static final String ACTION_ORDER_COMPONENT = "orderComponent";
 	private static final String ACTION_UPDATE_COMPONENT = "updateComponent";
@@ -225,5 +227,49 @@ public final class ComponentInventory {
 		Component component = new Component(name, productionCost);
 		component.setID(componentID);
 		return component;
+	}
+
+	/**
+	 * Retrieves all components in the inventory.
+	 * @precondition none
+	 * @postcondition none
+	 * @return An array of all components in the inventory.
+	 */
+	public static Component[] getComponents() {
+		Map<String, Object> dataMap = Server
+				.sendRequestAndGetResponse(ACTION_GET_COMPONENTS);
+		return parseComponents(dataMap);
+	}
+
+	private static Component[] parseComponents(Map<String, Object> dataMap) {
+		Component[] components = new Component[dataMap.size()];
+		int index = 0;
+		for (String key : dataMap.keySet()) {
+			Map<String, Object> componentMap = (Map<String, Object>) dataMap
+					.get(key);
+			Component component = extractComponent(key, componentMap);
+			components[index] = component;
+			index++;
+		}
+		return components;
+	}
+
+	private static Component extractComponent(String key,
+			Map<String, Object> componentMap) {
+		Component component = new Component(
+				(String) componentMap.get(KEY_DATA_NAME),
+				(double) componentMap.get(KEY_DATA_PRODUCTION_COST));
+		component.setID(key);
+		return component;
+	}
+
+	/**
+	 * Clears the inventory of all components.
+	 * 
+	 * @precondition none
+	 * @postcondition the inventory is empty
+	 */
+	public static void clearInventory() {
+		Server.sendRequestAndGetResponse(ACTION_CLEAR_INVENTORY);
 	}
 }

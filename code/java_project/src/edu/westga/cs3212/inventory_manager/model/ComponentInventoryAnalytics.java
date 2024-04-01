@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 
 /**
  * Provides analytics on component usage across all products in the inventory.
@@ -18,7 +19,6 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventor
  */
 public class ComponentInventoryAnalytics {
 
-	private LocalProductInventory productManager;
 	private static final int MINIMUM_LIST_SIZE = 0;
 
 	/**
@@ -30,7 +30,6 @@ public class ComponentInventoryAnalytics {
 	 *                this instance
 	 */
 	public ComponentInventoryAnalytics() {
-		this.productManager = new LocalProductInventory();
 	}
 
 	/**
@@ -56,7 +55,7 @@ public class ComponentInventoryAnalytics {
 		if (listSize < MINIMUM_LIST_SIZE) {
 			throw new IllegalArgumentException("List size cannot be negative");
 		}
-		Iterable<Product> products = this.productManager.getProducts();
+		Product[] products = ProductInventory.getProducts();
 		Map<Component, Integer> componentCount = new HashMap<>();
 
 		for (Product product : products) {
@@ -67,13 +66,17 @@ public class ComponentInventoryAnalytics {
 	}
 
 	private Map<Component, Integer> getTopComponentsSortedByCount(
-			Map<Component, Integer> componentCount, int listSize) {
-		return componentCount.entrySet().stream().sorted(
-				(Map.Entry.<Component, Integer>comparingByValue().reversed()))
-				.limit(listSize).collect(
-						Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-								(e1, e2) -> e1, LinkedHashMap::new));
+	        Map<Component, Integer> componentCount, int listSize) {
+	    return componentCount.entrySet().stream()
+	            .sorted(Map.Entry.<Component, Integer>comparingByValue().reversed())
+	            .limit(listSize)
+	            .collect(Collectors.toMap(
+	                    Map.Entry::getKey,
+	                    Map.Entry::getValue,
+	                    (oldValue, newValue) -> oldValue, // In case of a key collision, keep the old value
+	                    LinkedHashMap::new)); // Preserve the order
 	}
+
 
 	private void updateComponentCount(Product product,
 			Map<Component, Integer> componentCount) {
