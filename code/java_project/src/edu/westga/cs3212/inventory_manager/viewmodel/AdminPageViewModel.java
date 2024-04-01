@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -18,7 +19,6 @@ import javafx.collections.ObservableList;
 public class AdminPageViewModel {
 	
 	private ObjectProperty<LocalEmployeeCredentials> selectedUser;
-	private LocalEmployeeCredentialsManager credentialsManager;
 
 	/**
 	 * Instantiates a new admin page view model.
@@ -27,7 +27,6 @@ public class AdminPageViewModel {
      * 					this.credentialsManager != null
 	 */
 	public AdminPageViewModel() {
-		this.credentialsManager = new LocalEmployeeCredentialsManager();
 		this.selectedUser = new SimpleObjectProperty<>();
 	}
 
@@ -42,7 +41,7 @@ public class AdminPageViewModel {
 	 */
 	public boolean removeUser() {
 		String employeeId = this.selectedUser.getValue().getEmployeeID();
-		return this.credentialsManager.removeEmployee(employeeId);
+		return EmployeeCredentialsManager.removeEmployee(employeeId);
 	}
 	
 	/**
@@ -55,7 +54,7 @@ public class AdminPageViewModel {
      */
 	public ObservableList<LocalEmployeeCredentials> getObservableUsersList() {
 		ArrayList<LocalEmployeeCredentials> users = new ArrayList<>();
-		for (LocalEmployeeCredentials user : this.credentialsManager.getEmployees()) {
+		for (LocalEmployeeCredentials user : EmployeeCredentialsManager.getEmployees()) {
 			users.add(user);
 		}
 		return FXCollections.observableArrayList(users);

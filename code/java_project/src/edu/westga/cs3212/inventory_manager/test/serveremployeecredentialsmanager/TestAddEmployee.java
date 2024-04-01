@@ -59,9 +59,16 @@ class TestAddEmployee {
 	}
 	
 	@Test
-	void testAddNullRole() {
+	void testAddNullEmployeeTypeRole() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			EmployeeCredentialsManager.addEmployee(this.firstName, this.lastName, this.password, null);
+			EmployeeCredentialsManager.addEmployee(firstName, lastName, password, (EmployeeType) null);
+		});
+	}
+	
+	@Test
+	void testAddNullStringRole() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmployeeCredentialsManager.addEmployee(firstName, lastName, password, (String) null);
 		});
 	}
 
