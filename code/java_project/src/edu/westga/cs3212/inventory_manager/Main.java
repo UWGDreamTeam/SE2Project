@@ -42,7 +42,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws IOException {
 		primaryStage = stage;
 		Parent parent = FXMLLoader
-				.load(getClass().getResource(Main.LOGIN_PAGE));
+				.load(getClass().getResource(Main.ADMIN_PAGE));
 		Scene scene = new Scene(parent);
 		primaryStage.setTitle(WINDOW_TITLE);
 		primaryStage.setScene(scene);

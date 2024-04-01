@@ -23,6 +23,7 @@
             <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Home" />
             <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
             <Button fx:id="ordersButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Orders" />
+            <Button fx:id="adminButton" mnemonicParsing="false" onAction="#adminPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Admin" />
          </items>
       </ToolBar>
       <TabPane fx:id="ordersTabPane" layoutX="150.0" layoutY="100.0" prefHeight="400.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE">

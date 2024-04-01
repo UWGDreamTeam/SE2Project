@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.viewmodel.OrderPageViewModel;
 import javafx.beans.binding.BooleanBinding;
@@ -82,44 +83,7 @@ public class OrderPage {
 	private Button fulfillButton;
 
 	private OrderPageViewModel viewModel;
-
-	@FXML
-	void homePageButtonOnClick(ActionEvent event) throws IOException {
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
-		Scene scene = stage.getScene();
-		scene.setRoot(parent);
-		stage.setTitle("Home Page");
-	}
-
-	@FXML
-	void inventoryPageButtonOnClick(ActionEvent event) throws IOException {
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader
-				.load(Main.class.getResource(Main.INVENTORY_PAGE));
-		Scene scene = stage.getScene();
-		scene.setRoot(parent);
-		stage.setTitle("Inventory Page");
-	}
-
-	@FXML
-	void logOutButtonOnClick(ActionEvent event) throws IOException {
-		try {
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene()
-					.getWindow();
-			Parent parent = FXMLLoader
-					.load(Main.class.getResource(Main.LOGIN_PAGE));
-			Scene currentScene = currentStage.getScene();
-			currentScene.setRoot(parent);
-			currentStage.setTitle(Main.WINDOW_TITLE);
-			currentStage.sizeToScene();
-		} catch (IOException e) {
-			Alert errorPopup = new Alert(AlertType.ERROR);
-			errorPopup.setContentText(e.getMessage());
-			errorPopup.showAndWait();
-		}
-	}
-
+	
 	@FXML
 	void initialize() {
 		this.viewModel = new OrderPageViewModel();
@@ -140,6 +104,51 @@ public class OrderPage {
 				.or(isClosedOrdersTabSelected);
 
 		this.fulfillButton.disableProperty().bind(shouldDisableFulfillButton);
+	}
+	
+	@FXML
+	void homePageButtonOnClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
+		Scene scene = stage.getScene();
+		scene.setRoot(parent);
+		stage.setTitle(Constants.HOME_PAGE_TITLE);
+	}
+
+	@FXML
+	void inventoryPageButtonOnClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader
+				.load(Main.class.getResource(Main.INVENTORY_PAGE));
+		Scene scene = stage.getScene();
+		scene.setRoot(parent);
+		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
+	}
+	
+	@FXML
+	void adminPageButtonOnClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADMIN_PAGE));
+		Scene scene = new Scene(parent);
+		stage.setScene(scene);
+		stage.setTitle(Constants.ADMIN_PAGE_TITLE);
+		stage.show();
+	}
+
+	@FXML
+	void logOutButtonOnClick(ActionEvent event) {
+		try {
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
+			Scene currentScene = currentStage.getScene();
+			currentScene.setRoot(parent);
+			currentStage.setTitle(Main.WINDOW_TITLE);
+			currentStage.sizeToScene();
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+			errorPopup.setContentText(e.getMessage());
+			errorPopup.showAndWait();
+		}
 	}
 
 	private void bindTableColumns() {
@@ -203,10 +212,4 @@ public class OrderPage {
 		this.openOrders.getSelectionModel().clearSelection();
 
 	}
-
-	@FXML
-	void adminButtonOnClick(ActionEvent event) {
-		// TO DO Add Admin Page
-	}
-
 }

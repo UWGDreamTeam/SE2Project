@@ -10,6 +10,21 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.AdminPage">
    <children>
+      <Text layoutX="10.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin">
+         <font>
+            <Font size="47.0" />
+         </font>
+      </Text>
+      <Text layoutX="600.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
+      <Text layoutX="600.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
+      <Text layoutX="600.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
+      <ToolBar layoutX="150.0" layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="100.0">
+         <items>
+            <Button mnemonicParsing="false" onAction="#addUser" prefHeight="20.0" prefWidth="90.0" text="Add User" />
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#editUser" prefHeight="20.0" prefWidth="90.0" text="Edit User" />
+            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeUser" prefHeight="20.0" prefWidth="90.0" text="Remove User" />
+         </items>
+      </ToolBar>
       <TableView fx:id="usersTableView" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="500.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="70.0" text="ID" />
@@ -21,28 +36,14 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Text layoutX="10.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin">
-         <font>
-            <Font size="47.0" />
-         </font>
-      </Text>
-      <Text layoutX="600.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
-      <Text layoutX="600.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
-      <Text layoutX="600.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
       <ToolBar layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0">
          <items>
-            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Home" />
+            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Home" />
             <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
             <Button fx:id="ordersButton" mnemonicParsing="false" onAction="#ordersPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Orders" />
+            <Button fx:id="adminButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Admin" />
          </items>
       </ToolBar>
       <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
-      <ToolBar layoutX="150.0" layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="100.0">
-         <items>
-            <Button mnemonicParsing="false" onAction="#addUser" prefHeight="20.0" prefWidth="90.0" text="Add User" />
-            <Button fx:id="editButton" mnemonicParsing="false" onAction="#editUser" prefHeight="20.0" prefWidth="90.0" text="Edit User" />
-            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeUser" prefHeight="20.0" prefWidth="90.0" text="Remove User" />
-         </items>
-      </ToolBar>
    </children>
 </AnchorPane>
