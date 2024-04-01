@@ -49,8 +49,10 @@ public final class Constants {
 	public static final String INVENTORY_PAGE_TITLE = "Inventory Page";
 	public static final String ORDER_PAGE_TITLE = "Order Page";
 	public static final String ADMIN_PAGE_TITLE = "Admin Page";
+	
+	public static final String UTILITY_CLASS_ERROR = "Utility class";
 
 	private Constants() {
-		throw new IllegalStateException("Constants class");
+		throw new IllegalStateException(Constants.UTILITY_CLASS_ERROR);
 	}
 }
