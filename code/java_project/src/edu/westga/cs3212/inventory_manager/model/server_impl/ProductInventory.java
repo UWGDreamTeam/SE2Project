@@ -303,6 +303,12 @@ public final class ProductInventory {
 		}
 	}
 
+	/**
+	 * Retrieves all products from the server.
+	 * @precondition none
+	 * @postcondition none
+	 * @return An array of all products in the inventory.
+	 */
 	public static Product[] getProducts() {
 		Map<String, Object> dataMap = Server
 				.sendRequestAndGetResponse(ACTION_GET_PRODUCTS);
@@ -323,6 +329,12 @@ public final class ProductInventory {
         return products;
 	}
 	
+	/**
+	 * Clears the product inventory.
+	 * 
+	 * @precondition none
+	 * @postcondition The product inventory is empty.
+	 */
 	public static void clearInventory() {
 		Server.sendRequestAndGetResponse(ACTION_CLEAR_INVENTORY);
 	}

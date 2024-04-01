@@ -229,6 +229,12 @@ public final class ComponentInventory {
 		return component;
 	}
 
+	/**
+	 * Retrieves all components in the inventory.
+	 * @precondition none
+	 * @postcondition none
+	 * @return An array of all components in the inventory.
+	 */
 	public static Component[] getComponents() {
 		Map<String, Object> dataMap = Server
 				.sendRequestAndGetResponse(ACTION_GET_COMPONENTS);
@@ -257,6 +263,12 @@ public final class ComponentInventory {
 		return component;
 	}
 
+	/**
+	 * Clears the inventory of all components.
+	 * 
+	 * @precondition none
+	 * @postcondition the inventory is empty
+	 */
 	public static void clearInventory() {
 		Server.sendRequestAndGetResponse(ACTION_CLEAR_INVENTORY);
 	}
