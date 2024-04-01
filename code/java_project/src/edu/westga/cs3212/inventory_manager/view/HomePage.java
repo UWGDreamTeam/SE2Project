@@ -87,6 +87,16 @@ public class HomePage {
 		stage.setTitle(Constants.ORDER_PAGE_TITLE);
 		stage.show();
 	}
+	
+	@FXML
+	void adminPageButtonOnClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADMIN_PAGE));
+		Scene scene = new Scene(parent);
+		stage.setScene(scene);
+		stage.setTitle(Constants.ADMIN_PAGE_TITLE);
+		stage.show();
+	}
 
 	@FXML
 	void logOutButtonOnClick(ActionEvent event) {

@@ -116,7 +116,7 @@ public class InventoryPage {
 	private Text employeeRoleLabel;
 
 	@FXML
-	private TabPane invendoryTreeView;
+	private TabPane inventoryTreeView;
 
 	@FXML
 	private Tab productsTabPage;

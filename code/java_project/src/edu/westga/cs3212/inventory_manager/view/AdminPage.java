@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -51,6 +52,15 @@ public class AdminPage {
     
     @FXML
 	private Button removeButton;
+    
+    @FXML
+	private Text employeeFullNameLabel;
+
+	@FXML
+	private Text employeeIdLabel;
+
+	@FXML
+	private Text employeeRoleLabel;
     
     private AdminPageViewModel adminVM;
     
