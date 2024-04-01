@@ -298,6 +298,7 @@ public class InventoryPage {
 		this.inventoryVM.removeComponent();
 
 		this.refreshComponentsTableView();
+		this.showAlert("Component Removed", "The component was successfully removed.", AlertType.INFORMATION);
 	}
 
 	@FXML
@@ -355,6 +356,8 @@ public class InventoryPage {
 		if (selectedComponent != null) {
 			this.inventoryVM.orderComponent(selectedComponent, quantity);
 			this.refreshComponentsTableView();
+			String content = String.format("We have received %d units of '%s'.", quantity, selectedComponent.getName());
+	        this.showAlert("Ordered Components", content, AlertType.INFORMATION);
 		} else {
 			this.showAlert("Order Error", "No component selected.",
 					AlertType.ERROR);
@@ -390,7 +393,7 @@ public class InventoryPage {
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
 		modalStage.showAndWait();
 
-		this.refreshComponentsTableView();
+		this.refreshProductsTableView();
 	}
 
 	@FXML
@@ -413,7 +416,7 @@ public class InventoryPage {
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
 		modalStage.showAndWait();
 
-		this.refreshComponentsTableView();
+		this.refreshProductsTableView();
 	}
 
 	@FXML
@@ -433,5 +436,6 @@ public class InventoryPage {
 	void removeProductManagerOnClick(ActionEvent event) {
 		this.inventoryVM.removeProduct();
 		this.refreshProductsTableView();
+		this.showAlert("Product Removed", "The product was successfully removed.", AlertType.INFORMATION);
 	}
 }

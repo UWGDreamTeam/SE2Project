@@ -168,17 +168,17 @@ public class InventoryViewModel {
 	}
 
 	/**
-	 * Manages the production of a specified product, adjusting inventory
-	 * quantities as necessary. This includes decrementing the quantities of the
-	 * components used in the product's recipe.
+	 * Manages the production of a specified product, adjusting inventory quantities as necessary.
+	 * This includes decrementing the quantities of the components used in the product's recipe
+	 * and incrementing the quantity of the finished product.
 	 *
-	 * @param selectedProduct
-	 *            The product to be produced.
-	 * @param quantity
-	 *            The quantity of the product to produce.
+	 * @param selectedProduct The product to be produced. Must not be null.
+	 * @param quantity The quantity of the product to produce. Must be greater than 0.
 	 * @precondition selectedProduct != null && quantity > 0
-	 * @postcondition The selected product's quantity is increased, and the used
-	 *                components' quantities are decreased accordingly.
+	 * @postcondition The selected product's quantity in the inventory is increased by the specified quantity,
+	 *                and the quantities of the components used are decreased accordingly.
+	 *                If insufficient components are available, an IllegalArgumentException is thrown.
+	 * @throws IllegalArgumentException if there are not enough components in the inventory to produce the product.
 	 */
 	public void produceProduct(Product selectedProduct, int quantity) {
 		ProductInventory.produceProduct(selectedProduct.getID(), quantity);

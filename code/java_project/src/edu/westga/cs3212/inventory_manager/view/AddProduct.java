@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 
 public class AddProduct {
 
-	private static final String UNABLE_TO_ADD_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN = "Unable to add product, please check product information and try again";
+	private static final String UNABLE_TO_ADD_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN = "Invalid Product, Make sure you enter valid information.";
 
 	@FXML
 	private TableColumn<Component, String> componentIDColumn;
@@ -70,6 +70,7 @@ public class AddProduct {
 		}
 		if (result) {
 			this.returnToInventoryPage(event);
+			this.showAlert("Product Added", "The product was successfully added.", Alert.AlertType.INFORMATION);
 		}
 	}
 
@@ -149,6 +150,13 @@ public class AddProduct {
 		this.componentRecipeTableView
 				.setItems(this.addProductVM.getObservableComponentList());
 		this.componentRecipeTableView.refresh();
+	}
+	
+	private void showAlert(String title, String content, Alert.AlertType alertType) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setContentText(content);
+		alert.showAndWait();
 	}
 
 }

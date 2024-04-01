@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 
 public class EditProduct {
 
-	private static final String UNABLE_TO_UPDATE_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN = "Unable to update product, please check product information and try again";
+	private static final String UNABLE_TO_UPDATE_PRODUCT_PLEASE_CHECK_PRODUCT_INFORMATION_AND_TRY_AGAIN = "Invalid Product, Make sure you enter valid information.";
 
 	@FXML
 	private TableColumn<Component, String> componentIDColumn;
@@ -72,6 +72,7 @@ public class EditProduct {
 		}
 		if (result) {
 			this.returnToInventoryPage(event);
+			this.showAlert("Product Edited", "The product was successfully edited.", Alert.AlertType.INFORMATION);
 		}
 	}
 
@@ -173,6 +174,13 @@ public class EditProduct {
 		this.componentRecipeTableView
 				.setItems(this.editProductVM.getObservableComponentList());
 		this.componentRecipeTableView.refresh();
+	}
+	
+	private void showAlert(String title, String content, Alert.AlertType alertType) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setContentText(content);
+		alert.showAndWait();
 	}
 
 }

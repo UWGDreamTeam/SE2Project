@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class AddComponent {
 
-	private static final String UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN = "Unable to add component, please check component information and try again";
+	private static final String UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN = "Invalid Component, Make sure you enter valid information.";
 	private static final String COMPONENT_ADDED_SUCCESSFULLY = "Component Added Successfully";
 
 	@FXML
@@ -53,7 +53,7 @@ public class AddComponent {
 						UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
 				errorPopup.showAndWait();
 			}
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(
 					UNABLE_TO_ADD_COMPONENT_PLEASE_CHECK_COMPONENT_INFORMATION_AND_TRY_AGAIN);
