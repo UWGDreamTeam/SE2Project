@@ -21,12 +21,12 @@ public class LocalEmployeeCredentials {
 	/**
 	 * Creates a new set of credentials for an employee.
 	 * 
-	 * @precondition firstName != null && !firstName.isEmpty() && lastName !=
-	 *               null && !lastName.isEmpty() && password != null &&
+	 * @precondition firstName != null && !firstName.isEmpty() && lastName != null
+	 *               && !lastName.isEmpty() && password != null &&
 	 *               !password.isEmpty() && employeeType != null
 	 * 
-	 * @precondition firstName != null && !firstName.isEmpty() && lastName !=
-	 *               null && !lastName.isEmpty() && password != null &&
+	 * @precondition firstName != null && !firstName.isEmpty() && lastName != null
+	 *               && !lastName.isEmpty() && password != null &&
 	 *               !password.isEmpty() && employeeType != null
 	 * 
 	 * @postcondition getEmployeeID() != null && !getEmployeeID().isEmpty() &&
@@ -35,19 +35,14 @@ public class LocalEmployeeCredentials {
 	 *                getPassword().equals(password) &&
 	 *                getEmployeeType().equals(employeeType)
 	 * 
-	 * @param employeeID
-	 *            the unique id of the employee
-	 * @param firstName
-	 *            the first name of the employee
-	 * @param lastName
-	 *            the last name of the employee
-	 * @param password
-	 *            the password for the employee's account
-	 * @param employeeType
-	 *            the type of employee (MANAGER or WORKER)
+	 * @param employeeID   the unique id of the employee
+	 * @param firstName    the first name of the employee
+	 * @param lastName     the last name of the employee
+	 * @param password     the password for the employee's account
+	 * @param employeeType the type of employee (MANAGER or WORKER)
 	 */
-	public LocalEmployeeCredentials(String employeeID, String firstName,
-			String lastName, String password, EmployeeType employeeType) {
+	public LocalEmployeeCredentials(String employeeID, String firstName, String lastName, String password,
+			EmployeeType employeeType) {
 		this.setEmployeeID(employeeID);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
@@ -57,36 +52,31 @@ public class LocalEmployeeCredentials {
 
 	private void checkForValidEmployeeID(String employeeID) {
 		if (employeeID == null || employeeID.trim().isEmpty()) {
-			throw new IllegalArgumentException(
-					Constants.EMPLOYEE_ID_CANNOT_BE_NULL_OR_EMPTY);
+			throw new IllegalArgumentException(Constants.EMPLOYEE_ID_CANNOT_BE_NULL_OR_EMPTY);
 		}
 	}
 
 	private void checkForValidFirstName(String firstName) {
 		if (firstName == null || firstName.trim().isEmpty()) {
-			throw new IllegalArgumentException(
-					Constants.FIRST_NAME_CANNOT_BE_NULL_OR_EMPTY);
+			throw new IllegalArgumentException(Constants.FIRST_NAME_CANNOT_BE_NULL_OR_EMPTY);
 		}
 	}
 
 	private void checkForValidLastName(String lastName) {
 		if (lastName == null || lastName.trim().isEmpty()) {
-			throw new IllegalArgumentException(
-					Constants.LAST_NAME_CANNOT_BE_NULL_OR_EMPTY);
+			throw new IllegalArgumentException(Constants.LAST_NAME_CANNOT_BE_NULL_OR_EMPTY);
 		}
 	}
 
 	private void checkForValidPassword(String password) {
 		if (password == null || password.trim().isEmpty()) {
-			throw new IllegalArgumentException(
-					Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);
+			throw new IllegalArgumentException(Constants.PASSWORD_CANNOT_BE_NULL_OR_EMPTY);
 		}
 	}
 
 	private EmployeeType checkForValidEmployeeType(EmployeeType employeeType) {
 		if (employeeType == null) {
-			throw new IllegalArgumentException(
-					Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
+			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
 		}
 		return employeeType;
 	}
@@ -112,8 +102,7 @@ public class LocalEmployeeCredentials {
 	/**
 	 * Sets the first name of the employee.
 	 * 
-	 * @param firstName
-	 *            the new first name of the employee
+	 * @param firstName the new first name of the employee
 	 */
 	public void setFirstName(String firstName) {
 		this.checkForValidFirstName(firstName);
@@ -132,8 +121,7 @@ public class LocalEmployeeCredentials {
 	/**
 	 * Sets the last name of the employee.
 	 * 
-	 * @param lastName
-	 *            the new last name of the employee
+	 * @param lastName the new last name of the employee
 	 */
 	public void setLastName(String lastName) {
 		this.checkForValidLastName(lastName);
@@ -152,8 +140,7 @@ public class LocalEmployeeCredentials {
 	/**
 	 * Sets the password for the employee's account.
 	 * 
-	 * @param password
-	 *            the new password for the employee
+	 * @param password the new password for the employee
 	 */
 	public void setPassword(String password) {
 		this.checkForValidPassword(password);
@@ -172,8 +159,7 @@ public class LocalEmployeeCredentials {
 	/**
 	 * Sets the type of the employee (MANAGER or WORKER).
 	 * 
-	 * @param employeeType
-	 *            the new type of the employee
+	 * @param employeeType the new type of the employee
 	 */
 	public void setEmployeeType(EmployeeType employeeType) {
 		this.checkForValidEmployeeType(employeeType);
