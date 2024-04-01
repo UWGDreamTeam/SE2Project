@@ -17,6 +17,9 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredent
  */
 public class EmployeeCredentialsManager {
 
+	private static final String ROLE_STRING_CONST = "Role";
+	private static final String LAST_NAME_STRING_CONST = "LastName";
+	private static final String FIRST_NAME_STRING_CONST = "FirstName";
 	private static final String PASSWORD_STRING_CONST = "Password";
 	private static final String REMOVE_STATUS_STRING_CONST = "RemoveStatus";
 	private static final String TRUE_REPONSE_STRING_CONST = "true";
@@ -62,8 +65,8 @@ public class EmployeeCredentialsManager {
 		checkForValidPassword(password);
 		checkForValidRole(role);
 
-		Map<String, Object> requestData = Map.of(DATA_KEY,
-				Map.of("FirstName", firstName, "LastName", lastName, PASSWORD_STRING_CONST, password, "Role", role));
+		Map<String, Object> requestData = Map.of(DATA_KEY, Map.of(FIRST_NAME_STRING_CONST, firstName,
+				LAST_NAME_STRING_CONST, lastName, PASSWORD_STRING_CONST, password, ROLE_STRING_CONST, role));
 
 		Map<String, Object> dataMap = Server.sendRequestAndGetResponse(REGISTER_USER_REQUEST_TYPE, requestData);
 		return (String) dataMap.get(EMPLOYEE_ID_STRING_CONST);
@@ -158,10 +161,10 @@ public class EmployeeCredentialsManager {
 			String employeeID = entry.getKey();
 			Map<String, String> employeeInfo = entry.getValue();
 
-			String firstName = employeeInfo.get("FirstName");
-			String lastName = employeeInfo.get("LastName");
+			String firstName = employeeInfo.get(FIRST_NAME_STRING_CONST);
+			String lastName = employeeInfo.get(LAST_NAME_STRING_CONST);
 			String password = employeeInfo.get(PASSWORD_STRING_CONST);
-			String roleStr = employeeInfo.get("Role");
+			String roleStr = employeeInfo.get(ROLE_STRING_CONST);
 
 			EmployeeType role = convertEmployeeType(roleStr);
 
@@ -223,10 +226,10 @@ public class EmployeeCredentialsManager {
 	}
 
 	private static LocalEmployeeCredentials parseEmployee(Map<String, Object> employeeData, String employeeID) {
-		String firstName = (String) employeeData.get("FirstName");
-		String lastName = (String) employeeData.get("LastName");
+		String firstName = (String) employeeData.get(FIRST_NAME_STRING_CONST);
+		String lastName = (String) employeeData.get(LAST_NAME_STRING_CONST);
 		String password = (String) employeeData.get(PASSWORD_STRING_CONST);
-		String roleString = (String) employeeData.get("Role");
+		String roleString = (String) employeeData.get(ROLE_STRING_CONST);
 		EmployeeType role = convertEmployeeType(roleString);
 
 		LocalEmployeeCredentials employee = new LocalEmployeeCredentials(employeeID, firstName, lastName, password,
