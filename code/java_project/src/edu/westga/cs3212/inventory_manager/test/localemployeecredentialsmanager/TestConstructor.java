@@ -26,7 +26,6 @@ class TestConstructor {
 	@AfterEach
 	public void tearDown() throws IOException {
 		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
-		manager.addAdminUser();
 	}
 
 	

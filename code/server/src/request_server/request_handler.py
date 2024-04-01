@@ -38,6 +38,12 @@ from request_server.orders import (
     clear_all_orders, get_orders_by_status,
     clear_order_inventory, get_all_orders
 )
+
+from request_server.authentication_request_handler import (
+    attemptLogin, registerUser, updateUser, removeUser,
+    getEmployee, clear, getEmployeesList
+)
+
 from request_server.utilities import log
 
 __author__ = 'Jason Nunez'
@@ -51,16 +57,19 @@ request_handlers = {
     "getComponent": get_component,
     "getQuantityOfComponent": get_quantity_of_component,
     "orderComponent": order_component,
+    
     "addProduct": add_product,
     "produceProduct": produce_product,
     "deleteProduct": delete_product,
     "updateProduct": update_product,
     "getProduct": get_product,
     "getQuantityOfProduct": get_quantity_of_product,
+    
     "createOrder": create_order,
     "deleteOrder": delete_order,
     "updateOrder": update_order,
     "getOrder": get_order,
+    
     "getComponents": get_all_components,
     "clearProductInventory": clear_product_inventory,
     "clearComponentInventory": clear_component_inventory,
@@ -68,7 +77,15 @@ request_handlers = {
     "getProducts": get_all_products,
     "clearOrders": clear_all_orders,
     "getOrdersByCompletionStatus": get_orders_by_status,
-    "getOrders": get_all_orders
+    "getOrders": get_all_orders,
+    
+    "attemptLogin": attemptLogin,
+    "registerUser": registerUser,
+    "updateUser": updateUser,
+    "removeUser": removeUser,
+    "getEmployee": getEmployee,
+    "clearCredentials" : clear,
+    "getEmployeesList" : getEmployeesList
 }
 
 def handle_request(request_str):

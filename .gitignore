@@ -5,3 +5,9 @@ code/.DS_Store
 code/java_project/.classpath
 *.json
 .DS_Store
+code/server/.settings/org.eclipse.ltk.core.refactoring.prefs
+code/server/.checkstyle
+code/java_project/componentInventory.json1
+code/java_project/orders.json
+code/java_project/productInventory.json
+code/java_project/test.json1
