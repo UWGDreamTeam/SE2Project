@@ -5,9 +5,11 @@ import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.viewmodel.RegisterPageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class RegisterPage {
 
@@ -79,6 +81,7 @@ public class RegisterPage {
         try {
             this.viewModel.registerEmployee();
             this.showAlert(Alert.AlertType.INFORMATION, Constants.REGISTRATION_SUCCESSFUL, Constants.EMPLOYEE_REGISTRATION_SUCCESSFUL);
+            this.clearFields();
         } catch (IllegalArgumentException e) {
             this.showAlert(Alert.AlertType.ERROR, Constants.REGISTRATION_ERROR, e.getMessage());
         }
@@ -86,12 +89,22 @@ public class RegisterPage {
 
     @FXML
     void cancelRegistration(ActionEvent action) {
-        this.firstNameTextField.clear();
+        this.clearFields();
+        this.closeWindow(action);
+    }
+    
+    private void closeWindow(ActionEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.close();
+	}
+
+	private void clearFields() {
+		this.firstNameTextField.clear();
         this.lastNameTextField.clear();
         this.passwordTextField.clear();
         this.confirmPasswordTextField.clear();
         this.employeeTypeComboBox.getSelectionModel().clearSelection();
-    }
+	}
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
