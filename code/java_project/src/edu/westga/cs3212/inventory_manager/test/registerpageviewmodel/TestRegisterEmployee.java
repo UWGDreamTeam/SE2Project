@@ -1,6 +1,9 @@
 package edu.westga.cs3212.inventory_manager.test.registerpageviewmodel;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,12 +15,12 @@ class TestRegisterEmployee {
 	private RegisterPageViewModel viewModel;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		this.viewModel = new RegisterPageViewModel();
 	}
 
 	@Test
-	public void testRegisterEmployeeWithPasswordMismatchThrowsException() {
+	void testRegisterEmployeeWithPasswordMismatchThrowsException() {
 		this.viewModel.passwordProperty().set("password");
 		this.viewModel.confirmPasswordProperty().set("differentPassword");
 		Exception exception = assertThrows(IllegalArgumentException.class, this.viewModel::registerEmployee);
@@ -25,7 +28,7 @@ class TestRegisterEmployee {
 	}
 
 	@Test
-	public void testRegisterEmployeeWithMatchingPasswords() {
+	void testRegisterEmployeeWithMatchingPasswords() {
 		this.viewModel.firstNameProperty().set("John");
 		this.viewModel.lastNameProperty().set("Doe");
 		this.viewModel.passwordProperty().set("password");
@@ -34,7 +37,7 @@ class TestRegisterEmployee {
 	}
 	
 	@Test
-	public void testRegisterEmployeeWithMatchingPasswordsAndValidData() {
+	void testRegisterEmployeeWithMatchingPasswordsAndValidData() {
 	    this.viewModel.firstNameProperty().set("John");
 	    this.viewModel.lastNameProperty().set("Doe");
 	    this.viewModel.passwordProperty().set("password");
@@ -45,7 +48,7 @@ class TestRegisterEmployee {
 	}
 	
 	@Test
-	public void testRegisterEmployeeWithInvalidPasswordThrowsException() {
+	void testRegisterEmployeeWithInvalidPasswordThrowsException() {
 	    this.viewModel.firstNameProperty().set("John");
 	    this.viewModel.lastNameProperty().set("Doe");
 	    this.viewModel.passwordProperty().set("");

@@ -33,6 +33,10 @@ public class EmployeeCredentialsManager {
 	private static final String ATTEMPT_LOGIN_REQUEST_TYPE = "attemptLogin";
 	private static final String REGISTER_USER_REQUEST_TYPE = "registerUser";
 	private static final String DATA_KEY = "data";
+	
+	private EmployeeCredentialsManager() {
+		
+	}
 
 	/**
 	 * Adds a new employee to the system by sending their credentials to the server.
