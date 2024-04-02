@@ -1,10 +1,12 @@
 package edu.westga.cs3212.inventory_manager.model.server_impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
+import edu.westga.cs3212.inventory_manager.model.Item;
 
 /**
  * Handles the inventory of components, including CRUD operations and component
@@ -165,6 +167,28 @@ public final class ComponentInventory {
 				.sendRequestAndGetResponse(ACTION_ORDER_COMPONENT, requestData);
 		return ((Number) dataMap.get(KEY_DATA_QUANTITY)).intValue();
 
+	}
+	
+	/**
+	 * Searches for components by name using a brute force search.
+	 * 
+	 * @param searchString The string to search for.
+	 * @precondition searchString != null && !searchString.isBlank()
+	 * @postcondition none
+	 * @return A list of components that contain the search string.
+	 */
+	public static ArrayList<Component> searchComponentsBruteForce(String searchString) {
+		ArrayList<Component> results = new ArrayList<Component>();
+		for (Component currentComponent : getComponents()) {
+			results.add(currentComponent);
+		}
+		
+		for (Component component : results) {
+			if (!component.getName().contains(searchString)) {
+				results.remove(component);
+			}
+		}
+		return results;
 	}
 
 	/**
