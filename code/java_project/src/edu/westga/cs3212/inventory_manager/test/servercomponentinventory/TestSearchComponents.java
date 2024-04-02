@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
 
-class TestSearchComponentsBruteForce {
+class TestSearchComponents {
 
 	@BeforeEach
 	void setUp() throws Exception {

@@ -196,6 +196,25 @@ public final class ProductInventory {
 
 		Server.sendRequestAndGetResponse(ACTION_UPDATE_PRODUCT, requestData);
 	}
+	
+	/**
+	 * Searches for products by name using a brute force search.
+	 * 
+	 * @param searchString The string to search for.
+	 * @precondition searchString != null && !searchString.isBlank()
+	 * @postcondition none
+	 * @return A list of products that contain the search string.
+	 */
+	public static ArrayList<Product> searchProducts(String searchString) {
+		ArrayList<Product> results = new ArrayList<Product>();
+		
+		for (Product product : getProducts()) {
+			if (product.getName().contains(searchString)) {
+				results.add(product);
+			}
+		}
+		return results;
+	}
 
 	/**
 	 * Retrieves the current quantity of a specified product.
