@@ -22,7 +22,7 @@ class TestSearchComponents {
 		ComponentInventory.addComponent("Glass", 10, 10);
 		ComponentInventory.addComponent("Clay", 15, 5);
 		ArrayList<Component> components = new ArrayList<Component>();
-		components = ComponentInventory.searchComponentsBruteForce("Glass");
+		components = ComponentInventory.searchComponents("Glass");
 		assertEquals(1, components.size());
 	}
 	
@@ -32,7 +32,7 @@ class TestSearchComponents {
 		ComponentInventory.addComponent("Iron Shavings", 10, 10);
 		ComponentInventory.addComponent("Clay", 15, 5);
 		ArrayList<Component> components = new ArrayList<Component>();
-		components = ComponentInventory.searchComponentsBruteForce("Iron");
+		components = ComponentInventory.searchComponents("Iron");
 		assertEquals(2, components.size());
 	}
 	
@@ -42,13 +42,13 @@ class TestSearchComponents {
 		ComponentInventory.addComponent("Clay", 15, 5);
 		ComponentInventory.addComponent("Iron Shavings", 10, 10);
 		ArrayList<Component> components = new ArrayList<Component>();
-		components = ComponentInventory.searchComponentsBruteForce("Iron");
+		components = ComponentInventory.searchComponents("Iron");
 		assertEquals(2, components.size());
 	}
 	
 	@Test
 	void testSearchComponentsEmpty() {
-		ArrayList<Component> components = ComponentInventory.searchComponentsBruteForce("Component1");
+		ArrayList<Component> components = ComponentInventory.searchComponents("Component1");
 		assertEquals(0, components.size());
 	}
 }

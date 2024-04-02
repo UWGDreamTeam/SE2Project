@@ -209,7 +209,7 @@ public final class ProductInventory {
 		ArrayList<Product> results = new ArrayList<Product>();
 		
 		for (Product product : getProducts()) {
-			if (product.getName().contains(searchString)) {
+			if (product.getName().toLowerCase().contains(searchString.toLowerCase())) {
 				results.add(product);
 			}
 		}

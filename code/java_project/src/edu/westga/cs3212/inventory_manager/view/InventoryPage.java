@@ -428,6 +428,13 @@ public class InventoryPage {
 		.setItems(this.inventoryVM.searchComponents(this.componentSearchTextField.getText()));
 		this.componentsTableView.refresh();
 	}
+	
+	@FXML
+	void onProductSearchButtonClicked(ActionEvent event) {
+		this.productsTableView
+		.setItems(this.inventoryVM.searchProducts(this.productSearchTextField.getText()));
+		this.productsTableView.refresh();
+	}
 
 	@FXML
 	void produceProductButtonOnClick(ActionEvent event) {

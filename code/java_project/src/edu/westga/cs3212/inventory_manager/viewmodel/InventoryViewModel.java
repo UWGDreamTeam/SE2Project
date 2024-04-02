@@ -185,7 +185,12 @@ public class InventoryViewModel {
 	}
 	
 	public ObservableList<Component> searchComponents(String searchString) {
-		ArrayList<Component> results = ComponentInventory.searchComponentsBruteForce(searchString);
+		ArrayList<Component> results = ComponentInventory.searchComponents(searchString);
+		return FXCollections.observableArrayList(results);
+	}
+	
+	public ObservableList<Product> searchProducts(String searchString) {
+		ArrayList<Product> results = ProductInventory.searchProducts(searchString);
 		return FXCollections.observableArrayList(results);
 	}
 }

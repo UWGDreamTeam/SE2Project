@@ -177,11 +177,11 @@ public final class ComponentInventory {
 	 * @postcondition none
 	 * @return A list of components that contain the search string.
 	 */
-	public static ArrayList<Component> searchComponentsBruteForce(String searchString) {
+	public static ArrayList<Component> searchComponents(String searchString) {
 		ArrayList<Component> results = new ArrayList<Component>();
 		
 		for (Component component : getComponents()) {
-			if (component.getName().contains(searchString)) {
+			if (component.getName().toLowerCase().contains(searchString.toLowerCase())) {
 				results.add(component);
 			}
 		}
