@@ -179,13 +179,10 @@ public final class ComponentInventory {
 	 */
 	public static ArrayList<Component> searchComponentsBruteForce(String searchString) {
 		ArrayList<Component> results = new ArrayList<Component>();
-		for (Component currentComponent : getComponents()) {
-			results.add(currentComponent);
-		}
 		
-		for (Component component : results) {
-			if (!component.getName().contains(searchString)) {
-				results.remove(component);
+		for (Component component : getComponents()) {
+			if (component.getName().contains(searchString)) {
+				results.add(component);
 			}
 		}
 		return results;
