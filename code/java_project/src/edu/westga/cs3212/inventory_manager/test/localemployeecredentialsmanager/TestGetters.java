@@ -23,7 +23,6 @@ class TestGetters {
 		Files.deleteIfExists(Paths.get(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION));
 	}
 	
-	
 	@Test
 	void testGetEmployeeCredentialsWhenTheresValidEmployeeID() {
 		LocalEmployeeCredentialsManager testManager = new LocalEmployeeCredentialsManager();

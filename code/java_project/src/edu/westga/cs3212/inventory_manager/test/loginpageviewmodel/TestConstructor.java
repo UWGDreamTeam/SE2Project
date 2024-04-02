@@ -9,7 +9,7 @@ import edu.westga.cs3212.inventory_manager.viewmodel.LoginViewModel;
 public class TestConstructor {
 
 	@Test
-	public void testConstructor() {
+	void testConstructor() {
 		LoginViewModel testLoginViewModel = new LoginViewModel();
 		assertNotNull(testLoginViewModel);
 		assertNotNull(testLoginViewModel.employeeIDProperty());
