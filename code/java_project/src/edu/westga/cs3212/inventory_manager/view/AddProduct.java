@@ -69,8 +69,8 @@ public class AddProduct {
 			result = false;
 		}
 		if (result) {
-			this.returnToInventoryPage(event);
 			this.showAlert("Product Added", "The product was successfully added.", Alert.AlertType.INFORMATION);
+			this.returnToInventoryPage(event);
 		}
 	}
 
