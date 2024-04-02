@@ -183,4 +183,9 @@ public class InventoryViewModel {
 	public void produceProduct(Product selectedProduct, int quantity) {
 		ProductInventory.produceProduct(selectedProduct.getID(), quantity);
 	}
+	
+	public ObservableList<Component> searchComponents(String searchString) {
+		ArrayList<Component> results = ComponentInventory.searchComponentsBruteForce(searchString);
+		return FXCollections.observableArrayList(results);
+	}
 }

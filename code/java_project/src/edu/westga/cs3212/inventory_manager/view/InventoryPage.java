@@ -366,10 +366,6 @@ public class InventoryPage {
 					AlertType.ERROR);
 		}
 	}
-	
-	private void onComponentSearchButtonClicked(ActionEvent event) {
-		this.inventoryVM.searchComponents(this.componentSearchTextField.getText());
-	}
 
 	private void showAlert(String title, String content,
 			Alert.AlertType alertType) {
@@ -424,6 +420,13 @@ public class InventoryPage {
 		modalStage.showAndWait();
 
 		this.refreshProductsTableView();
+	}
+	
+	@FXML
+	void onComponentSearchButtonClicked(ActionEvent event) {
+		this.componentsTableView
+		.setItems(this.inventoryVM.searchComponents(this.componentSearchTextField.getText()));
+		this.componentsTableView.refresh();
 	}
 
 	@FXML
