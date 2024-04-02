@@ -35,6 +35,31 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class InventoryPage {
+	
+	private static final String DEFAULT_QUANTITY = "1";
+    private static final String PRODUCE_PRODUCT_TITLE = "Produce Product";
+    private static final String ENTER_QUANTITY_MESSAGE = "Enter Quantity to Produce";
+    private static final String QUANTITY_PROMPT = "Quantity:";
+    private static final String PRODUCTION_ERROR_TITLE = "Production Error";
+    private static final String PRODUCE_ERROR_TITLE = "Produce Error";
+    private static final String INVALID_QUANTITY_MESSAGE = "Invalid Quantity";
+    private static final String ENTER_POSITIVE_NUMBER_MESSAGE = "Please enter a positive number.";
+    private static final String INVALID_INPUT_TITLE = "Invalid Input";
+    private static final String VALID_NUMBER_MESSAGE = "Please enter a valid number.";
+    private static final String NO_PRODUCT_SELECTED = "No product selected.";
+    private static final String COMPONENT_REMOVED_TITLE = "Component Removed";
+    private static final String COMPONENT_REMOVED_MESSAGE = "The component was successfully removed.";
+    private static final String ORDER_COMPONENT_TITLE = "Order Component";
+    private static final String ORDER_COMPONENT_HEADER = "Order More Components";
+    private static final String ORDER_COMPONENT_MESSAGE = "Please enter the quantity:";
+    private static final String ORDER_ERROR_TITLE = "Order Error";
+    private static final String NO_COMPONENT_SELECTED = "No component selected.";
+    private static final String ORDERED_COMPONENTS_TITLE = "Ordered Components";
+    private static final String HOME_PAGE_TITLE = "Home Page";
+    private static final String ORDER_PAGE_TITLE = "Order Page";
+    private static final String PRODUCT_REMOVED_TITLE = "Product Removed";
+    private static final String PRODUCT_REMOVED_MESSAGE = "The product was successfully removed.";
+    private static final String RECEIVED_UNITS_FORMAT = "We have received %d units of '%s'.";
 
 	@FXML
 	private Button editProductButton;
@@ -234,7 +259,7 @@ public class InventoryPage {
 			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
-			currentStage.setTitle("Home Page");
+			currentStage.setTitle(HOME_PAGE_TITLE);
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
@@ -252,7 +277,7 @@ public class InventoryPage {
 			parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
 			Scene currentScene = currentStage.getScene();
 			currentScene.setRoot(parent);
-			currentStage.setTitle("Order Page");
+			currentStage.setTitle(ORDER_PAGE_TITLE);
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
@@ -303,7 +328,7 @@ public class InventoryPage {
 		this.inventoryVM.removeComponent();
 
 		this.refreshComponentsTableView();
-		this.showAlert("Component Removed", "The component was successfully removed.", AlertType.INFORMATION);
+		this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
 
 	@FXML
@@ -332,10 +357,10 @@ public class InventoryPage {
 
 	@FXML
 	void orderComponentButtonManagerOnClick(ActionEvent event) {
-		TextInputDialog dialog = new TextInputDialog("1");
-		dialog.setTitle("Order Component");
-		dialog.setHeaderText("Order More Components");
-		dialog.setContentText("Please enter the quantity:");
+		TextInputDialog dialog = new TextInputDialog(DEFAULT_QUANTITY);
+		dialog.setTitle(ORDER_COMPONENT_TITLE);
+		dialog.setHeaderText(ORDER_COMPONENT_HEADER);
+		dialog.setContentText(ORDER_COMPONENT_MESSAGE);
 
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
@@ -344,11 +369,11 @@ public class InventoryPage {
 				if (quantity > 0) {
 					this.tryToOrderComponent(quantity);
 				} else {
-					this.showAlert("Invalid Quantity",
-							"Please enter a positive number.", AlertType.ERROR);
+					this.showAlert(INVALID_QUANTITY_MESSAGE,
+							ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
 				}
 			} catch (NumberFormatException e) {
-				this.showAlert("Invalid Input", "Please enter a valid number.",
+				this.showAlert(INVALID_INPUT_TITLE, VALID_NUMBER_MESSAGE,
 						AlertType.ERROR);
 			}
 		}
@@ -361,10 +386,10 @@ public class InventoryPage {
 		if (selectedComponent != null) {
 			this.inventoryVM.orderComponent(selectedComponent, quantity);
 			this.refreshComponentsTableView();
-			String content = String.format("We have received %d units of '%s'.", quantity, selectedComponent.getName());
-	        this.showAlert("Ordered Components", content, AlertType.INFORMATION);
+			String content = String.format(RECEIVED_UNITS_FORMAT, quantity, selectedComponent.getName());
+	        this.showAlert(ORDERED_COMPONENTS_TITLE, content, AlertType.INFORMATION);
 		} else {
-			this.showAlert("Order Error", "No component selected.",
+			this.showAlert(ORDER_ERROR_TITLE, NO_COMPONENT_SELECTED,
 					AlertType.ERROR);
 		}
 	}
@@ -426,10 +451,10 @@ public class InventoryPage {
 
 	@FXML
 	void produceProductButtonOnClick(ActionEvent event) {
-	    TextInputDialog dialog = new TextInputDialog("1");
-	    dialog.setTitle("Produce Product");
-	    dialog.setHeaderText("Enter Quantity to Produce");
-	    dialog.setContentText("Quantity:");
+	    TextInputDialog dialog = new TextInputDialog(DEFAULT_QUANTITY);
+	    dialog.setTitle(PRODUCE_PRODUCT_TITLE);
+	    dialog.setHeaderText(ENTER_QUANTITY_MESSAGE);
+	    dialog.setContentText(QUANTITY_PROMPT);
 
 	    Optional<String> result = dialog.showAndWait();
 	    result.ifPresent(quantityString -> {
@@ -442,16 +467,16 @@ public class InventoryPage {
 	                        this.inventoryVM.produceProduct(selectedProduct, quantity);
 	                        this.refreshProductsTableView();
 	                    } catch (IllegalArgumentException e) {
-	                        this.showAlert("Production Error", e.getMessage(), AlertType.ERROR);
+	                        this.showAlert(PRODUCTION_ERROR_TITLE, e.getMessage(), AlertType.ERROR);
 	                    }
 	                } else {
-	                    this.showAlert("Produce Error", "No product selected.", AlertType.ERROR);
+	                    this.showAlert(PRODUCE_ERROR_TITLE, NO_PRODUCT_SELECTED, AlertType.ERROR);
 	                }
 	            } else {
-	                this.showAlert("Invalid Quantity", "Please enter a positive number.", AlertType.ERROR);
+	                this.showAlert(INVALID_QUANTITY_MESSAGE, ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
 	            }
 	        } catch (NumberFormatException e) {
-	            this.showAlert("Invalid Input", "Please enter a valid number.", AlertType.ERROR);
+	            this.showAlert(INVALID_INPUT_TITLE, VALID_NUMBER_MESSAGE, AlertType.ERROR);
 	        }
 	    });
 	}
@@ -460,6 +485,6 @@ public class InventoryPage {
 	void removeProductManagerOnClick(ActionEvent event) {
 		this.inventoryVM.removeProduct();
 		this.refreshProductsTableView();
-		this.showAlert("Product Removed", "The product was successfully removed.", AlertType.INFORMATION);
+		this.showAlert(PRODUCT_REMOVED_TITLE, PRODUCT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
 }
