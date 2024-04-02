@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager;
 
 import java.io.IOException;
 
+import edu.westga.cs3212.inventory_manager.model.server_impl.DemoDataUtility;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -40,6 +41,9 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage stage) throws IOException {
+		DemoDataUtility.createDemoComponents();
+		DemoDataUtility.createDemoProducts();
+		DemoDataUtility.createDemoOrders();
 		primaryStage = stage;
 		Parent parent = FXMLLoader
 				.load(getClass().getResource(Main.LOGIN_PAGE));
