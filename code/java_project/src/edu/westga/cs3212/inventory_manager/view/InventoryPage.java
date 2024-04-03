@@ -11,6 +11,7 @@ import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
@@ -153,16 +154,21 @@ public class InventoryPage {
 	private TableColumn<Product, Number> productSellingPrice;
 
 	@FXML
-	private Text employeeFullNameLabel;
-
-	@FXML
-	private Text employeeIdLabel;
-
-	@FXML
 	private Text employeeRoleLabel;
 
 	@FXML
 	private TabPane inventoryTreeView;
+	
+	@FXML
+	private Text fullnameLabel;
+	
+	@FXML
+	private Text employeeIdLabel;
+	
+	@FXML
+	private Text workerTypeLabel;
+	
+	private static final String COMMA_SEPERATION = ", ";
 
 	private InventoryViewModel inventoryVM;
 
@@ -181,6 +187,14 @@ public class InventoryPage {
 		this.setupComponentButtons();
 		this.setupProductButtons();
 		this.setPermissions();
+		this.setCurrentUserSummary();
+	}
+	
+	private void setCurrentUserSummary() {
+		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
+		this.fullnameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
+		this.employeeIdLabel.setText(user.getEmployeeID().toString());
+		this.workerTypeLabel.setText(user.getEmployeeType().toString());
 	}
 
 	private void setupProductButtons() {

@@ -7,6 +7,7 @@ import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Order;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.viewmodel.OrderPageViewModel;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
@@ -74,10 +75,15 @@ public class OrderPage {
 	private TabPane ordersTabPane;
 
 	@FXML
-	private Text employeeFullNameLabel;
-
+	private Text fullnameLabel;
+	
 	@FXML
 	private Text employeeIdLabel;
+	
+	@FXML
+	private Text workerTypeLabel;
+
+	private static final String COMMA_SEPERATION = ", ";
 
 	@FXML
 	private Text employeeRoleLabel;
@@ -108,6 +114,14 @@ public class OrderPage {
 
 		this.setPermissions();
 		this.fulfillButton.disableProperty().bind(shouldDisableFulfillButton);
+		this.setCurrentUserSummary();
+	}
+	
+	private void setCurrentUserSummary() {
+		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
+		this.fullnameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
+		this.employeeIdLabel.setText(user.getEmployeeID().toString());
+		this.workerTypeLabel.setText(user.getEmployeeType().toString());
 	}
 	
 	@FXML
