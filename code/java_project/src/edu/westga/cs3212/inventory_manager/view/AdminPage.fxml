@@ -17,6 +17,14 @@
             <Font size="47.0" />
          </font>
       </Text>
+      <ToolBar layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0">
+         <items>
+            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Home" />
+            <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
+            <Button fx:id="ordersButton" mnemonicParsing="false" onAction="#ordersPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Orders" />
+            <Button fx:id="adminButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Admin" />
+         </items>
+      </ToolBar>
       <ToolBar layoutX="150.0" layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="100.0">
          <items>
             <Button mnemonicParsing="false" onAction="#addUser" prefHeight="20.0" prefWidth="90.0" text="Add User" />
@@ -24,7 +32,7 @@
             <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeUser" prefHeight="20.0" prefWidth="90.0" text="Remove User" />
          </items>
       </ToolBar>
-      <TableView fx:id="usersTableView" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="500.0">
+      <TableView fx:id="usersTableView" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="475.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="70.0" text="ID" />
           <TableColumn fx:id="firstNameCol" prefWidth="100.0" text="First Name" />
@@ -35,18 +43,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <ToolBar layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0">
-         <items>
-            <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Home" />
-            <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Inventory" />
-            <Button fx:id="ordersButton" mnemonicParsing="false" onAction="#ordersPageButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Orders" />
-            <Button fx:id="adminButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Admin" />
-         </items>
-      </ToolBar>
       <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
       <Pane layoutX="475.0" prefHeight="100.0" prefWidth="250.0">
          <children>
-            <Text fx:id="fullNameLabel" layoutX="100.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name, First Name" />
+            <Text fx:id="fullnameLabel" layoutX="100.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name, First Name" />
             <Text fx:id="employeeIdLabel" layoutX="100.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
             <Text fx:id="workerTypeLabel" layoutX="100.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
             <Label layoutY="17.0" text="Name:" />
