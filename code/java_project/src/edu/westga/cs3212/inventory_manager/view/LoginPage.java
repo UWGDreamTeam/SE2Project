@@ -32,12 +32,16 @@ public class LoginPage {
 	private LoginViewModel viewModel;
 
 	@FXML
-	void attemptLogin(ActionEvent event) throws IOException {
-		if (this.viewModel.attemptLogin()) {
-			this.showHomePage(event);
-		} else {
-			this.showHomePage(event);
-		}
+	void attemptLogin(ActionEvent event) {
+	    try {
+	        if (this.viewModel.attemptLogin()) {
+	            this.showHomePage(event);
+	        } else {
+	            this.showErrorPopup();
+	        }
+	    } catch (Exception ex) {
+	        this.showErrorPopup();
+	    }
 	}
 
 	@FXML
