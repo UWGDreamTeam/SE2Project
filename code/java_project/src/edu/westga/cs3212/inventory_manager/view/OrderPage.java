@@ -122,8 +122,7 @@ public class OrderPage {
 	@FXML
 	void inventoryPageButtonOnClick(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader
-				.load(Main.class.getResource(Main.INVENTORY_PAGE));
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
 		Scene scene = stage.getScene();
 		scene.setRoot(parent);
 		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
