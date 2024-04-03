@@ -2,6 +2,8 @@ package edu.westga.cs3212.inventory_manager;
 
 import java.io.IOException;
 
+import edu.westga.cs3212.inventory_manager.model.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.server_impl.DemoDataUtility;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +32,8 @@ public class Main extends Application {
 	public static final String ADMIN_EDIT_CREDENTIALS_PAGE = "view/AdminEditCredentialsPage.fxml";
 	
 	private static Stage primaryStage;
+	
+	private static LocalEmployeeCredentials loggedInEmployee;
 
 	/**
 	 * JavaFX entry point.
@@ -65,6 +69,37 @@ public class Main extends Application {
 	public static Stage getPrimaryStage() {
 		return primaryStage;
 	}
+	
+	/**
+	 * Sets the logged-in employee's credentials.
+	 * 
+	 * This method stores the credentials of the currently logged-in employee,
+	 * allowing other parts of the application to access user-related information.
+	 * 
+	 * @precondition employee should not be null
+	 * @postcondition loggedInEmployee is set to the provided employee credentials, making them accessible throughout the application.
+	 * 
+	 * @param employee The credentials of the logged-in employee.
+	 */
+	public static void setLoggedInEmployee(LocalEmployeeCredentials employee) {
+		loggedInEmployee = employee;
+    }
+	
+	/**
+	 * Retrieves the logged-in employee's credentials.
+	 * 
+	 * This method returns the credentials of the currently logged-in employee,
+	 * which can be used throughout the application to check permissions,
+	 * access user information, and more.
+	 * 
+	 * @precondition The employee must be logged in before calling this method.
+	 * @postcondition Returns the current logged-in employee's credentials.
+	 * 
+	 * @return The credentials of the currently logged-in employee.
+	 */
+    public static LocalEmployeeCredentials getLoggedInEmployee() {
+        return loggedInEmployee;
+    }
 
 	/**
 	 * Primary Java entry point.
