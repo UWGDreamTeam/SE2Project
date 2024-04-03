@@ -30,6 +30,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -96,6 +97,12 @@ public class InventoryPage {
 
 	@FXML
 	private Tab componentsTabPage;
+	
+	@FXML
+	private TextField componentSearchTextField;
+	
+	@FXML
+	private Button componentSearchButton;
 
 	@FXML
 	private TableView<Component> componentsTableView;
@@ -115,6 +122,15 @@ public class InventoryPage {
 	@FXML
 	private TableColumn<Component, Number> recipesColumn;
 
+	@FXML
+	private Tab productsTabPage;
+	
+	@FXML
+	private TextField productSearchTextField;
+	
+	@FXML
+	private Button productSearchButton;
+	
 	@FXML
 	private TableView<Product> productsTableView;
 
@@ -144,9 +160,6 @@ public class InventoryPage {
 
 	@FXML
 	private TabPane inventoryTreeView;
-
-	@FXML
-	private Tab productsTabPage;
 
 	private InventoryViewModel inventoryVM;
 
@@ -439,6 +452,20 @@ public class InventoryPage {
 		modalStage.showAndWait();
 
 		this.refreshProductsTableView();
+	}
+	
+	@FXML
+	void onComponentSearchButtonClicked(ActionEvent event) {
+		this.componentsTableView
+		.setItems(this.inventoryVM.searchComponents(this.componentSearchTextField.getText()));
+		this.componentsTableView.refresh();
+	}
+	
+	@FXML
+	void onProductSearchButtonClicked(ActionEvent event) {
+		this.productsTableView
+		.setItems(this.inventoryVM.searchProducts(this.productSearchTextField.getText()));
+		this.productsTableView.refresh();
 	}
 
 	@FXML

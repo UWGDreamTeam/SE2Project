@@ -15,9 +15,6 @@
             <Font size="47.0" />
          </font>
       </Text>
-      <Text layoutX="600.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
-      <Text layoutX="600.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
-      <Text layoutX="600.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
       <ToolBar layoutX="150.0" layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="100.0">
          <items>
             <Button mnemonicParsing="false" onAction="#addUser" prefHeight="20.0" prefWidth="90.0" text="Add User" />
@@ -45,5 +42,8 @@
          </items>
       </ToolBar>
       <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
+      <Text layoutX="600.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name, Last Name" />
+      <Text layoutX="600.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
+      <Text layoutX="600.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
    </children>
 </AnchorPane>
