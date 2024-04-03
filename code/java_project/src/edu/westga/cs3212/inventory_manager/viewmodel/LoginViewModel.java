@@ -1,5 +1,7 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
+import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -39,6 +41,8 @@ public class LoginViewModel {
 		boolean result;
 		try {
 			result = EmployeeCredentialsManager.attemptLogin(employeeID, password);
+			LocalEmployeeCredentials current = EmployeeCredentialsManager.getEmployeeCredentials(employeeID);
+			Main.setLoggedInEmployee(current);
 		} catch (Exception exception) {
 			result = false;
 		}
