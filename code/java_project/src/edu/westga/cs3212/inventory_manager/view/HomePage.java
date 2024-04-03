@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.viewmodel.HomePageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
@@ -50,6 +52,17 @@ public class HomePage {
 	@FXML
 	private Tab productTab;
 
+	@FXML
+	private Text fullnameLabel;
+	
+	@FXML
+	private Text employeeIdLabel;
+	
+	@FXML
+	private Text workerTypeLabel;
+
+	private static final String COMMA_SEPERATION = ", ";
+	
 	private HomePageViewModel viewModel;
 
 	@FXML
@@ -58,7 +71,8 @@ public class HomePage {
 		this.viewModel.getComponentSummary();
 		this.viewModel.getProductSummary();
 		this.viewModel.getOrderSummary();
-        this.setPermissions();
+		this.setPermissions();
+		this.setCurrentUserSummary();
 	}
 
 	private void bindToViewModel() {
@@ -67,11 +81,18 @@ public class HomePage {
 		this.productSummaryTextArea.textProperty().bind(this.viewModel.getProductSumarryTextArea());
 		this.orderSummaryTextArea.textProperty().bind(this.viewModel.getOrderSumarryTextArea());
 	}
-	
+
 	private void setPermissions() {
 		if (!this.viewModel.isManager()) {
 			this.adminButton.setDisable(true);
 		}
+	}
+	
+	private void setCurrentUserSummary() {
+		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
+		this.fullnameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
+		this.employeeIdLabel.setText(user.getEmployeeID().toString());
+		this.workerTypeLabel.setText(user.getEmployeeType().toString());
 	}
 
 	@FXML
@@ -93,7 +114,7 @@ public class HomePage {
 		stage.setTitle(Constants.ORDER_PAGE_TITLE);
 		stage.show();
 	}
-	
+
 	@FXML
 	void adminPageButtonOnClick(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
