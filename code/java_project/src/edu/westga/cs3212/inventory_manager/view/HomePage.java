@@ -58,7 +58,7 @@ public class HomePage {
 		this.viewModel.getComponentSummary();
 		this.viewModel.getProductSummary();
 		this.viewModel.getOrderSummary();
-
+        this.setPermissions();
 	}
 
 	private void bindToViewModel() {
@@ -66,6 +66,12 @@ public class HomePage {
 		this.componentSummaryTextArea.textProperty().bind(this.viewModel.getComponentSumarryTextArea());
 		this.productSummaryTextArea.textProperty().bind(this.viewModel.getProductSumarryTextArea());
 		this.orderSummaryTextArea.textProperty().bind(this.viewModel.getOrderSumarryTextArea());
+	}
+	
+	private void setPermissions() {
+		if (!this.viewModel.isManager()) {
+			this.adminButton.setDisable(true);
+		}
 	}
 
 	@FXML

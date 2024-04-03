@@ -100,6 +100,26 @@ public class Main extends Application {
     public static LocalEmployeeCredentials getLoggedInEmployee() {
         return loggedInEmployee;
     }
+    
+    /**
+	 * Checks if the logged in employee is a manager.
+	 * 
+	 * This method checks the employee type of the currently logged-in employee.
+	 * This can be used to determine employee permissions thorughout the application.
+	 * 
+	 * @precondition The employee must be logged in before calling this method.
+	 * @postcondition Returns the current logged-in employee's EmployeType. Either MANAGER or WORKER.
+	 * 
+	 * @return true if the logged in employee is a manager, false otherwise
+	 */
+	public static boolean isLoggedInEmployeeManager() {
+		EmployeeType role  = Main.getLoggedInEmployee().getEmployeeType();
+		
+		if (role == EmployeeType.MANAGER) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Primary Java entry point.

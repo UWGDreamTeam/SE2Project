@@ -38,6 +38,9 @@ import javafx.stage.Stage;
 public class OrderPage {
 
 	@FXML
+	private Button adminButton;
+	
+	@FXML
 	private TableView<Order> openOrders;
 
 	@FXML
@@ -103,6 +106,7 @@ public class OrderPage {
 				.getSelectedOrderProperty().isNull()
 				.or(isClosedOrdersTabSelected);
 
+		this.setPermissions();
 		this.fulfillButton.disableProperty().bind(shouldDisableFulfillButton);
 	}
 	
@@ -148,6 +152,12 @@ public class OrderPage {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
 			errorPopup.showAndWait();
+		}
+	}
+	
+	private void setPermissions() {
+		if (!this.viewModel.isManager()) {
+			this.adminButton.setDisable(true);
 		}
 	}
 

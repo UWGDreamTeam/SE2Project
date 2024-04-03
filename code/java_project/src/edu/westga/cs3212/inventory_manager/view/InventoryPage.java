@@ -64,7 +64,10 @@ public class InventoryPage {
     private static final String PRODUCT_REMOVED_TITLE = "Product Removed";
     private static final String PRODUCT_REMOVED_MESSAGE = "The product was successfully removed.";
     private static final String RECEIVED_UNITS_FORMAT = "We have received %d units of '%s'.";
-
+    
+    @FXML
+    private Button adminButton;
+    
 	@FXML
 	private Button editProductButton;
 
@@ -178,6 +181,7 @@ public class InventoryPage {
 		this.setupProductsTableView();
 		this.setupComponentButtons();
 		this.setupProductButtons();
+		this.setPermissions();
 	}
 
 	private void setupProductButtons() {
@@ -203,6 +207,12 @@ public class InventoryPage {
 		this.componentRemoveButton.disableProperty()
 				.bind(Bindings.isNull(this.componentsTableView
 						.getSelectionModel().selectedItemProperty()));
+	}
+	
+	private void setPermissions() {
+		if (!this.inventoryVM.isManager()) {
+		    this.disableButtons();
+		}
 	}
 
 	private void setupProductsTableView() {
@@ -505,5 +515,16 @@ public class InventoryPage {
 		this.inventoryVM.removeProduct();
 		this.refreshProductsTableView();
 		this.showAlert(PRODUCT_REMOVED_TITLE, PRODUCT_REMOVED_MESSAGE, AlertType.INFORMATION);
+	}
+	
+	private void disableButtons() {
+		this.adminButton.setDisable(true);
+		this.componentOrderButton.setDisable(true);
+		this.componentAddButton.setDisable(true);
+		this.componentEditButton.setDisable(true);
+		this.componentRemoveButton.setDisable(true);
+		this.productAddButton.setDisable(true);
+		this.editProductButton.setDisable(true);
+		this.removeProductButton.setDisable(true);
 	}
 }

@@ -10,7 +10,6 @@ public class LoginViewModel {
 
 	private final StringProperty employeeID;
 	private final StringProperty password;
-	private String loggedInEmployeeID;
 
 	/**
 	 * ViewModel for the Login Page, encapsulating the logic for user authentication

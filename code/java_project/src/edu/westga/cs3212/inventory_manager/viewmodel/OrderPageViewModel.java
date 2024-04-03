@@ -3,6 +3,7 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 import java.util.List;
 import java.util.Map;
 
+import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Order;
 import edu.westga.cs3212.inventory_manager.model.Product;
@@ -80,6 +81,15 @@ public class OrderPageViewModel {
 		Map<Product, Integer> products = selectedOrder.getItems();
 		OrderInventory.updateOrder(selectedOrder.getID(), products,
 				CompletionStatus.COMPLETE);
+	}
+	
+	/**
+	 * Determines if the user is a manager.
+	 * 
+	 * @return true if the user is a manager, false otherwise
+	 */
+	public boolean isManager() {
+		return Main.isLoggedInEmployeeManager();
 	}
 
 	/**

@@ -3,6 +3,7 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
@@ -183,6 +184,15 @@ public class InventoryViewModel {
 	 */
 	public void produceProduct(Product selectedProduct, int quantity) {
 		ProductInventory.produceProduct(selectedProduct.getID(), quantity);
+	}
+	
+	/**
+	 * Determines if the user is a manager.
+	 * 
+	 * @return true if the user is a manager, false otherwise
+	 */
+	public boolean isManager() {
+		return Main.isLoggedInEmployeeManager();
 	}
 	
 	public ObservableList<Component> searchComponents(String searchString) {
