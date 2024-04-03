@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +30,7 @@ class TestSearchProducts {
 		String productID = ProductInventory.addProduct("Product1", 2.0, recipe, 1);
 		Product product = ProductInventory.getProduct(productID);
 		
-		ArrayList<Product> products = new ArrayList<Product>();
+		List<Product> products = new ArrayList<>();
 		products = ProductInventory.searchProducts("Product1");
 		assertEquals(1, products.size());
 	}
@@ -54,7 +55,7 @@ class TestSearchProducts {
 		recipe3.put(component3, 1);
 		ProductInventory.addProduct("Product3", 2.0, recipe3, 1);
 		
-		ArrayList<Product> products = new ArrayList<Product>();
+		List<Product> products = new ArrayList<>();
 		products = ProductInventory.searchProducts("Product");
 		assertEquals(3, products.size());
 	}
@@ -79,14 +80,14 @@ class TestSearchProducts {
 		recipe3.put(component3, 1);
 		ProductInventory.addProduct("Dry Wall", 2.0, recipe3, 1);
 		
-		ArrayList<Product> products = new ArrayList<Product>();
+		List<Product> products = new ArrayList<>();
 		products = ProductInventory.searchProducts("Wall");
 		assertEquals(1, products.size());
 	}
 	
 	@Test
 	void testSearchProductsEmpty() {
-		ArrayList<Product> products = ProductInventory.searchProducts("Component1");
+		List<Product> products = ProductInventory.searchProducts("Component1");
 		assertEquals(0, products.size());
 	}
 }

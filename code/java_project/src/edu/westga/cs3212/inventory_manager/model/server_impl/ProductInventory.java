@@ -205,8 +205,8 @@ public final class ProductInventory {
 	 * @postcondition none
 	 * @return A list of products that contain the search string.
 	 */
-	public static ArrayList<Product> searchProducts(String searchString) {
-		ArrayList<Product> results = new ArrayList<Product>();
+	public static List<Product> searchProducts(String searchString) {
+		ArrayList<Product> results = new ArrayList<>();
 		
 		for (Product product : getProducts()) {
 			if (product.getName().toLowerCase().contains(searchString.toLowerCase())) {

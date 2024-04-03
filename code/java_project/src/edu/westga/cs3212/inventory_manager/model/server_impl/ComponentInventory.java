@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.model.server_impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.Component;
@@ -177,8 +178,8 @@ public final class ComponentInventory {
 	 * @postcondition none
 	 * @return A list of components that contain the search string.
 	 */
-	public static ArrayList<Component> searchComponents(String searchString) {
-		ArrayList<Component> results = new ArrayList<Component>();
+	public static List<Component> searchComponents(String searchString) {
+		ArrayList<Component> results = new ArrayList<>();
 		
 		for (Component component : getComponents()) {
 			if (component.getName().toLowerCase().contains(searchString.toLowerCase())) {

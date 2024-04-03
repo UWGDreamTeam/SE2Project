@@ -1,6 +1,7 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Item;
@@ -185,12 +186,12 @@ public class InventoryViewModel {
 	}
 	
 	public ObservableList<Component> searchComponents(String searchString) {
-		ArrayList<Component> results = ComponentInventory.searchComponents(searchString);
+		List<Component> results = ComponentInventory.searchComponents(searchString);
 		return FXCollections.observableArrayList(results);
 	}
 	
 	public ObservableList<Product> searchProducts(String searchString) {
-		ArrayList<Product> results = ProductInventory.searchProducts(searchString);
+		List<Product> results = ProductInventory.searchProducts(searchString);
 		return FXCollections.observableArrayList(results);
 	}
 }
