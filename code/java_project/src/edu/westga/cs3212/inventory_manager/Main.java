@@ -76,6 +76,9 @@ public class Main extends Application {
 	 * This method stores the credentials of the currently logged-in employee,
 	 * allowing other parts of the application to access user-related information.
 	 * 
+	 * @precondition employee should not be null
+	 * @postcondition loggedInEmployee is set to the provided employee credentials, making them accessible throughout the application.
+	 * 
 	 * @param employee The credentials of the logged-in employee.
 	 */
 	public static void setLoggedInEmployee(LocalEmployeeCredentials employee) {
@@ -88,6 +91,9 @@ public class Main extends Application {
 	 * This method returns the credentials of the currently logged-in employee,
 	 * which can be used throughout the application to check permissions,
 	 * access user information, and more.
+	 * 
+	 * @precondition The employee must be logged in before calling this method.
+	 * @postcondition Returns the current logged-in employee's credentials.
 	 * 
 	 * @return The credentials of the currently logged-in employee.
 	 */
