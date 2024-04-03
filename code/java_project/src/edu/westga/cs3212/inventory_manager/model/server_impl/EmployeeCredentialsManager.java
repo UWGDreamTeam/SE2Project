@@ -33,6 +33,10 @@ public class EmployeeCredentialsManager {
 	private static final String ATTEMPT_LOGIN_REQUEST_TYPE = "attemptLogin";
 	private static final String REGISTER_USER_REQUEST_TYPE = "registerUser";
 	private static final String DATA_KEY = "data";
+	
+	private EmployeeCredentialsManager() {
+		
+	}
 
 	/**
 	 * Adds a new employee to the system by sending their credentials to the server.
@@ -70,6 +74,41 @@ public class EmployeeCredentialsManager {
 
 		Map<String, Object> dataMap = Server.sendRequestAndGetResponse(REGISTER_USER_REQUEST_TYPE, requestData);
 		return (String) dataMap.get(EMPLOYEE_ID_STRING_CONST);
+	}
+	
+	/**
+	 * Adds a new employee to the system by sending their credentials to the server.
+	 * 
+	 * @param firstName The first name of the new employee. Must not be null or
+	 *                  empty.
+	 * @param lastName  The last name of the new employee. Must not be null or
+	 *                  empty.
+	 * @param password  The password for the new employee. Must not be null or
+	 *                  empty.
+	 * @param role      The role of the new employee (e.g., EmployeeType.ADMIN,
+	 *                  EmployeeType.USER).
+	 * 
+	 * @precondition firstName != null && !firstName.isBlank() && lastName != null
+	 *               && !lastName.isBlank() && password != null &&
+	 *               !password.isBlank() && role != null
+	 * 
+	 * @postcondition A new employee is registered in the system with the provided
+	 *                credentials.
+	 * 
+	 * @return The employee ID assigned by the server if the addition is successful.
+	 * 
+	 * @throws IllegalArgumentException If any of the input parameters are null or
+	 *                                  do not meet validity criteria.
+	 */
+	public static String addEmployee(String firstName, String lastName, String password, String roleStr) {
+		checkForValidFirstName(firstName);
+		checkForValidLastName(lastName);
+		checkForValidPassword(password);
+		checkForValidRole(roleStr);
+
+		EmployeeType role = convertEmployeeType(roleStr);
+		
+		return addEmployee(firstName, lastName, password, role);
 	}
 
 	/**
@@ -253,6 +292,12 @@ public class EmployeeCredentialsManager {
 	}
 
 	private static void checkForValidRole(EmployeeType role) {
+		if (role == null) {
+			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
+		}
+	}
+	
+	private static void checkForValidRole(String role) {
 		if (role == null) {
 			throw new IllegalArgumentException(Constants.EMPLOYEE_TYPE_CANNOT_BE_NULL_OR_EMPTY);
 		}

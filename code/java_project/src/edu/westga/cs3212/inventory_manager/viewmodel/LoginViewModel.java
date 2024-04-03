@@ -1,12 +1,13 @@
 package edu.westga.cs3212.inventory_manager.viewmodel;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
+import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class LoginViewModel {
 
-	private final LocalEmployeeCredentialsManager manager;
 	private final StringProperty employeeID;
 	private final StringProperty password;
 
@@ -18,9 +19,12 @@ public class LoginViewModel {
 	 * @author Jason Nunez
 	 */
 	public LoginViewModel() {
-		this.manager = new LocalEmployeeCredentialsManager();
 		this.employeeID = new SimpleStringProperty();
 		this.password = new SimpleStringProperty();
+		
+		//Used only for testing purposes
+		//Generate Manager user with id aa0001 and password "admin"
+		EmployeeCredentialsManager.addEmployee("admin", "admin", "admin", "manager");
 	}
 
 	/**
@@ -36,7 +40,9 @@ public class LoginViewModel {
 		String password = this.password.get();
 		boolean result;
 		try {
-			result = this.manager.attemptLogin(employeeID, password);
+			result = EmployeeCredentialsManager.attemptLogin(employeeID, password);
+			LocalEmployeeCredentials current = EmployeeCredentialsManager.getEmployeeCredentials(employeeID);
+			Main.setLoggedInEmployee(current);
 		} catch (Exception exception) {
 			result = false;
 		}

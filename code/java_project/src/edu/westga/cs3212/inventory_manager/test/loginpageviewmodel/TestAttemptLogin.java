@@ -1,35 +1,59 @@
 package edu.westga.cs3212.inventory_manager.test.loginpageviewmodel;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 import edu.westga.cs3212.inventory_manager.viewmodel.LoginViewModel;
 
 public class TestAttemptLogin {
+	
+	@BeforeEach
+	void setup() {
+		EmployeeCredentialsManager.clearCredentials();
+	}
 
 	@Test
 	void testAttemptLoginWithValidCredentials() {
 		LoginViewModel testLoginViewModel = new LoginViewModel();
-		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
-		manager.addEmployee("Jason", "Nunez", "Password", EmployeeType.MANAGER.toString());
-		String employeeID = manager.getEmployees().get(0).getEmployeeID();
-		String password = manager.getEmployees().get(0).getPassword();
+		
+		EmployeeCredentialsManager.addEmployee("Jason", "Nunez", "Password", EmployeeType.MANAGER);
+		
+		String employeeID = "jn0001";
+		String password = "Password";
+		
 		testLoginViewModel.employeeIDProperty().set(employeeID);
 		testLoginViewModel.passwordProperty().set(password);
+		
 		assertTrue(testLoginViewModel.attemptLogin());
 	}
 	
 	@Test
-	void testAttemptLoginWithInvalidCredentials() {
+	void testAttemptLoginWithInvalidPassword() {
 		LoginViewModel testLoginViewModel = new LoginViewModel();
-		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
-		manager.addEmployee("Jason", "Nunez", "Password", EmployeeType.MANAGER.toString());
+		
+		EmployeeCredentialsManager.addEmployee("Jason", "Nunez", "Password", EmployeeType.MANAGER);
 		String password = "InvalidPassword";
-		testLoginViewModel.employeeIDProperty().set("");
+		
+		testLoginViewModel.employeeIDProperty().set("jn0001");
 		testLoginViewModel.passwordProperty().set(password);
-		assertTrue(!testLoginViewModel.attemptLogin());
+		
+		assertFalse(testLoginViewModel.attemptLogin());
+	}
+	
+	@Test
+	void testAttemptLoginWithInvalidID() {
+		LoginViewModel testLoginViewModel = new LoginViewModel();
+		
+		EmployeeCredentialsManager.addEmployee("Jason", "Nunez", "Password", EmployeeType.MANAGER);
+		
+		testLoginViewModel.employeeIDProperty().set("jj0000");
+		testLoginViewModel.passwordProperty().set("Password");
+		
+		assertFalse(testLoginViewModel.attemptLogin());
 	}
 }

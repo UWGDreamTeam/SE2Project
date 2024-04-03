@@ -39,6 +39,31 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class InventoryPage {
+	
+	private static final String DEFAULT_QUANTITY = "1";
+    private static final String PRODUCE_PRODUCT_TITLE = "Produce Product";
+    private static final String ENTER_QUANTITY_MESSAGE = "Enter Quantity to Produce";
+    private static final String QUANTITY_PROMPT = "Quantity:";
+    private static final String PRODUCTION_ERROR_TITLE = "Production Error";
+    private static final String PRODUCE_ERROR_TITLE = "Produce Error";
+    private static final String INVALID_QUANTITY_MESSAGE = "Invalid Quantity";
+    private static final String ENTER_POSITIVE_NUMBER_MESSAGE = "Please enter a positive number.";
+    private static final String INVALID_INPUT_TITLE = "Invalid Input";
+    private static final String VALID_NUMBER_MESSAGE = "Please enter a valid number.";
+    private static final String NO_PRODUCT_SELECTED = "No product selected.";
+    private static final String COMPONENT_REMOVED_TITLE = "Component Removed";
+    private static final String COMPONENT_REMOVED_MESSAGE = "The component was successfully removed.";
+    private static final String ORDER_COMPONENT_TITLE = "Order Component";
+    private static final String ORDER_COMPONENT_HEADER = "Order More Components";
+    private static final String ORDER_COMPONENT_MESSAGE = "Please enter the quantity:";
+    private static final String ORDER_ERROR_TITLE = "Order Error";
+    private static final String NO_COMPONENT_SELECTED = "No component selected.";
+    private static final String ORDERED_COMPONENTS_TITLE = "Ordered Components";
+    private static final String HOME_PAGE_TITLE = "Home Page";
+    private static final String ORDER_PAGE_TITLE = "Order Page";
+    private static final String PRODUCT_REMOVED_TITLE = "Product Removed";
+    private static final String PRODUCT_REMOVED_MESSAGE = "The product was successfully removed.";
+    private static final String RECEIVED_UNITS_FORMAT = "We have received %d units of '%s'.";
 
 	@FXML
 	private Button editProductButton;
@@ -235,31 +260,38 @@ public class InventoryPage {
 
 	@FXML
 	void homePageButtonOnClick(ActionEvent event) throws IOException {
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
-		Scene scene = stage.getScene();
-		scene.setRoot(parent);
-		stage.setTitle(Constants.HOME_PAGE_TITLE);
-	}
 
-	@FXML
-	void ordersPageButtonOnClick(ActionEvent event) throws IOException {
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
-		Scene scene = new Scene(parent);
-		stage.setScene(scene);
-		stage.setTitle(Constants.ORDER_PAGE_TITLE);
-		stage.show();
+		try {
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene()
+					.getWindow();
+			Parent parent;
+			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
+			Scene currentScene = currentStage.getScene();
+			currentScene.setRoot(parent);
+			currentStage.setTitle(HOME_PAGE_TITLE);
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+			errorPopup.setContentText(e.getMessage());
+			errorPopup.showAndWait();
+		}
 	}
 	
 	@FXML
-	void adminPageButtonOnClick(ActionEvent event) throws IOException {
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADMIN_PAGE));
-		Scene scene = new Scene(parent);
-		stage.setScene(scene);
-		stage.setTitle(Constants.ADMIN_PAGE_TITLE);
-		stage.show();
+	void orderPageButtonOnClick(ActionEvent event) throws IOException {
+
+		try {
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene()
+					.getWindow();
+			Parent parent;
+			parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
+			Scene currentScene = currentStage.getScene();
+			currentScene.setRoot(parent);
+			currentStage.setTitle(ORDER_PAGE_TITLE);
+		} catch (IOException e) {
+			Alert errorPopup = new Alert(AlertType.ERROR);
+			errorPopup.setContentText(e.getMessage());
+			errorPopup.showAndWait();
+		}
 	}
 
 	@FXML
@@ -301,7 +333,7 @@ public class InventoryPage {
 		this.inventoryVM.removeComponent();
 
 		this.refreshComponentsTableView();
-		this.showAlert("Component Removed", "The component was successfully removed.", AlertType.INFORMATION);
+		this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
 
 	@FXML
@@ -330,10 +362,10 @@ public class InventoryPage {
 
 	@FXML
 	void orderComponentButtonManagerOnClick(ActionEvent event) {
-		TextInputDialog dialog = new TextInputDialog("1");
-		dialog.setTitle("Order Component");
-		dialog.setHeaderText("Order More Components");
-		dialog.setContentText("Please enter the quantity:");
+		TextInputDialog dialog = new TextInputDialog(DEFAULT_QUANTITY);
+		dialog.setTitle(ORDER_COMPONENT_TITLE);
+		dialog.setHeaderText(ORDER_COMPONENT_HEADER);
+		dialog.setContentText(ORDER_COMPONENT_MESSAGE);
 
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
@@ -342,11 +374,11 @@ public class InventoryPage {
 				if (quantity > 0) {
 					this.tryToOrderComponent(quantity);
 				} else {
-					this.showAlert("Invalid Quantity",
-							"Please enter a positive number.", AlertType.ERROR);
+					this.showAlert(INVALID_QUANTITY_MESSAGE,
+							ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
 				}
 			} catch (NumberFormatException e) {
-				this.showAlert("Invalid Input", "Please enter a valid number.",
+				this.showAlert(INVALID_INPUT_TITLE, VALID_NUMBER_MESSAGE,
 						AlertType.ERROR);
 			}
 		}
@@ -359,10 +391,10 @@ public class InventoryPage {
 		if (selectedComponent != null) {
 			this.inventoryVM.orderComponent(selectedComponent, quantity);
 			this.refreshComponentsTableView();
-			String content = String.format("We have received %d units of '%s'.", quantity, selectedComponent.getName());
-	        this.showAlert("Ordered Components", content, AlertType.INFORMATION);
+			String content = String.format(RECEIVED_UNITS_FORMAT, quantity, selectedComponent.getName());
+	        this.showAlert(ORDERED_COMPONENTS_TITLE, content, AlertType.INFORMATION);
 		} else {
-			this.showAlert("Order Error", "No component selected.",
+			this.showAlert(ORDER_ERROR_TITLE, NO_COMPONENT_SELECTED,
 					AlertType.ERROR);
 		}
 	}
@@ -438,21 +470,40 @@ public class InventoryPage {
 
 	@FXML
 	void produceProductButtonOnClick(ActionEvent event) {
-		try {
-			this.inventoryVM.produceProduct(this.productsTableView
-					.getSelectionModel().getSelectedItem(), 1);
-		} catch (IllegalArgumentException e) {
-			Alert errorPopup = new Alert(AlertType.ERROR);
-			errorPopup.setContentText(e.getMessage());
-			errorPopup.showAndWait();
-		}
-		this.refreshProductsTableView();
+	    TextInputDialog dialog = new TextInputDialog(DEFAULT_QUANTITY);
+	    dialog.setTitle(PRODUCE_PRODUCT_TITLE);
+	    dialog.setHeaderText(ENTER_QUANTITY_MESSAGE);
+	    dialog.setContentText(QUANTITY_PROMPT);
+
+	    Optional<String> result = dialog.showAndWait();
+	    result.ifPresent(quantityString -> {
+	        try {
+	            int quantity = Integer.parseInt(quantityString);
+	            if (quantity > 0) {
+	                Product selectedProduct = this.productsTableView.getSelectionModel().getSelectedItem();
+	                if (selectedProduct != null) {
+	                    try {
+	                        this.inventoryVM.produceProduct(selectedProduct, quantity);
+	                        this.refreshProductsTableView();
+	                    } catch (IllegalArgumentException e) {
+	                        this.showAlert(PRODUCTION_ERROR_TITLE, e.getMessage(), AlertType.ERROR);
+	                    }
+	                } else {
+	                    this.showAlert(PRODUCE_ERROR_TITLE, NO_PRODUCT_SELECTED, AlertType.ERROR);
+	                }
+	            } else {
+	                this.showAlert(INVALID_QUANTITY_MESSAGE, ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
+	            }
+	        } catch (NumberFormatException e) {
+	            this.showAlert(INVALID_INPUT_TITLE, VALID_NUMBER_MESSAGE, AlertType.ERROR);
+	        }
+	    });
 	}
 
 	@FXML
 	void removeProductManagerOnClick(ActionEvent event) {
 		this.inventoryVM.removeProduct();
 		this.refreshProductsTableView();
-		this.showAlert("Product Removed", "The product was successfully removed.", AlertType.INFORMATION);
+		this.showAlert(PRODUCT_REMOVED_TITLE, PRODUCT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
 }

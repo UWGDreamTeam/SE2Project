@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 import edu.westga.cs3212.inventory_manager.viewmodel.AdminEditCredentialsPageViewModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,18 +26,17 @@ class TestEditUser {
 	@Test
 	void testRemoveUser() {
 		//Arrange
-		LocalEmployeeCredentialsManager fakeCredentialsManager = new LocalEmployeeCredentialsManager();
-		fakeCredentialsManager.addEmployee("testEditFirstName", "testEditLastName", "testEditPassword", "manager");
+		EmployeeCredentialsManager.addEmployee("testEditFirstName", "testEditLastName", "testEditPassword", "manager");
 		
 		String fakeID = "";
 		
-		for (LocalEmployeeCredentials curr: fakeCredentialsManager.getEmployees()) {
+		for (LocalEmployeeCredentials curr: EmployeeCredentialsManager.getEmployees()) {
 			if (curr.getFirstName().equals("testEditFirstName")) {
 				fakeID = curr.getEmployeeID();
 			}
 		}
 		
-		LocalEmployeeCredentials selectedUser = fakeCredentialsManager.getEmployeeCredentials(fakeID);
+		LocalEmployeeCredentials selectedUser = EmployeeCredentialsManager.getEmployeeCredentials(fakeID);
 		
 		StringProperty testFirstName = new SimpleStringProperty();
 		StringProperty testLastName = new SimpleStringProperty();
@@ -74,7 +74,7 @@ class TestEditUser {
 		assertEquals("newEditPassword", actualpassword);
 		assertEquals(EmployeeType.WORKER, actualEmployeeType);
 		
-		fakeCredentialsManager.removeEmployee(fakeID);
+		EmployeeCredentialsManager.removeEmployee(fakeID);
 	}
 
 }

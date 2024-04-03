@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -14,7 +15,6 @@ import javafx.beans.property.StringProperty;
  */
 public class RegisterPageViewModel {
 
-    private final LocalEmployeeCredentialsManager credentialsManager;
     private final StringProperty firstName = new SimpleStringProperty();
     private final StringProperty lastName = new SimpleStringProperty();
     private final StringProperty password = new SimpleStringProperty();
@@ -28,7 +28,6 @@ public class RegisterPageViewModel {
      * @postcondition credentialsManager != null
      */
     public RegisterPageViewModel() {
-        this.credentialsManager = new LocalEmployeeCredentialsManager();
     }
 
     /**
@@ -45,7 +44,7 @@ public class RegisterPageViewModel {
             throw new IllegalArgumentException(Constants.PASSWORDS_DO_NOT_MATCH);
         }
         try {
-            this.credentialsManager.addEmployee(
+        	EmployeeCredentialsManager.addEmployee(
                 this.firstName.get(),
                 this.lastName.get(),
                 this.password.get(),
