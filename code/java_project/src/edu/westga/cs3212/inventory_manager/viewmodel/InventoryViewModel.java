@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Component;
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Item;
 import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
@@ -166,6 +167,11 @@ public class InventoryViewModel {
 	 *                inventory.
 	 */
 	public void removeProduct() {
+		if (ProductInventory.checkAnyProductUsesComponent(
+				this.selectedComponent.get().getID())) {
+			throw new IllegalArgumentException(
+					Constants.ERROR_COMPONENT_IN_USE_BY_PRODUCT);
+		}
 		ProductInventory.deleteProduct(this.selectedProduct.get().getID());
 	}
 
