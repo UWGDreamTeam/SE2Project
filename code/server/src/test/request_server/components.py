@@ -11,7 +11,7 @@ class TestComponenet(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        log("Starting Inventory Management System tests.")
+        log("Starting Tests for Component Server.")
 
     def setUp(self):
         clear_component_inventory()
@@ -90,10 +90,25 @@ class TestComponenet(unittest.TestCase):
         self.assertEqual(clear_result['status'], 'success')
         all_components_result = get_all_components()
         self.assertEqual(len(all_components_result['data']), 0)
+        
+        
+    def test_get_quantity_of_component(self):
+        component_data = {
+            "Name": "LED",
+            "ProductionCost": 0.05,
+            "Quantity": 1000
+        }
+        add_result = add_component(component_data)
+        component_id = add_result['data']['ComponentID']
+    
+        quantity_data = {"ComponentID": component_id}
+        quantity_result = get_quantity_of_component(quantity_data)
+        self.assertEqual(quantity_result['status'], 'success')
+        self.assertEqual(quantity_result['data']['Quantity'], 1000)
 
     @classmethod
     def tearDownClass(cls):
-        log("Completed Inventory Management System tests.")
+        log("Completed Component System tests.")
 
 if __name__ == '__main__':
     unittest.main()
