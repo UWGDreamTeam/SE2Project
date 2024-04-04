@@ -210,7 +210,7 @@ public class AdminPage {
     	this.adminVM.getSelectedUser().bind(this.usersTableView.getSelectionModel().selectedItemProperty());
     	this.setupProductButtons();
     	this.setupButtonsVisibility();
-    	this.setCurrentUserSummary();
+    	Main.createSummary(fullNameLabel, employeeIdLabel, workerTypeLabel);
     }
     
 	private void refreshUsersTableView() {

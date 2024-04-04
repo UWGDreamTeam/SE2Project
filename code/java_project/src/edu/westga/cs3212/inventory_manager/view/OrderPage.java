@@ -114,14 +114,7 @@ public class OrderPage {
 
 		this.setPermissions();
 		this.fulfillButton.disableProperty().bind(shouldDisableFulfillButton);
-		this.setCurrentUserSummary();
-	}
-	
-	private void setCurrentUserSummary() {
-		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
-		this.fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
-		this.employeeIdLabel.setText(user.getEmployeeID().toString());
-		this.workerTypeLabel.setText(user.getEmployeeType().toString());
+		Main.createSummary(this.fullNameLabel, this.employeeIdLabel, this.workerTypeLabel);
 	}
 	
 	@FXML

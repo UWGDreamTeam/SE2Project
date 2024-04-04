@@ -60,8 +60,6 @@ public class HomePage {
 	
 	@FXML
 	private Text workerTypeLabel;
-
-	private static final String COMMA_SEPERATION = ", ";
 	
 	private HomePageViewModel viewModel;
 
@@ -72,7 +70,7 @@ public class HomePage {
 		this.viewModel.getProductSummary();
 		this.viewModel.getOrderSummary();
 		this.setPermissions();
-		this.setCurrentUserSummary();
+		Main.createSummary(fullNameLabel, employeeIdLabel, workerTypeLabel);
 	}
 
 	private void bindToViewModel() {
@@ -86,13 +84,6 @@ public class HomePage {
 		if (!this.viewModel.isManager()) {
 			this.adminButton.setDisable(true);
 		}
-	}
-	
-	private void setCurrentUserSummary() {
-		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
-		this.fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
-		this.employeeIdLabel.setText(user.getEmployeeID().toString());
-		this.workerTypeLabel.setText(user.getEmployeeType().toString());
 	}
 
 	@FXML

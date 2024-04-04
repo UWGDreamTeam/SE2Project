@@ -167,8 +167,6 @@ public class InventoryPage {
 	
 	@FXML
 	private Text workerTypeLabel;
-	
-	private static final String COMMA_SEPERATION = ", ";
 
 	private InventoryViewModel inventoryVM;
 
@@ -187,14 +185,7 @@ public class InventoryPage {
 		this.setupComponentButtons();
 		this.setupProductButtons();
 		this.setPermissions();
-		this.setCurrentUserSummary();
-	}
-	
-	private void setCurrentUserSummary() {
-		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
-		this.fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
-		this.employeeIdLabel.setText(user.getEmployeeID().toString());
-		this.workerTypeLabel.setText(user.getEmployeeType().toString());
+		Main.createSummary(this.fullNameLabel, this.employeeIdLabel, this.workerTypeLabel);
 	}
 
 	private void setupProductButtons() {
