@@ -189,21 +189,27 @@ public class InventoryPage {
 	}
 
 	private void setupProductButtons() {
+	    boolean isManager = this.inventoryVM.isManager();
 
-		if (!this.inventoryVM.isManager()) {
-			this.productAddButton.setDisable(true);
-			this.editProductButton.setDisable(true);
-			this.removeProductButton.setDisable(true);
-		} else {
-			this.editProductButton.disableProperty()
-					.bind(Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()));
+	    this.productAddButton.setDisable(!isManager);
+	    this.editProductButton.setDisable(!isManager);
+	    this.removeProductButton.setDisable(!isManager);
 
-			this.productProduceButton.disableProperty()
-					.bind(Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()));
-			this.removeProductButton.disableProperty()
-					.bind(Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()));
-		}
+	    this.editProductButton.disableProperty()
+	            .bind(Bindings.or(
+	                    Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()),
+	                    Bindings.not(Bindings.createBooleanBinding(() -> isManager))
+	            ));
+	    this.removeProductButton.disableProperty()
+	            .bind(Bindings.or(
+	                    Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()),
+	                    Bindings.not(Bindings.createBooleanBinding(() -> isManager))
+	            ));
+	   
+	    this.productProduceButton.disableProperty()
+	            .bind(Bindings.isNull(this.productsTableView.getSelectionModel().selectedItemProperty()));
 	}
+
 
 	private void setupComponentButtons() {
 
