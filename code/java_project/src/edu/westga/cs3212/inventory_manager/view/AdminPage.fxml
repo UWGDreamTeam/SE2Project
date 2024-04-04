@@ -46,7 +46,7 @@
       <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
       <Pane layoutX="475.0" prefHeight="100.0" prefWidth="250.0">
          <children>
-            <Text fx:id="fullnameLabel" layoutX="100.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name, First Name" />
+            <Text fx:id="fullNameLabel" layoutX="100.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name, First Name" />
             <Text fx:id="employeeIdLabel" layoutX="100.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
             <Text fx:id="workerTypeLabel" layoutX="100.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type" />
             <Label layoutY="17.0" text="Name:" />

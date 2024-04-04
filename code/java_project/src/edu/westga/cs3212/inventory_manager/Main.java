@@ -112,14 +112,11 @@ public class Main extends Application {
 	 * 
 	 * @return true if the logged in employee is a manager, false otherwise
 	 */
-	public static boolean isLoggedInEmployeeManager() {
-		EmployeeType role  = Main.getLoggedInEmployee().getEmployeeType();
-		
-		if (role == EmployeeType.MANAGER) {
-			return true;
-		}
-		return false;
-	}
+    public static boolean isLoggedInEmployeeManager() {
+        EmployeeType role  = Main.getLoggedInEmployee().getEmployeeType();
+
+        return role == EmployeeType.MANAGER;
+    }
 
 	/**
 	 * Primary Java entry point.
