@@ -11,7 +11,7 @@ class TestComponenet(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        log("Starting Tests for Component Server.")
+        log("Starting Component System tests.")
 
     def setUp(self):
         clear_component_inventory()
