@@ -262,6 +262,7 @@ public final class OrderInventory {
 			Map<String, Object> order = (Map<String, Object>) orderData
 					.get(orderID);
 			orders[index] = extractOrder(order);
+			orders[index].setID(orderID);
 			index++;
 		}
 		return List.of(orders);
