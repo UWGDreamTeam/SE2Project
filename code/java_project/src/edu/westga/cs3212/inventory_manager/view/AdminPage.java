@@ -88,13 +88,6 @@ public class AdminPage {
 				.bind(Bindings.isNull(this.usersTableView.getSelectionModel().selectedItemProperty()));
 	}
 	
-	private void setCurrentUserSummary() {
-		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
-		this.fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
-		this.employeeIdLabel.setText(user.getEmployeeID());
-		this.workerTypeLabel.setText(user.getEmployeeType().toString());
-	}
-	
 	@FXML
 	void homePageButtonOnClick(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
+import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -129,5 +130,7 @@ public class AdminEditCredentialsPageViewModel {
 		selectedUser.setLastName(newLastName);
 		selectedUser.setPassword(newPassword);
 		selectedUser.setEmployeeType(newEmployeeType);
+		EmployeeCredentialsManager.removeEmployee(selectedUser.getEmployeeID());
+		EmployeeCredentialsManager.addEmployee(newFirstName, newLastName, newPassword, newEmployeeType);
 	}
 }
