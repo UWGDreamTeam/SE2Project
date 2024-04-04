@@ -53,7 +53,7 @@ public class HomePage {
 	private Tab productTab;
 
 	@FXML
-	private Text fullnameLabel;
+	private Text fullNameLabel;
 	
 	@FXML
 	private Text employeeIdLabel;
@@ -90,7 +90,7 @@ public class HomePage {
 	
 	private void setCurrentUserSummary() {
 		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
-		this.fullnameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
+		this.fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
 		this.employeeIdLabel.setText(user.getEmployeeID().toString());
 		this.workerTypeLabel.setText(user.getEmployeeType().toString());
 	}

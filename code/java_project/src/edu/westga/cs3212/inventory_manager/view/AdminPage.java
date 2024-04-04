@@ -56,7 +56,7 @@ public class AdminPage {
 	private Button removeButton;
     
     @FXML
-	private Text fullnameLabel;
+	private Text fullNameLabel;
 	
 	@FXML
 	private Text employeeIdLabel;
@@ -90,8 +90,8 @@ public class AdminPage {
 	
 	private void setCurrentUserSummary() {
 		LocalEmployeeCredentials user = Main.getLoggedInEmployee();
-		this.fullnameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
-		this.employeeIdLabel.setText(user.getEmployeeID().toString());
+		this.fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
+		this.employeeIdLabel.setText(user.getEmployeeID());
 		this.workerTypeLabel.setText(user.getEmployeeType().toString());
 	}
 	
