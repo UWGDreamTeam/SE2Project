@@ -31,6 +31,18 @@ class TestRemoveItem {
 
 		assertThrows(IllegalArgumentException.class, () -> inventory.removeItem(null));
 	}
+	
+	@Test
+	void testRemoveItemWithNotInList() {
+		LocalProductInventory inventory = new LocalProductInventory();
+		Map<Component, Integer> recipe = new HashMap<>();
+		recipe.put(new Component("component", 1.0), 1);
+		Product product = new Product("product", 5.0, 20.0, recipe);
+		Product product2 = new Product("product", 5.0, 20.0, recipe);
+		inventory.addItem(product, 1);
+
+		assertFalse(inventory.removeItem(product2));
+	}
 
 	@Test
 	void testRemoveItemWithItemOnList() {

@@ -10,6 +10,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.OrderInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
@@ -51,6 +52,15 @@ class TestOrderPageViewModel {
 		this.viewModel.getSelectedOrderProperty().bindBidirectional(selectedOrder);
 		
 		assertNotNull(this.viewModel.getSelectedOrderProperty());
+	}
+	
+	@Test
+	public void testIsManager() {
+		EmployeeCredentialsManager.clearCredentials();
+		EmployeeCredentialsManager.addEmployee("admin", "admin", "admin", "manager");
+		EmployeeCredentialsManager.attemptLogin("aa0001", "admin");
+		
+		assertNotNull(this.viewModel.isManager());
 	}
 	
 	@Test

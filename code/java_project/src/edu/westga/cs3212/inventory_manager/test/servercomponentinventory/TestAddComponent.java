@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.model.server.Server;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 
 class TestAddComponent {
@@ -14,6 +15,21 @@ class TestAddComponent {
 			ComponentInventory.addComponent(null, 0, 0);
 		});
 	}
+	
+	@Test
+	void testNullRequest() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Server.sendRequest(null);
+		});
+	}
+	
+	@Test
+	void testErrorRequest() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Server.sendRequest("request");
+		});
+	}
+	
 	
 	@Test
 	void testAddBlankComponentName() {
