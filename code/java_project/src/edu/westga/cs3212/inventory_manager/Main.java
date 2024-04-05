@@ -23,7 +23,7 @@ public class Main extends Application {
 	public static final String ADD_PAGE = "view/AddComponentPage.fxml";
 	public static final String HOME_PAGE = "view/HomePage.fxml";
 	public static final String REGISTER_PAGE = "view/RegisterPage.fxml";
-	public static final String LOGIN_PAGE = "view/LoginPage.fxml";
+	public static final String LOGIN_PAGE = "view/login/LoginPage.fxml";
 	public static final String ORDER_PAGE = "view/OrderPage.fxml";
 	public static final String EDIT_COMPONENT_PAGE = "view/EditComponentPage.fxml";
 	public static final String ADD_PRODUCT_PAGE = "view/AddProductPage.fxml";

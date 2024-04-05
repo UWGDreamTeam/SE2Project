@@ -146,7 +146,7 @@ public class InventoryViewModel {
 	 *            The component for which the quantity is to be adjusted.
 	 * @param quantity
 	 *            The amount by which to adjust the component's quantity.
-	 * @precondition selectedComponent2 != null && quantity >= 0
+	 * @precondition selectedComponent != null && quantity >= 0
 	 * @postcondition The specified component's quantity is incremented by the
 	 *                provided amount.
 	 */
@@ -154,7 +154,7 @@ public class InventoryViewModel {
 		try {
 			ComponentInventory.orderComponent(selectedComponent.getID(), quantity);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new IllegalArgumentException();
 		}
 	}
 

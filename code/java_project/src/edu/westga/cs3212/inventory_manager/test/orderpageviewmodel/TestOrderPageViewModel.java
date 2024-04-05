@@ -1,6 +1,7 @@
 package edu.westga.cs3212.inventory_manager.test.orderpageviewmodel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashMap;
@@ -10,6 +11,9 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.Main;
+import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.OrderInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
@@ -66,10 +70,17 @@ class TestOrderPageViewModel {
 		String OrderID = OrderInventory.createOrder(orders, CompletionStatus.COMPLETE);
 		Order newOrder = OrderInventory.getOrder(OrderID);
 		ObjectProperty<Order> selectedOrder = new SimpleObjectProperty<Order>(newOrder);
-		
+	
 		this.viewModel.getSelectedOrderProperty().bindBidirectional(selectedOrder);
 		this.viewModel.fulfillSelectedOrder(newOrder);
 		
 		assertEquals(CompletionStatus.COMPLETE, newOrder.getCompletionStatus());
+	}
+	
+	@Test
+	public void testIsManager() {
+		EmployeeCredentialsManager.addEmployee("Jason", "Nunez", "Password", EmployeeType.WORKER);
+		Main.setLoggedInEmployee(EmployeeCredentialsManager.getEmployeeCredentials("jn0001"));
+		assertFalse(this.viewModel.isManager());
 	}
 }

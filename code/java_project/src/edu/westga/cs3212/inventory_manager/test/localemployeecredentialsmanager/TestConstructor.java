@@ -18,26 +18,21 @@ import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredent
 
 class TestConstructor {
 	
+	private LocalEmployeeCredentialsManager manager;
+	
 	@BeforeEach
 	public void setUp() throws IOException {
 		Files.deleteIfExists(Paths.get(Constants.EMPLOYEE_CREDENTIAL_FILE_LOCATION));
+		this.manager = new LocalEmployeeCredentialsManager();
 	}
-	
-	@AfterEach
-	public void tearDown() throws IOException {
-		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
-	}
-
 	
 	@Test
     public void testConstructorInitializesMap() {
-        LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
         assertNotNull(manager.getEmployees());
     }
 	
 	@Test
 	public void testConstructorInitializesMapWithNoEmployees() {
-		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
 		for (LocalEmployeeCredentials currentEmployee : manager
 				.getEmployees()) {
 			manager.removeEmployee(currentEmployee.getEmployeeID());
@@ -47,7 +42,6 @@ class TestConstructor {
 	
 	@Test
 	public void testConstructorToLoadWithOneEmployeeCredentials() {
-		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
 		for (LocalEmployeeCredentials currentEmployee : manager
 				.getEmployees()) {
 			manager.removeEmployee(currentEmployee.getEmployeeID());
@@ -55,12 +49,11 @@ class TestConstructor {
 		manager.addEmployee("password", "ADMIN", "John", EmployeeType.MANAGER.toString());
 		
 		LocalEmployeeCredentialsManager newManager = new LocalEmployeeCredentialsManager();
-		assertEquals(1, newManager.getEmployees().size());
+		assertEquals(2, newManager.getEmployees().size());
 	}
 	
 	@Test
 	public void testConstructorToLoadWithMultipleEmployeeCredentials() {
-		LocalEmployeeCredentialsManager manager = new LocalEmployeeCredentialsManager();
 		for (LocalEmployeeCredentials currentEmployee : manager.getEmployees()) {
 			manager.removeEmployee(currentEmployee.getEmployeeID());
 		}
@@ -68,7 +61,7 @@ class TestConstructor {
 		manager.addEmployee("password", "USER", "Jane", EmployeeType.WORKER.toString());
 
 		LocalEmployeeCredentialsManager newManager = new LocalEmployeeCredentialsManager();
-		assertEquals(2, newManager.getEmployees().size());
+		assertEquals(3, newManager.getEmployees().size());
 	}
 
 }

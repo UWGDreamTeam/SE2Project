@@ -1,5 +1,8 @@
 package edu.westga.cs3212.inventory_manager.test.editproductviewmodel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +31,7 @@ public class TestSetProduct {
 		String productID = ProductInventory.addProduct("test", 1.0, recipe, 0);
 		product.setID(productID);
 		viewModel.setProduct(product);
+		viewModel.getRecipe();
 		assert(viewModel.getName().getValue().equals("test"));
 		assert(viewModel.getProductionCost().getValue().equals("1.0"));
 		assert(viewModel.getSellingPrice().getValue().equals("2.0"));
@@ -53,5 +57,15 @@ public class TestSetProduct {
         assert(viewModel.getSellingPrice().getValue().equals("2.0"));
         assert(viewModel.getQuantity().getValue().equals("2"));
         assert(viewModel.getRecipe().equals(recipe));
+	}
+	
+	@Test
+	void testSetProductWhenProductIsNull() {
+		EditProductViewModel viewModel = new EditProductViewModel();
+		
+		assertThrows(NullPointerException.class, () -> {
+			viewModel.setProduct(null);
+			assertEquals(0, viewModel.getQuantity());
+		});
 	}
 }

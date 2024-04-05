@@ -1,12 +1,17 @@
 package edu.westga.cs3212.inventory_manager.test.homepageviewmodel;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.analytics.ProductInventoryAnalytics;
+import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.OrderInventory;
@@ -60,6 +65,13 @@ class TestGetComponentSummary {
 
 		OrderInventory.createOrder(products, CompletionStatus.INCOMPLETE);
 		OrderInventory.createOrder(products, CompletionStatus.INCOMPLETE);
+	}
+	
+	@Test
+	void testIsManager() {
+		LocalEmployeeCredentials user = new LocalEmployeeCredentials("user", "Jacob", "Evans", "password", EmployeeType.WORKER);
+		Main.setLoggedInEmployee(user);
+		assertFalse(new HomePageViewModel().isManager());
 	}
 
 	@Test
