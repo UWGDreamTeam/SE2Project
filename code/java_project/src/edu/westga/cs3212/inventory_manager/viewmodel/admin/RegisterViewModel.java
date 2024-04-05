@@ -1,7 +1,6 @@
 package edu.westga.cs3212.inventory_manager.viewmodel.admin;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
 import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

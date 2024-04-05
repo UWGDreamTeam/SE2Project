@@ -7,9 +7,6 @@ import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
@@ -519,18 +516,5 @@ public class InventoryPage {
 		this.inventoryVM.removeProduct();
 		this.refreshProductsTableView();
 		this.showAlert(PRODUCT_REMOVED_TITLE, PRODUCT_REMOVED_MESSAGE, AlertType.INFORMATION);
-	}
-
-	private void disableProductButtons() {
-		this.productAddButton.setDisable(true);
-		this.editProductButton.setDisable(true);
-		this.removeProductButton.setDisable(true);
-	}
-
-	private void disableComponentButtons() {
-		this.componentOrderButton.setDisable(true);
-		this.componentAddButton.setDisable(true);
-		this.componentEditButton.setDisable(true);
-		this.componentRemoveButton.setDisable(true);
 	}
 }

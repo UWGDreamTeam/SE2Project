@@ -169,20 +169,22 @@ public final class ComponentInventory {
 		return ((Number) dataMap.get(KEY_DATA_QUANTITY)).intValue();
 
 	}
-	
+
 	/**
 	 * Searches for components by name using a brute force search.
 	 * 
-	 * @param searchString The string to search for.
+	 * @param searchString
+	 *            The string to search for.
 	 * @precondition searchString != null && !searchString.isBlank()
 	 * @postcondition none
 	 * @return A list of components that contain the search string.
 	 */
 	public static List<Component> searchComponents(String searchString) {
 		ArrayList<Component> results = new ArrayList<>();
-		
+
 		for (Component component : getComponents()) {
-			if (component.getName().toLowerCase().contains(searchString.toLowerCase())) {
+			if (component.getName().toLowerCase()
+					.contains(searchString.toLowerCase())) {
 				results.add(component);
 			}
 		}
@@ -253,6 +255,7 @@ public final class ComponentInventory {
 
 	/**
 	 * Retrieves all components in the inventory.
+	 * 
 	 * @precondition none
 	 * @postcondition none
 	 * @return An array of all components in the inventory.
@@ -263,6 +266,7 @@ public final class ComponentInventory {
 		return parseComponents(dataMap);
 	}
 
+	@SuppressWarnings("unchecked")
 	private static Component[] parseComponents(Map<String, Object> dataMap) {
 		Component[] components = new Component[dataMap.size()];
 		int index = 0;

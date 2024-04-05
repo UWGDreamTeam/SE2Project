@@ -16,7 +16,7 @@ import edu.westga.cs3212.inventory_manager.model.server.Server;
  * @author Vitor dos Santos
  * @version Spring 2024
  */
-public class EmployeeCredentialsManager {
+public final class EmployeeCredentialsManager {
 
 	private static final String ROLE_STRING_CONST = "Role";
 	private static final String LAST_NAME_STRING_CONST = "LastName";
@@ -86,7 +86,7 @@ public class EmployeeCredentialsManager {
 	 *                  empty.
 	 * @param password  The password for the new employee. Must not be null or
 	 *                  empty.
-	 * @param role      The role of the new employee (e.g., EmployeeType.ADMIN,
+	 * @param roleStr      The role of the new employee (e.g., EmployeeType.ADMIN,
 	 *                  EmployeeType.USER).
 	 * 
 	 * @precondition firstName != null && !firstName.isBlank() && lastName != null

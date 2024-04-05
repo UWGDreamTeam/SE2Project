@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
 import edu.westga.cs3212.inventory_manager.viewmodel.inventory.product.AddProductViewModel;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -69,7 +67,9 @@ public class AddProduct {
 			result = false;
 		}
 		if (result) {
-			this.showAlert("Product Added", "The product was successfully added.", Alert.AlertType.INFORMATION);
+			this.showAlert("Product Added",
+					"The product was successfully added.",
+					Alert.AlertType.INFORMATION);
 			this.returnToInventoryPage(event);
 		}
 	}
@@ -123,15 +123,7 @@ public class AddProduct {
 			}
 		});
 
-		this.componentRecipeTableView.getSelectionModel().selectedItemProperty()
-				.addListener((obs, oldSelection, newSelection) -> {
-					if (newSelection != null) {
-						Integer quantity = this.componentList
-								.getOrDefault(newSelection, 0);
-						this.currentComponentQuantity.getValueFactory()
-								.setValue(quantity);
-					}
-				});
+		this.setupComponentRecipeTableView();
 
 		this.currentComponentQuantity.valueProperty()
 				.addListener((obs, oldValue, newValue) -> {
@@ -146,13 +138,26 @@ public class AddProduct {
 
 	}
 
+	private void setupComponentRecipeTableView() {
+		this.componentRecipeTableView.getSelectionModel().selectedItemProperty()
+				.addListener((obs, oldSelection, newSelection) -> {
+					if (newSelection != null) {
+						Integer quantity = this.componentList
+								.getOrDefault(newSelection, 0);
+						this.currentComponentQuantity.getValueFactory()
+								.setValue(quantity);
+					}
+				});
+	}
+
 	private void refreshComponentTableView() {
 		this.componentRecipeTableView
 				.setItems(this.addProductVM.getObservableComponentList());
 		this.componentRecipeTableView.refresh();
 	}
-	
-	private void showAlert(String title, String content, Alert.AlertType alertType) {
+
+	private void showAlert(String title, String content,
+			Alert.AlertType alertType) {
 		Alert alert = new Alert(alertType);
 		alert.setTitle(title);
 		alert.setContentText(content);

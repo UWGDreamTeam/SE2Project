@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 import edu.westga.cs3212.inventory_manager.viewmodel.order.OrderViewModel;
@@ -82,8 +81,6 @@ public class OrderPage {
 	
 	@FXML
 	private Text workerTypeLabel;
-
-	private static final String COMMA_SEPERATION = ", ";
 
 	@FXML
 	private Text employeeRoleLabel;

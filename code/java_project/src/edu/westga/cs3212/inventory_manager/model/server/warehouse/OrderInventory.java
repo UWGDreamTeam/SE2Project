@@ -153,9 +153,9 @@ public final class OrderInventory {
 
 		Order order = extractOrder(orderData);
 		order.setID(orderID);
-        return order;
+		return order;
 	}
-	
+
 	/**
 	 * Clears all orders from the inventory.
 	 * 
@@ -166,14 +166,16 @@ public final class OrderInventory {
 	public static void clearOrders() {
 		Server.sendRequestAndGetResponse("clearOrders");
 	}
-	
+
 	/**
-	 * Retrieves all orders from the inventory that have the specified completion
+	 * Retrieves all orders from the inventory that have the specified
+	 * completion
 	 * 
-	 * @param complete The completion status of the orders to retrieve.
+	 * @param complete
+	 *            The completion status of the orders to retrieve.
 	 * @precondition complete != null
 	 * @postcondition none
-	 * @return
+	 * @return A List collection of orders with the specified completion status.
 	 */
 	public static List<Order> getOrdersByCompletionStatus(
 			CompletionStatus complete) {
@@ -255,7 +257,7 @@ public final class OrderInventory {
 		}
 	}
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	private static List<Order> parseOrders(Map<String, Object> orderData) {
 		Order[] orders = new Order[orderData.size()];
 		int index = 0;
@@ -268,19 +270,19 @@ public final class OrderInventory {
 		}
 		return List.of(orders);
 	}
-    
-    /**
-     * Retrieves all orders from the inventory.
-     * 
-     * @precondition none
-     * @postcondition none
-     * 
-     * @return A List collection of all orders.
-     */
-    public static List<Order> getOrders() {
-    	        Map<String, Object> orderData = Server.sendRequestAndGetResponse(ACTION_GET_ORDERS);
-    	        return parseOrders(orderData);
-    }
-	
+
+	/**
+	 * Retrieves all orders from the inventory.
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return A List collection of all orders.
+	 */
+	public static List<Order> getOrders() {
+		Map<String, Object> orderData = Server
+				.sendRequestAndGetResponse(ACTION_GET_ORDERS);
+		return parseOrders(orderData);
+	}
 
 }

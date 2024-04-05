@@ -25,10 +25,8 @@ public class AddProductViewModel {
 	 * Constructs an AddProductViewModel with references to the component and
 	 * product inventories.
 	 *
-	 * @param componentInventory
-	 *            The inventory of components available for creating a product.
-	 * @param productInventory
-	 *            The inventory where the new product will be added.
+	 * @precondition none
+	 * @postcondition getName() == ""
 	 */
 	public AddProductViewModel() {
 		this.name = new SimpleStringProperty();
@@ -41,6 +39,9 @@ public class AddProductViewModel {
 	/**
 	 * Returns the property for the selected component in the UI.
 	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
 	 * @return The selected component as an observable property.
 	 */
 	public ObjectProperty<Component> getSelectedComponentProperty() {
@@ -50,6 +51,9 @@ public class AddProductViewModel {
 	/**
 	 * Provides an observable list of components for the UI, derived from the
 	 * component inventory.
+	 * 
+	 * @precondition none
+	 * @postcondition none
 	 * 
 	 * @return An observable list of all components in the inventory.
 	 */
@@ -64,6 +68,10 @@ public class AddProductViewModel {
 	/**
 	 * Returns the property for the name of the product being added.
 	 * 
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
 	 * @return The name property of the new product.
 	 */
 	public StringProperty getName() {
@@ -72,6 +80,9 @@ public class AddProductViewModel {
 
 	/**
 	 * Returns the property for the production cost of the product being added.
+	 * 
+	 * @precondition none
+	 * @postcondition none
 	 * 
 	 * @return The production cost property of the new product.
 	 */
@@ -82,6 +93,9 @@ public class AddProductViewModel {
 	/**
 	 * Returns the property for the selling price of the product being added.
 	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
 	 * @return The selling price property of the new product.
 	 */
 	public StringProperty getSellingPrice() {
@@ -90,6 +104,9 @@ public class AddProductViewModel {
 
 	/**
 	 * Returns the property for the quantity of the product being added.
+	 * 
+	 * @precondition none
+	 * @postcondition none
 	 * 
 	 * @return The quantity property of the new product.
 	 */
@@ -104,6 +121,9 @@ public class AddProductViewModel {
 	 * @param recipe
 	 *            A map of components and their quantities required for the new
 	 *            product.
+	 * @precondition none
+	 * @postcondition ProductInventory.getProducts().size() == ProductInventory.getProducts().size()@prev
+	 *                + 1
 	 * @throws NumberFormatException
 	 *             If the production cost, selling price, or quantity cannot be
 	 *             parsed to their respective numeric types.

@@ -5,8 +5,6 @@ import java.util.List;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
@@ -33,10 +31,8 @@ public class InventoryViewModel {
 	 * components and products. Initializes properties for tracking selected
 	 * items in the UI.
 	 *
-	 * @param componentsInventory
-	 *            The inventory of components to be managed.
-	 * @param productInventory
-	 *            The inventory of products to be managed.
+	 * @precondition none
+	 * @postcondition getSelectedComponent() != null && getSelectedProduct() != null
 	 */
 	public InventoryViewModel() {
 
@@ -49,6 +45,8 @@ public class InventoryViewModel {
 	 * This list can be used for binding to UI elements, enabling dynamic
 	 * updates.
 	 *
+	 * @precondition none
+	 * @postcondition none
 	 * @return An ObservableList containing all components in the component
 	 *         inventory.
 	 */
@@ -78,6 +76,9 @@ public class InventoryViewModel {
 	 * the UI. This property allows for binding and listening for changes in
 	 * selection.
 	 *
+	 * @precondition none
+	 * @postcondition none
+	 * 
 	 * @return The property containing the currently selected component.
 	 */
 	public ObjectProperty<Item> getSelectedComponent() {
@@ -142,7 +143,7 @@ public class InventoryViewModel {
 	 * typically used when a component is ordered, incrementing its quantity in
 	 * the inventory.
 	 *
-	 * @param selectedComponent2
+	 * @param selectedComponent
 	 *            The component for which the quantity is to be adjusted.
 	 * @param quantity
 	 *            The amount by which to adjust the component's quantity.
@@ -201,11 +202,29 @@ public class InventoryViewModel {
 		return Main.isLoggedInEmployeeManager();
 	}
 	
+	/**
+	 * This method searches for components in the component inventory that match the provided search string.
+	 * 
+	 * @param searchString The string to search for in the component inventory.
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return An ObservableList of Component objects that match the search string.
+	 */
 	public ObservableList<Component> searchComponents(String searchString) {
 		List<Component> results = ComponentInventory.searchComponents(searchString);
 		return FXCollections.observableArrayList(results);
 	}
 	
+	/**
+	 * This method searches for products in the product inventory that match the provided search string.
+	 * 
+	 * @param searchString The string to search for in the product inventory.
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return An ObservableList of Product objects that match the search string.
+	 */
 	public ObservableList<Product> searchProducts(String searchString) {
 		List<Product> results = ProductInventory.searchProducts(searchString);
 		return FXCollections.observableArrayList(results);

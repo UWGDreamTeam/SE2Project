@@ -71,7 +71,7 @@ public final class ProductInventory {
 	 * 
 	 * @precondition component != null
 	 * @postcondition none
-	 * @param component the component to check
+	 * @param componentID the component to check
 	 * @return true if any product uses the component, false otherwise
 	 */ 
 	public static boolean checkAnyProductUsesComponent(String componentID) {
@@ -354,6 +354,7 @@ public final class ProductInventory {
 		return parseProducts(dataMap);
 	}
 
+	@SuppressWarnings("unchecked")
 	private static Product[] parseProducts(Map<String, Object> response) {
 		Product[] products = new Product[response.size()];
         int index = 0;

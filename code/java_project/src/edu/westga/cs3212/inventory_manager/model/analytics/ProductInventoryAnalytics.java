@@ -17,7 +17,7 @@ import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
  * @author Group 1
  * @version Spring 2024
  */
-public class ProductInventoryAnalytics {
+public final class ProductInventoryAnalytics {
 
 	private static final int MINIMUM_LIST_SIZE = 0;
 

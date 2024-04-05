@@ -71,7 +71,7 @@ public class OrderViewModel {
 	 * This method is typically invoked in response to a user action indicating
 	 * that an order has been fulfilled.
 	 *
-	 * @param selectedOrder2
+	 * @param selectedOrder
 	 *            The order to be marked as complete.
 	 * @precondition none
 	 * @postcondition selectedOrder2's completion status is set to

@@ -1,9 +1,6 @@
 package edu.westga.cs3212.inventory_manager.viewmodel.inventory.component;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
-import edu.westga.cs3212.inventory_manager.model.warehouse.Item;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

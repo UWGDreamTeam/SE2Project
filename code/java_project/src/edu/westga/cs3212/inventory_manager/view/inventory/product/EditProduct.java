@@ -3,8 +3,6 @@ package edu.westga.cs3212.inventory_manager.view.inventory.product;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Item;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
@@ -138,14 +136,7 @@ public class EditProduct {
 		this.componentName
 				.setCellValueFactory(cellData -> new SimpleStringProperty(
 						cellData.getValue().getName()));
-		this.quantityColumn.setCellValueFactory(cellData -> {
-			try {
-				int quantity = this.componentList.get(cellData.getValue());
-				return new SimpleIntegerProperty(quantity).asObject();
-			} catch (Exception e) {
-				return new SimpleIntegerProperty(0).asObject();
-			}
-		});
+		this.setupQuantityColumn();
 
 		this.componentRecipeTableView.getSelectionModel().selectedItemProperty()
 				.addListener((obs, oldSelection, newSelection) -> {
@@ -168,6 +159,17 @@ public class EditProduct {
 					}
 				});
 
+	}
+
+	private void setupQuantityColumn() {
+		this.quantityColumn.setCellValueFactory(cellData -> {
+			try {
+				int quantity = this.componentList.get(cellData.getValue());
+				return new SimpleIntegerProperty(quantity).asObject();
+			} catch (Exception e) {
+				return new SimpleIntegerProperty(0).asObject();
+			}
+		});
 	}
 
 	private void refreshComponentTableView() {

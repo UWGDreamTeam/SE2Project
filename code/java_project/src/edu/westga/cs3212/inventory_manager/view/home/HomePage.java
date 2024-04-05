@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.viewmodel.home.HomeViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,7 +69,7 @@ public class HomePage {
 		this.viewModel.getProductSummary();
 		this.viewModel.getOrderSummary();
 		this.setPermissions();
-		Main.createSummary(fullNameLabel, employeeIdLabel, workerTypeLabel);
+		Main.createSummary(this.fullNameLabel, this.employeeIdLabel, this.workerTypeLabel);
 	}
 
 	private void bindToViewModel() {

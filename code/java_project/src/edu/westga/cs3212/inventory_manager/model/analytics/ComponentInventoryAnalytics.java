@@ -18,7 +18,7 @@ import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
  * @version Spring 2024
  * @author Group 1
  */
-public class ComponentInventoryAnalytics {
+public final class ComponentInventoryAnalytics {
 
 	private static final int MINIMUM_LIST_SIZE = 0;
 
@@ -74,8 +74,8 @@ public class ComponentInventoryAnalytics {
 	            .collect(Collectors.toMap(
 	                    Map.Entry::getKey,
 	                    Map.Entry::getValue,
-	                    (oldValue, newValue) -> oldValue, // In case of a key collision, keep the old value
-	                    LinkedHashMap::new)); // Preserve the order
+	                    (oldValue, newValue) -> oldValue,
+	                    LinkedHashMap::new));
 	}
 
 
