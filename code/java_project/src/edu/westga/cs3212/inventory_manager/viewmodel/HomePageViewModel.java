@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager.viewmodel;
 
 import java.util.Map;
 
+import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.ComponentInventoryAnalytics;
 import edu.westga.cs3212.inventory_manager.model.OrderAnalytics;
@@ -55,6 +56,15 @@ public class HomePageViewModel {
 	 */
 	public StringProperty getOrderSumarryTextArea() {
 		return this.orderSummaryTextArea;
+	}
+	
+	/**
+	 * Determines if the user is a manager.
+	 * 
+	 * @return true if the user is a manager, false otherwise
+	 */
+	public boolean isManager() {
+		return Main.isLoggedInEmployeeManager();
 	}
 
 	/**

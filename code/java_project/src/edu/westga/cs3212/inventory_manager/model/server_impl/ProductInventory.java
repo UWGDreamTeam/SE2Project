@@ -64,6 +64,25 @@ public final class ProductInventory {
 
 		return extractProduct(productID, productData, recipe);
 	}
+	
+	/**
+	 *  Checks if any product uses the given component in its recipe.
+	 * 
+	 * @precondition component != null
+	 * @postcondition none
+	 * @param component the component to check
+	 * @return true if any product uses the component, false otherwise
+	 */ 
+	public static boolean checkAnyProductUsesComponent(String componentID) {
+		for (Product product : getProducts()) {
+		    for (Component component : product.getRecipe().keySet()) {
+                if (component.getID().equals(componentID)) {
+                    return true;
+                }
+		    }
+		}
+		return false;
+	}
 
 	/**
 	 * Adds a new product to the inventory with the given details.

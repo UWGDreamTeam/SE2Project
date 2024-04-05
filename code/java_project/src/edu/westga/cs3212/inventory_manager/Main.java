@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Text;
 
 /**
  * Entry point for the program
@@ -30,7 +31,7 @@ public class Main extends Application {
 	public static final String EDIT_PRODUCT_PAGE = "view/EditProductPage.fxml";
 	public static final String ADMIN_PAGE = "view/AdminPage.fxml";
 	public static final String ADMIN_EDIT_CREDENTIALS_PAGE = "view/AdminEditCredentialsPage.fxml";
-	
+	private static final String COMMA_SEPERATION = ", ";
 	private static Stage primaryStage;
 	
 	private static LocalEmployeeCredentials loggedInEmployee;
@@ -99,6 +100,37 @@ public class Main extends Application {
 	 */
     public static LocalEmployeeCredentials getLoggedInEmployee() {
         return loggedInEmployee;
+    }
+    
+    /**
+	 * Checks if the logged in employee is a manager.
+	 * 
+	 * This method checks the employee type of the currently logged-in employee.
+	 * This can be used to determine employee permissions thorughout the application.
+	 * 
+	 * @precondition The employee must be logged in before calling this method.
+	 * @postcondition Returns the current logged-in employee's EmployeType. Either MANAGER or WORKER.
+	 * 
+	 * @return true if the logged in employee is a manager, false otherwise
+	 */
+    public static boolean isLoggedInEmployeeManager() {
+        EmployeeType role  = Main.getLoggedInEmployee().getEmployeeType();
+
+        return role == EmployeeType.MANAGER;
+    }
+    
+    /**
+     * Creates a summary of the currently logged-in employee.
+     * 
+     * @param fullNameLabel the label to display the full name
+     * @param employeeIdLabel the label to display the employee ID
+     * @param workerTypeLabel the label to display the worker type
+     */
+    public static void createSummary(Text fullNameLabel, Text employeeIdLabel, Text workerTypeLabel) {
+    	LocalEmployeeCredentials user = Main.getLoggedInEmployee();
+		fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
+		employeeIdLabel.setText(user.getEmployeeID());
+		workerTypeLabel.setText(user.getEmployeeType().toString());
     }
 
 	/**

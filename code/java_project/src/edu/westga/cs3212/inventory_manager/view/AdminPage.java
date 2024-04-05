@@ -56,10 +56,15 @@ public class AdminPage {
 	private Button removeButton;
     
     @FXML
-	private Text employeeFullNameLabel;
-
+	private Text fullNameLabel;
+	
 	@FXML
 	private Text employeeIdLabel;
+	
+	@FXML
+	private Text workerTypeLabel;
+
+	private static final String COMMA_SEPERATION = ", ";
 
 	@FXML
 	private Text employeeRoleLabel;
@@ -198,6 +203,7 @@ public class AdminPage {
     	this.adminVM.getSelectedUser().bind(this.usersTableView.getSelectionModel().selectedItemProperty());
     	this.setupProductButtons();
     	this.setupButtonsVisibility();
+    	Main.createSummary(fullNameLabel, employeeIdLabel, workerTypeLabel);
     }
     
 	private void refreshUsersTableView() {

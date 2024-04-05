@@ -25,6 +25,7 @@ public class LoginViewModel {
 		//Used only for testing purposes
 		//Generate Manager user with id aa0001 and password "admin"
 		EmployeeCredentialsManager.addEmployee("admin", "admin", "admin", "manager");
+		EmployeeCredentialsManager.addEmployee("worker", "worker", "worker", "worker");
 	}
 
 	/**
@@ -41,11 +42,11 @@ public class LoginViewModel {
 		boolean result;
 		try {
 			result = EmployeeCredentialsManager.attemptLogin(employeeID, password);
-			LocalEmployeeCredentials current = EmployeeCredentialsManager.getEmployeeCredentials(employeeID);
-			Main.setLoggedInEmployee(current);
 		} catch (Exception exception) {
 			result = false;
 		}
+		LocalEmployeeCredentials current = EmployeeCredentialsManager.getEmployeeCredentials(employeeID);
+		Main.setLoggedInEmployee(current);
 		return result;
 	}
 

@@ -7,6 +7,7 @@ import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Order;
+import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.viewmodel.OrderPageViewModel;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
@@ -37,6 +38,9 @@ import javafx.stage.Stage;
  */
 public class OrderPage {
 
+	@FXML
+	private Button adminButton;
+	
 	@FXML
 	private TableView<Order> openOrders;
 
@@ -71,10 +75,15 @@ public class OrderPage {
 	private TabPane ordersTabPane;
 
 	@FXML
-	private Text employeeFullNameLabel;
-
+	private Text fullNameLabel;
+	
 	@FXML
 	private Text employeeIdLabel;
+	
+	@FXML
+	private Text workerTypeLabel;
+
+	private static final String COMMA_SEPERATION = ", ";
 
 	@FXML
 	private Text employeeRoleLabel;
@@ -103,7 +112,9 @@ public class OrderPage {
 				.getSelectedOrderProperty().isNull()
 				.or(isClosedOrdersTabSelected);
 
+		this.setPermissions();
 		this.fulfillButton.disableProperty().bind(shouldDisableFulfillButton);
+		Main.createSummary(this.fullNameLabel, this.employeeIdLabel, this.workerTypeLabel);
 	}
 	
 	@FXML
@@ -118,8 +129,7 @@ public class OrderPage {
 	@FXML
 	void inventoryPageButtonOnClick(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent parent = FXMLLoader
-				.load(Main.class.getResource(Main.INVENTORY_PAGE));
+		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
 		Scene scene = stage.getScene();
 		scene.setRoot(parent);
 		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
@@ -148,6 +158,12 @@ public class OrderPage {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
 			errorPopup.showAndWait();
+		}
+	}
+	
+	private void setPermissions() {
+		if (!this.viewModel.isManager()) {
+			this.adminButton.setDisable(true);
 		}
 	}
 

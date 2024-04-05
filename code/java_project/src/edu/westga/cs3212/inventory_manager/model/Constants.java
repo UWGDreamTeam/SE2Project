@@ -51,6 +51,7 @@ public final class Constants {
 	public static final String ADMIN_PAGE_TITLE = "Admin Page";
 	
 	public static final String UTILITY_CLASS_ERROR = "Utility class";
+	public static final String ERROR_COMPONENT_IN_USE_BY_PRODUCT = "Component is used by a product and cannot be deleted";
 
 	private Constants() {
 		throw new IllegalStateException(Constants.UTILITY_CLASS_ERROR);
