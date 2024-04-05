@@ -21,15 +21,15 @@ public class Main extends Application {
 	public static final String WINDOW_TITLE = "Inventory Manager";
 	public static final String INVENTORY_PAGE = "view/inventory/InventoryPage.fxml";
 	public static final String ADD_PAGE = "view/inventory/component/AddComponentPage.fxml";
-	public static final String HOME_PAGE = "view/HomePage.fxml";
-	public static final String REGISTER_PAGE = "view/RegisterPage.fxml";
-	public static final String LOGIN_PAGE = "view/LoginPage.fxml";
-	public static final String ORDER_PAGE = "view/OrderPage.fxml";
-	public static final String EDIT_COMPONENT_PAGE = "view/EditComponentPage.fxml";
-	public static final String ADD_PRODUCT_PAGE = "view/AddProductPage.fxml";
-	public static final String EDIT_PRODUCT_PAGE = "view/EditProductPage.fxml";
-	public static final String ADMIN_PAGE = "view/AdminPage.fxml";
-	public static final String ADMIN_EDIT_CREDENTIALS_PAGE = "view/AdminEditCredentialsPage.fxml";
+	public static final String HOME_PAGE = "view/home/HomePage.fxml";
+	public static final String REGISTER_PAGE = "view/admin/RegisterPage.fxml";
+	public static final String LOGIN_PAGE = "view/login/LoginPage.fxml";
+	public static final String ORDER_PAGE = "view/order/OrderPage.fxml";
+	public static final String EDIT_COMPONENT_PAGE = "view/inventory/component/EditComponentPage.fxml";
+	public static final String ADD_PRODUCT_PAGE = "view/inventory/product/AddProductPage.fxml";
+	public static final String EDIT_PRODUCT_PAGE = "view/inventory/product/EditProductPage.fxml";
+	public static final String ADMIN_PAGE = "view/admin/AdminPage.fxml";
+	public static final String ADMIN_EDIT_CREDENTIALS_PAGE = "view/admin/AdminEditCredentialsPage.fxml";
 	private static final String COMMA_SEPERATION = ", ";
 	private static Stage primaryStage;
 	
