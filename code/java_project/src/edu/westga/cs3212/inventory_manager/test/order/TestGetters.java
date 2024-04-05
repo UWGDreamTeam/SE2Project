@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.Order;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 
 public class TestGetters {
 

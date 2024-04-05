@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.EmployeeType;
-import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
 
 class TestAttemptLogin {
 	

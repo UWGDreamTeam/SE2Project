@@ -10,9 +10,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
-import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
 
 class TestGetEmployees {
 	

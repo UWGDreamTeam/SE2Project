@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
-import edu.westga.cs3212.inventory_manager.model.Order;
+
+import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 
 public class TestOrderConstructor {
 

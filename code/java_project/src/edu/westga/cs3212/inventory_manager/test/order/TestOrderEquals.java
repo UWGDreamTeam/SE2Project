@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.Component;
-import edu.westga.cs3212.inventory_manager.model.Order;
-import edu.westga.cs3212.inventory_manager.model.Product;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 class TestOrderEquals {
 

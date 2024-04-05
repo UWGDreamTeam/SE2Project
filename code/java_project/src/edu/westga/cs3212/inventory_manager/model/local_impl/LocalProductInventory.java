@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.ItemInventoryManager;
-import edu.westga.cs3212.inventory_manager.model.Item;
-import edu.westga.cs3212.inventory_manager.model.Product;
-import edu.westga.cs3212.inventory_manager.model.ProductInventoryStorage;
+import edu.westga.cs3212.inventory_manager.model.storage.ProductInventoryStorage;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Item;
+import edu.westga.cs3212.inventory_manager.model.warehouse.ItemInventoryManager;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 /**
  * Manages the inventory of products locally. Provides functionalities to add,

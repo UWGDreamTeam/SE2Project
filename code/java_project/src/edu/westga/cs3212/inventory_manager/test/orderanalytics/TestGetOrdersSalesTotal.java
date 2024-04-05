@@ -8,13 +8,13 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
-import edu.westga.cs3212.inventory_manager.model.Component;
-import edu.westga.cs3212.inventory_manager.model.OrderAnalytics;
-import edu.westga.cs3212.inventory_manager.model.Product;
-import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.server_impl.OrderInventory;
-import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
+import edu.westga.cs3212.inventory_manager.model.analytics.OrderAnalytics;
+import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server.warehouse.OrderInventory;
+import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
+import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 class TestGetOrdersSalesTotal {
 

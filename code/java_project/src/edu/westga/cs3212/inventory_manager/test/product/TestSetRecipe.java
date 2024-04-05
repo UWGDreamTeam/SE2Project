@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.Component;
-import edu.westga.cs3212.inventory_manager.model.Product;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 public class TestSetRecipe {
 

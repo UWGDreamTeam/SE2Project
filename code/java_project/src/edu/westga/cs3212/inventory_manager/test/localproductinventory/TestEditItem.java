@@ -9,10 +9,11 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import edu.westga.cs3212.inventory_manager.model.Component;
+
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.Product;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 class TestEditItem {
 

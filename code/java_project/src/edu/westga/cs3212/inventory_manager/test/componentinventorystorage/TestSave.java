@@ -14,9 +14,10 @@ import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import edu.westga.cs3212.inventory_manager.model.Component;
-import edu.westga.cs3212.inventory_manager.model.ComponentInventoryStorage;
+
 import edu.westga.cs3212.inventory_manager.model.Constants;
+import edu.westga.cs3212.inventory_manager.model.storage.ComponentInventoryStorage;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
 
 class TestSave {
 

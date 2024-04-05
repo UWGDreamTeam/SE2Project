@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.viewmodel.RegisterPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.RegisterPageViewModel;
 
 class TestGetters {
 

@@ -3,8 +3,8 @@ package edu.westga.cs3212.inventory_manager.test.adminpageviewmodel;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
-import edu.westga.cs3212.inventory_manager.viewmodel.AdminPageViewModel;
+import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminPageViewModel;
 
 class TestGetObservableUsersList {
 

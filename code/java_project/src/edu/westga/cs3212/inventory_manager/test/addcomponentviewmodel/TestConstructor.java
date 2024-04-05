@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.viewmodel.AddComponentViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.inventory.component.AddComponentViewModel;
 
 public class TestConstructor {
 

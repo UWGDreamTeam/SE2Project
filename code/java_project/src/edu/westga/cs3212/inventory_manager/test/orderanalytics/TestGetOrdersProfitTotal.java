@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.OrderAnalytics;
-import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.server_impl.OrderInventory;
-import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
+import edu.westga.cs3212.inventory_manager.model.analytics.OrderAnalytics;
+import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server.warehouse.OrderInventory;
+import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
 
 class TestGetOrdersProfitTotal {
 

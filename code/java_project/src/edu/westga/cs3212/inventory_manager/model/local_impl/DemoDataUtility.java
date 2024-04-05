@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
-import edu.westga.cs3212.inventory_manager.model.Component;
-import edu.westga.cs3212.inventory_manager.model.Item;
-import edu.westga.cs3212.inventory_manager.model.Order;
-import edu.westga.cs3212.inventory_manager.model.Product;
+import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Item;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 /**
  * Utility class for generating demo data for components, products, and orders.

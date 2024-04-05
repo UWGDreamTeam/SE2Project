@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.Order;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 
 class TestSetID {
 

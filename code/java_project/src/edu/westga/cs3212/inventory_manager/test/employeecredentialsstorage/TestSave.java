@@ -12,8 +12,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.EmployeeCredentialsStorage;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
+import edu.westga.cs3212.inventory_manager.model.storage.EmployeeCredentialsStorage;
 
 public class TestSave {
 

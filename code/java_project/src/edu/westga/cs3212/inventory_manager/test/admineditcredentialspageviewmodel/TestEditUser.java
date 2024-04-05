@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.model.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
-import edu.westga.cs3212.inventory_manager.model.server_impl.EmployeeCredentialsManager;
-import edu.westga.cs3212.inventory_manager.viewmodel.AdminEditCredentialsPageViewModel;
+import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminEditCredentialsPageViewModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

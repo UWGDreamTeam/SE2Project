@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-import edu.westga.cs3212.inventory_manager.model.Product;
-import edu.westga.cs3212.inventory_manager.model.ProductInventoryStorage;
+
+import edu.westga.cs3212.inventory_manager.model.storage.ProductInventoryStorage;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 class TestSave {
 

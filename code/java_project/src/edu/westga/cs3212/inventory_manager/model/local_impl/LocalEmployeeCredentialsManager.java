@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.EmployeeCredentialsStorage;
-import edu.westga.cs3212.inventory_manager.model.EmployeeType;
-import edu.westga.cs3212.inventory_manager.model.SystemCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
+import edu.westga.cs3212.inventory_manager.model.credentials.SystemCredentialsManager;
+import edu.westga.cs3212.inventory_manager.model.storage.EmployeeCredentialsStorage;
 
 /**
  * Manages employee credentials locally by storing, retrieving, updating, and
