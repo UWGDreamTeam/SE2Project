@@ -63,7 +63,14 @@ class TestGetters {
 	void testGetEmployeePasswordWhereTheresValidEmployee() {
 		LocalEmployeeCredentialsManager testManager = new LocalEmployeeCredentialsManager();
 		testManager.addEmployee("password", "ADMIN", "John", EmployeeType.MANAGER.toString());
-		String employeeID = testManager.getEmployees().get(0).getEmployeeID();
+		String employeeID = "";
+		
+		for (LocalEmployeeCredentials employee: testManager.getEmployees()) { 
+			if (employee.getFirstName().equals("password") && employee.getLastName().equals("ADMIN")) {
+				employeeID = employee.getEmployeeID();
+			}
+		}
+		
 		assertEquals("John", testManager.getEmployeePassword(employeeID));
 	}
 	

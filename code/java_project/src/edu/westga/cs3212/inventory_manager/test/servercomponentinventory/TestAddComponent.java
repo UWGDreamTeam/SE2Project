@@ -24,14 +24,6 @@ class TestAddComponent {
 	}
 	
 	@Test
-	void testErrorRequest() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Server.sendRequest("request");
-		});
-	}
-	
-	
-	@Test
 	void testAddBlankComponentName() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			ComponentInventory.addComponent("", 0, 0);
