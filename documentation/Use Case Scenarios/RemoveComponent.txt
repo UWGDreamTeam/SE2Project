@@ -1,0 +1,19 @@
+Context - User is a manager and has selected a component within the component tab page of the inventory page
+
+Primary Flow -
+1 - User clicks remove button
+2 - System communicates with server to remove product
+3 - System notifies the user about success
+4 - User then remains on the Inventory page
+
+Alternative Flow(s)
+PRODUCT USES COMPONENT
+a2 - system detects a product uses the component in it's recipe
+a3 - system informs user of failure and prompts the user that a product currently uses component
+return to step 4
+
+BAD CONNECTION
+a2 - system can't connect to server
+a3 - system informs user of failuer and prompts to retry later
+return to step 4
+

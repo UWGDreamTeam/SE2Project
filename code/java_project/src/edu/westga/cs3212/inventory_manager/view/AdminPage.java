@@ -9,6 +9,7 @@ import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.viewmodel.AdminPageViewModel;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,8 +65,6 @@ public class AdminPage {
 	@FXML
 	private Text workerTypeLabel;
 
-	private static final String COMMA_SEPERATION = ", ";
-
 	@FXML
 	private Text employeeRoleLabel;
     
@@ -84,8 +83,18 @@ public class AdminPage {
 	private void setupProductButtons() {
 		this.editButton.disableProperty()
 				.bind(Bindings.isNull(this.usersTableView.getSelectionModel().selectedItemProperty()));
+		BooleanBinding isUserSelectedAndNotCurrentUser = Bindings
+				.createBooleanBinding(() -> {
+					return this.usersTableView.getSelectionModel()
+							.getSelectedItem() == null
+							|| this.usersTableView.getSelectionModel()
+									.getSelectedItem().getEmployeeID()
+									.equals(Main.getLoggedInEmployee()
+											.getEmployeeID());
+				}, this.usersTableView.getSelectionModel()
+						.selectedItemProperty());
 		this.removeButton.disableProperty()
-				.bind(Bindings.isNull(this.usersTableView.getSelectionModel().selectedItemProperty()));
+		.bind(isUserSelectedAndNotCurrentUser);
 	}
 	
 	@FXML

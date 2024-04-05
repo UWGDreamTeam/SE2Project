@@ -1,0 +1,15 @@
+Context - User is within the component tab page of the inventory page
+
+Primary Flow - 
+1 - User inputs a string in the search bar
+2 - User selects search
+3 - System communicates with the server to retrieve components that contain the input string
+4 - Sysem displays the components to the user
+
+Alternative Flow(s)
+BAD CONNECTION
+a1 - System will display that the connection to the server is not avaiable
+
+
+NO COMPONENTS WITH STRING
+a4 - System will display no components

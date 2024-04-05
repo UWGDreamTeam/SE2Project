@@ -1,0 +1,18 @@
+Context - User is a manager and has selected an user within the admin page and the user selected is not the one logged in
+
+Primary Flow - 
+1 - User clicks remove employee
+2 - System communicates with server to remove user
+3 - System notifies the user about sucessfull removal
+4 - User then remains on the admin page
+
+Alternative Flow(s)
+FAILURE TO REMOVE USER
+a2 - System cannot remove product
+a3 - System informs user of failure and prompts to retry later
+Return to Step 4
+
+BAD CONNECTION
+a2 - System can't connect to server
+a3 - System informs user of failure and prompts to retry later
+Return to Step 4

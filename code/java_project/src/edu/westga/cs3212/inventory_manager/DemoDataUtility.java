@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_manager.model.server_impl;
+package edu.westga.cs3212.inventory_manager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +9,9 @@ import edu.westga.cs3212.inventory_manager.model.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.Component;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.Product;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ComponentInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.OrderInventory;
+import edu.westga.cs3212.inventory_manager.model.server_impl.ProductInventory;
 
 /**
  * Utility class for generating demo data for components, products, and orders.

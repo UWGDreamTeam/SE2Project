@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.model.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
-import edu.westga.cs3212.inventory_manager.model.server_impl.DemoDataUtility;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

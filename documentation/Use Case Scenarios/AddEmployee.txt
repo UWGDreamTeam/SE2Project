@@ -1,0 +1,23 @@
+Context - User is a manager and select add user on admin page
+
+Primary Flow - 
+1 - User inputs user information
+2 - System validates input
+4 - System adds user to the server
+5 - System gives confirmation of successfully adding the product
+6 - System display the admin page
+
+Alterntaive Flow
+CANCEL
+a1-2 - User selects cancel
+a2-3 - System displays admin page
+
+INVALID SYSTEM INFORMATION
+a5 - System detects an error with the input
+a6 - System informs user of error and prompts to retry
+Return to step 2
+
+BAD CONNECTION
+a2 - System can't connect to server
+a3 - system informs user of failure and promtps to retry later
+Return to step 6

@@ -1,0 +1,30 @@
+Context - User is a maanger and has selected an employee within the admin page
+
+Primary Flow - 
+1 - User clicks the edit user button
+2 - System displays edit user page
+3 - System communicates with server to retreive user data
+4 - User edits employee information
+5 - System validates input
+6 - System communicates with server to update employee
+7 - System notifies the user about successful edit
+8 - User is redirected to the admin page
+
+Alternative Flow(s)
+CANCEL
+a2-5 - User selects cancel
+a2-3 - System displays admin page
+
+INVALID SYSTEM INFORMATION
+a5 - System detects an error with some information
+a6 - System informs user of error and prompts to retry
+
+FAILRUE TO UPDATE USER
+a2 - System cannot update user data
+a3 - System informs user of failure and prompts to retry later
+Return to Step 4
+
+BAD CONNECTION
+a2 - System can't connect to server
+a3 - System informs user of failure and prompts to retry later
+Return to step 8
