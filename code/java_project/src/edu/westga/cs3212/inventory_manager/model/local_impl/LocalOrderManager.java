@@ -35,13 +35,6 @@ public class LocalOrderManager implements OrderManager {
 	public LocalOrderManager() {
 		LocalOrderManager.orders = OrderInventoryStorage
 				.load(Constants.ORDER_FILE_PATH);
-		if (LocalOrderManager.orders.isEmpty()) {
-			LocalProductInventory productInventory = new LocalProductInventory();
-			LocalOrderManager.orders = DemoDataUtility.createDemoOrders(
-					productInventory.getProductsWithQuantities());
-			OrderInventoryStorage.save(LocalOrderManager.orders,
-					Constants.ORDER_FILE_PATH);
-		}
 	}
 
 	@Override

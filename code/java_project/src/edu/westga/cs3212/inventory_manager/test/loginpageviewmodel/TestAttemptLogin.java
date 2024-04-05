@@ -1,6 +1,7 @@
 package edu.westga.cs3212.inventory_manager.test.loginpageviewmodel;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +55,8 @@ public class TestAttemptLogin {
 		testLoginViewModel.employeeIDProperty().set("jj0000");
 		testLoginViewModel.passwordProperty().set("Password");
 		
-		assertFalse(testLoginViewModel.attemptLogin());
+		assertThrows(IllegalArgumentException.class, () -> {
+			testLoginViewModel.attemptLogin();
+		});
 	}
 }

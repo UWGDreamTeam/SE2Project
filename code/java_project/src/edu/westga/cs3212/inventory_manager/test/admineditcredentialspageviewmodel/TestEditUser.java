@@ -35,7 +35,7 @@ class TestEditUser {
 				fakeID = curr.getEmployeeID();
 			}
 		}
-		
+	
 		LocalEmployeeCredentials selectedUser = EmployeeCredentialsManager.getEmployeeCredentials(fakeID);
 		
 		StringProperty testFirstName = new SimpleStringProperty();
@@ -74,7 +74,7 @@ class TestEditUser {
 		assertEquals("newEditPassword", actualpassword);
 		assertEquals(EmployeeType.WORKER, actualEmployeeType);
 		
-		EmployeeCredentialsManager.removeEmployee(fakeID);
+		//EmployeeCredentialsManager.removeEmployee(fakeID);
 	}
 
 }

@@ -119,42 +119,4 @@ public final class DemoDataUtility {
 		return products;
 	}
 
-	/**
-	 * Creates a list of demo orders based on the given products. Each order is
-	 * filled with 1 to 10 products, and each product quantity ranges from 1 to
-	 * 10. Orders are randomly marked as either COMPLETE or INCOMPLETE.
-	 *
-	 * @param products
-	 *            a Map<Product, Integer> representing the available products
-	 *            and their quantities to be used in orders
-	 * @preconditions products != null && !products.isEmpty()
-	 * @postconditions none
-	 *
-	 * @return a List<Order> containing demo orders.
-	 */
-	static List<Order> createDemoOrders(Map<Product, Integer> products) {
-		List<Order> orders = new ArrayList<>();
-		for (int i = 1; i <= 15; i++) {
-			Map<Product, Integer> orderItems = new HashMap<>();
-			for (int j = 1; j <= 10; j++) {
-				Product product = (Product) products.keySet()
-						.toArray()[(int) (Math.random() * products.size())];
-
-				// Quantities between 1 and 10
-				int quantity = (int) (Math.random() * 10 + 1);
-				orderItems.put(product, quantity);
-			}
-			Order order = new Order();
-			for (Map.Entry<Product, Integer> entry : orderItems.entrySet()) {
-				order.addItem(entry.getKey(), entry.getValue());
-			}
-			CompletionStatus status = Math.random() < 0.5
-					? CompletionStatus.COMPLETE
-					: CompletionStatus.INCOMPLETE;
-			order.setCompletionStatus(status);
-			orders.add(order);
-		}
-		return orders;
-	}
-
 }
