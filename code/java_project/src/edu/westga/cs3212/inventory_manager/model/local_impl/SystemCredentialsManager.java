@@ -1,4 +1,4 @@
-package edu.westga.cs3212.inventory_manager.model.credentials;
+package edu.westga.cs3212.inventory_manager.model.local_impl;
 
 public abstract class SystemCredentialsManager {
 

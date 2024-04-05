@@ -1,6 +1,8 @@
-package edu.westga.cs3212.inventory_manager.model.warehouse;
+package edu.westga.cs3212.inventory_manager.model.local_impl;
 
 import java.util.Map;
+
+import edu.westga.cs3212.inventory_manager.model.warehouse.Item;
 
 /**
  * The Interface InventoryManager.

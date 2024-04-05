@@ -6,7 +6,7 @@ import java.util.Map;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
+import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.server.Server;
 
 /**

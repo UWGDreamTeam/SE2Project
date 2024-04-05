@@ -2,7 +2,7 @@ package edu.westga.cs3212.inventory_manager.viewmodel.admin;
 
 import java.util.ArrayList;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
+import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
 import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
 import javafx.beans.property.ObjectProperty;

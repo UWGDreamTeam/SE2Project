@@ -1,6 +1,9 @@
-package edu.westga.cs3212.inventory_manager.model.warehouse;
+package edu.westga.cs3212.inventory_manager.model.local_impl;
 
 import java.util.List;
+
+import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 
 /**
  * The Order Manager class manages a collection of orders. It provides methods

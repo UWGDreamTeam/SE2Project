@@ -3,7 +3,7 @@ package edu.westga.cs3212.inventory_manager;
 import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
+import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -19,8 +19,8 @@ import javafx.scene.text.Text;
  */
 public class Main extends Application {
 	public static final String WINDOW_TITLE = "Inventory Manager";
-	public static final String INVENTORY_PAGE = "view/InventoryPage.fxml";
-	public static final String ADD_PAGE = "view/AddComponentPage.fxml";
+	public static final String INVENTORY_PAGE = "view/inventory/InventoryPage.fxml";
+	public static final String ADD_PAGE = "view/inventory/component/AddComponentPage.fxml";
 	public static final String HOME_PAGE = "view/HomePage.fxml";
 	public static final String REGISTER_PAGE = "view/RegisterPage.fxml";
 	public static final String LOGIN_PAGE = "view/LoginPage.fxml";

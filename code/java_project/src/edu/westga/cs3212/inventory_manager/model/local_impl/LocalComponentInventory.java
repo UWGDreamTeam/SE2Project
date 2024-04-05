@@ -8,7 +8,6 @@ import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.storage.ComponentInventoryStorage;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Item;
-import edu.westga.cs3212.inventory_manager.model.warehouse.ItemInventoryManager;
 
 public class LocalComponentInventory implements ItemInventoryManager {
 

@@ -1,7 +1,6 @@
-package edu.westga.cs3212.inventory_manager.model.local_impl;
+package edu.westga.cs3212.inventory_manager.model.credentials;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 
 /**
  * Represents credentials for an employee in the inventory manager system. This

@@ -15,7 +15,7 @@ import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
  */
 public final class OrderAnalytics {
 	
-	public OrderAnalytics() {
+	private OrderAnalytics() {
 	}
 
 	/**
@@ -25,7 +25,7 @@ public final class OrderAnalytics {
 	 * @precondition none
 	 * @postcondition none
 	 */
-	public int getOrdersCount() {
+	public static int getOrdersCount() {
 		int count = 0;
 		count += OrderInventory.getOrdersByCompletionStatus(CompletionStatus.COMPLETE).size();
 		count += OrderInventory.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE).size();
@@ -39,7 +39,7 @@ public final class OrderAnalytics {
 	 * @precondition none
 	 * @postcondition none
 	 */
-	public double getOrdersSalesTotal() {
+	public static double getOrdersSalesTotal() {
 		double total = 0;
 		for (Order order : OrderInventory.getOrdersByCompletionStatus(CompletionStatus.COMPLETE)) {
 			total += order.getSalePrice();
@@ -54,7 +54,7 @@ public final class OrderAnalytics {
 	 * @precondition none
 	 * @postcondition none
 	 */
-	public double getOrdersProductionCostTotal() {
+	public static double getOrdersProductionCostTotal() {
 		double total = 0;
 		for (Order order : OrderInventory.getOrdersByCompletionStatus(CompletionStatus.COMPLETE)) {
 			total += order.getProductionCost();
@@ -71,8 +71,8 @@ public final class OrderAnalytics {
 	 * @precondition none
 	 * @postcondition none
 	 */
-	public double getOrdersProfitTotal() {
-		return this.getOrdersSalesTotal() - this.getOrdersProductionCostTotal();
+	public static double getOrdersProfitTotal() {
+		return getOrdersSalesTotal() - getOrdersProductionCostTotal();
 	}
 
 	/**
@@ -82,7 +82,7 @@ public final class OrderAnalytics {
 	 * @precondition none
 	 * @postcondition none
 	 */
-	public int getOrdersCompletedCount() {
+	public static int getOrdersCompletedCount() {
 		return OrderInventory.getOrdersByCompletionStatus(CompletionStatus.COMPLETE).size();
 	}
 
@@ -93,7 +93,7 @@ public final class OrderAnalytics {
 	 * @precondition none
 	 * @postcondition none
 	 */
-	public int getOrdersInProgressCount() {
+	public static int getOrdersInProgressCount() {
 		return OrderInventory.getOrdersByCompletionStatus(CompletionStatus.INCOMPLETE).size();
 	}
 
@@ -103,7 +103,7 @@ public final class OrderAnalytics {
 	 * @precondition none
 	 * @postcondition all orders are removed from the system
 	 */
-	public void clearOrders() {
+	public static void clearOrders() {
 		OrderInventory.clearOrders();
 	}
 }

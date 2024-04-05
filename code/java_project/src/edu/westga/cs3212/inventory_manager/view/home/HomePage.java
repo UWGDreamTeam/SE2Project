@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentials;
+import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.viewmodel.home.HomePageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.OrderInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
@@ -30,7 +29,7 @@ public class ProductInventoryAnalytics {
 	 * @postcondition a new LocalOrderManager instance is associated with this
 	 *                instance
 	 */
-	public ProductInventoryAnalytics() {
+	private ProductInventoryAnalytics() {
 	}
 
 	/**
@@ -48,7 +47,7 @@ public class ProductInventoryAnalytics {
 	 * @throws IllegalArgumentException
 	 *             if listSize is negative
 	 */
-	public Map<Product, Integer> getMostUsedProducts(int listSize) {
+	public static Map<Product, Integer> getMostUsedProducts(int listSize) {
 		if (listSize < MINIMUM_LIST_SIZE) {
 			throw new IllegalArgumentException("List size cannot be negative");
 		}
@@ -56,13 +55,13 @@ public class ProductInventoryAnalytics {
 		Map<Product, Integer> productCount = new HashMap<>();
 
 		for (Order order : orders) {
-			this.updateProductCount(order, productCount);
+			updateProductCount(order, productCount);
 		}
 
-		return this.getTopProductsSortedByCount(productCount, listSize);
+		return getTopProductsSortedByCount(productCount, listSize);
 	}
 
-	private Map<Product, Integer> getTopProductsSortedByCount(
+	private static Map<Product, Integer> getTopProductsSortedByCount(
 			Map<Product, Integer> productCount, int listSize) {
 		return productCount.entrySet().stream().sorted(
 				(Map.Entry.<Product, Integer>comparingByValue().reversed()))
@@ -71,7 +70,7 @@ public class ProductInventoryAnalytics {
 								(e1, e2) -> e1, LinkedHashMap::new));
 	}
 
-	private void updateProductCount(Order order,
+	private static void updateProductCount(Order order,
 			Map<Product, Integer> productCount) {
 		Map<Product, Integer> necessaryProducts = order.getItems();
 		for (Map.Entry<Product, Integer> entry : necessaryProducts.entrySet()) {

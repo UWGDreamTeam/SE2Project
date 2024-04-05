@@ -7,7 +7,6 @@ import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.storage.OrderInventoryStorage;
 import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
-import edu.westga.cs3212.inventory_manager.model.warehouse.OrderManager;
 
 /**
  * Local implementation of the OrderManager class meant to mimic the

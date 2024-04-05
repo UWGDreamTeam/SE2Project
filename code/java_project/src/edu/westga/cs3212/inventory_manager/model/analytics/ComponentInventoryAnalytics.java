@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
@@ -31,7 +30,7 @@ public class ComponentInventoryAnalytics {
 	 * @postcondition a new LocalProductInventory is created and associated with
 	 *                this instance
 	 */
-	public ComponentInventoryAnalytics() {
+	private ComponentInventoryAnalytics() {
 	}
 
 	/**
@@ -53,7 +52,7 @@ public class ComponentInventoryAnalytics {
 	 * @throws IllegalArgumentException
 	 *             if listSize is negative
 	 */
-	public Map<Component, Integer> getMostUsedComponents(int listSize) {
+	public static Map<Component, Integer> getMostUsedComponents(int listSize) {
 		if (listSize < MINIMUM_LIST_SIZE) {
 			throw new IllegalArgumentException("List size cannot be negative");
 		}
@@ -61,13 +60,13 @@ public class ComponentInventoryAnalytics {
 		Map<Component, Integer> componentCount = new HashMap<>();
 
 		for (Product product : products) {
-			this.updateComponentCount(product, componentCount);
+			updateComponentCount(product, componentCount);
 		}
 
-		return this.getTopComponentsSortedByCount(componentCount, listSize);
+		return getTopComponentsSortedByCount(componentCount, listSize);
 	}
 
-	private Map<Component, Integer> getTopComponentsSortedByCount(
+	private static Map<Component, Integer> getTopComponentsSortedByCount(
 	        Map<Component, Integer> componentCount, int listSize) {
 	    return componentCount.entrySet().stream()
 	            .sorted(Map.Entry.<Component, Integer>comparingByValue().reversed())
@@ -80,7 +79,7 @@ public class ComponentInventoryAnalytics {
 	}
 
 
-	private void updateComponentCount(Product product,
+	private static void updateComponentCount(Product product,
 			Map<Component, Integer> componentCount) {
 		Map<Component, Integer> necessaryComponents = product.getRecipe();
 		for (Map.Entry<Component, Integer> entry : necessaryComponents

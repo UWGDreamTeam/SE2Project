@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.analytics.ProductInventoryAnalytics;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
+import edu.westga.cs3212.inventory_manager.model.local_impl.OrderManager;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.OrderInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
-import edu.westga.cs3212.inventory_manager.model.warehouse.OrderManager;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 import edu.westga.cs3212.inventory_manager.viewmodel.home.HomePageViewModel;
 import javafx.beans.property.SimpleStringProperty;

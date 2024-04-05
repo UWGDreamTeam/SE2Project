@@ -6,7 +6,6 @@ import java.util.Map;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.storage.ProductInventoryStorage;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Item;
-import edu.westga.cs3212.inventory_manager.model.warehouse.ItemInventoryManager;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 /**
