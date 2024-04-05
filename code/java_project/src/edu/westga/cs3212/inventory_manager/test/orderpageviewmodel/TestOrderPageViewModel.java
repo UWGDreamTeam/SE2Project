@@ -17,17 +17,17 @@ import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
-import edu.westga.cs3212.inventory_manager.viewmodel.order.OrderPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.order.OrderViewModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 class TestOrderPageViewModel {
 
-	private OrderPageViewModel viewModel;
+	private OrderViewModel viewModel;
 
 	@BeforeEach
 	public void setUp() {
-		this.viewModel = new OrderPageViewModel();
+		this.viewModel = new OrderViewModel();
 		this.viewModel.clearOrders();
 	}
 

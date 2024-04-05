@@ -16,7 +16,7 @@ import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
-import edu.westga.cs3212.inventory_manager.viewmodel.home.HomePageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.home.HomeViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -27,7 +27,6 @@ class TestGetComponentSummary {
 		ComponentInventory.clearInventory();
 		ProductInventory.clearInventory();
 		OrderInventory.clearOrders();
-		new ProductInventoryAnalytics();
 
 		Component componentA = new Component("ComponentA", 1.0);
 		String componentIDA = ComponentInventory.addComponent("ComponentA", 1.0, 10);
@@ -69,7 +68,7 @@ class TestGetComponentSummary {
 		StringProperty testProductSummaryTextArea = new SimpleStringProperty();
 		StringProperty testOrderSummaryTextArea = new SimpleStringProperty();
 
-		HomePageViewModel homeVM = new HomePageViewModel();
+		HomeViewModel homeVM = new HomeViewModel();
 
 		homeVM.getComponentSumarryTextArea().bindBidirectional(testComponentSummaryTextArea);
 		homeVM.getOrderSumarryTextArea().bindBidirectional(testOrderSummaryTextArea);

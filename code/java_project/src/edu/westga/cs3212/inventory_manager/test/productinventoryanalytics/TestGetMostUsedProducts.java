@@ -19,12 +19,9 @@ import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 class TestGetMostUsedProducts {
-	
-    private ProductInventoryAnalytics analytics;
     
     @BeforeEach
     void setUp() {
-    	this.analytics = new ProductInventoryAnalytics();
 		OrderInventory.clearOrders();
 		ProductInventory.clearInventory();
 		ComponentInventory.clearInventory();
@@ -43,19 +40,17 @@ class TestGetMostUsedProducts {
 
 	@Test
 	public void testGetMostUsedProducts_NegativeListSize_ThrowsException() {
-	    ProductInventoryAnalytics analytics = new ProductInventoryAnalytics();
-	    assertThrows(IllegalArgumentException.class, () -> analytics.getMostUsedProducts(-1));
+	    assertThrows(IllegalArgumentException.class, () -> ProductInventoryAnalytics.getMostUsedProducts(-1));
 	}
 
 	@Test
 	public void testGetMostUsedProducts_ZeroListSize_ReturnsEmptyMap() {
-	    ProductInventoryAnalytics analytics = new ProductInventoryAnalytics();
-	    assertTrue(analytics.getMostUsedProducts(0).isEmpty());
+	    assertTrue(ProductInventoryAnalytics.getMostUsedProducts(0).isEmpty());
 	}
 
     @Test
     public void testGetMostUsedProducts_PositiveListSize_ReturnsNonEmptyMap() {
-        Map<Product, Integer> mostUsedProducts = this.analytics.getMostUsedProducts(2);
+        Map<Product, Integer> mostUsedProducts = ProductInventoryAnalytics.getMostUsedProducts(2);
         assertFalse(mostUsedProducts.isEmpty(), "Map should not be empty when list size is positive");
     }
 

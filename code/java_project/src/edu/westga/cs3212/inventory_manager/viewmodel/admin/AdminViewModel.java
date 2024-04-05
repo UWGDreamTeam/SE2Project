@@ -16,7 +16,7 @@ import javafx.collections.ObservableList;
  * @author Vitor dos Santos
  * @version Spring 2024
  */
-public class AdminPageViewModel {
+public class AdminViewModel {
 	
 	private ObjectProperty<LocalEmployeeCredentials> selectedUser;
 
@@ -26,7 +26,7 @@ public class AdminPageViewModel {
      * @postconditions 	this.getSelectedUser() != null && 
      * 					this.credentialsManager != null
 	 */
-	public AdminPageViewModel() {
+	public AdminViewModel() {
 		this.selectedUser = new SimpleObjectProperty<>();
 	}
 

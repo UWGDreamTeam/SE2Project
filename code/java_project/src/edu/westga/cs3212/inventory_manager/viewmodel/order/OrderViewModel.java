@@ -19,7 +19,7 @@ import javafx.beans.property.SimpleObjectProperty;
  * @author Group 1
  * @version Spring 2024
  */
-public class OrderPageViewModel {
+public class OrderViewModel {
 
 	private ObjectProperty<Order> selectedOrder;
 
@@ -28,7 +28,7 @@ public class OrderPageViewModel {
 	 * to the order management system and initializes properties for UI
 	 * interaction.
 	 */
-	public OrderPageViewModel() {
+	public OrderViewModel() {
 		this.selectedOrder = new SimpleObjectProperty<Order>();
 	}
 

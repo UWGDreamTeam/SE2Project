@@ -11,7 +11,7 @@ import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class HomePageViewModel {
+public class HomeViewModel {
 
 	private StringProperty componentSummaryTextArea;
 	private StringProperty productSummaryTextArea;
@@ -22,7 +22,7 @@ public class HomePageViewModel {
 	 * StringProperties for binding to the UI text areas that display the
 	 * summaries.
 	 */
-	public HomePageViewModel() {
+	public HomeViewModel() {
 		this.componentSummaryTextArea = new SimpleStringProperty();
 		this.productSummaryTextArea = new SimpleStringProperty();
 		this.orderSummaryTextArea = new SimpleStringProperty();
@@ -73,8 +73,7 @@ public class HomePageViewModel {
 	 * based on their usage in product recipes.
 	 */
 	public void getComponentSummary() {
-		ComponentInventoryAnalytics componentInventoryAnalytics = new ComponentInventoryAnalytics();
-		Map<Component, Integer> componentSummary = componentInventoryAnalytics
+		Map<Component, Integer> componentSummary = ComponentInventoryAnalytics
 				.getMostUsedComponents(5);
 
 		StringBuilder componentSummaryStringBuilder = new StringBuilder(
@@ -99,8 +98,7 @@ public class HomePageViewModel {
 	 * products based on order frequency.
 	 */
 	public void getProductSummary() {
-		ProductInventoryAnalytics productInventoryAnalytics = new ProductInventoryAnalytics();
-		Map<Product, Integer> products = productInventoryAnalytics
+		Map<Product, Integer> products = ProductInventoryAnalytics
 				.getMostUsedProducts(5);
 		StringBuilder productSummaryStringBuilder = new StringBuilder(
 				"The top 5 most requested products are: \n");
@@ -121,28 +119,27 @@ public class HomePageViewModel {
 	 * Updates the order summary text area with this information.
 	 */
 	public void getOrderSummary() {
-		OrderAnalytics orderInventoryAnalytics = new OrderAnalytics();
 		StringBuilder summary = new StringBuilder();
 		summary.append("Order Analytics Summary:\n");
 		summary.append("Total Orders: ")
-				.append(orderInventoryAnalytics.getOrdersCount()).append("\n");
+				.append(OrderAnalytics.getOrdersCount()).append("\n");
 		summary.append("Total Sales of Completed Orders: $")
 				.append(String.format("%.2f",
-						orderInventoryAnalytics.getOrdersSalesTotal()))
+						OrderAnalytics.getOrdersSalesTotal()))
 				.append("\n");
 		summary.append("Total Production Cost of Completed Orders: $")
 				.append(String.format("%.2f",
-						orderInventoryAnalytics.getOrdersProductionCostTotal()))
+						OrderAnalytics.getOrdersProductionCostTotal()))
 				.append("\n");
 		summary.append("Total Profit of Completed Orders: $")
 				.append(String.format("%.2f",
-						orderInventoryAnalytics.getOrdersProfitTotal()))
+						OrderAnalytics.getOrdersProfitTotal()))
 				.append("\n");
 		summary.append("Orders Completed: ")
-				.append(orderInventoryAnalytics.getOrdersCompletedCount())
+				.append(OrderAnalytics.getOrdersCompletedCount())
 				.append("\n");
 		summary.append("Orders In Progress: ")
-				.append(orderInventoryAnalytics.getOrdersInProgressCount())
+				.append(OrderAnalytics.getOrdersInProgressCount())
 				.append("\n");
 
 		this.orderSummaryTextArea.set(summary.toString());

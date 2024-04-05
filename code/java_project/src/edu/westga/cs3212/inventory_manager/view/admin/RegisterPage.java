@@ -2,7 +2,7 @@ package edu.westga.cs3212.inventory_manager.view.admin;
 
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
-import edu.westga.cs3212.inventory_manager.viewmodel.admin.RegisterPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.RegisterViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class RegisterPage {
 
-    private RegisterPageViewModel viewModel = new RegisterPageViewModel();
+    private RegisterViewModel viewModel = new RegisterViewModel();
 
     @FXML
     private TextField firstNameTextField;

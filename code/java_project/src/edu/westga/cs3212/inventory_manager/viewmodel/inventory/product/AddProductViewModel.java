@@ -3,13 +3,9 @@ package edu.westga.cs3212.inventory_manager.viewmodel.inventory.product;
 import java.util.ArrayList;
 import java.util.Map;
 
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalComponentInventory;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
-import edu.westga.cs3212.inventory_manager.model.warehouse.Item;
-import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

@@ -27,10 +27,9 @@ class TestGetOrdersSalesTotal {
 	
 	@Test
 	void testWithNoOrders() {
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		testOrderAnalytics.clearOrders();
+		OrderAnalytics.clearOrders();
 		
-		assertTrue(testOrderAnalytics.getOrdersSalesTotal() == 0);
+		assertTrue(OrderAnalytics.getOrdersSalesTotal() == 0);
 	}
 	
 	@Test
@@ -44,8 +43,7 @@ class TestGetOrdersSalesTotal {
 		Map<Product, Integer> orders = new HashMap<>();
 		orders.put(product, 1);
 		OrderInventory.createOrder(orders, CompletionStatus.INCOMPLETE);
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersSalesTotal() == 0);
+		assertTrue(OrderAnalytics.getOrdersSalesTotal() == 0);
 	}
 	
 	@Test
@@ -59,7 +57,6 @@ class TestGetOrdersSalesTotal {
 		Map<Product, Integer> orders = new HashMap<>();
 		orders.put(product, 1);
 		OrderInventory.createOrder(orders, CompletionStatus.INCOMPLETE);
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersSalesTotal() == 0);
+		assertTrue(OrderAnalytics.getOrdersSalesTotal() == 0);
 	}
 }

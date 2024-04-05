@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
-import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminEditCredentialsPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminEditCredentialsViewModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +38,7 @@ public class AdminEditCredentialsPage {
     @FXML
     private ComboBox<EmployeeType> roleComboBox;
     
-    private AdminEditCredentialsPageViewModel adminEditVM;
+    private AdminEditCredentialsViewModel adminEditVM;
 
     @FXML
 	void cancel(ActionEvent event) {
@@ -68,7 +68,7 @@ public class AdminEditCredentialsPage {
 
     @FXML
     void initialize() {
-    	this.adminEditVM = new AdminEditCredentialsPageViewModel();
+    	this.adminEditVM = new AdminEditCredentialsViewModel();
     	
     	this.roleComboBox.setItems(FXCollections.observableArrayList(EmployeeType.values()));
     }

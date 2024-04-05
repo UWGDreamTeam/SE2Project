@@ -9,13 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.analytics.OrderAnalytics;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalOrderManager;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.OrderInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
-import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 class TestGetOrdersCompletedCount {
@@ -29,10 +27,9 @@ class TestGetOrdersCompletedCount {
 	
 	@Test
 	void testWithNoOrders() {
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		testOrderAnalytics.clearOrders();
+		OrderAnalytics.clearOrders();
 		
-		assertTrue(testOrderAnalytics.getOrdersCompletedCount() == 0);
+		assertTrue(OrderAnalytics.getOrdersCompletedCount() == 0);
 	}
 	
 	@Test
@@ -47,8 +44,7 @@ class TestGetOrdersCompletedCount {
 		orders.put(product, 1);
 		OrderInventory.createOrder(orders, CompletionStatus.COMPLETE);
 		
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersCompletedCount() == 1);
+		assertTrue(OrderAnalytics.getOrdersCompletedCount() == 1);
 	}
 	
 	@Test
@@ -62,8 +58,7 @@ class TestGetOrdersCompletedCount {
 		Map<Product, Integer> orders = new HashMap<>();
 		orders.put(product, 1);
 		OrderInventory.createOrder(orders, CompletionStatus.INCOMPLETE);
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersCompletedCount() == 0);
+		assertTrue(OrderAnalytics.getOrdersCompletedCount() == 0);
 	}
 	
 	@Test
@@ -78,8 +73,7 @@ class TestGetOrdersCompletedCount {
 		orders.put(product, 1);
 		OrderInventory.createOrder(orders, CompletionStatus.COMPLETE);
 		OrderInventory.createOrder(orders, CompletionStatus.COMPLETE);
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersCompletedCount() == 2);
+		assertTrue(OrderAnalytics.getOrdersCompletedCount() == 2);
 	}
 
 }

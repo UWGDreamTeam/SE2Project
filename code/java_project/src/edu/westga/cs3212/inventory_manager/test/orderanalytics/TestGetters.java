@@ -27,10 +27,9 @@ public class TestGetters {
 	
 	@Test
 	void testWhenThereAreNoOrders() {
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		testOrderAnalytics.clearOrders();
+		OrderAnalytics.clearOrders();
 		
-		assertTrue(testOrderAnalytics.getOrdersCount() == 0);
+		assertTrue(OrderAnalytics.getOrdersCount() == 0);
 	}
 	
 	@Test
@@ -44,7 +43,6 @@ public class TestGetters {
 		Map<Product, Integer> orders = new HashMap<>();
 		orders.put(product, 1);
 		OrderInventory.createOrder(orders, CompletionStatus.INCOMPLETE);
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersCount() == 1);
+		assertTrue(OrderAnalytics.getOrdersCount() == 1);
 	}
 }

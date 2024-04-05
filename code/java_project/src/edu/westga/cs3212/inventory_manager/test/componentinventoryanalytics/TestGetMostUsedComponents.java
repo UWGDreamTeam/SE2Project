@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.analytics.ComponentInventoryAnalytics;
-import edu.westga.cs3212.inventory_manager.model.local_impl.LocalProductInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ProductInventory;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
@@ -27,41 +26,35 @@ class TestGetMostUsedComponents {
 
 	@Test
 	void testWhenListSizeIsNegative() {
-		ComponentInventoryAnalytics testComponentInventoryAnalytics = new ComponentInventoryAnalytics();
-		assertThrows(IllegalArgumentException.class, () -> testComponentInventoryAnalytics.getMostUsedComponents(-1));
+		assertThrows(IllegalArgumentException.class, () -> ComponentInventoryAnalytics.getMostUsedComponents(-1));
 	}
 	
 	@Test
 	void testWhenListSizeIsZero() {
-		ComponentInventoryAnalytics testComponentInventoryAnalytics = new ComponentInventoryAnalytics();
-		assertEquals(0, testComponentInventoryAnalytics.getMostUsedComponents(0).size());
+		assertEquals(0, ComponentInventoryAnalytics.getMostUsedComponents(0).size());
 	}
 	
 	@Test
 	void testWhenListSizeIsOne() {
-		ComponentInventoryAnalytics testComponentInventoryAnalytics = new ComponentInventoryAnalytics();
-		Map<Component, Integer> testMap = testComponentInventoryAnalytics.getMostUsedComponents(1);
+		Map<Component, Integer> testMap = ComponentInventoryAnalytics.getMostUsedComponents(1);
 		assertNotNull(testMap);
 	}
 	
 	@Test
 	void testWhenInventoryIsEmpty() {
-		ComponentInventoryAnalytics testComponentInventoryAnalytics = new ComponentInventoryAnalytics();
-		assertEquals(0, testComponentInventoryAnalytics.getMostUsedComponents(1).size());
+		assertEquals(0, ComponentInventoryAnalytics.getMostUsedComponents(1).size());
 	}
 	
 	@Test
 	void testWhenInventoryHasOneItem() {
-		ComponentInventoryAnalytics testComponentInventoryAnalytics = new ComponentInventoryAnalytics();
 		
-		assertEquals(0, testComponentInventoryAnalytics.getMostUsedComponents(1).size());
+		assertEquals(0, ComponentInventoryAnalytics.getMostUsedComponents(1).size());
 	}
 	
 	@Test
 	void testComponentsAreSortedByUsageInDescendingOrder() {
-	    ComponentInventoryAnalytics testComponentInventoryAnalytics = initializeInventoryWithSampleData();
-	    
-	    Map<Component, Integer> testMap = testComponentInventoryAnalytics.getMostUsedComponents(3);
+	    this.initializeInventoryWithSampleData();
+	    Map<Component, Integer> testMap = ComponentInventoryAnalytics.getMostUsedComponents(3);
 	    
 	    // Verify the order is maintained
 	    assertEquals(3, testMap.size());
@@ -73,8 +66,7 @@ class TestGetMostUsedComponents {
 	    assertEquals("ComponentB", entryList.get(2).getKey().getName()); // Component B used 5 times
 	}
 	
-	private ComponentInventoryAnalytics initializeInventoryWithSampleData() {
-	    ComponentInventoryAnalytics analytics = new ComponentInventoryAnalytics();
+	private void initializeInventoryWithSampleData() {
 
 	    // Create components
 	    Component componentA = new Component("ComponentA", 1.0);
@@ -103,8 +95,6 @@ class TestGetMostUsedComponents {
 	    Product product2 = new Product("Product2", 200.0, 250.0, recipe2);
 	    productID = ProductInventory.addProduct("Product2", 200.0, recipe2, 250);
 	    product2.setID(productID);
-	    
-	    return analytics;
 	}
 
 }

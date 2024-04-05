@@ -5,7 +5,7 @@ import java.io.IOException;
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
-import edu.westga.cs3212.inventory_manager.viewmodel.home.HomePageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.home.HomeViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +61,7 @@ public class HomePage {
 	@FXML
 	private Text workerTypeLabel;
 	
-	private HomePageViewModel viewModel;
+	private HomeViewModel viewModel;
 
 	@FXML
 	void initialize() {
@@ -74,7 +74,7 @@ public class HomePage {
 	}
 
 	private void bindToViewModel() {
-		this.viewModel = new HomePageViewModel();
+		this.viewModel = new HomeViewModel();
 		this.componentSummaryTextArea.textProperty().bind(this.viewModel.getComponentSumarryTextArea());
 		this.productSummaryTextArea.textProperty().bind(this.viewModel.getProductSumarryTextArea());
 		this.orderSummaryTextArea.textProperty().bind(this.viewModel.getOrderSumarryTextArea());

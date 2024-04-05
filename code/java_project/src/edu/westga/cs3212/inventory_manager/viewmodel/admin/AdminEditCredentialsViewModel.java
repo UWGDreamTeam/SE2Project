@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class AdminEditCredentialsPageViewModel {
+public class AdminEditCredentialsViewModel {
 
 	private StringProperty firstName;
 	private StringProperty lastName;
@@ -25,7 +25,7 @@ public class AdminEditCredentialsPageViewModel {
 	 * @precondition None, as this is a constructor initializing properties.
 	 * @postcondition A new instance of AdminEditCredentialsPageViewModel is created with initialized properties.
 	 */
-	public AdminEditCredentialsPageViewModel() {
+	public AdminEditCredentialsViewModel() {
 		this.firstName = new SimpleStringProperty();
 		this.lastName = new SimpleStringProperty();
 		this.password = new SimpleStringProperty();

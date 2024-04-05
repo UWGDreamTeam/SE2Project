@@ -27,10 +27,9 @@ class TestGetOrdersInProgressCount {
 
 	@Test
 	void testWithNoOrders() {
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		testOrderAnalytics.clearOrders();
+		OrderAnalytics.clearOrders();
 		
-		assertTrue(testOrderAnalytics.getOrdersInProgressCount() == 0);
+		assertTrue(OrderAnalytics.getOrdersInProgressCount() == 0);
 	}
 	
 	@Test
@@ -44,8 +43,7 @@ class TestGetOrdersInProgressCount {
 		Map<Product, Integer> orders = new HashMap<>();
 		orders.put(product, 1);
 		OrderInventory.createOrder(orders, CompletionStatus.INCOMPLETE);
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersInProgressCount() == 1);
+		assertTrue(OrderAnalytics.getOrdersInProgressCount() == 1);
 	}
 	
 	@Test
@@ -59,8 +57,7 @@ class TestGetOrdersInProgressCount {
 		Map<Product, Integer> orders = new HashMap<>();
 		orders.put(product, 1);
 		OrderInventory.createOrder(orders, CompletionStatus.COMPLETE);
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersInProgressCount() == 0);
+		assertTrue(OrderAnalytics.getOrdersInProgressCount() == 0);
 	}
 	
 	@Test
@@ -76,8 +73,7 @@ class TestGetOrdersInProgressCount {
 		OrderInventory.createOrder(orders, CompletionStatus.INCOMPLETE);
 		OrderInventory.createOrder(orders, CompletionStatus.INCOMPLETE);
 		
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		assertTrue(testOrderAnalytics.getOrdersInProgressCount() == 2);
+		assertTrue(OrderAnalytics.getOrdersInProgressCount() == 2);
 	}
 
 }

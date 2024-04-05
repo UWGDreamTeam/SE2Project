@@ -21,10 +21,9 @@ class TestGetOrdersProfitTotal {
 	
 	@Test
 	void testWithNoOrders() {
-		OrderAnalytics testOrderAnalytics = new OrderAnalytics();
-		testOrderAnalytics.clearOrders();
+		OrderAnalytics.clearOrders();
 		
-		assertTrue(testOrderAnalytics.getOrdersProfitTotal() == 0);
+		assertTrue(OrderAnalytics.getOrdersProfitTotal() == 0);
 	}
 
 }

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
-import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminViewModel;
 
 class TestGetObservableUsersList {
 
@@ -12,7 +12,7 @@ class TestGetObservableUsersList {
 	void testGetEmptyList() {
 		EmployeeCredentialsManager.clearCredentials();
 		
-		AdminPageViewModel adminPageVM = new AdminPageViewModel();
+		AdminViewModel adminPageVM = new AdminViewModel();
 		
 		assertThrows(IllegalArgumentException.class, () -> {
 			adminPageVM.getObservableUsersList();

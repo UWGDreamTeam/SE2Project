@@ -8,15 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.inventory_manager.viewmodel.admin.RegisterPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.RegisterViewModel;
 
 class TestRegisterEmployee {
 
-	private RegisterPageViewModel viewModel;
+	private RegisterViewModel viewModel;
 
 	@BeforeEach
 	void setUp() {
-		this.viewModel = new RegisterPageViewModel();
+		this.viewModel = new RegisterViewModel();
 	}
 
 	@Test

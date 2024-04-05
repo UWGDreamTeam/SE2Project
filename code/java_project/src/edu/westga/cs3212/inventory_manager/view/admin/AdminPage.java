@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import edu.westga.cs3212.inventory_manager.Main;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
-import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
@@ -68,7 +68,7 @@ public class AdminPage {
 	@FXML
 	private Text employeeRoleLabel;
     
-    private AdminPageViewModel adminVM;
+    private AdminViewModel adminVM;
     
     private void setupButtonsVisibility() {
 		this.refreshUsersTableView();
@@ -208,7 +208,7 @@ public class AdminPage {
 
     @FXML
     void initialize() {
-    	this.adminVM = new AdminPageViewModel();
+    	this.adminVM = new AdminViewModel();
     	this.adminVM.getSelectedUser().bind(this.usersTableView.getSelectionModel().selectedItemProperty());
     	this.setupProductButtons();
     	this.setupButtonsVisibility();

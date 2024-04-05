@@ -13,7 +13,7 @@ import javafx.beans.property.StringProperty;
  * 
  * @author Jacob Haas
  */
-public class RegisterPageViewModel {
+public class RegisterViewModel {
 
     private final StringProperty firstName = new SimpleStringProperty();
     private final StringProperty lastName = new SimpleStringProperty();
@@ -27,7 +27,7 @@ public class RegisterPageViewModel {
      * @precondition none
      * @postcondition credentialsManager != null
      */
-    public RegisterPageViewModel() {
+    public RegisterViewModel() {
     }
 
     /**

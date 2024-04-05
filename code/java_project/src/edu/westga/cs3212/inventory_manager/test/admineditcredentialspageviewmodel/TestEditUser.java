@@ -10,7 +10,7 @@ import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.local_impl.LocalEmployeeCredentialsManager;
 import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
-import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminEditCredentialsPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminEditCredentialsViewModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -45,7 +45,7 @@ class TestEditUser {
 		ObjectProperty<EmployeeType> selectedEmploType = new SimpleObjectProperty<EmployeeType>(EmployeeType.MANAGER);
 		ObjectProperty<LocalEmployeeCredentials> selectedUserView = new SimpleObjectProperty<LocalEmployeeCredentials>(selectedUser);
 		
-		AdminEditCredentialsPageViewModel adminEditPageVM = new AdminEditCredentialsPageViewModel();
+		AdminEditCredentialsViewModel adminEditPageVM = new AdminEditCredentialsViewModel();
 		
 		adminEditPageVM.setSelectedUser(selectedUserView.getValue());
 		

@@ -8,7 +8,7 @@ import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.warehouse.CompletionStatus;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
-import edu.westga.cs3212.inventory_manager.viewmodel.order.OrderPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.order.OrderViewModel;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -91,11 +91,11 @@ public class OrderPage {
 	@FXML
 	private Button fulfillButton;
 
-	private OrderPageViewModel viewModel;
+	private OrderViewModel viewModel;
 	
 	@FXML
 	void initialize() {
-		this.viewModel = new OrderPageViewModel();
+		this.viewModel = new OrderViewModel();
 
 		this.bindTableColumns();
 

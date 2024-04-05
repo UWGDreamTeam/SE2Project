@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.server.credentials.EmployeeCredentialsManager;
-import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminPageViewModel;
+import edu.westga.cs3212.inventory_manager.viewmodel.admin.AdminViewModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -27,7 +27,7 @@ class TestRemoveUser {
 			}
 		}
 		
-		AdminPageViewModel adminPageVM = new AdminPageViewModel();
+		AdminViewModel adminPageVM = new AdminViewModel();
 		
 		LocalEmployeeCredentials selectedUser = EmployeeCredentialsManager.getEmployeeCredentials(fakeID);
 		ObjectProperty<LocalEmployeeCredentials> selectedUserView = new SimpleObjectProperty<LocalEmployeeCredentials>(selectedUser);
@@ -40,7 +40,7 @@ class TestRemoveUser {
 	
 	@Test
 	void testRemoveNotInSystem() {
-		AdminPageViewModel adminPageVM = new AdminPageViewModel();
+		AdminViewModel adminPageVM = new AdminViewModel();
 		
 		LocalEmployeeCredentials selectedUser = new LocalEmployeeCredentials("tt0001", "testName1", "testLastName1", "testPassword1", EmployeeType.WORKER);
 		ObjectProperty<LocalEmployeeCredentials> selectedUserView = new SimpleObjectProperty<LocalEmployeeCredentials>(selectedUser);
