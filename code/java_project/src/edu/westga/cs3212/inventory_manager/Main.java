@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
+import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -45,9 +46,11 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage stage) throws IOException {
-		DemoDataUtility.createDemoComponents();
-		DemoDataUtility.createDemoProducts();
-		DemoDataUtility.createDemoOrders();
+		if (ComponentInventory.getComponents().length == 0) {
+			DemoDataUtility.createDemoComponents();
+			DemoDataUtility.createDemoProducts();
+			DemoDataUtility.createDemoOrders();
+		}
 		primaryStage = stage;
 		Parent parent = FXMLLoader
 				.load(getClass().getResource(Main.LOGIN_PAGE));
