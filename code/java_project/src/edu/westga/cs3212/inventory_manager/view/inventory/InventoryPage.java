@@ -303,9 +303,10 @@ public class InventoryPage {
 	}
 	
 	private void setupLowStockTableColumns() {
-	    // Assuming columns are set similar to other TableView setups
 	    this.lowStockIDColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
 	    this.lowStockNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+	    this.lowStockCostColumn
+		.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
 	    this.lowStockQuantityColumn.setCellValueFactory(cellData -> {
 	        try {
 	            int quantity = ComponentInventory.getQuantity(cellData.getValue().getID());
@@ -395,6 +396,8 @@ public class InventoryPage {
 		modalStage.showAndWait();
 
 		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
+		
 	}
 
 	@FXML
@@ -402,6 +405,7 @@ public class InventoryPage {
 		this.inventoryVM.removeComponent();
 
 		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
 		this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
 
@@ -424,6 +428,7 @@ public class InventoryPage {
 		modalStage.showAndWait();
 
 		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
 	}
 
 	@FXML
@@ -447,6 +452,7 @@ public class InventoryPage {
 			}
 		}
 		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
 	}
 
 	private void tryToOrderComponent(int quantity) {
