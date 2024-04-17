@@ -52,6 +52,7 @@ public class Main extends Application {
 		Parent parent = FXMLLoader
 				.load(getClass().getResource(Main.LOGIN_PAGE));
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 		primaryStage.setTitle(WINDOW_TITLE);
 		primaryStage.setScene(scene);
 		primaryStage.show();
