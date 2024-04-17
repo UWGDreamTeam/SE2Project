@@ -1,6 +1,7 @@
 package edu.westga.cs3212.inventory_manager.viewmodel.inventory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.westga.cs3212.inventory_manager.Main;
@@ -56,6 +57,20 @@ public class InventoryViewModel {
 			items.add(currentComponent);
 		}
 		return FXCollections.observableArrayList(items);
+	}
+	
+	public ObservableList<Component> getLowStockComponents() {
+	    List<Component> allComponents = Arrays.asList(ComponentInventory.getComponents());
+	    List<Component> lowStockComponents = new ArrayList<>();
+
+	    for (Component component : allComponents) {
+	        int quantity = ComponentInventory.getQuantity(component.getID());
+	        if (quantity <= 10) {
+	            lowStockComponents.add(component);
+	        }
+	    }
+
+	    return FXCollections.observableArrayList(lowStockComponents);
 	}
 
 	/**

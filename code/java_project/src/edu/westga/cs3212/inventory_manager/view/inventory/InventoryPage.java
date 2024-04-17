@@ -124,6 +124,25 @@ public class InventoryPage {
 
 	@FXML
 	private TableColumn<Component, Number> recipesColumn;
+	
+	@FXML
+    private TableColumn<Item, Number> lowStockCostColumn;
+
+    @FXML
+    private TableColumn<Item, String> lowStockIDColumn;
+
+    @FXML
+    private TableColumn<Item, String> lowStockNameColumn;
+
+    @FXML
+    private TableColumn<Component, Integer> lowStockQuantityColumn;
+
+    @FXML
+    private Tab lowStockTabPage;
+
+    @FXML
+    private TableView<Component> lowStockTableView;
+
 
 	@FXML
 	private Tab productsTabPage;
@@ -183,6 +202,7 @@ public class InventoryPage {
 		this.setupProductsTableView();
 		this.setupComponentButtons();
 		this.setupProductButtons();
+		this.setupLowStockTableView();
 		this.setPermissions();
 		Main.createSummary(this.fullNameLabel, this.employeeIdLabel, this.workerTypeLabel);
 	}
@@ -274,6 +294,30 @@ public class InventoryPage {
 				return new SimpleIntegerProperty(0).asObject();
 			}
 		});
+	}
+	
+	private void setupLowStockTableView() {
+	    this.lowStockTableView.setItems(this.inventoryVM.getLowStockComponents());
+	    setupLowStockTableColumns();
+	    refreshLowStockTableView();
+	}
+	
+	private void setupLowStockTableColumns() {
+	    // Assuming columns are set similar to other TableView setups
+	    this.lowStockIDColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
+	    this.lowStockNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+	    this.lowStockQuantityColumn.setCellValueFactory(cellData -> {
+	        try {
+	            int quantity = ComponentInventory.getQuantity(cellData.getValue().getID());
+	            return new SimpleIntegerProperty(quantity).asObject();
+	        } catch (IllegalArgumentException e) {
+	            return new SimpleIntegerProperty(0).asObject();
+	        }
+	    });
+	}
+	
+	private void refreshLowStockTableView() {
+	    this.lowStockTableView.refresh();
 	}
 
 	@FXML
