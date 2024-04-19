@@ -63,6 +63,7 @@ public class Login {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.HOME_PAGE_TITLE);
 		stage.show();
