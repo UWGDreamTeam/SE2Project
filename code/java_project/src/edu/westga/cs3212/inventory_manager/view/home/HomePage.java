@@ -90,6 +90,7 @@ public class HomePage {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.INVENTORY_PAGE));
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
 		stage.show();
@@ -100,6 +101,7 @@ public class HomePage {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.ORDER_PAGE_TITLE);
 		stage.show();
@@ -110,6 +112,7 @@ public class HomePage {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADMIN_PAGE));
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.ADMIN_PAGE_TITLE);
 		stage.show();
@@ -121,6 +124,7 @@ public class HomePage {
 			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
 			Scene currentScene = currentStage.getScene();
+			currentScene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
 			currentStage.sizeToScene();

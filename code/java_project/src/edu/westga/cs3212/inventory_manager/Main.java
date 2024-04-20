@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager;
 
 import java.io.IOException;
 
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import javafx.application.Application;
@@ -52,7 +53,7 @@ public class Main extends Application {
 		Parent parent = FXMLLoader
 				.load(getClass().getResource(Main.LOGIN_PAGE));
 		Scene scene = new Scene(parent);
-		scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		primaryStage.setTitle(WINDOW_TITLE);
 		primaryStage.setScene(scene);
 		primaryStage.show();

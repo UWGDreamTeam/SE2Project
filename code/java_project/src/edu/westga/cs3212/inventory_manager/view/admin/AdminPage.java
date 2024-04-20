@@ -109,6 +109,7 @@ public class AdminPage {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
 		Scene scene = stage.getScene();
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		scene.setRoot(parent);
 		stage.setTitle(Constants.HOME_PAGE_TITLE);
 	}
@@ -119,6 +120,7 @@ public class AdminPage {
 		Parent parent = FXMLLoader
 				.load(Main.class.getResource(Main.INVENTORY_PAGE));
 		Scene scene = stage.getScene();
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		scene.setRoot(parent);
 		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
 	}
@@ -129,6 +131,7 @@ public class AdminPage {
 		Parent parent = FXMLLoader
 				.load(Main.class.getResource(Main.ORDER_PAGE));
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.ORDER_PAGE_TITLE);
 		stage.show();
@@ -142,6 +145,7 @@ public class AdminPage {
 			Parent parent = FXMLLoader
 					.load(Main.class.getResource(Main.LOGIN_PAGE));
 			Scene currentScene = currentStage.getScene();
+			currentScene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
 			currentStage.sizeToScene();
@@ -158,7 +162,7 @@ public class AdminPage {
 		Parent parent = FXMLLoader
 				.load(Main.class.getResource(Main.REGISTER_PAGE));
 		Scene scene = new Scene(parent);
-
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
@@ -183,6 +187,7 @@ public class AdminPage {
 
 		Stage modalStage = new Stage();
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
