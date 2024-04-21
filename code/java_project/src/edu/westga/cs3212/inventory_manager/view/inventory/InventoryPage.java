@@ -202,6 +202,11 @@ public class InventoryPage {
 		this.inventoryVM.getSelectedComponent()
 				.bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
 		this.inventoryVM.getSelectedProduct().bind(this.productsTableView.getSelectionModel().selectedItemProperty());
+		
+		this.lowStockComponentOrderButton.disableProperty().bind(
+	        Bindings.isNull(this.lowStockTableView.getSelectionModel().selectedItemProperty()));
+	    this.lowStockComponentRemoveButton.disableProperty().bind(
+	        Bindings.isNull(this.lowStockTableView.getSelectionModel().selectedItemProperty()));
 
 		this.setupComponentsTableView();
 		this.setupProductsTableView();
@@ -242,6 +247,8 @@ public class InventoryPage {
 			this.componentAddButton.setDisable(true);
 			this.componentEditButton.setDisable(true);
 			this.componentRemoveButton.setDisable(true);
+			this.lowStockTabPage.setDisable(true);
+			
 			
 		} else {
 			this.componentEditButton.disableProperty()
@@ -254,6 +261,7 @@ public class InventoryPage {
 	}
 
 	private void setPermissions() {
+		
 		if (!this.inventoryVM.isManager()) {
 			this.adminButton.setDisable(true);
 		}
@@ -323,7 +331,8 @@ public class InventoryPage {
 	}
 	
 	private void refreshLowStockTableView() {
-	    this.lowStockTableView.refresh();
+	    this.lowStockTableView.setItems(this.inventoryVM.getLowStockComponents());
+		this.lowStockTableView.refresh();
 	}
 
 	@FXML
@@ -414,12 +423,20 @@ public class InventoryPage {
 	}
 	
 	@FXML
-    void removeLowStockButtonManagerOnClick(ActionEvent event) {
-		this.inventoryVM.removeComponent();
-		this.refreshLowStockTableView();
-		this.refreshComponentsTableView();
-		this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
-    }
+	void removeLowStockButtonManagerOnClick(ActionEvent event) {
+	    this.inventoryVM.getSelectedComponent().unbind();
+
+	    Item selectedLowStockComponent = this.lowStockTableView.getSelectionModel().getSelectedItem();
+	    this.inventoryVM.setSelectedComponent(selectedLowStockComponent);
+
+	    this.inventoryVM.removeComponent();
+
+	    this.inventoryVM.getSelectedComponent().bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
+
+	    this.refreshLowStockTableView();
+	    this.refreshComponentsTableView();
+	    this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
+	}
 
 	@FXML
 	void editComponentButtonManagerOnClick(ActionEvent event) throws IOException {
@@ -445,8 +462,8 @@ public class InventoryPage {
 
 	@FXML
 	void orderComponentButtonManagerOnClick(ActionEvent event) {
-		Component selectedComponent = this.lowStockTableView.getSelectionModel().getSelectedItem();
-		this.showOrderDialog(selectedComponent, this.lowStockTableView);
+		Component selectedComponent = this.componentsTableView.getSelectionModel().getSelectedItem();
+		this.showOrderDialog(selectedComponent, this.componentsTableView);
 		this.refreshComponentsTableView();
 		this.refreshLowStockTableView();
 	}
@@ -455,6 +472,8 @@ public class InventoryPage {
 	void orderLowStockButtonManagerOnClick(ActionEvent event) {
 	    Component selectedComponent = this.lowStockTableView.getSelectionModel().getSelectedItem();
 	    this.showOrderDialog(selectedComponent, this.lowStockTableView);
+	    this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
 	}
 
 	private void showOrderDialog(Component selectedComponent, TableView<Component> tableView) {
@@ -570,6 +589,8 @@ public class InventoryPage {
 						try {
 							this.inventoryVM.produceProduct(selectedProduct, quantity);
 							this.refreshProductsTableView();
+							this.refreshComponentsTableView();
+							this.refreshLowStockTableView();
 						} catch (IllegalArgumentException e) {
 							this.showAlert(PRODUCTION_ERROR_TITLE, e.getMessage(), AlertType.ERROR);
 						}
