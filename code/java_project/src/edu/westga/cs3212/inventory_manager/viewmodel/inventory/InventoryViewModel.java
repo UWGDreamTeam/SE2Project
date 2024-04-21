@@ -26,6 +26,7 @@ public class InventoryViewModel {
 
 	private ObjectProperty<Item> selectedComponent;
 	private ObjectProperty<Item> selectedProduct;
+	private ObjectProperty<Item> selectedLowStockComponent;
 
 	/**
 	 * Constructs an InventoryViewModel with specified inventories for
@@ -39,6 +40,7 @@ public class InventoryViewModel {
 
 		this.selectedComponent = new SimpleObjectProperty<Item>();
 		this.selectedProduct = new SimpleObjectProperty<Item>();
+		this.selectedLowStockComponent = new SimpleObjectProperty<Item>();
 	}
 
 	/**
@@ -83,6 +85,10 @@ public class InventoryViewModel {
 	 *                exists.
 	 */
 	public void removeComponent() {
+		ComponentInventory.deleteComponent(this.selectedComponent.get().getID());
+	}
+	
+	public void removeLowStock() {
 		ComponentInventory.deleteComponent(this.selectedComponent.get().getID());
 	}
 

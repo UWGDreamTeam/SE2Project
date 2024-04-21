@@ -142,7 +142,12 @@ public class InventoryPage {
 
     @FXML
     private TableView<Component> lowStockTableView;
+    
+    @FXML
+    private Button lowStockComponentOrderButton;
 
+    @FXML
+    private Button lowStockComponentRemoveButton;
 
 	@FXML
 	private Tab productsTabPage;
@@ -403,11 +408,18 @@ public class InventoryPage {
 	@FXML
 	void removeComponentButtonManagerOnClick(ActionEvent event) {
 		this.inventoryVM.removeComponent();
-
 		this.refreshComponentsTableView();
 		this.refreshLowStockTableView();
 		this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
+	
+	@FXML
+    void removeLowStockButtonManagerOnClick(ActionEvent event) {
+		this.inventoryVM.removeComponent();
+		this.refreshLowStockTableView();
+		this.refreshComponentsTableView();
+		this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
+    }
 
 	@FXML
 	void editComponentButtonManagerOnClick(ActionEvent event) throws IOException {
@@ -433,6 +445,19 @@ public class InventoryPage {
 
 	@FXML
 	void orderComponentButtonManagerOnClick(ActionEvent event) {
+		Component selectedComponent = this.lowStockTableView.getSelectionModel().getSelectedItem();
+		this.showOrderDialog(selectedComponent, this.lowStockTableView);
+		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
+	}
+	
+	@FXML
+	void orderLowStockButtonManagerOnClick(ActionEvent event) {
+	    Component selectedComponent = this.lowStockTableView.getSelectionModel().getSelectedItem();
+	    this.showOrderDialog(selectedComponent, this.lowStockTableView);
+	}
+
+	private void showOrderDialog(Component selectedComponent, TableView<Component> tableView) {
 		TextInputDialog dialog = new TextInputDialog(DEFAULT_QUANTITY);
 		dialog.setTitle(ORDER_COMPONENT_TITLE);
 		dialog.setHeaderText(ORDER_COMPONENT_HEADER);
@@ -443,7 +468,7 @@ public class InventoryPage {
 			try {
 				int quantity = Integer.parseInt(result.get());
 				if (quantity > 0) {
-					this.tryToOrderComponent(quantity);
+					this.tryToOrderComponent(selectedComponent, quantity, tableView);
 				} else {
 					this.showAlert(INVALID_QUANTITY_MESSAGE, ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
 				}
@@ -451,15 +476,14 @@ public class InventoryPage {
 				this.showAlert(INVALID_INPUT_TITLE, VALID_NUMBER_MESSAGE, AlertType.ERROR);
 			}
 		}
-		this.refreshComponentsTableView();
-		this.refreshLowStockTableView();
 	}
 
-	private void tryToOrderComponent(int quantity) {
-		Component selectedComponent = this.componentsTableView.getSelectionModel().getSelectedItem();
+
+	private void tryToOrderComponent(Component selectedComponent, int quantity, TableView<Component> tableView) {
 		if (selectedComponent != null) {
 			this.inventoryVM.orderComponent(selectedComponent, quantity);
 			this.refreshComponentsTableView();
+			this.refreshLowStockTableView();
 			String content = String.format(RECEIVED_UNITS_FORMAT, quantity, selectedComponent.getName());
 			this.showAlert(ORDERED_COMPONENTS_TITLE, content, AlertType.INFORMATION);
 		} else {
