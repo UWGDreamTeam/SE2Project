@@ -59,6 +59,14 @@ public class InventoryViewModel {
 		return FXCollections.observableArrayList(items);
 	}
 	
+	/**
+	 * Generates an observable list of components that are low in stock.
+	 * A component is considered low in stock if its quantity is 10 or less.
+	 *
+	 * @precondition none
+	 * @postcondition none
+	 * @return An ObservableList of components with low stock.
+	 */
 	public ObservableList<Component> getLowStockComponents() {
 	    List<Component> allComponents = Arrays.asList(ComponentInventory.getComponents());
 	    List<Component> lowStockComponents = new ArrayList<>();
