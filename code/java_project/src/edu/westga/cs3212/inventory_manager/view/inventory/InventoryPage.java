@@ -215,6 +215,7 @@ public class InventoryPage {
 		this.setupLowStockTableView();
 		this.setPermissions();
 		Main.createSummary(this.fullNameLabel, this.employeeIdLabel, this.workerTypeLabel);
+		
 	}
 
 	private void setupProductButtons() {
@@ -311,8 +312,10 @@ public class InventoryPage {
 	
 	private void setupLowStockTableView() {
 	    this.lowStockTableView.setItems(this.inventoryVM.getLowStockComponents());
-	    setupLowStockTableColumns();
-	    refreshLowStockTableView();
+	    this.setupLowStockTableColumns();
+	    this.refreshLowStockTableView();
+	    this.updateLowStockTabStyle();
+	    
 	}
 	
 	private void setupLowStockTableColumns() {
@@ -333,6 +336,16 @@ public class InventoryPage {
 	private void refreshLowStockTableView() {
 	    this.lowStockTableView.setItems(this.inventoryVM.getLowStockComponents());
 		this.lowStockTableView.refresh();
+	}
+	
+	private void updateLowStockTabStyle() {
+	    if (this.lowStockTableView.getItems() == null || this.lowStockTableView.getItems().isEmpty()) {
+	        // Clear any specific styles if there are no items
+	        this.lowStockTabPage.setStyle("");
+	    } else {
+	        // Set the tab's background to red if there are items
+	        this.lowStockTabPage.setStyle("-fx-background-color: #FF6347;"); // Tomato red color
+	    }
 	}
 
 	@FXML
@@ -411,6 +424,7 @@ public class InventoryPage {
 
 		this.refreshComponentsTableView();
 		this.refreshLowStockTableView();
+	    this.updateLowStockTabStyle();
 		
 	}
 
@@ -419,6 +433,7 @@ public class InventoryPage {
 		this.inventoryVM.removeComponent();
 		this.refreshComponentsTableView();
 		this.refreshLowStockTableView();
+		this.updateLowStockTabStyle();
 		this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
 	
@@ -435,6 +450,7 @@ public class InventoryPage {
 
 	    this.refreshLowStockTableView();
 	    this.refreshComponentsTableView();
+	    this.updateLowStockTabStyle();
 	    this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
 
@@ -466,6 +482,7 @@ public class InventoryPage {
 		this.showOrderDialog(selectedComponent, this.componentsTableView);
 		this.refreshComponentsTableView();
 		this.refreshLowStockTableView();
+		this.updateLowStockTabStyle();
 	}
 	
 	@FXML
@@ -474,6 +491,7 @@ public class InventoryPage {
 	    this.showOrderDialog(selectedComponent, this.lowStockTableView);
 	    this.refreshComponentsTableView();
 		this.refreshLowStockTableView();
+		this.updateLowStockTabStyle();
 	}
 
 	private void showOrderDialog(Component selectedComponent, TableView<Component> tableView) {
@@ -591,6 +609,7 @@ public class InventoryPage {
 							this.refreshProductsTableView();
 							this.refreshComponentsTableView();
 							this.refreshLowStockTableView();
+							this.updateLowStockTabStyle();
 						} catch (IllegalArgumentException e) {
 							this.showAlert(PRODUCTION_ERROR_TITLE, e.getMessage(), AlertType.ERROR);
 						}
