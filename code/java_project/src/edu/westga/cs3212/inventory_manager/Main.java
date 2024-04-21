@@ -31,7 +31,7 @@ public class Main extends Application {
 	public static final String EDIT_PRODUCT_PAGE = "view/inventory/product/EditProductPage.fxml";
 	public static final String ADMIN_PAGE = "view/admin/AdminPage.fxml";
 	public static final String ADMIN_EDIT_CREDENTIALS_PAGE = "view/admin/AdminEditCredentialsPage.fxml";
-	private static final String COMMA_SEPERATION = ", ";
+	private static final String SPACE_SEPERATION = " ";
 	private static Stage primaryStage;
 	
 	private static LocalEmployeeCredentials loggedInEmployee;
@@ -129,7 +129,7 @@ public class Main extends Application {
      */
     public static void createSummary(Text fullNameLabel, Text employeeIdLabel, Text workerTypeLabel) {
     	LocalEmployeeCredentials user = Main.getLoggedInEmployee();
-		fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
+		fullNameLabel.setText(user.getLastName() + SPACE_SEPERATION + user.getFirstName());
 		employeeIdLabel.setText(user.getEmployeeID());
 		workerTypeLabel.setText(user.getEmployeeType().toString());
     }

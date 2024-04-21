@@ -19,7 +19,7 @@
             <Font size="35.0" />
          </font>
       </Text>
-      <ToolBar layoutY="100.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0">
+      <ToolBar layoutY="75.0" orientation="VERTICAL" prefHeight="425.0" prefWidth="150.0">
          <items>
             <Button fx:id="homeButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#homePageButtonOnClick" prefHeight="25.0" prefWidth="100.0" text="Home" />
             <Button fx:id="inventoryButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Inventory" />
@@ -27,13 +27,13 @@
             <Button fx:id="adminButton" mnemonicParsing="false" onAction="#adminPageButtonOnClick" prefHeight="25.0" prefWidth="100.0" text="Admin" />
          </items>
       </ToolBar>
-      <TabPane fx:id="invendoryTreeView" layoutX="150.0" layoutY="100.0" prefHeight="400.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0">
+      <TabPane fx:id="invendoryTreeView" layoutX="150.0" layoutY="75.0" prefHeight="425.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0">
         <tabs>
           <Tab fx:id="componentsTabPage" text="Components">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="355.0" prefWidth="80.0">
+                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="390.0" prefWidth="80.0">
                            <items>
                               <Button fx:id="componentOrderButton" mnemonicParsing="false" onAction="#orderComponentButtonManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Order" textFill="RED" />
                               <Button fx:id="componentAddButton" mnemonicParsing="false" onAction="#addComponentButtonManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Add" textFill="#fa0000" />
@@ -42,7 +42,7 @@
                            </items>
                         </ToolBar>
                         <Button fx:id="componentSearchButton" defaultButton="true" layoutX="480.0" mnemonicParsing="false" onAction="#onComponentSearchButtonClicked" prefHeight="25.0" prefWidth="95.0" text="Search" />
-                        <TableView fx:id="componentsTableView" layoutX="80.0" layoutY="35.0" prefHeight="325.0" prefWidth="500.0">
+                        <TableView fx:id="componentsTableView" layoutX="80.0" layoutY="35.0" prefHeight="345.0" prefWidth="500.0">
                           <columns>
                             <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
                             <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
@@ -50,7 +50,7 @@
                               <TableColumn fx:id="costColumn" prefWidth="150.0" text="Production Cost" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="componentSearchTextField" layoutX="80.0" prefHeight="20.0" prefWidth="400.0" promptText="Search Components" />
+                        <TextField fx:id="componentSearchTextField" layoutX="80.0" prefHeight="2.0" prefWidth="400.0" promptText="Search Components" />
                      </children>
                   </AnchorPane>
             </content>
@@ -59,7 +59,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="355.0" prefWidth="80.0">
+                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="390.0" prefWidth="80.0">
                            <items>
                               <Button fx:id="productProduceButton" mnemonicParsing="false" onAction="#produceProductButtonOnClick" prefHeight="20.0" prefWidth="75.0" text="Produce" />
                               <Button fx:id="productAddButton" mnemonicParsing="false" onAction="#addProductManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Add" textFill="#fa0000" />
@@ -69,7 +69,7 @@
                         </ToolBar>
                         <TextField fx:id="productSearchTextField" layoutX="80.0" prefHeight="20.0" prefWidth="400.0" promptText="Search Products" />
                         <Button fx:id="productSearchButton" defaultButton="true" layoutX="480.0" mnemonicParsing="false" onAction="#onProductSearchButtonClicked" prefHeight="25.0" prefWidth="95.0" text="Search" />
-                        <TableView fx:id="productsTableView" layoutX="80.0" layoutY="35.0" prefHeight="325.0" prefWidth="500.0">
+                        <TableView fx:id="productsTableView" layoutX="80.0" layoutY="35.0" prefHeight="345.0" prefWidth="500.0">
                            <columns>
                               <TableColumn fx:id="productIDColumn" prefWidth="100.0" text="ID" />
                               <TableColumn fx:id="productNameColumn" prefWidth="150.0" text="Name" />
@@ -85,25 +85,20 @@
         </tabs>
       </TabPane>
       <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
-      <Pane layoutX="475.0" layoutY="25.0" prefHeight="50.0" prefWidth="250.0">
+      <Pane layoutX="515.0" layoutY="15.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Text fx:id="fullNameLabel" layoutX="90.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name, First Name" />
-            <Text fx:id="employeeIdLabel" layoutX="169.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID">
+            <Text fx:id="fullNameLabel" layoutX="72.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name, First Name" />
+            <Text fx:id="employeeIdLabel" layoutX="135.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID">
                <font>
                   <Font size="11.0" />
                </font>
             </Text>
-            <Text fx:id="workerTypeLabel" layoutX="90.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type">
+            <Text fx:id="workerTypeLabel" layoutX="72.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Worker Type">
                <font>
                   <Font size="11.0" />
                </font>
             </Text>
-            <Text layoutX="10.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome," />
-            <Text layoutX="158.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
+            <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome," />
          </children>
       </Pane>
    </children>
