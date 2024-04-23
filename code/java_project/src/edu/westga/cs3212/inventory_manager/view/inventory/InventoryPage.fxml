@@ -67,7 +67,7 @@
                               <Button fx:id="editProductButton" mnemonicParsing="false" onAction="#editProductManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Edit" textFill="#fa0000" />
                            </items>
                         </ToolBar>
-                        <TextField fx:id="productSearchTextField" layoutX="320.0" prefHeight="40.0" prefWidth="250.0" promptText="Search Products" />
+                        <TextField fx:id="productSearchTextField" alignment="CENTER" layoutX="320.0" prefHeight="40.0" prefWidth="250.0" promptText="Search Products" />
                         <Button fx:id="productSearchButton" defaultButton="true" layoutX="570.0" mnemonicParsing="false" onAction="#onProductSearchButtonClicked" prefHeight="40.0" prefWidth="80.0" text="Search" />
                         <TableView fx:id="productsTableView" layoutY="40.0" prefHeight="395.0" prefWidth="650.0">
                            <columns>
