@@ -26,6 +26,7 @@ public class InventoryViewModel {
 
 	private ObjectProperty<Item> selectedComponent;
 	private ObjectProperty<Item> selectedProduct;
+	private int lowStockThreshold = 10;
 
 	/**
 	 * Constructs an InventoryViewModel with specified inventories for
@@ -73,7 +74,7 @@ public class InventoryViewModel {
 
 	    for (Component component : allComponents) {
 	        int quantity = ComponentInventory.getQuantity(component.getID());
-	        if (quantity <= 10) {
+	        if (quantity <= lowStockThreshold) {
 	            lowStockComponents.add(component);
 	        }
 	    }
@@ -251,5 +252,13 @@ public class InventoryViewModel {
 	public ObservableList<Product> searchProducts(String searchString) {
 		List<Product> results = ProductInventory.searchProducts(searchString);
 		return FXCollections.observableArrayList(results);
+	}
+
+	public int getLowStockThreshold() {
+		return this.lowStockThreshold;
+	}
+	
+	public void  setLowStockThreshold(int lowStockThreshold) {
+		this.lowStockThreshold = lowStockThreshold;
 	}
 }

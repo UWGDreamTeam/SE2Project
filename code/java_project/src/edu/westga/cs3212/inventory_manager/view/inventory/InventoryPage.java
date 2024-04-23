@@ -148,6 +148,9 @@ public class InventoryPage {
 
     @FXML
     private Button lowStockComponentRemoveButton;
+    
+    @FXML
+    private Button lowStockComponentSettingsButton;
 
 	@FXML
 	private Tab productsTabPage;
@@ -397,6 +400,13 @@ public class InventoryPage {
 			errorPopup.showAndWait();
 		}
 	}
+	
+	@FXML
+	void settingLowStockButtonManagerOnClick(ActionEvent event) throws IOException {
+		this.showLowStockSettingsDialog();
+		this.refreshLowStockTableView();
+		this.updateLowStockTabStyle();
+	}
 
 	@FXML
 	void adminPageButtonOnClick(ActionEvent event) throws IOException {
@@ -506,6 +516,26 @@ public class InventoryPage {
 				int quantity = Integer.parseInt(result.get());
 				if (quantity > 0) {
 					this.tryToOrderComponent(selectedComponent, quantity, tableView);
+				} else {
+					this.showAlert(INVALID_QUANTITY_MESSAGE, ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
+				}
+			} catch (NumberFormatException e) {
+				this.showAlert(INVALID_INPUT_TITLE, VALID_NUMBER_MESSAGE, AlertType.ERROR);
+			}
+		}
+	}
+	
+	private void showLowStockSettingsDialog() {
+		TextInputDialog dialog = new TextInputDialog(String.valueOf(this.inventoryVM.getLowStockThreshold()));
+		dialog.setTitle("Low Stock Settings");
+		dialog.setHeaderText("Set Low Stock Threshold");
+		dialog.setContentText("Please enter the threshold:");
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()) {
+			try {
+				int quantity = Integer.parseInt(result.get());
+				if (quantity > 0) {
+					this.inventoryVM.setLowStockThreshold(quantity);
 				} else {
 					this.showAlert(INVALID_QUANTITY_MESSAGE, ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
 				}
