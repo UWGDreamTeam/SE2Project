@@ -170,7 +170,7 @@ public class InventoryPage {
 	private InventoryViewModel inventoryVM;
 
 	/* GENERAL */
-
+	
 	@FXML
 	void initialize() {
 		this.inventoryVM = new InventoryViewModel();
@@ -185,6 +185,25 @@ public class InventoryPage {
 		this.setupProductButtons();
 		this.setPermissions();
 		Main.createSummary(this.fullNameLabel, this.employeeIdLabel, this.workerTypeLabel);
+		this.setupSearchListeners();
+		
+	}
+
+	private void setupSearchListeners() {
+		this.componentSearchTextField.textProperty()
+		.addListener((observable, oldValue, newValue) -> {
+			this.componentsTableView.setItems(
+					this.inventoryVM.searchComponents(newValue));
+			this.componentsTableView.refresh();
+		});
+		
+		this.productSearchTextField.textProperty()
+				.addListener((observable, oldValue, newValue) -> {
+					this.productsTableView.setItems(
+							this.inventoryVM.searchProducts(newValue));
+					this.productsTableView.refresh();
+				});
+		
 	}
 
 	private void setupProductButtons() {
@@ -465,6 +484,13 @@ public class InventoryPage {
 		modalStage.showAndWait();
 
 		this.refreshProductsTableView();
+	}
+	
+	@FXML
+	void onComponentSearchTextChanged(ActionEvent event) {
+		this.componentsTableView.setItems(this.inventoryVM
+				.searchComponents(this.componentSearchTextField.getText()));
+		this.componentsTableView.refresh();
 	}
 
 	@FXML
