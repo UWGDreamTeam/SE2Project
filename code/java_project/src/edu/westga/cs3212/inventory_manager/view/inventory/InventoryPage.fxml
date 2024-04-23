@@ -42,8 +42,8 @@
                               <TableColumn fx:id="costColumn" prefWidth="250.0" text="Production Cost" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="componentSearchTextField" alignment="CENTER" layoutX="320.0" prefHeight="40.0" prefWidth="250.0" promptText="Search Components" />
-                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="320.0">
+                        <TextField fx:id="componentSearchTextField" alignment="CENTER" layoutX="344.0" prefHeight="40.0" prefWidth="225.0" promptText="Search Components" />
+                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="345.0">
                            <items>
                               <Button fx:id="componentOrderButton" mnemonicParsing="false" onAction="#orderComponentButtonManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Order" textFill="RED" />
                               <Button fx:id="componentAddButton" mnemonicParsing="false" onAction="#addComponentButtonManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Add" textFill="#fa0000" />
@@ -59,7 +59,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="320.0">
+                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="345.0">
                            <items>
                               <Button fx:id="productProduceButton" mnemonicParsing="false" onAction="#produceProductButtonOnClick" prefHeight="20.0" prefWidth="75.0" text="Produce" />
                               <Button fx:id="productAddButton" mnemonicParsing="false" onAction="#addProductManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Add" textFill="#fa0000" />
@@ -67,7 +67,7 @@
                               <Button fx:id="editProductButton" mnemonicParsing="false" onAction="#editProductManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Edit" textFill="#fa0000" />
                            </items>
                         </ToolBar>
-                        <TextField fx:id="productSearchTextField" alignment="CENTER" layoutX="320.0" prefHeight="40.0" prefWidth="250.0" promptText="Search Products" />
+                        <TextField fx:id="productSearchTextField" alignment="CENTER" layoutX="344.0" prefHeight="40.0" prefWidth="225.0" promptText="Search Products" />
                         <Button fx:id="productSearchButton" defaultButton="true" layoutX="570.0" mnemonicParsing="false" onAction="#onProductSearchButtonClicked" prefHeight="40.0" prefWidth="80.0" text="Search" />
                         <TableView fx:id="productsTableView" layoutY="40.0" prefHeight="395.0" prefWidth="650.0">
                            <columns>
