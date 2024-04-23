@@ -11,14 +11,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.home.HomePage">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.inventory_manager.view.home.HomePage">
    <children>
-      <Text layoutX="10.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home">
+      <Text layoutX="15.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home">
          <font>
-            <Font size="35.0" />
+            <Font name="System Bold" size="35.0" />
          </font>
       </Text>
-      <ToolBar layoutY="75.0" orientation="VERTICAL" prefHeight="425.0" prefWidth="150.0">
+      <ToolBar layoutY="75.0" orientation="VERTICAL" prefHeight="475.0" prefWidth="150.0">
         <items>
           <Button fx:id="homeButton" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Home" textAlignment="RIGHT" />
             <Button fx:id="inventoryButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#inventoryPageButtonOnClick" prefHeight="25.0" prefWidth="100.0" text="Inventory" textAlignment="RIGHT" />
@@ -26,13 +26,13 @@
             <Button fx:id="adminButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#adminPageButtonOnClick" prefHeight="25.0" prefWidth="100.0" text="Admin" textAlignment="RIGHT" />
         </items>
       </ToolBar>
-      <TabPane layoutX="150.0" layoutY="75.0" prefHeight="425.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0">
+      <TabPane layoutX="150.0" layoutY="75.0" prefHeight="475.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0">
         <tabs>
           <Tab fx:id="componentTab" text="Components">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="componentSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="370.0" prefWidth="550.0" />
+                        <TextArea fx:id="componentSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -41,7 +41,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="productSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="375.0" prefWidth="550.0" />
+                        <TextArea fx:id="productSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -50,7 +50,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="orderSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="375.0" prefWidth="550.0" />
+                        <TextArea fx:id="orderSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -60,8 +60,8 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TabPane>
-      <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
-      <Pane layoutX="550.0" layoutY="15.0" prefHeight="60.0" prefWidth="150.0">
+      <Button alignment="CENTER" layoutX="15.0" layoutY="500.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />
+      <Pane layoutX="600.0" layoutY="10.0" prefHeight="60.0" prefWidth="150.0">
          <children>
             <Text fx:id="fullNameLabel" layoutX="80.0" layoutY="20.0" nodeOrientation="RIGHT_TO_LEFT" strokeType="OUTSIDE" strokeWidth="0.0" text="first, last" textAlignment="RIGHT" />
             <Text fx:id="employeeIdLabel" layoutX="80.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID">
