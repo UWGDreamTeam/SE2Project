@@ -254,10 +254,28 @@ public class InventoryViewModel {
 		return FXCollections.observableArrayList(results);
 	}
 
+	/**
+	 * Retrieves the current threshold value that determines when a component's
+	 * stock is considered low. Components whose stock levels are at or below
+	 * this threshold are identified as low stock.
+	 *
+	 * @return The current low stock threshold.
+	 * @precondition none
+	 * @postcondition none
+	 */
 	public int getLowStockThreshold() {
 		return this.lowStockThreshold;
 	}
 	
+	/**
+	 * Sets the threshold for what is considered low stock for a component.
+	 * When a component's quantity falls at or below this threshold, it is
+	 * considered to be low in stock.
+	 *
+	 * @param lowStockThreshold The threshold value to set for low stock.
+	 * @precondition lowStockThreshold >= 0
+	 * @postcondition getLowStockThreshold() == lowStockThreshold
+	 */
 	public void  setLowStockThreshold(int lowStockThreshold) {
 		this.lowStockThreshold = lowStockThreshold;
 	}
