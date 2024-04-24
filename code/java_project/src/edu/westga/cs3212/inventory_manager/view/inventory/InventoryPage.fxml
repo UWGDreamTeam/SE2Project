@@ -81,6 +81,33 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab fx:id="lowStockTabPage" text="Low Stock">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ToolBar layoutY="35.0" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="350.0" prefWidth="80.0">
+                                 <items>
+                                    <Button fx:id="lowStockComponentOrderButton" mnemonicParsing="false" onAction="#orderLowStockButtonManagerOnClick" prefHeight="20.0" prefWidth="60.0" text="Order" textFill="RED" />
+                                    <Button fx:id="lowStockComponentRemoveButton" mnemonicParsing="false" onAction="#removeLowStockButtonManagerOnClick" prefHeight="20.0" prefWidth="60.0" text="Remove" textFill="#fa0000" />
+                                    <Button id="s" fx:id="lowStockComponentSettingsButton" mnemonicParsing="false" onAction="#settingLowStockButtonManagerOnClick" prefHeight="26.0" prefWidth="61.0" text="Settings" />
+                                 </items>
+                              </ToolBar>
+                              <TableView fx:id="lowStockTableView" layoutX="80.0" layoutY="35.0" prefHeight="350.0" prefWidth="500.0">
+                                 <columns>
+                                    <TableColumn fx:id="lowStockIDColumn" prefWidth="100.0" text="ID" />
+                                    <TableColumn fx:id="lowStockNameColumn" prefWidth="150.0" text="Name" />
+                                    <TableColumn fx:id="lowStockQuantityColumn" prefWidth="100.0" text="Quantity" />
+                                    <TableColumn fx:id="lowStockCostColumn" prefWidth="150.0" text="Production Cost" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
       <Button alignment="CENTER" layoutX="5.0" layoutY="450.0" mnemonicParsing="false" onAction="#logOutButtonOnClick" prefHeight="25.0" prefWidth="80.0" text="Log Out" />

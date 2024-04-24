@@ -124,6 +124,33 @@ public class InventoryPage {
 
 	@FXML
 	private TableColumn<Component, Number> recipesColumn;
+	
+	@FXML
+    private TableColumn<Item, Number> lowStockCostColumn;
+
+    @FXML
+    private TableColumn<Item, String> lowStockIDColumn;
+
+    @FXML
+    private TableColumn<Item, String> lowStockNameColumn;
+
+    @FXML
+    private TableColumn<Component, Integer> lowStockQuantityColumn;
+
+    @FXML
+    private Tab lowStockTabPage;
+
+    @FXML
+    private TableView<Component> lowStockTableView;
+    
+    @FXML
+    private Button lowStockComponentOrderButton;
+
+    @FXML
+    private Button lowStockComponentRemoveButton;
+    
+    @FXML
+    private Button lowStockComponentSettingsButton;
 
 	@FXML
 	private Tab productsTabPage;
@@ -178,31 +205,19 @@ public class InventoryPage {
 		this.inventoryVM.getSelectedComponent()
 				.bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
 		this.inventoryVM.getSelectedProduct().bind(this.productsTableView.getSelectionModel().selectedItemProperty());
+		
+		this.lowStockComponentOrderButton.disableProperty().bind(
+	        Bindings.isNull(this.lowStockTableView.getSelectionModel().selectedItemProperty()));
+	    this.lowStockComponentRemoveButton.disableProperty().bind(
+	        Bindings.isNull(this.lowStockTableView.getSelectionModel().selectedItemProperty()));
 
 		this.setupComponentsTableView();
 		this.setupProductsTableView();
 		this.setupComponentButtons();
 		this.setupProductButtons();
+		this.setupLowStockTableView();
 		this.setPermissions();
 		Main.createSummary(this.fullNameLabel, this.employeeIdLabel, this.workerTypeLabel);
-		this.setupSearchListeners();
-		
-	}
-
-	private void setupSearchListeners() {
-		this.componentSearchTextField.textProperty()
-		.addListener((observable, oldValue, newValue) -> {
-			this.componentsTableView.setItems(
-					this.inventoryVM.searchComponents(newValue));
-			this.componentsTableView.refresh();
-		});
-		
-		this.productSearchTextField.textProperty()
-				.addListener((observable, oldValue, newValue) -> {
-					this.productsTableView.setItems(
-							this.inventoryVM.searchProducts(newValue));
-					this.productsTableView.refresh();
-				});
 		
 	}
 
@@ -236,6 +251,8 @@ public class InventoryPage {
 			this.componentAddButton.setDisable(true);
 			this.componentEditButton.setDisable(true);
 			this.componentRemoveButton.setDisable(true);
+			this.lowStockTabPage.setDisable(true);
+			
 			
 		} else {
 			this.componentEditButton.disableProperty()
@@ -248,6 +265,7 @@ public class InventoryPage {
 	}
 
 	private void setPermissions() {
+		
 		if (!this.inventoryVM.isManager()) {
 			this.adminButton.setDisable(true);
 		}
@@ -293,6 +311,44 @@ public class InventoryPage {
 				return new SimpleIntegerProperty(0).asObject();
 			}
 		});
+	}
+	
+	private void setupLowStockTableView() {
+	    this.lowStockTableView.setItems(this.inventoryVM.getLowStockComponents());
+	    this.setupLowStockTableColumns();
+	    this.refreshLowStockTableView();
+	    this.updateLowStockTabStyle();
+	    
+	}
+	
+	private void setupLowStockTableColumns() {
+	    this.lowStockIDColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
+	    this.lowStockNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+	    this.lowStockCostColumn
+		.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
+	    this.lowStockQuantityColumn.setCellValueFactory(cellData -> {
+	        try {
+	            int quantity = ComponentInventory.getQuantity(cellData.getValue().getID());
+	            return new SimpleIntegerProperty(quantity).asObject();
+	        } catch (IllegalArgumentException e) {
+	            return new SimpleIntegerProperty(0).asObject();
+	        }
+	    });
+	}
+	
+	private void refreshLowStockTableView() {
+	    this.lowStockTableView.setItems(this.inventoryVM.getLowStockComponents());
+		this.lowStockTableView.refresh();
+	}
+	
+	private void updateLowStockTabStyle() {
+	    if (this.lowStockTableView.getItems() == null || this.lowStockTableView.getItems().isEmpty()) {
+	        // Clear any specific styles if there are no items
+	        this.lowStockTabPage.setStyle("");
+	    } else {
+	        // Set the tab's background to red if there are items
+	        this.lowStockTabPage.setStyle("-fx-background-color: #FF6347;"); // Tomato red color
+	    }
 	}
 
 	@FXML
@@ -344,6 +400,13 @@ public class InventoryPage {
 			errorPopup.showAndWait();
 		}
 	}
+	
+	@FXML
+	void settingLowStockButtonManagerOnClick(ActionEvent event) throws IOException {
+		this.showLowStockSettingsDialog();
+		this.refreshLowStockTableView();
+		this.updateLowStockTabStyle();
+	}
 
 	@FXML
 	void adminPageButtonOnClick(ActionEvent event) throws IOException {
@@ -370,14 +433,35 @@ public class InventoryPage {
 		modalStage.showAndWait();
 
 		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
+	    this.updateLowStockTabStyle();
+		
 	}
 
 	@FXML
 	void removeComponentButtonManagerOnClick(ActionEvent event) {
 		this.inventoryVM.removeComponent();
-
 		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
+		this.updateLowStockTabStyle();
 		this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
+	}
+	
+	@FXML
+	void removeLowStockButtonManagerOnClick(ActionEvent event) {
+	    this.inventoryVM.getSelectedComponent().unbind();
+
+	    Item selectedLowStockComponent = this.lowStockTableView.getSelectionModel().getSelectedItem();
+	    this.inventoryVM.setSelectedComponent(selectedLowStockComponent);
+
+	    this.inventoryVM.removeComponent();
+
+	    this.inventoryVM.getSelectedComponent().bind(this.componentsTableView.getSelectionModel().selectedItemProperty());
+
+	    this.refreshLowStockTableView();
+	    this.refreshComponentsTableView();
+	    this.updateLowStockTabStyle();
+	    this.showAlert(COMPONENT_REMOVED_TITLE, COMPONENT_REMOVED_MESSAGE, AlertType.INFORMATION);
 	}
 
 	@FXML
@@ -399,10 +483,28 @@ public class InventoryPage {
 		modalStage.showAndWait();
 
 		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
 	}
 
 	@FXML
 	void orderComponentButtonManagerOnClick(ActionEvent event) {
+		Component selectedComponent = this.componentsTableView.getSelectionModel().getSelectedItem();
+		this.showOrderDialog(selectedComponent, this.componentsTableView);
+		this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
+		this.updateLowStockTabStyle();
+	}
+	
+	@FXML
+	void orderLowStockButtonManagerOnClick(ActionEvent event) {
+	    Component selectedComponent = this.lowStockTableView.getSelectionModel().getSelectedItem();
+	    this.showOrderDialog(selectedComponent, this.lowStockTableView);
+	    this.refreshComponentsTableView();
+		this.refreshLowStockTableView();
+		this.updateLowStockTabStyle();
+	}
+
+	private void showOrderDialog(Component selectedComponent, TableView<Component> tableView) {
 		TextInputDialog dialog = new TextInputDialog(DEFAULT_QUANTITY);
 		dialog.setTitle(ORDER_COMPONENT_TITLE);
 		dialog.setHeaderText(ORDER_COMPONENT_HEADER);
@@ -413,7 +515,7 @@ public class InventoryPage {
 			try {
 				int quantity = Integer.parseInt(result.get());
 				if (quantity > 0) {
-					this.tryToOrderComponent(quantity);
+					this.tryToOrderComponent(selectedComponent, quantity, tableView);
 				} else {
 					this.showAlert(INVALID_QUANTITY_MESSAGE, ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
 				}
@@ -421,14 +523,34 @@ public class InventoryPage {
 				this.showAlert(INVALID_INPUT_TITLE, VALID_NUMBER_MESSAGE, AlertType.ERROR);
 			}
 		}
-		this.refreshComponentsTableView();
+	}
+	
+	private void showLowStockSettingsDialog() {
+		TextInputDialog dialog = new TextInputDialog(String.valueOf(this.inventoryVM.getLowStockThreshold()));
+		dialog.setTitle("Low Stock Settings");
+		dialog.setHeaderText("Set Low Stock Threshold");
+		dialog.setContentText("Please enter the threshold:");
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()) {
+			try {
+				int quantity = Integer.parseInt(result.get());
+				if (quantity > 0) {
+					this.inventoryVM.setLowStockThreshold(quantity);
+				} else {
+					this.showAlert(INVALID_QUANTITY_MESSAGE, ENTER_POSITIVE_NUMBER_MESSAGE, AlertType.ERROR);
+				}
+			} catch (NumberFormatException e) {
+				this.showAlert(INVALID_INPUT_TITLE, VALID_NUMBER_MESSAGE, AlertType.ERROR);
+			}
+		}
 	}
 
-	private void tryToOrderComponent(int quantity) {
-		Component selectedComponent = this.componentsTableView.getSelectionModel().getSelectedItem();
+
+	private void tryToOrderComponent(Component selectedComponent, int quantity, TableView<Component> tableView) {
 		if (selectedComponent != null) {
 			this.inventoryVM.orderComponent(selectedComponent, quantity);
 			this.refreshComponentsTableView();
+			this.refreshLowStockTableView();
 			String content = String.format(RECEIVED_UNITS_FORMAT, quantity, selectedComponent.getName());
 			this.showAlert(ORDERED_COMPONENTS_TITLE, content, AlertType.INFORMATION);
 		} else {
@@ -522,6 +644,9 @@ public class InventoryPage {
 						try {
 							this.inventoryVM.produceProduct(selectedProduct, quantity);
 							this.refreshProductsTableView();
+							this.refreshComponentsTableView();
+							this.refreshLowStockTableView();
+							this.updateLowStockTabStyle();
 						} catch (IllegalArgumentException e) {
 							this.showAlert(PRODUCTION_ERROR_TITLE, e.getMessage(), AlertType.ERROR);
 						}

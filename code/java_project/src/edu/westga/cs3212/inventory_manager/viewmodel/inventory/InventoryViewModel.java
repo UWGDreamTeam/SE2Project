@@ -1,6 +1,7 @@
 package edu.westga.cs3212.inventory_manager.viewmodel.inventory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.westga.cs3212.inventory_manager.Main;
@@ -25,6 +26,7 @@ public class InventoryViewModel {
 
 	private ObjectProperty<Item> selectedComponent;
 	private ObjectProperty<Item> selectedProduct;
+	private int lowStockThreshold = 10;
 
 	/**
 	 * Constructs an InventoryViewModel with specified inventories for
@@ -56,6 +58,28 @@ public class InventoryViewModel {
 			items.add(currentComponent);
 		}
 		return FXCollections.observableArrayList(items);
+	}
+	
+	/**
+	 * Generates an observable list of components that are low in stock.
+	 * A component is considered low in stock if its quantity is 10 or less.
+	 *
+	 * @precondition none
+	 * @postcondition none
+	 * @return An ObservableList of components with low stock.
+	 */
+	public ObservableList<Component> getLowStockComponents() {
+	    List<Component> allComponents = Arrays.asList(ComponentInventory.getComponents());
+	    List<Component> lowStockComponents = new ArrayList<>();
+
+	    for (Component component : allComponents) {
+	        int quantity = ComponentInventory.getQuantity(component.getID());
+	        if (quantity <= lowStockThreshold) {
+	            lowStockComponents.add(component);
+	        }
+	    }
+
+	    return FXCollections.observableArrayList(lowStockComponents);
 	}
 
 	/**
@@ -228,5 +252,31 @@ public class InventoryViewModel {
 	public ObservableList<Product> searchProducts(String searchString) {
 		List<Product> results = ProductInventory.searchProducts(searchString);
 		return FXCollections.observableArrayList(results);
+	}
+
+	/**
+	 * Retrieves the current threshold value that determines when a component's
+	 * stock is considered low. Components whose stock levels are at or below
+	 * this threshold are identified as low stock.
+	 *
+	 * @return The current low stock threshold.
+	 * @precondition none
+	 * @postcondition none
+	 */
+	public int getLowStockThreshold() {
+		return this.lowStockThreshold;
+	}
+	
+	/**
+	 * Sets the threshold for what is considered low stock for a component.
+	 * When a component's quantity falls at or below this threshold, it is
+	 * considered to be low in stock.
+	 *
+	 * @param lowStockThreshold The threshold value to set for low stock.
+	 * @precondition lowStockThreshold >= 0
+	 * @postcondition getLowStockThreshold() == lowStockThreshold
+	 */
+	public void  setLowStockThreshold(int lowStockThreshold) {
+		this.lowStockThreshold = lowStockThreshold;
 	}
 }
