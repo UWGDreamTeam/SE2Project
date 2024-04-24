@@ -359,6 +359,7 @@ public class InventoryPage {
 			Parent parent;
 			parent = FXMLLoader.load(Main.class.getResource(Main.HOME_PAGE));
 			Scene currentScene = currentStage.getScene();
+			currentScene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(HOME_PAGE_TITLE);
 		} catch (IOException e) {
@@ -376,6 +377,7 @@ public class InventoryPage {
 			Parent parent;
 			parent = FXMLLoader.load(Main.class.getResource(Main.ORDER_PAGE));
 			Scene currentScene = currentStage.getScene();
+			currentScene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(ORDER_PAGE_TITLE);
 		} catch (IOException e) {
@@ -391,6 +393,7 @@ public class InventoryPage {
 			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Parent parent = FXMLLoader.load(Main.class.getResource(Main.LOGIN_PAGE));
 			Scene currentScene = currentStage.getScene();
+			currentScene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
 			currentStage.sizeToScene();
@@ -413,6 +416,7 @@ public class InventoryPage {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADMIN_PAGE));
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.ADMIN_PAGE_TITLE);
 		stage.show();
@@ -425,7 +429,7 @@ public class InventoryPage {
 		Stage modalStage = new Stage();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PAGE));
 		Scene scene = new Scene(parent);
-
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
@@ -476,6 +480,7 @@ public class InventoryPage {
 
 		Stage modalStage = new Stage();
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
@@ -577,7 +582,7 @@ public class InventoryPage {
 		Stage modalStage = new Stage();
 		Parent parent = FXMLLoader.load(Main.class.getResource(Main.ADD_PRODUCT_PAGE));
 		Scene scene = new Scene(parent);
-
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
@@ -599,6 +604,7 @@ public class InventoryPage {
 
 		Stage modalStage = new Stage();
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);

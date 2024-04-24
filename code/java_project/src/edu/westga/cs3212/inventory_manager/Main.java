@@ -2,6 +2,7 @@ package edu.westga.cs3212.inventory_manager;
 
 import java.io.IOException;
 
+import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.credentials.EmployeeType;
 import edu.westga.cs3212.inventory_manager.model.credentials.LocalEmployeeCredentials;
 import edu.westga.cs3212.inventory_manager.model.server.warehouse.ComponentInventory;
@@ -31,7 +32,7 @@ public class Main extends Application {
 	public static final String EDIT_PRODUCT_PAGE = "view/inventory/product/EditProductPage.fxml";
 	public static final String ADMIN_PAGE = "view/admin/AdminPage.fxml";
 	public static final String ADMIN_EDIT_CREDENTIALS_PAGE = "view/admin/AdminEditCredentialsPage.fxml";
-	private static final String COMMA_SEPERATION = ", ";
+	private static final String SPACE_SEPERATION = " ";
 	private static Stage primaryStage;
 	
 	private static LocalEmployeeCredentials loggedInEmployee;
@@ -55,6 +56,7 @@ public class Main extends Application {
 		Parent parent = FXMLLoader
 				.load(getClass().getResource(Main.LOGIN_PAGE));
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		primaryStage.setTitle(WINDOW_TITLE);
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -130,7 +132,7 @@ public class Main extends Application {
      */
     public static void createSummary(Text fullNameLabel, Text employeeIdLabel, Text workerTypeLabel) {
     	LocalEmployeeCredentials user = Main.getLoggedInEmployee();
-		fullNameLabel.setText(user.getLastName() + COMMA_SEPERATION + user.getFirstName());
+		fullNameLabel.setText(user.getLastName() + SPACE_SEPERATION + user.getFirstName());
 		employeeIdLabel.setText(user.getEmployeeID());
 		workerTypeLabel.setText(user.getEmployeeType().toString());
     }
