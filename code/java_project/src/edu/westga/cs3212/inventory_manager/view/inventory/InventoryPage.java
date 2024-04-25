@@ -363,6 +363,7 @@ public class InventoryPage {
 			currentScene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(HOME_PAGE_TITLE);
+			currentStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
@@ -381,6 +382,7 @@ public class InventoryPage {
 			currentScene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(ORDER_PAGE_TITLE);
+			currentStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
 			errorPopup.setContentText(e.getMessage());
@@ -397,6 +399,7 @@ public class InventoryPage {
 			currentScene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
+			currentStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 			currentStage.sizeToScene();
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
@@ -420,6 +423,7 @@ public class InventoryPage {
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.ADMIN_PAGE_TITLE);
+	    stage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		stage.show();
 	}
 
@@ -432,6 +436,7 @@ public class InventoryPage {
 		Scene scene = new Scene(parent);
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
@@ -483,6 +488,7 @@ public class InventoryPage {
 		Scene scene = new Scene(parent);
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
@@ -585,6 +591,7 @@ public class InventoryPage {
 		Scene scene = new Scene(parent);
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
@@ -607,6 +614,7 @@ public class InventoryPage {
 		Scene scene = new Scene(parent);
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());

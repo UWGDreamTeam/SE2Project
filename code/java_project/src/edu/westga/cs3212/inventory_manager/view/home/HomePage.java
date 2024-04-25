@@ -93,6 +93,7 @@ public class HomePage {
 		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
+		stage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		stage.show();
 	}
 
@@ -104,6 +105,7 @@ public class HomePage {
 		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.ORDER_PAGE_TITLE);
+		stage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		stage.show();
 	}
 
@@ -115,6 +117,7 @@ public class HomePage {
 		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.ADMIN_PAGE_TITLE);
+		stage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		stage.show();
 	}
 
@@ -127,6 +130,7 @@ public class HomePage {
 			currentScene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
+			currentStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 			currentStage.sizeToScene();
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);

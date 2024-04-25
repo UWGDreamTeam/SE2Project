@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 
 /**
@@ -20,6 +21,8 @@ import javafx.scene.text.Text;
  * @version Spring 2024
  */
 public class Main extends Application {
+	private static final String COMPANY_LOGO_JPEG = "CompanyAppLogo.jpeg";
+	public static final Image COMPANY_LOGO = new Image(Main.class.getResourceAsStream(COMPANY_LOGO_JPEG));
 	public static final String WINDOW_TITLE = "Inventory Manager";
 	public static final String INVENTORY_PAGE = "view/inventory/InventoryPage.fxml";
 	public static final String ADD_PAGE = "view/inventory/component/AddComponentPage.fxml";
@@ -57,6 +60,8 @@ public class Main extends Application {
 				.load(getClass().getResource(Main.LOGIN_PAGE));
 		Scene scene = new Scene(parent);
 		scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
+	    Image applicationIcon = new Image(getClass().getResourceAsStream(COMPANY_LOGO_JPEG));
+	    primaryStage.getIcons().add(applicationIcon);
 		primaryStage.setTitle(WINDOW_TITLE);
 		primaryStage.setScene(scene);
 		primaryStage.show();

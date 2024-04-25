@@ -112,6 +112,7 @@ public class AdminPage {
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		scene.setRoot(parent);
 		stage.setTitle(Constants.HOME_PAGE_TITLE);
+		stage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 	}
 
 	@FXML
@@ -123,6 +124,7 @@ public class AdminPage {
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		scene.setRoot(parent);
 		stage.setTitle(Constants.INVENTORY_PAGE_TITLE);
+		stage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 	}
 
 	@FXML
@@ -134,6 +136,7 @@ public class AdminPage {
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(Constants.ORDER_PAGE_TITLE);
+		stage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		stage.show();
 	}
 
@@ -148,6 +151,7 @@ public class AdminPage {
 			currentScene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 			currentScene.setRoot(parent);
 			currentStage.setTitle(Main.WINDOW_TITLE);
+			currentStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 			currentStage.sizeToScene();
 		} catch (IOException e) {
 			Alert errorPopup = new Alert(AlertType.ERROR);
@@ -164,6 +168,7 @@ public class AdminPage {
 		Scene scene = new Scene(parent);
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
@@ -189,6 +194,7 @@ public class AdminPage {
 		Scene scene = new Scene(parent);
 		scene.getStylesheets().add(Main.class.getResource(Constants.STYLESHEET_PATH).toExternalForm());
 		modalStage.setTitle(Main.WINDOW_TITLE);
+		modalStage.getIcons().add(Main.getPrimaryStage().getIcons().get(0));
 		modalStage.setScene(scene);
 		modalStage.initModality(Modality.WINDOW_MODAL);
 		modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
