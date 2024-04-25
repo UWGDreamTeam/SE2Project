@@ -33,7 +33,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="320.0">
+                        <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="330.0">
                            <items>
                               <Button fx:id="componentEditButton" mnemonicParsing="false" onAction="#editComponentButtonManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Edit" textFill="#fa0000" />
                               <Button fx:id="componentRemoveButton" mnemonicParsing="false" onAction="#removeComponentButtonManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Remove" textFill="#fa0000" />
@@ -41,7 +41,7 @@
                               <Button fx:id="componentOrderButton" mnemonicParsing="false" onAction="#orderComponentButtonManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Order" textFill="RED" />
                            </items>
                         </ToolBar>
-                        <TextField fx:id="componentSearchTextField" alignment="CENTER" layoutX="320.0" prefHeight="40.0" prefWidth="230.0" promptText="Search Components" />
+                        <TextField fx:id="componentSearchTextField" alignment="CENTER" layoutX="330.0" prefHeight="40.0" prefWidth="220.0" promptText="Search Components" />
                         <Button fx:id="componentSearchButton" defaultButton="true" layoutX="550.0" mnemonicParsing="false" onAction="#onComponentSearchButtonClicked" prefHeight="40.0" prefWidth="100.0" text="Search" />
                         <TableView fx:id="componentsTableView" layoutY="40.0" prefHeight="395.0" prefWidth="650.0">
                           <columns>
@@ -59,7 +59,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ToolBar prefHeight="40.0" prefWidth="320.0">
+                        <ToolBar prefHeight="40.0" prefWidth="330.0">
                            <items>
                               <Button fx:id="editProductButton" mnemonicParsing="false" onAction="#editProductManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Edit" textFill="#fa0000" />
                               <Button fx:id="removeProductButton" mnemonicParsing="false" onAction="#removeProductManagerOnClick" prefHeight="20.0" prefWidth="75.0" text="Remove" textFill="#fa0000" />
@@ -67,7 +67,7 @@
                               <Button fx:id="productProduceButton" mnemonicParsing="false" onAction="#produceProductButtonOnClick" prefHeight="20.0" prefWidth="75.0" text="Produce" />
                            </items>
                         </ToolBar>
-                        <TextField fx:id="productSearchTextField" alignment="CENTER" layoutX="320.0" prefHeight="40.0" prefWidth="230.0" promptText="Search Products" />
+                        <TextField fx:id="productSearchTextField" alignment="CENTER" layoutX="330.0" prefHeight="40.0" prefWidth="220.0" promptText="Search Products" />
                         <Button fx:id="productSearchButton" defaultButton="true" layoutX="550.0" mnemonicParsing="false" onAction="#onProductSearchButtonClicked" prefHeight="40.0" prefWidth="100.0" text="Search" />
                         <TableView fx:id="productsTableView" layoutY="40.0" prefHeight="395.0" prefWidth="650.0">
                            <columns>
