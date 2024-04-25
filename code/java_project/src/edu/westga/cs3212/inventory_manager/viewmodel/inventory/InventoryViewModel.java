@@ -192,10 +192,10 @@ public class InventoryViewModel {
 	 *                inventory.
 	 */
 	public void removeProduct() {
-		if (ProductInventory.checkAnyProductUsesComponent(
-				this.selectedComponent.get().getID())) {
+		if (ProductInventory.checkAnyProductUsedInOrder(
+				this.selectedProduct.get().getID())) {
 			throw new IllegalArgumentException(
-					Constants.ERROR_COMPONENT_IN_USE_BY_PRODUCT);
+					Constants.ERROR_PRODUCT_IN_USE_BY_ORDER);
 		}
 		ProductInventory.deleteProduct(this.selectedProduct.get().getID());
 	}

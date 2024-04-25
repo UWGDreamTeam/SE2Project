@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import edu.westga.cs3212.inventory_manager.model.Constants;
 import edu.westga.cs3212.inventory_manager.model.server.Server;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Component;
+import edu.westga.cs3212.inventory_manager.model.warehouse.Order;
 import edu.westga.cs3212.inventory_manager.model.warehouse.Product;
 
 /**
@@ -377,6 +378,22 @@ public final class ProductInventory {
 	 */
 	public static void clearInventory() {
 		Server.sendRequestAndGetResponse(ACTION_CLEAR_INVENTORY);
+	}
+
+	public static boolean checkAnyProductUsedInOrder(String productID) {
+		if (productID == null) {
+			throw new IllegalArgumentException(
+					Constants.PRODUCT_ID_CANNOT_BE_NULL);
+		}
+		for (Order order : OrderInventory.getOrders()) {
+			Map<Product, Integer> products = order.getItems();
+			for (Product product : products.keySet()) {
+				if (product.getID().equals(productID)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

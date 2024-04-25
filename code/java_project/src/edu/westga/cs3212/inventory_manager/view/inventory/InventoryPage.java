@@ -126,7 +126,7 @@ public class InventoryPage {
 	private TableColumn<Component, Number> recipesColumn;
 	
 	@FXML
-    private TableColumn<Item, Number> lowStockCostColumn;
+    private TableColumn<Item, String> lowStockCostColumn;
 
     @FXML
     private TableColumn<Item, String> lowStockIDColumn;
@@ -177,7 +177,7 @@ public class InventoryPage {
 	private TableColumn<Product, Integer> productQuantityColumn;
 
 	@FXML
-	private TableColumn<Product, Number> productSellingPrice;
+	private TableColumn<Product, String> productSellingPrice;
 
 	@FXML
 	private Text employeeRoleLabel;
@@ -277,7 +277,7 @@ public class InventoryPage {
 		this.productIDColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
 		this.productNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		this.productProductionCostColumn.setCellValueFactory(cellData -> 
-	        new SimpleStringProperty(String.format("%.2f", cellData.getValue().getProductionCost())));
+	        new SimpleStringProperty("$" + String.format("%.2f", cellData.getValue().getProductionCost())));
 		this.productQuantityColumn.setCellValueFactory(cellData -> {
 			try {
 				int quantity = ProductInventory.getQuantity(cellData.getValue().getID());
@@ -286,8 +286,8 @@ public class InventoryPage {
 				return new SimpleIntegerProperty(0).asObject();
 			}
 		});
-		this.productSellingPrice
-				.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSalePrice()));
+		this.productSellingPrice.setCellValueFactory(cellData -> 
+	    new SimpleStringProperty(String.format("$%.2f", cellData.getValue().getSalePrice())));
 
 	}
 
@@ -302,7 +302,7 @@ public class InventoryPage {
 		this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
 		this.nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		this.costColumn.setCellValueFactory(cellData ->
-        	new SimpleStringProperty(String.format("%.2f", cellData.getValue().getProductionCost())));
+        	new SimpleStringProperty("$" + String.format("%.2f", cellData.getValue().getProductionCost())));
 		this.quantityColumn.setCellValueFactory(cellData -> {
 			try {
 				int quantity = ComponentInventory.getQuantity(cellData.getValue().getID());
@@ -325,7 +325,8 @@ public class InventoryPage {
 	    this.lowStockIDColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
 	    this.lowStockNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 	    this.lowStockCostColumn
-		.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
+	    .setCellValueFactory(cellData ->
+    	new SimpleStringProperty("$" + String.format("%.2f", cellData.getValue().getProductionCost())));
 	    this.lowStockQuantityColumn.setCellValueFactory(cellData -> {
 	        try {
 	            int quantity = ComponentInventory.getQuantity(cellData.getValue().getID());
@@ -670,8 +671,13 @@ public class InventoryPage {
 
 	@FXML
 	void removeProductManagerOnClick(ActionEvent event) {
-		this.inventoryVM.removeProduct();
-		this.refreshProductsTableView();
-		this.showAlert(PRODUCT_REMOVED_TITLE, PRODUCT_REMOVED_MESSAGE, AlertType.INFORMATION);
+		try {
+			this.inventoryVM.removeProduct();
+			this.refreshProductsTableView();
+			this.showAlert(PRODUCT_REMOVED_TITLE, PRODUCT_REMOVED_MESSAGE, AlertType.INFORMATION);
+		} catch (IllegalArgumentException e) {
+			this.showAlert(PRODUCT_REMOVED_TITLE, e.getMessage(),
+					AlertType.ERROR);
+		}
 	}
 }

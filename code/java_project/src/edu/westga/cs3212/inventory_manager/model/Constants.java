@@ -53,7 +53,7 @@ public final class Constants {
 	public static final String STYLESHEET_PATH = "styles.css";
 	public static final String UTILITY_CLASS_ERROR = "Utility class";
 	public static final String ERROR_COMPONENT_IN_USE_BY_PRODUCT = "Component is used by a product and cannot be deleted";
-
+	public static final String ERROR_PRODUCT_IN_USE_BY_ORDER = "Product is used by an order and cannot be deleted";
 	private Constants() {
 		throw new IllegalStateException(Constants.UTILITY_CLASS_ERROR);
 	}
