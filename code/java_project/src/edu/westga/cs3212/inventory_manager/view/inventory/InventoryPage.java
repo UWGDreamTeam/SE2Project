@@ -117,7 +117,7 @@ public class InventoryPage {
 	private TableColumn<Item, String> nameColumn;
 
 	@FXML
-	private TableColumn<Item, Number> costColumn;
+	private TableColumn<Item, String> costColumn;
 
 	@FXML
 	private TableColumn<Component, Integer> quantityColumn;
@@ -171,7 +171,7 @@ public class InventoryPage {
 	private TableColumn<Product, String> productNameColumn;
 
 	@FXML
-	private TableColumn<Product, Number> productProductionCostColumn;
+	private TableColumn<Product, String> productProductionCostColumn;
 
 	@FXML
 	private TableColumn<Product, Integer> productQuantityColumn;
@@ -276,8 +276,8 @@ public class InventoryPage {
 
 		this.productIDColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
 		this.productNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-		this.productProductionCostColumn
-				.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
+		this.productProductionCostColumn.setCellValueFactory(cellData -> 
+	        new SimpleStringProperty(String.format("%.2f", cellData.getValue().getProductionCost())));
 		this.productQuantityColumn.setCellValueFactory(cellData -> {
 			try {
 				int quantity = ProductInventory.getQuantity(cellData.getValue().getID());
@@ -301,8 +301,8 @@ public class InventoryPage {
 
 		this.idColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getID()));
 		this.nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-		this.costColumn
-				.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProductionCost()));
+		this.costColumn.setCellValueFactory(cellData ->
+        	new SimpleStringProperty(String.format("%.2f", cellData.getValue().getProductionCost())));
 		this.quantityColumn.setCellValueFactory(cellData -> {
 			try {
 				int quantity = ComponentInventory.getQuantity(cellData.getValue().getID());
