@@ -32,7 +32,10 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="componentSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0" />
+                        <TextArea fx:id="componentSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font></TextArea>
                      </children>
                   </AnchorPane>
             </content>
@@ -41,7 +44,10 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="productSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0" />
+                        <TextArea fx:id="productSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font></TextArea>
                      </children>
                   </AnchorPane>
             </content>
@@ -50,7 +56,10 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="orderSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0" />
+                        <TextArea fx:id="orderSummaryTextArea" layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="630.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font></TextArea>
                      </children>
                   </AnchorPane>
                </content>
