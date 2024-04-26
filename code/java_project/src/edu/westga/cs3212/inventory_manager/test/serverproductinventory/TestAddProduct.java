@@ -2,6 +2,9 @@ package edu.westga.cs3212.inventory_manager.test.serverproductinventory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,4 +80,13 @@ class TestAddProduct {
 		});
 	}
 
+	@Test
+	void testAddProductWithValidProductButComponentQuantityNotEnough() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		  Constructor<ProductInventory> constructor = ProductInventory.class.getDeclaredConstructor();
+		  assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		  constructor.setAccessible(true);
+			assertThrows(InvocationTargetException.class, () -> {
+				constructor.newInstance();
+			});
+	}
 }

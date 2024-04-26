@@ -46,5 +46,12 @@ class TestGetLowStockComponents {
 
         assertEquals(0, this.inventoryVM.getLowStockComponents().size(), "Expected no components to be low in stock");
     }
+    
+    @Test
+	void testGetLowStockThreshold() {
+    	this.inventoryVM.setLowStockThreshold(10);
+		assertEquals(10, this.inventoryVM.getLowStockThreshold(),
+				"Expected low stock threshold to be 10");
+	}
 
 }

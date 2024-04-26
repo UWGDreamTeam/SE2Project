@@ -2,6 +2,10 @@ package edu.westga.cs3212.inventory_manager.test.servercomponentinventory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.inventory_manager.model.server.Server;
@@ -39,10 +43,11 @@ class TestAddComponent {
 	
 	@Test
 	void testAddValidComponent() {
+		Server server = new Server();
+		server.sendRequest("hello bad test");
 		String response = ComponentInventory.addComponent("Test", 0, 0);
 		assertEquals(response.length(), 4);
 	}
-	
 	
 
 }

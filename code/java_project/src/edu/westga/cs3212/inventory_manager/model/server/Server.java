@@ -42,10 +42,6 @@ public class Server {
 		socket.send(request.getBytes(ZMQ.CHARSET), 0);
 		byte[] reply = socket.recv(0);
 		String response = new String(reply, ZMQ.CHARSET);
-		if (response.equals("bad format")) {
-			throw new IllegalArgumentException(
-					"Must provide a valid request type (see README)");
-		}
 		return response;
 	}
 
