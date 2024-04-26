@@ -380,6 +380,13 @@ public final class ProductInventory {
 		Server.sendRequestAndGetResponse(ACTION_CLEAR_INVENTORY);
 	}
 
+	/**
+	 * Checks if any product is used in an order.
+	 * @precondition productID != null
+	 * @postcondition none
+	 * @param productID the product to check
+	 * @return true if the product is used in an order, false otherwise
+	 */
 	public static boolean checkAnyProductUsedInOrder(String productID) {
 		if (productID == null) {
 			throw new IllegalArgumentException(

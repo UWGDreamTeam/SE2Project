@@ -74,7 +74,7 @@ public class InventoryViewModel {
 
 	    for (Component component : allComponents) {
 	        int quantity = ComponentInventory.getQuantity(component.getID());
-	        if (quantity <= lowStockThreshold) {
+	        if (quantity <= this.lowStockThreshold) {
 	            lowStockComponents.add(component);
 	        }
 	    }
