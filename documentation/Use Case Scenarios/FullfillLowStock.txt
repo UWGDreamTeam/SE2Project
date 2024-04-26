@@ -1,0 +1,28 @@
+Context - User is a manager and select low stock tab on inventory page
+
+Primary Flow - 
+2 - System grabs components below low stock threshold
+4 - User selects component
+5 - User selects order and enters quantity
+6 - System orders component
+7 - System displays low stock page
+
+Alterntaive Flow
+CANCEL Ordering
+a4-5 - User selects cancel
+a2 - System displays low stock page
+
+INVALID SYSTEM INFORMATION
+a5 - System detects an error with the quantity
+a6 - System informs user of error and prompts to retry
+Return to step 7
+
+BAD CONNECTION
+a2 - System can't connect to server
+a3 - system informs user of failure and promtps to retry later
+Return to step 7
+
+Remove Component
+a4 - User selects remove
+a3 - System removes component from the inventory
+Return to step 7
